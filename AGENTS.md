@@ -5,7 +5,7 @@ Many Eyes turns a Twitch chat into a verified disaster-mapping crew. The overlay
 Built for the Codex x TwitchCon Hackathon (deadline Nov 2, 2026, 2:00 PM PT). Three days of build time. Prefer the simplest thing that works and is testable.
 
 ## Stack (do not change without asking)
-- Node 22 LTS, TypeScript (strict), ESM. Built-in `WebSocket` (no `ws` package).
+- Node 22 or newer (dev machine runs 24; `engines` must be `">=22"`), TypeScript (strict), ESM. Built-in `WebSocket` (no `ws` package).
 - `npm` only. Ask before adding any dependency beyond: `fastify`, `better-sqlite3`, `zod`, `openai`, `vite`, `vitest`, `tsx`.
 - Server: Fastify. State: SQLite via `better-sqlite3`. Overlay: Vite + vanilla TypeScript (no framework).
 - Monorepo layout:

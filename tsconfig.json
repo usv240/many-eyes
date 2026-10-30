@@ -6,7 +6,7 @@
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   },
   "include": ["server/src/**/*.ts", "overlay/src/**/*.ts", "sim/src/**/*.ts", "scripts/**/*.ts"]
 }
