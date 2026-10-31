@@ -4,5 +4,7 @@ node_modules/
 *.bot.log
 data/cache/
 data/ledger.jsonl
+data/ledger.jsonl.head
+data/ledger.jsonl.head.tmp
 dist/
 coverage/

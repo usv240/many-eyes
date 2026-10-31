@@ -16,6 +16,8 @@
     "test": "vitest run",
     "lint": "eslint . && tsc --noEmit -p tsconfig.json",
     "tiles:warm": "tsx scripts/warm-tiles.ts",
+    "bench": "tsx scripts/bench.ts",
+    "mission": "node --env-file=.env --import tsx scripts/run-mission.ts",
     "verify": "tsx server/src/verify.ts"
   },
   "devDependencies": {

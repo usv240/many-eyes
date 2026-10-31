@@ -20,6 +20,9 @@ Imagery attribution is shown directly on the overlay.
 - `npm test` — run Vitest.
 - `npm run lint` — run ESLint and TypeScript checks.
 - `npm run verify` — verify published report data against the ledger.
+- `npm run mission -- nepal-flood-2026 sim` — run 15-second voting windows and 5-second pauses.
+- `npm run mission -- nepal-flood-2026 twitch` — use Twitch votes and announce one result per tile.
+- `npm run bench` — simulate all 80 gold tiles at 200 voters, four troll fractions, and five seeds without real-time waits.
 
 Copy `.env.example` to `.env` and fill in credentials before connecting Twitch or OpenAI.
 
@@ -37,4 +40,30 @@ EventSub deduplicates the most recent 10,000 notification IDs. A server-directed
 reconnect transfers the existing subscription; a lost connection creates a new
 session and subscription. Twitch cannot replay chat missed during a disconnect.
 The bot currently logs votes only; per-user replacement and tile closure belong
-to the future vote ingest layer. Press Ctrl+C to stop the bot.
+to the mission runner. Press Ctrl+C to stop the bot or runner.
+
+## Scoring and reproducibility
+
+The runner emits public state through its typed `state` event. Gold truth appears
+only after a tile is decided. Each user has one final vote per tile; updates replace
+their earlier vote until the deadline. Unsure votes do not enter the agreement or
+minimum-voter count. Refused building IDs are retained in the runner's expert queue.
+The unweighted baseline uses the same votes and thresholds, with every weight set to one.
+
+Gold decisions update weights only for later tiles. Simulated voter profiles persist
+through a run, while weights reset to one for each independent mission run. Work-tile
+simulation uses a private 50/50 latent truth and never updates weights from it.
+The gold pool includes inferred intact examples; synthetic benchmark accuracy is
+not evidence of real-world mapping accuracy.
+
+`reports/bench.json` and `reports/latest.json` include per-seed results, pooled
+metrics, and denominator definitions. Accuracy is over validated gold; false-destroyed
+and false-intact rates use all intact and all destroyed gold respectively. Refusal
+and coverage use all gold. Votes per tile includes final unsure votes.
+
+Benchmark runs append their complete event history to the ignored `data/ledger.jsonl`.
+Keep its `.head` sidecar with the file: record checksums detect final-line edits and
+the saved head detects truncation. This is a single-process writer; an interrupted
+append/head update fails verification rather than silently repairing history.
+`npm run verify` checks the chain, replays accepted votes and gold weight updates,
+and compares the recomputed metrics with `reports/latest.json`.
