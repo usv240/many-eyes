@@ -1,0 +1,2084 @@
+{
+  "id": "nepal-flood-2026",
+  "name": "Nepal flash flood, Syaphru Besi (Rasuwa), 26 Aug 2026",
+  "event_date": "2026-08-26",
+  "bbox": [
+    85.3322735,
+    28.1599836,
+    85.3475462,
+    28.1853436
+  ],
+  "aoi": [
+    [
+      [
+        85.33471255,
+        28.16376188
+      ],
+      [
+        85.34190977,
+        28.18501529
+      ],
+      [
+        85.34202976,
+        28.18533254
+      ],
+      [
+        85.34514919,
+        28.18818783
+      ],
+      [
+        85.34826837,
+        28.18765897
+      ],
+      [
+        85.3474878,
+        28.18274154
+      ],
+      [
+        85.34748777,
+        28.18258292
+      ],
+      [
+        85.34748774,
+        28.18237142
+      ],
+      [
+        85.34790628,
+        28.17285466
+      ],
+      [
+        85.34526667,
+        28.16392025
+      ],
+      [
+        85.34130872,
+        28.16064271
+      ],
+      [
+        85.33501252,
+        28.15540894
+      ],
+      [
+        85.32571874,
+        28.14911693
+      ],
+      [
+        85.32320008,
+        28.15207737
+      ],
+      [
+        85.33471255,
+        28.16376188
+      ]
+    ]
+  ],
+  "pre_scene": {
+    "title": "[PRE] Vantor GE01 Image 10500100364E8400",
+    "acquired": "2023-09-17",
+    "gsd_m": 0.47,
+    "tms": "https://tiles.openaerialmap.org/6a908044d8f7b27f667344de/0/6a908044d8f7b27f667344df/{z}/{x}/{y}",
+    "license": "CC BY-NC 4.0"
+  },
+  "post_scene": {
+    "title": "[POST] Vantor WV03 Image B040001100882F10",
+    "acquired": "2026-08-27",
+    "gsd_m": 0.35,
+    "tms": "https://tiles.openaerialmap.org/6a908a9bd8f7b27f66735576/0/6a908a9bd8f7b27f66735577/{z}/{x}/{y}",
+    "license": "CC BY-NC 4.0"
+  },
+  "fallback_pre_scene": {
+    "title": "[PRE] Vantor WV02 Image 10300100C86CED00",
+    "acquired": "2021-10-16",
+    "gsd_m": 0.59,
+    "tms": "https://tiles.openaerialmap.org/6a90bc90d8f7b27f66738feb/0/6a90bc90d8f7b27f66738fec/{z}/{x}/{y}",
+    "license": "CC BY-NC 4.0"
+  },
+  "fallback_post_scene": {
+    "title": "[POST] Vantor WV03 Image B040001100881610",
+    "acquired": "2026-08-27",
+    "gsd_m": 0.35,
+    "tms": "https://tiles.openaerialmap.org/6a90bbb4d8f7b27f66738e51/0/6a90bbb4d8f7b27f66738e52/{z}/{x}/{y}",
+    "license": "CC BY-NC 4.0"
+  },
+  "attribution": "Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: \u00a9 European Union, Copernicus Emergency Management Service (EMSR927). Buildings: \u00a9 OpenStreetMap contributors, ODbL.",
+  "counts": {
+    "copernicus_affected_total": 433,
+    "copernicus_destroyed": 323,
+    "copernicus_damaged": 32,
+    "copernicus_possibly_damaged": 78,
+    "osm_intact_candidates": 73,
+    "gold_destroyed": 40,
+    "gold_intact": 40,
+    "work_queue_uncertain": 110
+  },
+  "notes": [
+    "Gold 'destroyed' = Copernicus expert grade Destroyed.",
+    "Gold 'intact' is inferred: OSM building inside the graded AOI with no Copernicus affected point within 40 m. Copernicus graded the whole AOI, so absence of a grade implies no visible damage; disclose this as a measured limit.",
+    "Work queue = buildings Copernicus graded Damaged or Possibly damaged: the cases where experts were least certain.",
+    "Imagery tiles redirect (HTTP 302) to titiler.hotosm.org; follow redirects. z=18 tiles verified to render on 2026-10-30."
+  ],
+  "buildings": [
+    {
+      "id": "cems-0003",
+      "lon": 85.3360598,
+      "lat": 28.1599836,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0012",
+      "lon": 85.3368233,
+      "lat": 28.1605274,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0013",
+      "lon": 85.3364568,
+      "lat": 28.1605391,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0015",
+      "lon": 85.3365776,
+      "lat": 28.1605947,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0016",
+      "lon": 85.3366765,
+      "lat": 28.1606151,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0022",
+      "lon": 85.3357373,
+      "lat": 28.1606009,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0044",
+      "lon": 85.3367891,
+      "lat": 28.1613841,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0047",
+      "lon": 85.3367136,
+      "lat": 28.1615926,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0049",
+      "lon": 85.336691,
+      "lat": 28.1617364,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0052",
+      "lon": 85.3361613,
+      "lat": 28.161423,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0057",
+      "lon": 85.3358244,
+      "lat": 28.1616895,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0071",
+      "lon": 85.3367317,
+      "lat": 28.1618216,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0079",
+      "lon": 85.3367521,
+      "lat": 28.1623168,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0081",
+      "lon": 85.3363426,
+      "lat": 28.1619039,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0082",
+      "lon": 85.3358042,
+      "lat": 28.1620696,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0083",
+      "lon": 85.3360932,
+      "lat": 28.1621437,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0084",
+      "lon": 85.3360215,
+      "lat": 28.1621475,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0085",
+      "lon": 85.3361345,
+      "lat": 28.1622153,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0086",
+      "lon": 85.3359944,
+      "lat": 28.1623602,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0087",
+      "lon": 85.3361645,
+      "lat": 28.1625265,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0088",
+      "lon": 85.3359125,
+      "lat": 28.1625812,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0089",
+      "lon": 85.3360773,
+      "lat": 28.1627489,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0096",
+      "lon": 85.3365137,
+      "lat": 28.1628349,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0110",
+      "lon": 85.3395672,
+      "lat": 28.1627828,
+      "expert_grade": "Destroyed",
+      "building_type": "Non residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0119",
+      "lon": 85.3377011,
+      "lat": 28.1635077,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0120",
+      "lon": 85.3373289,
+      "lat": 28.1631026,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0121",
+      "lon": 85.3375262,
+      "lat": 28.1631304,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0123",
+      "lon": 85.3372347,
+      "lat": 28.1632524,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0128",
+      "lon": 85.3374327,
+      "lat": 28.1634443,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0134",
+      "lon": 85.338327,
+      "lat": 28.1636221,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0144",
+      "lon": 85.3375541,
+      "lat": 28.1636865,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0149",
+      "lon": 85.337141,
+      "lat": 28.1638387,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0151",
+      "lon": 85.3377303,
+      "lat": 28.1637883,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0180",
+      "lon": 85.3370577,
+      "lat": 28.1644236,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0181",
+      "lon": 85.3371512,
+      "lat": 28.1644734,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0182",
+      "lon": 85.3369687,
+      "lat": 28.164475,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0183",
+      "lon": 85.3375243,
+      "lat": 28.1644775,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0185",
+      "lon": 85.3371886,
+      "lat": 28.1645445,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0186",
+      "lon": 85.3369013,
+      "lat": 28.1645633,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0187",
+      "lon": 85.3370683,
+      "lat": 28.164578,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0188",
+      "lon": 85.3372639,
+      "lat": 28.1645905,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0189",
+      "lon": 85.3374594,
+      "lat": 28.1646927,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0190",
+      "lon": 85.3373834,
+      "lat": 28.1647077,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0191",
+      "lon": 85.3372687,
+      "lat": 28.1647251,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0192",
+      "lon": 85.3364018,
+      "lat": 28.1627864,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0193",
+      "lon": 85.3360991,
+      "lat": 28.1628173,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0194",
+      "lon": 85.3362463,
+      "lat": 28.1628998,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0195",
+      "lon": 85.336288,
+      "lat": 28.1630306,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0196",
+      "lon": 85.3364097,
+      "lat": 28.1630612,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0197",
+      "lon": 85.3363449,
+      "lat": 28.1630662,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0198",
+      "lon": 85.3363996,
+      "lat": 28.1632153,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0199",
+      "lon": 85.3363401,
+      "lat": 28.163335,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0200",
+      "lon": 85.336335,
+      "lat": 28.1633959,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0201",
+      "lon": 85.3363667,
+      "lat": 28.1635111,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0202",
+      "lon": 85.33647,
+      "lat": 28.163276,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0203",
+      "lon": 85.3365584,
+      "lat": 28.1634453,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0204",
+      "lon": 85.336669,
+      "lat": 28.1634946,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0205",
+      "lon": 85.3365419,
+      "lat": 28.1635437,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0206",
+      "lon": 85.3365619,
+      "lat": 28.1635964,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0208",
+      "lon": 85.3365535,
+      "lat": 28.1637204,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0209",
+      "lon": 85.3368095,
+      "lat": 28.1638148,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0210",
+      "lon": 85.3365479,
+      "lat": 28.1638295,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0211",
+      "lon": 85.3367825,
+      "lat": 28.163879,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0212",
+      "lon": 85.3363471,
+      "lat": 28.1636074,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0213",
+      "lon": 85.3363697,
+      "lat": 28.1639419,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0215",
+      "lon": 85.3368808,
+      "lat": 28.1638835,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0218",
+      "lon": 85.3369381,
+      "lat": 28.1640115,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0219",
+      "lon": 85.3369774,
+      "lat": 28.1640737,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0220",
+      "lon": 85.3368253,
+      "lat": 28.1640773,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0221",
+      "lon": 85.3370015,
+      "lat": 28.1641296,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0222",
+      "lon": 85.3368567,
+      "lat": 28.1641736,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0223",
+      "lon": 85.3370353,
+      "lat": 28.1641784,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0224",
+      "lon": 85.3365699,
+      "lat": 28.1638881,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0225",
+      "lon": 85.336648,
+      "lat": 28.1639351,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0226",
+      "lon": 85.33655,
+      "lat": 28.1639669,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0227",
+      "lon": 85.3367769,
+      "lat": 28.1639689,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0228",
+      "lon": 85.3365994,
+      "lat": 28.1639811,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0229",
+      "lon": 85.3366115,
+      "lat": 28.1640334,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0230",
+      "lon": 85.3364499,
+      "lat": 28.1640624,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0231",
+      "lon": 85.3365097,
+      "lat": 28.1641084,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0232",
+      "lon": 85.3365709,
+      "lat": 28.1641697,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0233",
+      "lon": 85.3365056,
+      "lat": 28.1641911,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0234",
+      "lon": 85.3366769,
+      "lat": 28.1642445,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0235",
+      "lon": 85.3366882,
+      "lat": 28.1643393,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0236",
+      "lon": 85.3372536,
+      "lat": 28.1641872,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0238",
+      "lon": 85.3372617,
+      "lat": 28.1642642,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0239",
+      "lon": 85.3369501,
+      "lat": 28.1642762,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0240",
+      "lon": 85.3373033,
+      "lat": 28.1643252,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0241",
+      "lon": 85.3369864,
+      "lat": 28.1643254,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0242",
+      "lon": 85.3373538,
+      "lat": 28.1643926,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0243",
+      "lon": 85.3371441,
+      "lat": 28.1643961,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0244",
+      "lon": 85.3368538,
+      "lat": 28.164399,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0245",
+      "lon": 85.3374592,
+      "lat": 28.1644059,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0249",
+      "lon": 85.3437847,
+      "lat": 28.1639029,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0260",
+      "lon": 85.3425973,
+      "lat": 28.1632067,
+      "expert_grade": "Destroyed",
+      "building_type": "Non residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0280",
+      "lon": 85.3430403,
+      "lat": 28.1643671,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0282",
+      "lon": 85.3432428,
+      "lat": 28.1643955,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0295",
+      "lon": 85.3426325,
+      "lat": 28.1647542,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0301",
+      "lon": 85.3431395,
+      "lat": 28.164666,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0324",
+      "lon": 85.3419985,
+      "lat": 28.16688,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0330",
+      "lon": 85.3437691,
+      "lat": 28.1674269,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0331",
+      "lon": 85.3438276,
+      "lat": 28.1675082,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0332",
+      "lon": 85.3437376,
+      "lat": 28.1675773,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0333",
+      "lon": 85.3438787,
+      "lat": 28.1679718,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0335",
+      "lon": 85.3437299,
+      "lat": 28.1692154,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0346",
+      "lon": 85.3381499,
+      "lat": 28.1645551,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0349",
+      "lon": 85.3392242,
+      "lat": 28.1649646,
+      "expert_grade": "Damaged",
+      "building_type": "School, university and research buildings",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0350",
+      "lon": 85.3387837,
+      "lat": 28.1650512,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0351",
+      "lon": 85.3388608,
+      "lat": 28.1650661,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0352",
+      "lon": 85.3389662,
+      "lat": 28.1651468,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0353",
+      "lon": 85.3390288,
+      "lat": 28.1651474,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0354",
+      "lon": 85.3391096,
+      "lat": 28.1651894,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0355",
+      "lon": 85.3392599,
+      "lat": 28.1652124,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0356",
+      "lon": 85.3393887,
+      "lat": 28.1652389,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0357",
+      "lon": 85.3386368,
+      "lat": 28.1652451,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0358",
+      "lon": 85.3401091,
+      "lat": 28.1651025,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0361",
+      "lon": 85.3414004,
+      "lat": 28.1651435,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0366",
+      "lon": 85.3405209,
+      "lat": 28.1653453,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0367",
+      "lon": 85.3404739,
+      "lat": 28.1653945,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0368",
+      "lon": 85.3405341,
+      "lat": 28.1654082,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0369",
+      "lon": 85.3400211,
+      "lat": 28.1654313,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0370",
+      "lon": 85.340698,
+      "lat": 28.1655255,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0371",
+      "lon": 85.3408012,
+      "lat": 28.1656068,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0372",
+      "lon": 85.3405945,
+      "lat": 28.1656849,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0373",
+      "lon": 85.340561,
+      "lat": 28.1657378,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0374",
+      "lon": 85.3406389,
+      "lat": 28.1657455,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0375",
+      "lon": 85.3411295,
+      "lat": 28.1657892,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0376",
+      "lon": 85.3406593,
+      "lat": 28.1658646,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0378",
+      "lon": 85.3405162,
+      "lat": 28.165874,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0379",
+      "lon": 85.3407155,
+      "lat": 28.1659233,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0381",
+      "lon": 85.3407373,
+      "lat": 28.1660065,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0382",
+      "lon": 85.3405921,
+      "lat": 28.1660269,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0383",
+      "lon": 85.3408297,
+      "lat": 28.1660319,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0385",
+      "lon": 85.3408024,
+      "lat": 28.1660907,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0386",
+      "lon": 85.3404598,
+      "lat": 28.1660912,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0387",
+      "lon": 85.3406683,
+      "lat": 28.1660993,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0388",
+      "lon": 85.3412119,
+      "lat": 28.1661654,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0389",
+      "lon": 85.3408126,
+      "lat": 28.1662278,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0390",
+      "lon": 85.3405931,
+      "lat": 28.1662536,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0391",
+      "lon": 85.340887,
+      "lat": 28.1663557,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0392",
+      "lon": 85.3411623,
+      "lat": 28.1663591,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0393",
+      "lon": 85.3412272,
+      "lat": 28.1663818,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0402",
+      "lon": 85.3410645,
+      "lat": 28.1669429,
+      "expert_grade": "Damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0408",
+      "lon": 85.3437328,
+      "lat": 28.1694689,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0409",
+      "lon": 85.3434234,
+      "lat": 28.1695373,
+      "expert_grade": "Destroyed",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0410",
+      "lon": 85.3430795,
+      "lat": 28.1828944,
+      "expert_grade": "Destroyed",
+      "building_type": "Non residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0415",
+      "lon": 85.3436245,
+      "lat": 28.1852657,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0416",
+      "lon": 85.3435384,
+      "lat": 28.1853436,
+      "expert_grade": "Possibly damaged",
+      "building_type": "Residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0418",
+      "lon": 85.3415329,
+      "lat": 28.1807195,
+      "expert_grade": "Destroyed",
+      "building_type": "Non residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "cems-0419",
+      "lon": 85.3416503,
+      "lat": 28.1807835,
+      "expert_grade": "Destroyed",
+      "building_type": "Non residential",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "id": "osm-w1132149393",
+      "lon": 85.3345259,
+      "lat": 28.1631451,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 149.7,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1132149395",
+      "lon": 85.3345064,
+      "lat": 28.16286,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 141.3,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1552968617",
+      "lon": 85.3353867,
+      "lat": 28.1621033,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 41.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1552972093",
+      "lon": 85.3349329,
+      "lat": 28.1626476,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 96.3,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1552972098",
+      "lon": 85.3328503,
+      "lat": 28.1609565,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 246.3,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1553017131",
+      "lon": 85.3457001,
+      "lat": 28.1767547,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 517.2,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1553639562",
+      "lon": 85.3394828,
+      "lat": 28.1656387,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 45.4,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554247674",
+      "lon": 85.3353544,
+      "lat": 28.1620121,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 44.6,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274560",
+      "lon": 85.3349494,
+      "lat": 28.162149,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 84.3,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274561",
+      "lon": 85.3349467,
+      "lat": 28.1620624,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 84.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274567",
+      "lon": 85.3354485,
+      "lat": 28.1625661,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 45.5,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274572",
+      "lon": 85.3348553,
+      "lat": 28.1626974,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 104.4,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274573",
+      "lon": 85.3348745,
+      "lat": 28.1626251,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 101.9,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w1554274579",
+      "lon": 85.3326434,
+      "lat": 28.1609695,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 264.8,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w850782558",
+      "lon": 85.3475462,
+      "lat": 28.175884,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 717.0,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w850782559",
+      "lon": 85.3474528,
+      "lat": 28.1759311,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 706.6,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w850782560",
+      "lon": 85.3473619,
+      "lat": 28.175842,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 706.2,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w850782562",
+      "lon": 85.3471853,
+      "lat": 28.1760884,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 675.3,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w850782564",
+      "lon": 85.3474567,
+      "lat": 28.1760521,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 698.5,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w851001710",
+      "lon": 85.3349996,
+      "lat": 28.1624365,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 88.8,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w851001711",
+      "lon": 85.3349406,
+      "lat": 28.162764,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 97.4,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w851001712",
+      "lon": 85.3345111,
+      "lat": 28.1630447,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 146.7,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w851001721",
+      "lon": 85.3322735,
+      "lat": 28.1608456,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 292.0,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854113167",
+      "lon": 85.3354762,
+      "lat": 28.1629699,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 60.8,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854113173",
+      "lon": 85.3357107,
+      "lat": 28.1635198,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 62.7,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854113195",
+      "lon": 85.3353339,
+      "lat": 28.1624852,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 57.7,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854113196",
+      "lon": 85.3352789,
+      "lat": 28.1622669,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 56.0,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854115570",
+      "lon": 85.3350637,
+      "lat": 28.1622032,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 74.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854115581",
+      "lon": 85.3347763,
+      "lat": 28.1635834,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 154.0,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854116032",
+      "lon": 85.3342827,
+      "lat": 28.1620353,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 149.2,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854116033",
+      "lon": 85.333106,
+      "lat": 28.1616676,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 266.5,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385655",
+      "lon": 85.3353151,
+      "lat": 28.1623972,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 60.2,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385659",
+      "lon": 85.3353364,
+      "lat": 28.1627665,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 60.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385660",
+      "lon": 85.3354776,
+      "lat": 28.162813,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 49.8,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385662",
+      "lon": 85.3355789,
+      "lat": 28.1629719,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 53.8,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385669",
+      "lon": 85.3359062,
+      "lat": 28.1632722,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 43.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385675",
+      "lon": 85.3346373,
+      "lat": 28.1625339,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 125.1,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385676",
+      "lon": 85.3346928,
+      "lat": 28.1626201,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 119.6,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385677",
+      "lon": 85.3347562,
+      "lat": 28.1625855,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 113.4,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "id": "osm-w854385679",
+      "lon": 85.334426,
+      "lat": 28.1631911,
+      "expert_grade": "Not affected (inferred)",
+      "building_type": "yes",
+      "nearest_affected_m": 160.7,
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    }
+  ],
+  "gold": [
+    {
+      "building_id": "osm-w850782564",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1554274567",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854385662",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1553017131",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0052",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0391",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0121",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0301",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0016",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w1554274561",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0012",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0003",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0149",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0015",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854385659",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854116033",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854113196",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854115570",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854385677",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0047",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854385679",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1553639562",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1552972093",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0110",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w850782559",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854113173",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0418",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0119",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854116032",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w851001710",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0280",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0057",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w850782560",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0049",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w1554274579",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0419",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0409",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854115581",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0022",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w1552972098",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0282",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854385675",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0410",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854385655",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0134",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0071",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0204",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0260",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854113195",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0120",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0295",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0151",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w851001711",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1554247674",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0144",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w1554274560",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1554274573",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854385676",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0215",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w850782562",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0128",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854385660",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0324",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0013",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w851001721",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1132149393",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1552968617",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w854385669",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1132149395",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0081",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0044",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0249",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w854113167",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "osm-w1554274572",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0123",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0079",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "cems-0361",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w851001712",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    },
+    {
+      "building_id": "cems-0209",
+      "truth": "destroyed",
+      "source": "Copernicus EMS EMSR927 AOI01 grading v1 (photo-interpretation, WorldView-3 2026-08-27)"
+    },
+    {
+      "building_id": "osm-w850782558",
+      "truth": "intact",
+      "source": "OpenStreetMap building inside EMSR927 AOI01, >40 m from any Copernicus-affected point"
+    }
+  ]
+}

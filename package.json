@@ -11,10 +11,11 @@
     "sim"
   ],
   "scripts": {
-    "dev": "tsx scripts/dev.ts",
+    "dev": "node --env-file=.env --import tsx scripts/dev.ts",
     "dev:bot": "node --env-file=.env --import tsx server/src/bot.ts",
     "test": "vitest run",
     "lint": "eslint . && tsc --noEmit -p tsconfig.json",
+    "tiles:warm": "tsx scripts/warm-tiles.ts",
     "verify": "tsx server/src/verify.ts"
   },
   "devDependencies": {
