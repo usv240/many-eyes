@@ -3,10 +3,12 @@ import { getMission, type Mission, type MissionScene } from "../missions/mission
 import { fetchTile, sceneId, type FetchOptions, type TileCoordinate } from "./fetch.js";
 
 const TILE_SIZE = 256;
+export const CROP_ZOOM = 19;
+export const CROP_SIZE = 384;
 export interface PixelPosition { pixelX: number; pixelY: number; tileX: number; tileY: number; localX: number; localY: number }
 export interface CropOptions extends FetchOptions { zoom?: number }
 export interface SceneCrop { image: Buffer; scene: MissionScene; usedFallback: boolean }
-export interface BuildingCrops { pre: SceneCrop; post: SceneCrop }
+export interface BuildingCrops { pre: SceneCrop; post: SceneCrop; zoom: number; sizePx: number; lat: number }
 
 export function lonLatToPixel(lon: number, lat: number, zoom = 19): PixelPosition {
   if (!Number.isFinite(lon) || !Number.isFinite(lat) || lon < -180 || lon > 180 || lat < -90 || lat > 90 ||
@@ -23,7 +25,7 @@ export function lonLatToPixel(lon: number, lat: number, zoom = 19): PixelPositio
 
 async function cropScene(primary: MissionScene, fallback: MissionScene, lon: number, lat: number,
   options: CropOptions): Promise<SceneCrop> {
-  const zoom = options.zoom ?? 19;
+  const zoom = options.zoom ?? CROP_ZOOM;
   const position = lonLatToPixel(lon, lat, zoom);
   const candidates: { scene: MissionScene; usedFallback: boolean }[] = [
     { scene: primary, usedFallback: false }, { scene: fallback, usedFallback: true },
@@ -40,20 +42,20 @@ async function cropScene(primary: MissionScene, fallback: MissionScene, lon: num
         fetchTile(candidate.scene, sceneId(candidate.scene), coordinate, options)));
       const metadata = await sharp(tiles[0]!).metadata();
       const tileWidth = metadata.width; const tileHeight = metadata.height;
-      if (!tileWidth || !tileHeight) throw new Error("Tile has no image dimensions.");
+      if (!tileWidth || tileWidth !== tileHeight) throw new Error("Tile must have square image dimensions.");
       const layers = await Promise.all(tiles.map(async (tile, index) => {
         const tileMetadata = await sharp(tile).metadata();
         if (tileMetadata.width !== tileWidth || tileMetadata.height !== tileHeight)
           throw new Error("Tile dimensions do not match within the scene.");
-        return { input: await sharp(tile).jpeg().toBuffer(),
-          left: index % 3 * tileWidth, top: Math.floor(index / 3) * tileHeight };
+        // Normalize XYZ tiles to 256 pixels so Web Mercator metres-per-pixel applies to the delivered crop.
+        return { input: await sharp(tile).resize(TILE_SIZE, TILE_SIZE).jpeg().toBuffer(),
+          left: index % 3 * TILE_SIZE, top: Math.floor(index / 3) * TILE_SIZE };
       }));
-      const centerX = tileWidth + position.localX * tileWidth / TILE_SIZE;
-      const centerY = tileHeight + position.localY * tileHeight / TILE_SIZE;
-      const left = Math.round(centerX - 192); const top = Math.round(centerY - 192);
-      const image = await sharp({ create: { width: tileWidth * 3, height: tileHeight * 3,
+      const left = Math.round(TILE_SIZE + position.localX - CROP_SIZE / 2);
+      const top = Math.round(TILE_SIZE + position.localY - CROP_SIZE / 2);
+      const image = await sharp({ create: { width: TILE_SIZE * 3, height: TILE_SIZE * 3,
         channels: 3, background: { r: 0, g: 0, b: 0 } } })
-        .composite(layers).extract({ left, top, width: 384, height: 384 }).jpeg({ quality: 88 }).toBuffer();
+        .composite(layers).extract({ left, top, width: CROP_SIZE, height: CROP_SIZE }).jpeg({ quality: 88 }).toBuffer();
       return { image, scene: candidate.scene, usedFallback: candidate.usedFallback };
     } catch (error) { lastError = error; }
   }
@@ -68,7 +70,7 @@ export async function cropBuilding(mission: Mission, buildingId: string, options
     cropScene(mission.pre_scene, mission.fallback_pre_scene, building.lon, building.lat, options),
     cropScene(mission.post_scene, mission.fallback_post_scene, building.lon, building.lat, options),
   ]);
-  return { pre, post };
+  return { pre, post, zoom: options.zoom ?? CROP_ZOOM, sizePx: CROP_SIZE, lat: building.lat };
 }
 
 export async function cropMissionBuilding(missionId: string, buildingId: string, options: CropOptions = {}) {

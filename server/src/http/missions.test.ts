@@ -11,8 +11,8 @@ async function appForTest() {
     const selected = mission.buildings.find(({ id }) => id === buildingId)!;
     const crop = (scene: typeof mission.pre_scene) => ({ image: Buffer.from("recorded-jpeg"),
       scene, usedFallback: false });
-    void selected;
-    return { pre: crop(mission.pre_scene), post: crop(mission.post_scene) } satisfies BuildingCrops;
+    return { pre: crop(mission.pre_scene), post: crop(mission.post_scene), zoom: 19, sizePx: 384,
+      lat: selected.lat } satisfies BuildingCrops;
   });
   return app;
 }
@@ -37,6 +37,8 @@ it("returns tile data URLs and imagery attribution without expert fields or gold
     expect(body.pre).toMatch(/^data:image\/jpeg;base64,/);
     expect(body.post).toMatch(/^data:image\/jpeg;base64,/);
     expect(body.attribution).toContain("Copernicus Emergency Management Service");
+    expect(body).toMatchObject({ zoom: 19, sizePx: 384,
+      lat: getMission("nepal-flood-2026").buildings.find(({ id }) => id === "cems-0003")!.lat });
     expect(JSON.stringify(body)).not.toMatch(/expert_grade|gold|truth|Destroyed/);
   } finally { await app.close(); }
 });

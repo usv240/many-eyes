@@ -27,6 +27,8 @@ it("stitches recorded tile fixtures and returns an undecorated 384 square JPEG",
     expect(metadata.width).toBe(384); expect(metadata.height).toBe(384); expect(metadata.format).toBe("jpeg");
   }
   expect(result.pre.usedFallback).toBe(false);
+  expect(result).toMatchObject({ zoom: 18, sizePx: 384,
+    lat: mission.buildings.find(({ id }) => id === "cems-0003")!.lat });
 });
 it("uses the fallback scene as a complete crop when primary tiles fail", async () => {
   const mission = getMission("nepal-flood-2026");

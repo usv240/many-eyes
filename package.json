@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "dev": "node --env-file=.env --import tsx scripts/dev.ts",
+    "dev:server": "node --env-file=.env --watch --import tsx server/src/index.ts",
     "dev:bot": "node --env-file=.env --import tsx server/src/bot.ts",
     "test": "vitest run",
     "lint": "eslint . && tsc --noEmit -p tsconfig.json",

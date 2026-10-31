@@ -16,6 +16,7 @@ Imagery attribution is shown directly on the overlay.
 
 - `npm install` — install workspace dependencies.
 - `npm run dev` — run the server and overlay in watch mode.
+- `npm run dev:server` — run the HTTP server and one real-time mission, with SSE at `/api/stream`.
 - `npm run dev:bot` — connect to Twitch, send one startup announcement, and log parsed votes.
 - `npm test` — run Vitest.
 - `npm run lint` — run ESLint and TypeScript checks.
@@ -25,6 +26,24 @@ Imagery attribution is shown directly on the overlay.
 - `npm run bench` — simulate 80 gold tiles at 1, 5, 10, 15, and 25 voters over 20 seeds, with shared hard tiles and troll raids.
 
 Copy `.env.example` to `.env` and fill in credentials before connecting Twitch or OpenAI.
+
+The server starts with an empty `.env`: `MANY_EYES_SOURCE` defaults to `sim` and
+`MANY_EYES_SEED` to `7`. Set the source to `twitch` to require and use Twitch
+credentials. The server owns one mission runner, with 15-second voting windows
+and 5-second result pauses. Closing the server stops the runner and its streams.
+
+`GET /api/stream` sends an unnamed SSE `data:` event containing the latest public
+state immediately, then on every state change. It sends a `: ping` comment every
+15 seconds. EventSource reconnects receive a fresh snapshot. `serverNow` is epoch
+milliseconds for clock correction. The optional `debate` field is reserved for Phase 5.
+`live.voters` counts non-unsure voters and `live.unsure` counts unsure voters; ties
+have no leading label. `stats.goldChecked` counts decided gold tiles and
+`stats.goldCorrect` counts those validated with the correct label. `remaining`
+includes the open tile. Detailed gold results appear after deciding and are
+cleared from public state when the next voting window opens.
+
+Tile responses include `zoom`, `sizePx`, and `lat`. Crops use 256-pixel XYZ tiles;
+metres per crop pixel is `156543.03392 * cos(lat * Math.PI / 180) / 2 ** zoom`.
 
 Use Node 22 or newer. The bot reads `.env` from the repository root and requires the
 Twitch client ID, user token, refresh token, bot user ID, and broadcaster user ID.

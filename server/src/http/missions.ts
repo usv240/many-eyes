@@ -39,6 +39,7 @@ export async function registerMissionRoutes(app: FastifyInstance, cropper: Cropp
           pre: "data:image/jpeg;base64," + crops.pre.image.toString("base64"),
           post: "data:image/jpeg;base64," + crops.post.image.toString("base64"),
           attribution: mission.attribution,
+          zoom: crops.zoom, sizePx: crops.sizePx, lat: crops.lat,
           scenes: { pre: sceneSummary(crops.pre.scene), post: sceneSummary(crops.post.scene) },
         });
       } catch {

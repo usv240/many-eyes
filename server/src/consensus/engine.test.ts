@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { collectVote, openSession, closeSession, decide, decideUnweighted, updateGoldWeights, type Vote } from "./engine.js";
+import { collectVote, openSession, closeSession, decide, decideUnweighted, preview, updateGoldWeights, type Vote } from "./engine.js";
 import { seededRng } from "../missions/mission.js";
 
 it("replaces a user's vote and ignores votes at or after the deadline", () => {
@@ -57,10 +57,27 @@ it.each([1, 7, 29, 137, 999])("matches an independent per-user map on random rep
     if (at < 15000) expected.set(vote.userId, vote);
   }
   expect(new Map(session.votes.map((vote) => [vote.userId, vote]))).toEqual(expected);
+  const before = structuredClone(session);
+  const live = preview(session);
   const result = decide(closeSession(session, 15000));
+  expect(session).toEqual(before);
+  expect(live.agreement).toBe(result.agreement);
+  expect(live.voters).toBe(result.voters);
+  expect(live.voters + live.unsure).toBe(result.totalVotes);
   const counted = [...expected.values()].filter(({ label }) => label !== "unsure");
   const destroyed = counted.filter(({ label }) => label === "destroyed").reduce((sum, vote) => sum + vote.weight, 0);
   const intact = counted.filter(({ label }) => label === "intact").reduce((sum, vote) => sum + vote.weight, 0);
   expect(result.voters).toBe(counted.length);
   expect(result.agreement).toBeCloseTo(Math.max(destroyed, intact) / (destroyed + intact), 12);
+  expect(live.leading).toBe(destroyed === intact ? null : destroyed > intact ? "destroyed" : "intact");
+});
+
+it("previews empty, unsure-only and tied sessions without inventing a leading label", () => {
+  let session = openSession("preview", 0);
+  expect(preview(session)).toEqual({ agreement: 0, leading: null, voters: 0, unsure: 0 });
+  session = collectVote(session, { userId: "a", label: "unsure", weight: 2 }, 1);
+  expect(preview(session)).toEqual({ agreement: 0, leading: null, voters: 0, unsure: 1 });
+  session = collectVote(session, { userId: "b", label: "destroyed", weight: 1 }, 2);
+  session = collectVote(session, { userId: "c", label: "intact", weight: 1 }, 3);
+  expect(preview(session)).toEqual({ agreement: 0.5, leading: null, voters: 2, unsure: 1 });
 });

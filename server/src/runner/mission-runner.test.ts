@@ -3,6 +3,7 @@ import { expect, it, vi } from "vitest";
 import { MissionRunner, type Clock, type PublicState } from "./mission-runner.js";
 import { MemoryLedger } from "../ledger/ledger.js";
 import type { ChatMessage } from "../twitch/eventsub.js";
+import { getMission } from "../missions/mission.js";
 
 class FakeTwitch extends EventEmitter<{ chatMessage: [ChatMessage]; fault: [Error]; ready: []; status: [string] }> {
   async start() {}
@@ -44,7 +45,7 @@ it("never exposes gold or expert information before deciding and persists weight
   runner.on("state", (state) => { states.push(state); });
   await runner.run();
   for (const state of states.filter((state) => state.phase === "voting" || state.phase === "idle"))
-    expect(JSON.stringify(state)).not.toMatch(/gold|truth|expert_grade/);
+    expect(JSON.stringify(state)).not.toMatch(/"(gold|truth|expert_grade|reveal)":/);
   expect(states.some((state) => state.phase === "decided" && state.reveal?.gold)).toBe(true);
   const secondTile = ledger.events.filter((event) => event.type === "tile_opened")[1]!.data.id;
   expect(ledger.events.some((event) => event.type === "vote" && event.data.tileId === secondTile && event.data.weight !== 1)).toBe(true);
@@ -57,4 +58,44 @@ it("stops without deciding a partially collected tile", async () => {
   await runner.run();
   expect(ledger.events.some((event) => event.type === "tile_decided")).toBe(false);
   expect(runner.getState().phase).toBe("stopped");
+});
+
+it.each(["complete", "stopped"] as const)("keeps stats consistent and hidden fields private across every phase ending in %s", async (terminal) => {
+  const ledger = new MemoryLedger();
+  const mission = getMission("nepal-flood-2026");
+  const runner = new MissionRunner({ missionId: mission.id, source: "sim", virtual: true, seed: 7,
+    goldOnly: true, maxTiles: 3, ledger });
+  const phases = new Set<string>();
+  const check = (state: PublicState) => {
+    phases.add(state.phase);
+    const decisions = ledger.events.filter((event) => event.type === "tile_decided");
+    const currentWasDecided = decisions.some((event) => event.data.tileId === state.tile?.id);
+    expect(JSON.stringify(state)).not.toContain('"expert_grade"');
+    if (!currentWasDecided) expect(JSON.stringify(state)).not.toMatch(/"(gold|truth|reveal)":/);
+    if (state.lastResult?.gold) {
+      expect(currentWasDecided).toBe(true);
+      const latest = decisions.at(-1)!;
+      expect(state.lastResult.gold.truth).toBe(latest.data.truth);
+    }
+    const { validated, refused, remaining, total, goldChecked, goldCorrect } = state.stats;
+    expect(validated + refused + remaining).toBe(total);
+    expect(remaining).toBeGreaterThanOrEqual(0);
+    expect(validated + refused).toBe(decisions.length);
+    expect(goldChecked).toBe(decisions.filter((event) => event.data.truth).length);
+    expect(goldCorrect).toBe(decisions.filter((event) => {
+      const result = event.data.weighted as { status: string; label: string | null };
+      return !!event.data.truth && result.status === "validated" && result.label === event.data.truth;
+    }).length);
+    expect(state.mission).toEqual({ name: mission.name, place: "Syaphru Besi, Rasuwa, Nepal",
+      eventDate: mission.event_date, preDate: mission.pre_scene.acquired, postDate: mission.post_scene.acquired,
+      attribution: mission.attribution });
+    expect(Number.isFinite(state.serverNow)).toBe(true);
+    expect(state.live.voters + state.live.unsure).toBe(state.votes.total);
+    if (terminal === "stopped" && state.phase === "voting" && state.tile!.number === 3) runner.stop();
+  };
+  check(runner.getState());
+  runner.on("state", check);
+  await runner.run();
+  expect(phases).toEqual(new Set(["idle", "voting", "decided", terminal]));
+  expect(runner.getState().stats.remaining).toBe(terminal === "complete" ? 0 : 1);
 });

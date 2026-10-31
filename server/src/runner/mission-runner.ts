@@ -2,7 +2,7 @@ import { EventEmitter } from "node:events";
 import { randomUUID } from "node:crypto";
 import { setTimeout as sleep } from "node:timers/promises";
 import { getMission, goldTruth, nextTile, seededRng } from "../missions/mission.js";
-import { openSession, closeSession, collectVote, updateGoldWeights, type TileSession, type Decision, type Truth } from "../consensus/engine.js";
+import { openSession, closeSession, collectVote, preview, updateGoldWeights, type TileSession, type Decision, type Truth, type Preview } from "../consensus/engine.js";
 import type { DecidedGold } from "../consensus/metrics.js";
 import { Ledger, type LedgerPort } from "../ledger/ledger.js";
 import { EventSubClient, type ChatMessage } from "../twitch/eventsub.js";
@@ -13,6 +13,13 @@ import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from
 
 export interface PublicState {
   missionId: string; source: "sim" | "twitch"; phase: "idle" | "voting" | "decided" | "complete" | "stopped";
+  mission: { name: string; place: string; eventDate: string; preDate: string; postDate: string; attribution: string };
+  live: Preview;
+  stats: { goldChecked: number; goldCorrect: number; validated: number; refused: number; remaining: number; total: number };
+  lastResult: (Pick<Decision, "status" | "label" | "agreement" | "voters" | "reason"> & {
+    tileNumber: number; gold?: { truth: Truth; chatCorrect: boolean } }) | null;
+  serverNow: number;
+  debate?: unknown;
   attribution: string; refusedCount: number;
   tile?: { id: string; buildingId: string; number: number; lon: number; lat: number;
     openedAt: number; closesAt: number; imageryUrl: string };
@@ -62,11 +69,16 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.ledger = options.ledger ?? new Ledger();
     this.clock = options.clock ?? makeClock(options.virtual ?? false);
     this.runId = options.runId ?? randomUUID();
+    const total = Math.min(options.maxTiles ?? Infinity, options.goldOnly ? this.mission.gold.length : this.mission.buildings.length);
     this.state = { missionId: this.mission.id, source: options.source, phase: "idle",
+      mission: { name: this.mission.name, place: "Syaphru Besi, Rasuwa, Nepal", eventDate: this.mission.event_date,
+        preDate: this.mission.pre_scene.acquired, postDate: this.mission.post_scene.acquired, attribution: this.mission.attribution },
+      live: { agreement: 0, leading: null, voters: 0, unsure: 0 }, lastResult: null, serverNow: this.clock.now(),
+      stats: { goldChecked: 0, goldCorrect: 0, validated: 0, refused: 0, remaining: total, total },
       attribution: this.mission.attribution, refusedCount: 0,
       votes: { destroyed: 0, intact: 0, unsure: 0, total: 0 } };
   }
-  getState() { return structuredClone(this.state); }
+  getState() { return structuredClone({ ...this.state, serverNow: this.clock.now() }); }
   getWeights() { return new Map(this.weights); }
   getRefusedQueue() { return [...this.refused]; }
   stop() { this.controller.abort(); }
@@ -90,6 +102,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.session = next;
     this.state.votes = { destroyed: 0, intact: 0, unsure: 0, total: next.votes.length };
     for (const item of next.votes) this.state.votes[item.label]++;
+    this.state.live = preview(next);
     this.publish();
     return true;
   }
@@ -123,8 +136,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       this.ledger.append("mission_started", { missionId: this.mission.id, runId: this.runId,
         source: this.options.source, seed, crowd: this.options.source === "sim" ? { voters: 10, ...this.options.crowd } : null },
       this.clock.now());
-      const total = this.options.goldOnly ? this.mission.gold.length : this.mission.buildings.length;
-      const limit = Math.min(total, this.options.maxTiles ?? total);
+      const limit = this.state.stats.total;
       for (let index = 0; index < limit && !signal.aborted; index++) {
         const buildingId = this.options.goldOnly ? this.mission.gold[index]!.building_id : nextTile(this.mission.id, rng).buildingId;
         const building = this.mission.buildings.find(({ id }) => id === buildingId)!;
@@ -132,6 +144,11 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         this.session = session;
         // Construct the public projection explicitly; no mission/building object is spread into it.
         this.state = { missionId: this.mission.id, source: this.options.source, phase: "voting",
+          mission: this.state.mission, stats: this.state.stats, live: preview(session), serverNow: this.clock.now(),
+          // Keep the previous result's public scores, but clear gold metadata during the next voting window.
+          lastResult: this.state.lastResult ? { tileNumber: this.state.lastResult.tileNumber,
+            status: this.state.lastResult.status, label: this.state.lastResult.label, agreement: this.state.lastResult.agreement,
+            voters: this.state.lastResult.voters, reason: this.state.lastResult.reason } : null,
           attribution: this.mission.attribution, refusedCount: this.refused.length,
           tile: { id: session.id, buildingId, number: index + 1, lon: building.lon, lat: building.lat,
             openedAt: session.openedAt, closesAt: session.closesAt,
@@ -168,7 +185,17 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
           this.gold.push({ truth, ...decision, ...(difficulty ? { difficulty } : {}) });
         }
         if (decision.weighted.status === "refused") this.refused.push(buildingId);
+        const result = decision.weighted;
+        const chatCorrect = !!truth && result.status === "validated" && result.label === truth;
+        const stats = this.state.stats;
         this.state = { ...this.state, phase: "decided", decision: decision.weighted, baseline: decision.unweighted,
+          live: preview(this.session),
+          stats: { goldChecked: stats.goldChecked + Number(!!truth), goldCorrect: stats.goldCorrect + Number(chatCorrect),
+            validated: stats.validated + Number(result.status === "validated"), refused: this.refused.length,
+            remaining: stats.remaining - 1, total: stats.total },
+          lastResult: { tileNumber: index + 1, status: result.status, label: result.label,
+            agreement: result.agreement, voters: result.voters, reason: result.reason,
+            ...(truth ? { gold: { truth, chatCorrect } } : {}) },
           refusedCount: this.refused.length, ...(truth ? { reveal: { gold: true, truth } } : {}) };
         this.publish();
         if (this.options.source === "twitch") {

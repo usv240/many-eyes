@@ -7,6 +7,7 @@ export interface TileSession {
   readonly closed: boolean; readonly votes: readonly Vote[];
 }
 interface Scores { readonly agreement: number; readonly voters: number; readonly totalVotes: number }
+export interface Preview { agreement: number; leading: Truth | null; voters: number; unsure: number }
 export type Decision = Scores & (
   { readonly status: "validated"; readonly label: Truth; readonly reason: null } |
   { readonly status: "refused"; readonly label: null; readonly reason: "low_agreement" | "too_few_voters" }
@@ -31,8 +32,7 @@ export function closeSession(session: TileSession, at: number): TileSession {
   return { ...session, closed: true };
 }
 
-function score(session: TileSession, weighted: boolean): Decision {
-  if (!session.closed) throw new Error("Close the session before deciding.");
+function tally(session: TileSession, weighted: boolean) {
   // Defend the scoring boundary even if a session was deserialized by another caller.
   const votes = [...new Map(session.votes.map((vote) => [vote.userId, vote])).values()];
   let destroyed = 0; let intact = 0; let voters = 0;
@@ -47,10 +47,23 @@ function score(session: TileSession, weighted: boolean): Decision {
   }
   const total = destroyed + intact;
   const agreement = total ? Math.max(destroyed, intact) / total : 0;
-  const scores = { agreement, voters, totalVotes: votes.length };
+  const leading: Truth | null = destroyed === intact ? null : destroyed > intact ? "destroyed" : "intact";
+  return { agreement, voters, totalVotes: votes.length, leading };
+}
+
+/** A preview is a score, never a validation or a gold-weight update. Ties have no leader. */
+export function preview(session: TileSession): Preview {
+  const { agreement, leading, voters, totalVotes } = tally(session, true);
+  return { agreement, leading, voters, unsure: totalVotes - voters };
+}
+
+function score(session: TileSession, weighted: boolean): Decision {
+  if (!session.closed) throw new Error("Close the session before deciding.");
+  const { agreement, voters, totalVotes, leading } = tally(session, weighted);
+  const scores = { agreement, voters, totalVotes };
   if (voters < 3) return { ...scores, status: "refused", label: null, reason: "too_few_voters" };
   if (agreement < 0.66) return { ...scores, status: "refused", label: null, reason: "low_agreement" };
-  return { ...scores, status: "validated", label: destroyed > intact ? "destroyed" : "intact", reason: null };
+  return { ...scores, status: "validated", label: leading!, reason: null };
 }
 
 export function decide(session: TileSession): Decision { return score(session, true); }
