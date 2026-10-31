@@ -8,6 +8,7 @@ it("reconstructs metrics and weights from vote events", async () => {
   const replay = new LedgerReplay();
   for (const event of result.events) replay.accept(event);
   expect(compareMetrics(replay.gold("replay"))).toEqual(result.metrics);
+  expect(replay.individual("replay")).toEqual(result.individual);
 });
 it("refuses scores that disagree with the recorded votes", async () => {
   const result = await runGoldSimulation({ seed: 5, voters: 2 }, "tampered");

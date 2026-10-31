@@ -22,7 +22,7 @@ Imagery attribution is shown directly on the overlay.
 - `npm run verify` — verify published report data against the ledger.
 - `npm run mission -- nepal-flood-2026 sim` — run 15-second voting windows and 5-second pauses.
 - `npm run mission -- nepal-flood-2026 twitch` — use Twitch votes and announce one result per tile.
-- `npm run bench` — simulate all 80 gold tiles at 200 voters, four troll fractions, and five seeds without real-time waits.
+- `npm run bench` — simulate 80 gold tiles at 1, 5, 10, 15, and 25 voters over 20 seeds, with shared hard tiles and troll raids.
 
 Copy `.env.example` to `.env` and fill in credentials before connecting Twitch or OpenAI.
 
@@ -56,10 +56,17 @@ simulation uses a private 50/50 latent truth and never updates weights from it.
 The gold pool includes inferred intact examples; synthetic benchmark accuracy is
 not evidence of real-world mapping accuracy.
 
-`reports/bench.json` and `reports/latest.json` include per-seed results, pooled
-metrics, and denominator definitions. Accuracy is over validated gold; false-destroyed
-and false-intact rates use all intact and all destroyed gold respectively. Refusal
-and coverage use all gold. Votes per tile includes final unsure votes.
+`reports/bench.json`, `reports/latest.json`, and `reports/bench.md` include
+per-seed results, pooled metrics, difficulty breakdowns, the ten-viewer learning
+curve, and denominator definitions. The benchmark fixes its assumptions before
+scoring: 65% easy, 25% shared hard tiles that reduce non-troll accuracy halfway
+toward chance, and 10% misleading tiles that flip honest-voter accuracy. Raids
+activate on 25% of tiles, and troll slots are split with one third always voting
+opposite truth and the rest joining synchronized destroyed raids. The single-viewer
+baseline reports mean, median, and 10th–90th percentile accuracy across honest
+voters' raw non-unsure votes. Accuracy is over validated gold; false-destroyed and
+false-intact rates use all intact and all destroyed gold respectively. Refusal and
+coverage use all gold. Votes per tile includes final unsure votes.
 
 Benchmark runs append their complete event history to the ignored `data/ledger.jsonl`.
 Keep its `.head` sidecar with the file: record checksums detect final-line edits and

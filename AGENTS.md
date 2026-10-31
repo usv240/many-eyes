@@ -9,8 +9,8 @@ Built for the Codex x TwitchCon Hackathon (deadline Nov 2, 2026, 2:00 PM PT). Th
 - `npm` only. Ask before adding any dependency beyond: `fastify`, `better-sqlite3`, `zod`, `openai`, `vite`, `vitest`, `tsx`.
 - Server: Fastify. State: SQLite via `better-sqlite3`. Overlay: Vite + vanilla TypeScript (no framework).
 - Monorepo layout:
-  - `server/` — Twitch EventSub client, vote ingest, consensus engine, ledger, tile service, debate agents, exports, HTTP + WebSocket API
-  - `overlay/` — OBS browser-source page (1920×1080), connects to server WebSocket
+  - `server/` — Twitch EventSub client, vote ingest, consensus engine, ledger, tile service, debate agents, exports, HTTP API + Server-Sent Events stream (`/api/stream`)
+  - `overlay/` — OBS browser-source page (1920×1080), subscribes to the server with `EventSource` (Server-Sent Events; Node has no built-in WebSocket server and we add no `ws` package)
   - `sim/` — simulated crowd and replay tooling
   - `data/` — missions, gold tiles, cached imagery (gitignored except small fixtures)
   - `reports/` — generated Mission Reports (Markdown + JSON)
@@ -31,7 +31,7 @@ Built for the Codex x TwitchCon Hackathon (deadline Nov 2, 2026, 2:00 PM PT). Th
 - Votes are `1` (destroyed), `2` (intact), `3` (unsure). Also accept `!1 !2 !3`, `destroyed`, `intact`, `unsure`. First vote per user per tile counts; later votes replace it until the tile closes.
 - Consensus: per-user weight starts at 1.0 and is updated only from gold tiles. A label is **validated** when weighted agreement ≥ 0.66 and at least 3 distinct voters; otherwise the tile is **refused** and queued. Never let the AI debaters' output influence the label.
 - Ledger: append-only `data/ledger.jsonl`, one JSON object per event, each line carrying `prev_hash` (sha256 of the previous line). `npm run verify` must detect any edit.
-- Imagery attribution must be rendered on the overlay: "Imagery: Vantor / Planet via OpenAerialMap, CC BY-NC 4.0".
+- Imagery attribution must be rendered on the overlay, using the mission's `attribution` string verbatim (Vantor imagery via OpenAerialMap, CC BY-NC 4.0; Copernicus EMS grading; OpenStreetMap buildings).
 - Dignity: no language like "wrecked", "KO", "points for destruction". Use "destroyed / intact / unsure", "validated", "refused".
 - Every module gets a small vitest file. The consensus engine and ledger need property-style tests (random vote streams, troll injection).
 - Keep files under ~300 lines. Prefer pure functions for anything scored.

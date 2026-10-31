@@ -1,4 +1,5 @@
 import { MemoryLedger } from "../../server/src/ledger/ledger.js";
+import { LedgerReplay } from "../../server/src/ledger/replay.js";
 import { MissionRunner } from "../../server/src/runner/mission-runner.js";
 import { compareMetrics } from "../../server/src/consensus/metrics.js";
 import type { CrowdConfig } from "./crowd.js";
@@ -9,5 +10,8 @@ export async function runGoldSimulation(config: CrowdConfig, runId = "sim-" + co
   const runner = new MissionRunner({ missionId, source: "sim", seed: config.seed, runId, virtual: true,
     goldOnly: true, crowd: config, ledger });
   const gold = await runner.run();
-  return { gold, metrics: compareMetrics(gold), events: ledger.events };
+  const replay = new LedgerReplay();
+  for (const event of ledger.events) replay.accept(event);
+  return { gold, metrics: compareMetrics(gold), events: ledger.events,
+    individual: replay.individual(runId) };
 }

@@ -4,11 +4,17 @@ import type { VoteLabel } from "../../server/src/votes/parse.js";
 
 export interface CrowdConfig {
   seed: number; voters: number; trollFraction?: number; lurkerFraction?: number; unsureRate?: number;
+  hardAccuracyMultiplier?: number; raidProbability?: number;
 }
+export const DIFFICULTY = { easy: 0.65, hard: 0.25, misleading: 0.1 } as const;
+export type TileDifficulty = keyof typeof DIFFICULTY;
+export type TrollStrategy = "always_wrong" | "raid";
 export interface Voter {
-  userId: string; sensitivity: number; specificity: number; troll: boolean; lurker: boolean; unsureRate: number;
+  userId: string; sensitivity: number; specificity: number; troll: boolean; trollStrategy: TrollStrategy | null;
+  lurker: boolean; unsureRate: number;
 }
 export interface SimVote { messageId: string; userId: string; label: VoteLabel; delayMs: number }
+export interface TileScenario { actual: Truth; difficulty: TileDifficulty; raid: boolean; raidDelay: number }
 function probability(value: number) {
   if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error("Fraction must be between zero and one.");
   return value;
@@ -29,6 +35,7 @@ export function createCrowd(config: CrowdConfig): Voter[] {
     [order[index], order[other]] = [order[other]!, order[index]!];
   }
   const trollIds = new Set(order.slice(0, trolls));
+  const alwaysWrong = new Set(order.slice(0, Math.ceil(trolls / 3)));
   // Lurkers are sampled independently of troll assignment.
   const lurkerIds = new Set<number>();
   const available = Array.from({ length: config.voters }, (_, index) => index);
@@ -39,23 +46,50 @@ export function createCrowd(config: CrowdConfig): Voter[] {
   return Array.from({ length: config.voters }, (_, index) => ({
     userId: "sim_" + String(index + 1).padStart(4, "0"),
     sensitivity: normal(rng, 0.78, 0.08), specificity: normal(rng, 0.97, 0.03),
-    troll: trollIds.has(index), lurker: lurkerIds.has(index), unsureRate,
+    troll: trollIds.has(index), trollStrategy: !trollIds.has(index) ? null :
+      alwaysWrong.has(index) ? "always_wrong" : "raid",
+    lurker: lurkerIds.has(index), unsureRate,
   }));
+}
+
+export function createTileScenario(seed: number, truth: Truth | "damaged" | "possibly damaged",
+  raidProbability = 0.25): TileScenario {
+  const rng = seededRng(seed);
+  const actual = truth === "destroyed" || truth === "intact" ? truth : rng() < 0.5 ? "destroyed" : "intact";
+  const draw = rng();
+  const difficulty: TileDifficulty = draw < DIFFICULTY.easy ? "easy" :
+    draw < DIFFICULTY.easy + DIFFICULTY.hard ? "hard" : "misleading";
+  const raid = rng() < probability(raidProbability);
+  return { actual, difficulty, raid, raidDelay: Math.floor(rng() * 15000) };
 }
 
 /** Work-tile truth is a private, single Bernoulli draw shared by the crowd, never expert ground truth. */
 export function simulateVotes(crowd: readonly Voter[], truth: Truth | "damaged" | "possibly damaged",
-  seed: number, tileId: string): SimVote[] {
+  seed: number, tileId: string, options: Pick<CrowdConfig,
+    "hardAccuracyMultiplier" | "raidProbability"> & { scenario?: TileScenario } = {}): SimVote[] {
   const rng = seededRng(seed);
-  const actual: Truth = truth === "destroyed" || truth === "intact" ? truth : rng() < 0.5 ? "destroyed" : "intact";
+  const scenario = options.scenario ?? createTileScenario(seed, truth, options.raidProbability);
+  const { actual, difficulty, raid, raidDelay } = scenario;
+  const accuracyMultiplier = probability(options.hardAccuracyMultiplier ?? 0.5);
+  // Consume the same tile-level draws before voter draws, keeping the stream deterministic.
+  if (truth !== "destroyed" && truth !== "intact") rng();
+  rng(); rng(); rng();
   const votes: SimVote[] = [];
   for (const voter of crowd) {
     if (voter.lurker) continue;
     let label: VoteLabel;
-    if (voter.troll) label = (["destroyed", "intact", "unsure"] as const)[Math.floor(rng() * 3)]!;
-    else if (rng() < voter.unsureRate) label = "unsure";
+    if (raid && voter.trollStrategy === "raid") {
+      label = "destroyed";
+      votes.push({ messageId: tileId + ":" + voter.userId, userId: voter.userId, label, delayMs: raidDelay });
+      continue;
+    } else if (voter.trollStrategy === "always_wrong") {
+      label = actual === "destroyed" ? "intact" : "destroyed";
+    } else if (rng() < voter.unsureRate) label = "unsure";
     else {
-      const correct = rng() < (actual === "destroyed" ? voter.sensitivity : voter.specificity);
+      let correctChance = actual === "destroyed" ? voter.sensitivity : voter.specificity;
+      if (difficulty === "hard") correctChance = 0.5 + (correctChance - 0.5) * accuracyMultiplier;
+      if (difficulty === "misleading") correctChance = 1 - correctChance;
+      const correct = rng() < correctChance;
       label = correct ? actual : actual === "destroyed" ? "intact" : "destroyed";
     }
     votes.push({ messageId: tileId + ":" + voter.userId, userId: voter.userId, label, delayMs: Math.floor(rng() * 15000) });

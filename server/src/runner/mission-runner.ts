@@ -9,7 +9,7 @@ import { EventSubClient, type ChatMessage } from "../twitch/eventsub.js";
 import { readConfig } from "../twitch/auth.js";
 import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
-import { createCrowd, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
+import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
 
 export interface PublicState {
   missionId: string; source: "sim" | "twitch"; phase: "idle" | "voting" | "decided" | "complete" | "stopped";
@@ -100,7 +100,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     const signal = this.controller.signal;
     const seed = this.options.seed ?? 1;
     const rng = seededRng(seed);
-    const crowd = this.options.source === "sim" ? createCrowd({ seed, voters: 200, ...this.options.crowd }) : [];
+    const crowd = this.options.source === "sim" ? createCrowd({ seed, voters: 10, ...this.options.crowd }) : [];
     let twitch = this.options.twitch;
     let sendChat = this.options.sendChat;
     if (this.options.source === "twitch" && !twitch) {
@@ -121,7 +121,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       }
       signal.throwIfAborted();
       this.ledger.append("mission_started", { missionId: this.mission.id, runId: this.runId,
-        source: this.options.source, seed, crowd: this.options.source === "sim" ? { voters: 200, ...this.options.crowd } : null },
+        source: this.options.source, seed, crowd: this.options.source === "sim" ? { voters: 10, ...this.options.crowd } : null },
       this.clock.now());
       const total = this.options.goldOnly ? this.mission.gold.length : this.mission.buildings.length;
       const limit = Math.min(total, this.options.maxTiles ?? total);
@@ -140,8 +140,14 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         this.ledger.append("tile_opened", { missionId: this.mission.id, runId: this.runId, ...this.state.tile }, session.openedAt);
         this.publish();
         const truth = goldTruth(buildingId, this.mission.id);
+        let difficulty: "easy" | "hard" | "misleading" | undefined;
         if (this.options.source === "sim") {
-          const votes = simulateVotes(crowd, truth ?? "possibly damaged", seed ^ Math.imul(index + 1, 0x9e3779b1), session.id);
+          const tileSeed = seed ^ Math.imul(index + 1, 0x9e3779b1);
+          const scenario = createTileScenario(tileSeed, truth ?? "possibly damaged", this.options.crowd?.raidProbability);
+          difficulty = scenario.difficulty;
+          const votes = simulateVotes(crowd, truth ?? "possibly damaged", tileSeed, session.id,
+            { hardAccuracyMultiplier: this.options.crowd?.hardAccuracyMultiplier,
+              raidProbability: this.options.crowd?.raidProbability, scenario });
           for (const vote of votes) {
             await this.clock.wait(Math.max(0, session.openedAt + vote.delayMs - this.clock.now()), signal);
             this.acceptVote(vote.messageId, vote.userId, vote.label, session.openedAt + vote.delayMs);
@@ -150,7 +156,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         await this.clock.wait(Math.max(0, session.closesAt - this.clock.now()), signal);
         this.session = closeSession(this.session!, this.clock.now());
         const decision = this.ledger.recordDecision(this.session, { missionId: this.mission.id, runId: this.runId,
-          buildingId, ...(truth ? { truth } : {}) });
+          buildingId, ...(truth ? { truth } : {}), ...(difficulty ? { difficulty } : {}) });
         if (truth) {
           const updated = updateGoldWeights(this.weights, this.session, truth);
           for (const [userId, weight] of updated) {
@@ -159,7 +165,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
               { missionId: this.mission.id, runId: this.runId, tileId: session.id, userId, previous, weight }, session.closesAt);
           }
           this.weights = updated;
-          this.gold.push({ truth, ...decision });
+          this.gold.push({ truth, ...decision, ...(difficulty ? { difficulty } : {}) });
         }
         if (decision.weighted.status === "refused") this.refused.push(buildingId);
         this.state = { ...this.state, phase: "decided", decision: decision.weighted, baseline: decision.unweighted,

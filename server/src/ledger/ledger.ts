@@ -1,12 +1,14 @@
 import { createHash } from "node:crypto";
-import { appendFileSync, existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { appendFileSync, closeSync, existsSync, mkdirSync, openSync, readFileSync, renameSync, writeFileSync, readSync } from "node:fs";
 import { dirname } from "node:path";
+import { StringDecoder } from "node:string_decoder";
 import { decide, decideUnweighted, type TileSession, type Truth } from "../consensus/engine.js";
 
 export type EventType = "mission_started" | "tile_opened" | "vote" | "tile_decided" | "weight_updated" | "export_written";
 export interface LedgerEvent { type: EventType; timestamp: number; data: Record<string, unknown> }
 export interface RecordLine extends LedgerEvent { prev_hash: string; hash: string }
-export interface DecisionContext { missionId: string; runId: string; buildingId: string; truth?: Truth }
+export interface DecisionContext { missionId: string; runId: string; buildingId: string; truth?: Truth;
+  difficulty?: "easy" | "hard" | "misleading" }
 export interface LedgerPort {
   append(type: Exclude<EventType, "tile_decided">, data: Record<string, unknown>, timestamp: number): void;
   recordDecision(session: TileSession, context: DecisionContext): ReturnType<typeof decisions>;
@@ -25,28 +27,46 @@ export function verify(path = "data/ledger.jsonl"): { lines: number; head: strin
     if (existsSync(path + ".head")) broken(1);
     return { lines: 0, head: GENESIS };
   }
-  const text = readFileSync(path, "utf8");
-  if (text && !text.endsWith("\n")) broken(text.split("\n").length);
-  const lines = text ? text.slice(0, -1).split("\n") : [];
   let previous = GENESIS;
-  for (let index = 0; index < lines.length; index++) {
-    const line = lines[index]!;
+  let lineNumber = 0;
+  let pending = "";
+  const decoder = new StringDecoder("utf8");
+  const fd = openSync(path, "r");
+  const chunk = Buffer.allocUnsafe(1024 * 1024);
+  const verifyLine = (line: string, number: number) => {
     try {
       const record = JSON.parse(line) as RecordLine;
       const { hash, ...payload } = record;
       if (!eventTypes.includes(record.type) || !Number.isFinite(record.timestamp) || !record.data ||
           record.prev_hash !== previous || hash !== digest(JSON.stringify(payload)) ||
-          line !== JSON.stringify(record)) broken(index + 1);
+          line !== JSON.stringify(record)) broken(number);
       previous = digest(line);
-    } catch { broken(index + 1); }
+    } catch { broken(number); }
+  };
+  try {
+    let bytes: number;
+    while ((bytes = readSync(fd, chunk, 0, chunk.length, null)) > 0) {
+      pending += decoder.write(chunk.subarray(0, bytes));
+      let newline = pending.indexOf("\n");
+      while (newline >= 0) {
+        lineNumber++;
+        verifyLine(pending.slice(0, newline), lineNumber);
+        pending = pending.slice(newline + 1);
+        newline = pending.indexOf("\n");
+      }
+    }
+    pending += decoder.end();
+  } finally {
+    closeSync(fd);
   }
+  if (pending.length) broken(lineNumber + 1);
   // Saved head detects deleted final lines; a plain prev_hash chain cannot.
-  if (!existsSync(path + ".head")) broken(lines.length || 1);
+  if (!existsSync(path + ".head")) broken(lineNumber || 1);
   try {
     const head = JSON.parse(readFileSync(path + ".head", "utf8")) as { lines: number; head: string };
-    if (head.lines !== lines.length || head.head !== previous) broken(lines.length + 1);
-  } catch { broken(lines.length + 1); }
-  return { lines: lines.length, head: previous };
+    if (head.lines !== lineNumber || head.head !== previous) broken(lineNumber + 1);
+  } catch { broken(lineNumber + 1); }
+  return { lines: lineNumber, head: previous };
 }
 
 /** Single-process writer. The head sidecar must be retained with the ledger. */

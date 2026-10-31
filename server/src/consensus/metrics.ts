@@ -1,6 +1,7 @@
 import type { Decision, Truth } from "./engine.js";
+import type { TileDifficulty } from "../../../sim/src/crowd.js";
 
-export interface DecidedGold { truth: Truth; weighted: Decision; unweighted: Decision }
+export interface DecidedGold { truth: Truth; weighted: Decision; unweighted: Decision; difficulty?: TileDifficulty }
 export interface Metrics {
   total: number; validated: number; correct: number; refused: number;
   intactGold: number; destroyedGold: number; falseDestroyed: number; falseIntact: number;
