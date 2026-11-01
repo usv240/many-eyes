@@ -53,9 +53,13 @@ async function cropScene(primary: MissionScene, fallback: MissionScene, lon: num
       }));
       const left = Math.round(TILE_SIZE + position.localX - CROP_SIZE / 2);
       const top = Math.round(TILE_SIZE + position.localY - CROP_SIZE / 2);
-      const image = await sharp({ create: { width: TILE_SIZE * 3, height: TILE_SIZE * 3,
+      // sharp applies extract before composite within a pipeline. Materialize the
+      // full mosaic first, then crop it in a separate pipeline around the building.
+      const mosaic = await sharp({ create: { width: TILE_SIZE * 3, height: TILE_SIZE * 3,
         channels: 3, background: { r: 0, g: 0, b: 0 } } })
-        .composite(layers).extract({ left, top, width: CROP_SIZE, height: CROP_SIZE }).jpeg({ quality: 88 }).toBuffer();
+        .composite(layers).png().toBuffer();
+      const image = await sharp(mosaic).extract({ left, top, width: CROP_SIZE, height: CROP_SIZE })
+        .jpeg({ quality: 88 }).toBuffer();
       return { image, scene: candidate.scene, usedFallback: candidate.usedFallback };
     } catch (error) { lastError = error; }
   }

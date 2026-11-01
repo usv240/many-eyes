@@ -136,3 +136,43 @@ file. Windows head renames retry ten times, then fall back to a direct head writ
 all other integrity mismatches fail hard.
 `npm run verify` checks both ledgers, replays accepted votes and gold weight updates,
 and compares the bench ledger?s recomputed metrics with `reports/latest.json`.
+
+## Limits
+
+The earlier 25 m imagery warning was based on incorrectly positioned crops, not a
+valid registration measurement. Crops now materialize the full 3-by-3 tile mosaic
+before extracting a 384-by-384 window centred on the building. All 190 crops were
+rebuilt successfully (0 failures); the source tile cache was retained. Integer
+pixel extraction centres the target to within half a pixel on each axis.
+
+On the **40 intact gold tiles**, the estimated pre/post displacement magnitude has
+**median 1.72 m**, interquartile range **1.36-2.62 m**, 10th-90th percentiles
+**1.02-7.13 m**, and range **0.82-13.49 m**. These are per-crop magnitudes, not the
+magnitude of an averaged displacement vector. The overlay rounds the median up
+to the next 5 m and says **"Typical pre/post offset: about 5 m"**. This is a typical
+value, not an upper bound. No registration correction is applied to displayed images.
+
+Method: read the corrected pre/post JPEGs as grayscale float32; apply OpenCV's
+384-by-384 Hann window and `phaseCorrelate` (normalized cross-power spectrum,
+5-by-5 peak centroid for subpixel displacement). Convert each displacement to
+metres with `156543.03392 * cos(latitude) / 2**19`. All 40 pairs are included,
+without filtering, search restrictions, mean subtraction, or manual alignment.
+Percentiles use NumPy's linear interpolation. Median correlation response is
+0.143; **9/40 responses are below 0.1**, indicating ambiguous peaks. Appearance,
+shadows, vegetation, terrain and changes between acquisition dates can confound
+phase correlation. This is an image translation estimate, not surveyed geometric
+accuracy; nearby overlapping crops are not independent samples. Intact gold is
+inferred from OSM buildings more than 40 m from a Copernicus damage point.
+
+Reproduce with `python scripts/measure-offset.py` (OpenCV and NumPy, already
+available on the analysis machine). The script first checks a seeded known
+translation. Per-pair pixel/metre shifts, responses, image hashes, package versions
+and summary statistics are in `reports/overlay/offset-measurement.json`.
+Run `npm exec tsx -- scripts/crop-sheet.ts` after warming to regenerate
+`reports/overlay/crop-sheet.png`: the first 12 gold entries in mission-file order,
+pre | post, with a 12 m ring. Visual review shows most pre rings overlap roofs or
+structures, but a few remain vegetation or ambiguous features; centring the crop
+does not itself validate the source point or a damage label.
+
+The bundled overlay fixture photos now use the corrected `cems-0052` crop:
+houses before, flood sediment after. Fixture decisions remain illustrative.

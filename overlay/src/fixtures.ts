@@ -10,7 +10,7 @@ export function fixtureSnapshot(name: FixtureName, now = Date.now()): Snapshot {
     missionId: "nepal-flood-2026", source: "sim", phase: "voting", mission, attribution: mission.attribution,
     serverNow: now, refusedCount: 4, live: { agreement: 0.81, leading: "destroyed", voters: 23, unsure: 2 },
     stats: { goldChecked: 8, goldCorrect: 7, validated: 32, refused: 4, remaining: 154, total: 190 },
-    tile: { token: "abcdef123456", number: 37, lon: 85.334426, lat: 28.1631911, openedAt: now, closesAt: now + 15000, imageryUrl: "/fixtures/pre.jpg" },
+    tile: { token: "abcdef123456", number: 37, lon: 85.3362, lat: 28.1614, openedAt: now, closesAt: now + 15000, imageryUrl: "/fixtures/pre.jpg" },
     lastResult: null, votes: { destroyed: 19, intact: 4, unsure: 2, total: 25 },
   };
   if (name === "intro") state.tile!.number = 1;
@@ -30,6 +30,6 @@ export function fixtureSnapshot(name: FixtureName, now = Date.now()): Snapshot {
     ...(name === "disconnected" ? { offlineSince: now - 4000 } : {}),
     imageryStatus: name === "loading" ? "loading" : "ready",
     ...(name === "loading" ? {} : { imagery: { pre: "/fixtures/pre.jpg", post: "/fixtures/post.jpg", zoom: 19, sizePx: 384,
-      lat: 28.1631911, attribution: mission.attribution, scenes: { pre: { title: "Before", date: mission.preDate }, post: { title: "After", date: mission.postDate } } } }),
+      lat: 28.161423, attribution: mission.attribution, scenes: { pre: { title: "Before", date: mission.preDate }, post: { title: "After", date: mission.postDate } } } }),
   };
 }

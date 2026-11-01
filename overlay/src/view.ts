@@ -83,7 +83,7 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       beforeDate: "Before · " + date(mission?.preDate), afterDate: "After · " + date(mission?.postDate),
       coordinates: tile ? Math.abs(tile.lat).toFixed(4) + "° " + (tile.lat >= 0 ? "N" : "S") + ", " +
         Math.abs(tile.lon).toFixed(4) + "° " + (tile.lon >= 0 ? "E" : "W") : "—",
-      scaleLabel: "20 m", caution: "The before photo can sit up to 25 m off. Judge the building inside the ring.",
+      scaleLabel: "20 m", caution: "Typical pre/post offset: about 5 m. Judge the building inside the ring.",
       intro1: "Satellite photos of Syaphru Besi, Nepal, before and after the flood of " + date(mission?.eventDate, true) + ".",
       intro2: "Look at the building in the ring. Did it survive?",
       intro3: "Type 1, 2 or 3. At least three of you must agree, or the tile goes to expert review.",
