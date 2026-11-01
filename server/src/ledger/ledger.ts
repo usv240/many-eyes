@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { appendFileSync, closeSync, existsSync, mkdirSync, openSync, readFileSync, renameSync, writeFileSync, readSync } from "node:fs";
+import { appendFileSync, closeSync, existsSync, mkdirSync, openSync, readFileSync, renameSync, writeFileSync, readSync, unlinkSync } from "node:fs";
 import { dirname } from "node:path";
 import { StringDecoder } from "node:string_decoder";
 import { decide, decideUnweighted, type TileSession, type Truth } from "../consensus/engine.js";
@@ -20,11 +20,32 @@ const GENESIS = "0".repeat(64);
 const digest = (text: string) => createHash("sha256").update(text).digest("hex");
 const eventTypes: string[] = ["mission_started", "tile_opened", "vote", "tile_decided", "weight_updated", "export_written"];
 const broken = (line: number): never => { throw new Error("Ledger integrity failure at line " + line + "."); };
+export const LIVE_LEDGER_PATH = "data/ledger.jsonl";
+export const BENCH_LEDGER_PATH = "data/bench-ledger.jsonl";
+export interface HeadOperations { rename?: typeof renameSync; wait?: (ms: number) => void }
+const transient = (error: unknown) => ["EPERM", "EBUSY", "EACCES"].includes((error as NodeJS.ErrnoException)?.code ?? "");
+const waitBuffer = new Int32Array(new SharedArrayBuffer(4));
+function promoteHead(path: string, state: { lines: number; head: string }, operations: HeadOperations) {
+  const rename = operations.rename ?? renameSync;
+  const wait = operations.wait ?? ((ms: number) => { Atomics.wait(waitBuffer, 0, 0, ms); });
+  for (let retry = 0; retry <= 10; retry++) {
+    try { rename(path + ".head.tmp", path + ".head"); return; }
+    catch (error) {
+      if (!transient(error)) throw error;
+      if (retry < 10) wait(Math.min(20 * (retry + 1), 100));
+    }
+  }
+  // Windows can hold the destination open without allowing replacement by rename.
+  // Retain the matching temporary checkpoint until the direct write succeeds.
+  writeFileSync(path + ".head", JSON.stringify(state));
+  try { unlinkSync(path + ".head.tmp"); }
+  catch (error) { if (!transient(error) && (error as NodeJS.ErrnoException).code !== "ENOENT") throw error; }
+}
 
 /** Both the full-line chain and record checksums are verified, including the final record. */
-export function verify(path = "data/ledger.jsonl"): { lines: number; head: string } {
+export function verify(path = LIVE_LEDGER_PATH, operations: HeadOperations = {}): { lines: number; head: string } {
   if (!existsSync(path)) {
-    if (existsSync(path + ".head")) broken(1);
+    if (existsSync(path + ".head") || existsSync(path + ".head.tmp")) broken(1);
     return { lines: 0, head: GENESIS };
   }
   let previous = GENESIS;
@@ -60,6 +81,15 @@ export function verify(path = "data/ledger.jsonl"): { lines: number; head: strin
     closeSync(fd);
   }
   if (pending.length) broken(lineNumber + 1);
+  const actual = { lines: lineNumber, head: previous };
+  if (existsSync(path + ".head.tmp")) {
+    let temporary: { lines: number; head: string };
+    try { temporary = JSON.parse(readFileSync(path + ".head.tmp", "utf8")) as typeof actual; }
+    catch { broken(lineNumber + 1); }
+    if (temporary!.lines !== actual.lines || temporary!.head !== actual.head) broken(lineNumber + 1);
+    // Adopt only a checkpoint proven against every record, never repair a mismatched chain.
+    promoteHead(path, actual, operations);
+  }
   // Saved head detects deleted final lines; a plain prev_hash chain cannot.
   if (!existsSync(path + ".head")) broken(lineNumber || 1);
   try {
@@ -73,8 +103,8 @@ export function verify(path = "data/ledger.jsonl"): { lines: number; head: strin
 export class Ledger {
   private head: string;
   private lines: number;
-  constructor(readonly path = "data/ledger.jsonl") {
-    const state = verify(path); this.head = state.head; this.lines = state.lines;
+  constructor(readonly path = LIVE_LEDGER_PATH, private readonly headOperations: HeadOperations = {}) {
+    const state = verify(path, headOperations); this.head = state.head; this.lines = state.lines;
     mkdirSync(dirname(path), { recursive: true });
   }
   append(type: Exclude<EventType, "tile_decided">, data: Record<string, unknown>, timestamp: number) {
@@ -118,7 +148,7 @@ export class Ledger {
     this.head = head; this.lines += lines.length;
     const temporary = this.path + ".head.tmp";
     writeFileSync(temporary, JSON.stringify({ lines: this.lines, head: this.head }));
-    renameSync(temporary, this.path + ".head");
+    promoteHead(this.path, { lines: this.lines, head: this.head }, this.headOperations);
   }
   verify() { return verify(this.path); }
 }

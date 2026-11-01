@@ -1,5 +1,73 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Many Eyes</title></head>
-  <body><main id="app">Many Eyes overlay scaffold</main><script type="module" src="/src/main.ts"></script></body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Many Eyes · live mapping</title>
+  <link rel="preload" href="/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+<main id="scene" aria-label="Many Eyes disaster mapping broadcast">
+  <section class="photo-stage" aria-label="Before and after satellite imagery">
+    <img data-node="before" class="photo" hidden />
+    <img data-node="after" class="photo after" hidden />
+    <div data-node="divider" class="wipe-divider" hidden></div>
+    <svg data-node="target" class="target" viewBox="0 0 984 984" aria-label="Building target, 12 metre radius" hidden>
+      <circle data-node="ringDark" cx="492" cy="492" class="ring-dark" />
+      <circle data-node="ringLight" cx="492" cy="492" class="ring-light" />
+    </svg>
+    <div data-node="advocateBox" class="evidence-box destroyed" hidden><span data-node="advocateBoxLabel"></span></div>
+    <div data-node="skepticBox" class="evidence-box intact" hidden><span data-node="skepticBoxLabel"></span></div>
+    <div data-node="beforeDate" class="date-plate before-date"></div>
+    <div data-node="afterDate" class="date-plate after-date"></div>
+    <div data-node="imageStatus" class="image-status"></div>
+    <div class="map-bottom">
+      <div data-node="scale" class="scale-plate" hidden><span data-node="scaleLabel"></span><div data-node="scaleBar" class="scale-bar"></div></div>
+      <span data-node="coordinates" class="coordinate-plate"></span>
+    </div>
+    <p data-node="caution" class="caution"></p>
+  </section>
+  <section class="sidebar" aria-label="Chat voting and mission progress">
+    <header class="header">
+      <div class="identity"><h1 data-node="wordmark"></h1><span data-node="simulated" class="pill" hidden></span></div>
+      <span data-node="tileCount" class="tile-count"></span>
+      <p data-node="location" class="location"></p>
+    </header>
+    <section class="question-block">
+      <h2 data-node="question"></h2>
+      <div class="keys" aria-label="Chat voting commands">
+        <span class="key destroyed"><span data-node="key1" class="digit"></span><span data-node="destroyedKey"></span></span>
+        <span class="key intact"><span data-node="key2" class="digit"></span><span data-node="intactKey"></span></span>
+        <span class="key unsure"><span data-node="key3" class="digit"></span><span data-node="unsureKey"></span></span>
+      </div>
+    </section>
+    <section class="context">
+      <div data-node="explainer" class="explainer"><p data-node="intro1"></p><p data-node="intro2"></p><p data-node="intro3"></p></div>
+      <div data-node="debate" class="debate" hidden>
+        <div><p data-node="advocateTitle" class="argument-title destroyed"></p><p data-node="advocateClaim" class="claim"></p></div>
+        <div><p data-node="skepticTitle" class="argument-title intact"></p><p data-node="skepticClaim" class="claim"></p></div>
+        <p data-node="aiFootnote" class="ai-footnote"></p>
+      </div>
+    </section>
+    <section class="tally" aria-label="Live weighted agreement">
+      <div data-node="lead" class="lead"><span data-node="agreement" class="agreement"></span><span data-node="leading" class="leading"></span></div>
+      <div class="bar-labels"><span data-node="destroyedBarLabel" class="destroyed"></span><span data-node="intactBarLabel" class="intact"></span></div>
+      <div class="vote-bar"><div data-node="destroyedFill" class="destroyed-fill"></div><div data-node="intactFill" class="intact-fill"></div><i class="tick tick-left"></i><i class="tick tick-right"></i></div>
+      <p data-node="threshold" class="threshold"></p>
+      <p data-node="voters" class="voter-count"></p>
+      <div class="countdown"><div class="countdown-track"><div data-node="countdownFill"></div></div><span data-node="countdown"></span></div>
+      <p data-node="pauseReason" class="pause-reason" hidden></p>
+    </section>
+    <section class="stats" aria-label="Mission statistics">
+      <div class="accuracy-stat"><p data-node="accuracyTitle"></p><div class="accuracy-value"><span data-node="accuracy" class="stat-value"></span><span data-node="checks" class="checks"></span></div></div>
+      <div><p data-node="validatedTitle"></p><span data-node="validated" class="stat-value"></span></div>
+      <div><p data-node="refusedTitle"></p><span data-node="refused" class="stat-value"></span></div>
+      <div><p data-node="remainingTitle"></p><span data-node="remaining" class="stat-value"></span></div>
+    </section>
+  </section>
+  <div data-node="connection" class="connection-status" hidden></div>
+  <footer data-node="attribution"></footer>
+</main>
+<script type="module" src="/src/main.ts"></script>
+</body>
 </html>

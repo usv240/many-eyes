@@ -1,13 +1,16 @@
 import Fastify from "fastify";
+import { randomUUID } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { registerMissionRoutes } from "./http/missions.js";
 import { registerStreamRoutes } from "./http/stream.js";
 import { createLive, type LiveMission } from "./live.js";
 
-export function createApp(options: { live?: LiveMission } = {}) {
+export function createApp(options: { live?: LiveMission; instanceId?: string } = {}) {
   const app = Fastify({ logger: false });
+  const instanceId = options.instanceId ?? randomUUID();
+  app.addHook("onRequest", async (_request, reply) => { reply.header("x-many-eyes-instance", instanceId); });
   const live = options.live ?? createLive();
-  void registerMissionRoutes(app);
+  void registerMissionRoutes(app, live.runner);
   registerStreamRoutes(app, live.runner);
   app.addHook("onReady", async () => { await live.start(); });
   app.addHook("preClose", async () => { await live.stop(); });
@@ -15,7 +18,7 @@ export function createApp(options: { live?: LiveMission } = {}) {
 }
 
 async function main() {
-  const port = Number(process.env.PORT ?? 8787);
+  const port = Number(process.env.PORT ?? 8791);
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PORT must be a valid TCP port.");
   const app = createApp();
   const shutdown = () => { void app.close(); };
@@ -23,7 +26,7 @@ async function main() {
   process.once("SIGTERM", shutdown);
   app.addHook("onClose", async () => { process.off("SIGINT", shutdown); process.off("SIGTERM", shutdown); });
   try {
-    await app.listen({ port, host: "0.0.0.0" });
+    await app.listen({ port, host: "127.0.0.1" });
     console.log("Many Eyes listening on http://localhost:" + port + " (SSE: /api/stream)");
   } catch (error) { await app.close(); throw error; }
 }

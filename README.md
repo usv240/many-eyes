@@ -15,7 +15,9 @@ Imagery attribution is shown directly on the overlay.
 ## Run commands
 
 - `npm install` — install workspace dependencies.
-- `npm run dev` — run the server and overlay in watch mode.
+- `npm run dev` — alias for the simulated broadcast scene.
+- `npm run demo` — run a simulated mission and Vite; prints the OBS URL (`http://localhost:5180/`).
+- `npm run live` — run the same scene with Twitch chat as its vote source.
 - `npm run dev:server` — run the HTTP server and one real-time mission, with SSE at `/api/stream`.
 - `npm run dev:bot` — connect to Twitch, send one startup announcement, and log parsed votes.
 - `npm test` — run Vitest.
@@ -44,6 +46,27 @@ cleared from public state when the next voting window opens.
 
 Tile responses include `zoom`, `sizePx`, and `lat`. Crops use 256-pixel XYZ tiles;
 metres per crop pixel is `156543.03392 * cos(lat * Math.PI / 180) / 2 ** zoom`.
+
+Public tiles use `/api/tiles/:token`. Tokens are the first 12 hex characters of
+HMAC-SHA256 over run ID + building ID with a random process key. Only issued tokens
+resolve, and the lookup map remains in the runner. Raw building IDs stay private;
+HTTP mission summaries contain no building inventory. Stream coordinates have four
+decimal places. Vite serves only overlay assets and dependencies, not mission data.
+
+Use a 1920×1080 OBS browser source. Smaller windows scale the entire scene to fit.
+The wipe is fixed at 50%. The caution occupies a bottom strip inside the photo
+stage because the specified stage/footer coordinates leave only an 8 px margin.
+Public Sans is bundled in `overlay/public/fonts/` with its OFL license; no external
+font request is needed. The font is from Google Fonts' Public Sans distribution.
+The optional debate contract is `{ advocate: { claim, box? }, skeptic: { claim, box? } }`;
+boxes use normalized crop coordinates `{ x, y, width, height }`. Claims are capped
+at 30 words, and arguments never enter the consensus engine. The overlay converts
+crop scale to display pixels and uses server timestamps to correct its countdown.
+The server binds only `127.0.0.1`, on `PORT` (default `8791`). Vite also binds only
+`127.0.0.1`, on `OVERLAY_PORT` (default `5180`), with strict port selection.
+The demo probes `/api/missions` before startup and checks the server instance after
+binding, refusing an occupied or unexpected service. The Vite proxy reads `PORT`
+from `.env`; Twitch credentials are never sent to the browser.
 
 Use Node 22 or newer. The bot reads `.env` from the repository root and requires the
 Twitch client ID, user token, refresh token, bot user ID, and broadcaster user ID.
@@ -87,9 +110,12 @@ voters' raw non-unsure votes. Accuracy is over validated gold; false-destroyed a
 false-intact rates use all intact and all destroyed gold respectively. Refusal and
 coverage use all gold. Votes per tile includes final unsure votes.
 
-Benchmark runs append their complete event history to the ignored `data/ledger.jsonl`.
+Benchmark runs append their complete event history to the ignored `data/bench-ledger.jsonl`.
+Live missions use `data/ledger.jsonl`; existing live history is never migrated automatically.
 Keep its `.head` sidecar with the file: record checksums detect final-line edits and
 the saved head detects truncation. This is a single-process writer; an interrupted
-append/head update fails verification rather than silently repairing history.
-`npm run verify` checks the chain, replays accepted votes and gold weight updates,
-and compares the recomputed metrics with `reports/latest.json`.
+append/head update recovers only when its `.head.tmp` exactly matches the verified
+file. Windows head renames retry ten times, then fall back to a direct head write;
+all other integrity mismatches fail hard.
+`npm run verify` checks both ledgers, replays accepted votes and gold weight updates,
+and compares the bench ledger?s recomputed metrics with `reports/latest.json`.

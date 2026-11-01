@@ -14,7 +14,7 @@ export function readLiveConfig(env: NodeJS.ProcessEnv = process.env): { source: 
 }
 
 /** One real-time mission per server instance. start() resolves when the first tile opens. */
-export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPort; onError?: () => void } = {}): LiveMission {
+export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPort; onError?: (error: Error) => void } = {}): LiveMission {
   const env = options.env ?? process.env;
   const config = readLiveConfig(env);
   const twitch = config.source === "twitch" ? readConfig(env) : undefined;
@@ -38,10 +38,13 @@ export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPo
         task = runner.run().then(() => {
           runner.off("state", onState);
           if (!opened) reject(new Error("Live mission stopped before the first tile opened."));
-        }, () => {
+        }, (error: unknown) => {
           runner.off("state", onState);
-          if (!opened) reject(new Error("Live mission failed to start. Check Twitch configuration and connectivity."));
-          else (options.onError ?? (() => console.error("Live mission stopped after an error.")))();
+          if (!opened) reject(config.source === "twitch"
+            ? new Error("Live Twitch mission failed to start. Check Twitch configuration and connectivity.")
+            : new Error("Live simulation failed to start: " + (error instanceof Error ? error.message : "unknown startup error")));
+          else (options.onError ?? ((cause: Error) => console.error("Live mission stopped: " + cause.message)))(
+            error instanceof Error ? error : new Error(String(error)));
         });
       });
       return ready;

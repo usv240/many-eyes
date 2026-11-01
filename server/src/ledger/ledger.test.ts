@@ -1,7 +1,7 @@
-import { mkdtempSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync, rmSync, renameSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { Ledger, MemoryLedger, verify, type EventType } from "./ledger.js";
 import { openSession, closeSession } from "../consensus/engine.js";
 import { seededRng } from "../missions/mission.js";
@@ -23,6 +23,53 @@ it.each([1, 77, 9901])("detects edits to every record including the final line, 
   }
   writeFileSync(file, original);
   expect(new Ledger(file).verify().lines).toBe(30);
+});
+
+it("retries Windows rename locks, then continues appending after recovery", () => {
+  const file = path(); const wait = vi.fn();
+  const locks = ["EPERM", "EBUSY", "EACCES"];
+  const rename = vi.fn<typeof renameSync>((from, to) => {
+    const code = locks.shift();
+    if (code) throw Object.assign(new Error("Head temporarily locked"), { code });
+    renameSync(from, to);
+  });
+  const ledger = new Ledger(file, { rename, wait });
+  ledger.append("mission_started", {}, 0);
+  expect(rename).toHaveBeenCalledTimes(4); expect(wait).toHaveBeenCalledTimes(3);
+  ledger.append("tile_opened", {}, 1);
+  expect(verify(file).lines).toBe(2);
+});
+
+it("falls back to a direct head write after ten rename retries", () => {
+  const file = path();
+  const rename = vi.fn<typeof renameSync>(() => { throw Object.assign(new Error("Head locked"), { code: "EPERM" }); });
+  const ledger = new Ledger(file, { rename, wait: () => {} });
+  ledger.append("mission_started", {}, 0);
+  expect(rename).toHaveBeenCalledTimes(11);
+  expect(verify(file).lines).toBe(1);
+  ledger.append("tile_opened", {}, 1);
+  expect(verify(file).lines).toBe(2);
+});
+
+it("adopts a matching temporary checkpoint on startup without changing ledger bytes", () => {
+  const file = path(); const ledger = new Ledger(file);
+  ledger.append("mission_started", {}, 0);
+  const stale = readFileSync(file + ".head");
+  ledger.append("tile_opened", {}, 1);
+  const original = readFileSync(file);
+  writeFileSync(file + ".head.tmp", readFileSync(file + ".head"));
+  writeFileSync(file + ".head", stale);
+  expect(new Ledger(file).verify().lines).toBe(2);
+  expect(readFileSync(file)).toEqual(original);
+  expect(existsSync(file + ".head.tmp")).toBe(false);
+});
+
+it("rejects a mismatched temporary checkpoint even when the saved head matches", () => {
+  const file = path(); const ledger = new Ledger(file);
+  ledger.append("mission_started", {}, 0);
+  writeFileSync(file + ".head.tmp", JSON.stringify({ lines: 1, head: "0".repeat(64) }));
+  expect(() => verify(file)).toThrow("Ledger integrity failure at line 2");
+  expect(() => new Ledger(file)).toThrow("Ledger integrity failure");
 });
 it("detects suffix deletion, malformed JSON and final-line whitespace changes", () => {
   const file = path(); const ledger = new Ledger(file);

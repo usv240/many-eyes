@@ -3,11 +3,11 @@ import { createHash, randomUUID } from "node:crypto";
 import { runGoldSimulation } from "../sim/src/benchmark.js";
 import { DIFFICULTY, type TileDifficulty } from "../sim/src/crowd.js";
 import { compareMetrics, type DecidedGold } from "../server/src/consensus/metrics.js";
-import { Ledger } from "../server/src/ledger/ledger.js";
+import { Ledger, BENCH_LEDGER_PATH } from "../server/src/ledger/ledger.js";
 
 const seeds = Array.from({ length: 20 }, (_, index) => index + 1);
 const missionId = "nepal-flood-2026";
-const ledger = new Ledger();
+const ledger = new Ledger(BENCH_LEDGER_PATH);
 const batchId = randomUUID();
 const cohorts = [
   { voters: 1, trolls: 0 }, { voters: 5, trolls: 2 }, { voters: 10, trolls: 3 },

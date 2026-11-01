@@ -14,3 +14,12 @@ it("owns one live mission for the HTTP app's lifetime", async () => {
   } finally { await app.close(); }
   expect(live.runner.getState().phase).toBe("stopped");
 });
+
+it("reports the real port conflict in sim mode without Twitch advice", async () => {
+  const first = createApp({ live: createLive({ env: {}, ledger: new MemoryLedger() }) });
+  const second = createApp({ live: createLive({ env: {}, ledger: new MemoryLedger() }) });
+  try {
+    const url = await first.listen({ host: "127.0.0.1", port: 0 });
+    await expect(second.listen({ host: "127.0.0.1", port: Number(new URL(url).port) })).rejects.toMatchObject({ code: "EADDRINUSE" });
+  } finally { await Promise.all([first.close(), second.close()]); }
+});

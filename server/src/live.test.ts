@@ -34,7 +34,7 @@ it("requires Twitch credentials only in twitch mode and rejects invalid live opt
 it("reports startup failures and releases the readiness listener", async () => {
   const live = createLive({ env: {}, ledger: new MemoryLedger() });
   vi.spyOn(live.runner, "run").mockRejectedValue(new Error("private implementation detail"));
-  await expect(live.start()).rejects.toThrow("Live mission failed to start");
+  await expect(live.start()).rejects.toThrow("Live simulation failed to start: private implementation detail");
   expect(live.runner.listenerCount("state")).toBe(0);
   await live.stop();
 });

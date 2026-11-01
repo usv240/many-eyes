@@ -11,7 +11,9 @@
     "sim"
   ],
   "scripts": {
-    "dev": "node --env-file=.env --import tsx scripts/dev.ts",
+    "dev": "npm run demo",
+    "demo": "node --env-file=.env --import tsx scripts/broadcast.ts sim",
+    "live": "node --env-file=.env --import tsx scripts/broadcast.ts twitch",
     "dev:server": "node --env-file=.env --watch --import tsx server/src/index.ts",
     "dev:bot": "node --env-file=.env --import tsx server/src/bot.ts",
     "test": "vitest run",

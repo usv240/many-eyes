@@ -6,5 +6,9 @@ data/cache/
 data/ledger.jsonl
 data/ledger.jsonl.head
 data/ledger.jsonl.head.tmp
+data/ledger.jsonl.head.bak-*
+data/bench-ledger.jsonl
+data/bench-ledger.jsonl.head
+data/bench-ledger.jsonl.head.tmp
 dist/
 coverage/

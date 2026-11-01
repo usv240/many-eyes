@@ -2,5 +2,5 @@
   "name": "@many-eyes/overlay",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "vite --host 0.0.0.0" }
+  "scripts": { "dev": "vite --host 127.0.0.1" }
 }

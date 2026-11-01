@@ -1,5 +1,5 @@
 import { EventEmitter } from "node:events";
-import { randomUUID } from "node:crypto";
+import { createHmac, randomBytes, randomUUID } from "node:crypto";
 import { setTimeout as sleep } from "node:timers/promises";
 import { getMission, goldTruth, nextTile, seededRng } from "../missions/mission.js";
 import { openSession, closeSession, collectVote, preview, updateGoldWeights, type TileSession, type Decision, type Truth, type Preview } from "../consensus/engine.js";
@@ -11,6 +11,8 @@ import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
 import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
 
+const publicTokenKey = randomBytes(32);
+export interface DebateArgument { claim: string; box?: { x: number; y: number; width: number; height: number } }
 export interface PublicState {
   missionId: string; source: "sim" | "twitch"; phase: "idle" | "voting" | "decided" | "complete" | "stopped";
   mission: { name: string; place: string; eventDate: string; preDate: string; postDate: string; attribution: string };
@@ -19,9 +21,10 @@ export interface PublicState {
   lastResult: (Pick<Decision, "status" | "label" | "agreement" | "voters" | "reason"> & {
     tileNumber: number; gold?: { truth: Truth; chatCorrect: boolean } }) | null;
   serverNow: number;
-  debate?: unknown;
+  pauseReason?: string;
+  debate?: { advocate: DebateArgument; skeptic: DebateArgument };
   attribution: string; refusedCount: number;
-  tile?: { id: string; buildingId: string; number: number; lon: number; lat: number;
+  tile?: { token: string; number: number; lon: number; lat: number;
     openedAt: number; closesAt: number; imageryUrl: string };
   votes: { destroyed: number; intact: number; unsure: number; total: number };
   decision?: Decision; baseline?: Decision; reveal?: { gold: true; truth: Truth };
@@ -54,10 +57,12 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
   private readonly clock: Clock;
   private readonly controller = new AbortController();
   private readonly seen = new Set<string>();
+  private readonly publicTiles = new Map<string, string>();
   private weights = new Map<string, number>();
   private session?: TileSession;
   private started = false;
   private fault?: Error;
+  private pauseReason?: string;
   private state: PublicState;
   private refused: string[] = [];
   private gold: DecidedGold[] = [];
@@ -79,9 +84,13 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       votes: { destroyed: 0, intact: 0, unsure: 0, total: 0 } };
   }
   getState() { return structuredClone({ ...this.state, serverNow: this.clock.now() }); }
+  resolveTile(token: string) {
+    const buildingId = this.publicTiles.get(token);
+    return buildingId ? { missionId: this.mission.id, buildingId } : undefined;
+  }
   getWeights() { return new Map(this.weights); }
   getRefusedQueue() { return [...this.refused]; }
-  stop() { this.controller.abort(); }
+  stop(reason = "Mission was stopped.") { this.pauseReason = reason; this.controller.abort(); }
   private publish() { this.emit("state", this.getState()); }
 
   ingestChat(message: ChatMessage): boolean {
@@ -123,9 +132,12 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     }
     const onChat = (message: ChatMessage) => {
       try { this.ingestChat(message); }
-      catch { this.fault = new Error("Vote recording failed; mission stopped."); this.stop(); }
+      catch (error) {
+        this.fault = new Error("Vote recording failed: " + (error instanceof Error ? error.message : "unknown ledger error"));
+        this.stop(this.fault.message);
+      }
     };
-    const onFault = () => { this.fault = new Error("Twitch connection failed; mission stopped."); this.stop(); };
+    const onFault = (error: Error) => { this.fault = new Error("Twitch connection failed: " + error.message); this.stop(this.fault.message); };
     try {
       if (this.options.source === "twitch") {
         if (!sendChat) throw new Error("A Twitch runner needs a chat sender.");
@@ -140,6 +152,9 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       for (let index = 0; index < limit && !signal.aborted; index++) {
         const buildingId = this.options.goldOnly ? this.mission.gold[index]!.building_id : nextTile(this.mission.id, rng).buildingId;
         const building = this.mission.buildings.find(({ id }) => id === buildingId)!;
+        const token = createHmac("sha256", publicTokenKey).update(this.runId + buildingId).digest("hex").slice(0, 12);
+        if (this.publicTiles.has(token) && this.publicTiles.get(token) !== buildingId) throw new Error("Public tile token collision.");
+        this.publicTiles.set(token, buildingId);
         const session = openSession(this.runId + ":" + (index + 1), this.clock.now());
         this.session = session;
         // Construct the public projection explicitly; no mission/building object is spread into it.
@@ -150,11 +165,12 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             status: this.state.lastResult.status, label: this.state.lastResult.label, agreement: this.state.lastResult.agreement,
             voters: this.state.lastResult.voters, reason: this.state.lastResult.reason } : null,
           attribution: this.mission.attribution, refusedCount: this.refused.length,
-          tile: { id: session.id, buildingId, number: index + 1, lon: building.lon, lat: building.lat,
+          tile: { token, number: index + 1, lon: Number(building.lon.toFixed(4)), lat: Number(building.lat.toFixed(4)),
             openedAt: session.openedAt, closesAt: session.closesAt,
-            imageryUrl: "/api/missions/" + this.mission.id + "/tiles/" + buildingId },
+            imageryUrl: "/api/tiles/" + token },
           votes: { destroyed: 0, intact: 0, unsure: 0, total: 0 } };
-        this.ledger.append("tile_opened", { missionId: this.mission.id, runId: this.runId, ...this.state.tile }, session.openedAt);
+        this.ledger.append("tile_opened", { missionId: this.mission.id, runId: this.runId, id: session.id, buildingId,
+          number: index + 1, lon: building.lon, lat: building.lat, openedAt: session.openedAt, closesAt: session.closesAt }, session.openedAt);
         this.publish();
         const truth = goldTruth(buildingId, this.mission.id);
         let difficulty: "easy" | "hard" | "misleading" | undefined;
@@ -209,11 +225,12 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       }
     } catch (error) {
       if (this.fault) throw this.fault;
-      if (!signal.aborted) { this.stop(); throw error; }
+      if (!signal.aborted) { this.stop(error instanceof Error ? error.message : "Unknown mission error."); throw error; }
     } finally {
       this.session = undefined;
       twitch?.off("chatMessage", onChat); twitch?.off("fault", onFault); twitch?.stop();
-      this.state = { ...this.state, phase: signal.aborted ? "stopped" : "complete" };
+      this.state = { ...this.state, phase: signal.aborted ? "stopped" : "complete",
+        ...(signal.aborted ? { pauseReason: this.pauseReason } : {}) };
       this.publish();
     }
     return structuredClone(this.gold);

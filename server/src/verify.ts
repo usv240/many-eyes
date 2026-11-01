@@ -2,7 +2,7 @@ import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import { isDeepStrictEqual } from "node:util";
 import { createHash } from "node:crypto";
-import { verify, type LedgerEvent } from "./ledger/ledger.js";
+import { verify, LIVE_LEDGER_PATH, BENCH_LEDGER_PATH, type LedgerEvent } from "./ledger/ledger.js";
 import { LedgerReplay } from "./ledger/replay.js";
 import { compareMetrics, type DecidedGold } from "./consensus/metrics.js";
 import { DIFFICULTY, type TileDifficulty } from "../../sim/src/crowd.js";
@@ -19,15 +19,18 @@ function distribution(values: number[]) {
     median: quantile(0.5), p10: quantile(0.1), p90: quantile(0.9) };
 }
 
-const integrity = verify();
+const liveIntegrity = verify(LIVE_LEDGER_PATH);
+const integrity = verify(BENCH_LEDGER_PATH);
 const replay = new LedgerReplay();
 const exports: { batchId?: string; sha256?: string; path?: string }[] = [];
-if (integrity.lines) {
-  const lines = createInterface({ input: createReadStream("data/ledger.jsonl"), crlfDelay: Infinity });
+for (const [path, count, target] of [[LIVE_LEDGER_PATH, liveIntegrity.lines, new LedgerReplay()],
+  [BENCH_LEDGER_PATH, integrity.lines, replay]] as const) {
+  if (!count) continue;
+  const lines = createInterface({ input: createReadStream(path), crlfDelay: Infinity });
   for await (const line of lines) {
     const event = JSON.parse(line) as LedgerEvent;
-    replay.accept(event);
-    if (event.type === "export_written") exports.push(event.data as { batchId?: string; sha256?: string; path?: string });
+    target.accept(event);
+    if (path === BENCH_LEDGER_PATH && event.type === "export_written") exports.push(event.data as { batchId?: string; sha256?: string; path?: string });
   }
 }
 if (existsSync("reports/latest.json")) {
@@ -87,4 +90,4 @@ if (existsSync("reports/latest.json")) {
   if (!isDeepStrictEqual(curve, report.learningCurve)) throw new Error("Learning curve differs from ledger replay.");
   if (!isDeepStrictEqual(report.model.difficulty, DIFFICULTY)) throw new Error("Difficulty assumptions differ from the benchmark model.");
 }
-console.log("Verified " + integrity.lines + " ledger events; published metrics match replay.");
+console.log("Verified " + liveIntegrity.lines + " live and " + integrity.lines + " benchmark ledger events; published metrics match benchmark replay.");

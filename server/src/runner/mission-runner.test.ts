@@ -9,6 +9,16 @@ class FakeTwitch extends EventEmitter<{ chatMessage: [ChatMessage]; fault: [Erro
   async start() {}
   stop() {}
 }
+it("uses different opaque tokens across runs and resolves only tokens it issued", async () => {
+  const make = (runId: string) => new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", runId,
+    virtual: true, goldOnly: true, maxTiles: 1, crowd: { voters: 0 }, ledger: new MemoryLedger() });
+  const first = make("token-test-a"); const second = make("token-test-b");
+  await first.run(); await second.run();
+  const a = first.getState().tile!.token; const b = second.getState().tile!.token;
+  expect(a).not.toBe(b);
+  expect(first.resolveTile(a)).toEqual(second.resolveTile(b));
+  expect(first.resolveTile(b)).toBeUndefined();
+});
 it("dedupes IDs across tiles, replaces per-user votes, and sends one result per tile", async () => {
   let now = 1000;
   const clock: Clock = { now: () => now, wait: async (ms) => { now += ms; } };
@@ -69,9 +79,21 @@ it.each(["complete", "stopped"] as const)("keeps stats consistent and hidden fie
   const check = (state: PublicState) => {
     phases.add(state.phase);
     const decisions = ledger.events.filter((event) => event.type === "tile_decided");
-    const currentWasDecided = decisions.some((event) => event.data.tileId === state.tile?.id);
+    const currentWasDecided = !!state.tile && decisions.length >= state.tile.number;
     expect(JSON.stringify(state)).not.toContain('"expert_grade"');
-    if (!currentWasDecided) expect(JSON.stringify(state)).not.toMatch(/"(gold|truth|reveal)":/);
+    if (!currentWasDecided) {
+      const serialized = JSON.stringify(state);
+      expect(serialized).not.toMatch(/"(gold|truth|reveal)":|osm-|cems-/);
+      for (const building of mission.buildings) expect(serialized).not.toContain(building.id);
+    }
+    if (state.tile) {
+      expect(state.tile.token).toMatch(/^[a-f0-9]{12}$/);
+      expect(state.tile.imageryUrl).toBe("/api/tiles/" + state.tile.token);
+      const privateTile = runner.resolveTile(state.tile.token)!;
+      const building = mission.buildings.find(({ id }) => id === privateTile.buildingId)!;
+      expect(state.tile.lon).toBe(Number(building.lon.toFixed(4)));
+      expect(state.tile.lat).toBe(Number(building.lat.toFixed(4)));
+    }
     if (state.lastResult?.gold) {
       expect(currentWasDecided).toBe(true);
       const latest = decisions.at(-1)!;
