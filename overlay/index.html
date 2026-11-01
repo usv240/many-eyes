@@ -8,9 +8,11 @@
 </head>
 <body>
 <main id="scene" aria-label="Many Eyes disaster mapping broadcast">
-  <section class="photo-stage" aria-label="Before and after satellite imagery">
-    <img data-node="before" class="photo" hidden />
-    <img data-node="after" class="photo after" hidden />
+  <section data-node="photoStage" class="photo-stage" aria-label="Before and after satellite imagery">
+    <div class="photo-layer" data-node="photoLayer">
+      <img data-node="before" class="photo" hidden />
+      <div class="wipe-window"><img data-node="after" class="photo after" hidden /></div>
+    </div>
     <div data-node="divider" class="wipe-divider" hidden></div>
     <svg data-node="target" class="target" viewBox="0 0 984 984" aria-label="Building target, 12 metre radius" hidden>
       <circle data-node="ringDark" cx="492" cy="492" class="ring-dark" />
@@ -25,11 +27,15 @@
       <div data-node="scale" class="scale-plate" hidden><span data-node="scaleLabel"></span><div data-node="scaleBar" class="scale-bar"></div></div>
       <span data-node="coordinates" class="coordinate-plate"></span>
     </div>
+    <div data-node="resultPlate" class="result-plate" data-visible="false" aria-live="polite">
+      <p data-node="resultCopy"></p><p data-node="goldCopy" class="gold-copy" hidden></p>
+    </div>
     <p data-node="caution" class="caution"></p>
   </section>
   <section class="sidebar" aria-label="Chat voting and mission progress">
     <header class="header">
       <div class="identity"><h1 data-node="wordmark"></h1><span data-node="simulated" class="pill" hidden></span></div>
+      <span data-node="connection" class="connection-status" hidden></span>
       <span data-node="tileCount" class="tile-count"></span>
       <p data-node="location" class="location"></p>
     </header>
@@ -42,6 +48,7 @@
       </div>
     </section>
     <section class="context">
+      <p data-node="completeCopy" class="explainer" hidden></p>
       <div data-node="explainer" class="explainer"><p data-node="intro1"></p><p data-node="intro2"></p><p data-node="intro3"></p></div>
       <div data-node="debate" class="debate" hidden>
         <div><p data-node="advocateTitle" class="argument-title destroyed"></p><p data-node="advocateClaim" class="claim"></p></div>
@@ -51,8 +58,9 @@
     </section>
     <section class="tally" aria-label="Live weighted agreement">
       <div data-node="lead" class="lead"><span data-node="agreement" class="agreement"></span><span data-node="leading" class="leading"></span></div>
-      <div class="bar-labels"><span data-node="destroyedBarLabel" class="destroyed"></span><span data-node="intactBarLabel" class="intact"></span></div>
-      <div class="vote-bar"><div data-node="destroyedFill" class="destroyed-fill"></div><div data-node="intactFill" class="intact-fill"></div><i class="tick tick-left"></i><i class="tick tick-right"></i></div>
+      <p data-node="emptyCopy" class="empty-copy" hidden></p>
+      <div data-node="barLabels" class="bar-labels"><span data-node="destroyedBarLabel" class="destroyed"></span><span data-node="intactBarLabel" class="intact"></span></div>
+      <div data-node="voteBar" class="vote-bar"><div data-node="destroyedFill" class="destroyed-fill"></div><div data-node="intactFill" class="intact-fill"></div><i class="tick tick-left"></i><i class="tick tick-right"></i></div>
       <p data-node="threshold" class="threshold"></p>
       <p data-node="voters" class="voter-count"></p>
       <div class="countdown"><div class="countdown-track"><div data-node="countdownFill"></div></div><span data-node="countdown"></span></div>
@@ -65,7 +73,6 @@
       <div><p data-node="remainingTitle"></p><span data-node="remaining" class="stat-value"></span></div>
     </section>
   </section>
-  <div data-node="connection" class="connection-status" hidden></div>
   <footer data-node="attribution"></footer>
 </main>
 <script type="module" src="/src/main.ts"></script>

@@ -2,6 +2,45 @@
 import { expect, it } from "vitest";
 import { fixture, imagery } from "./test-fixtures.js";
 import { metresPerPixel, view } from "./view.js";
+import { fixtureSnapshot } from "./fixtures.js";
+import type { FixtureName } from "./fixtures.js";
+
+const sample = (name: FixtureName) => { const snapshot = fixtureSnapshot(name, 10000);
+  return view(snapshot.state, { ...snapshot, now: 10000, localNow: 10000 }); };
+it("renders every overlay state's copy", () => {
+  expect(sample("intro").hidden.explainer).toBe(false);
+  expect(sample("intro").text.intro2).toBe("Look at the building in the ring. Did it survive?");
+  expect(sample("empty").text.emptyCopy).toBe("Waiting for votes. Type 1, 2 or 3 in chat.");
+  expect(sample("empty").hidden.voteBar).toBe(true);
+  expect(sample("voting").text.agreement).toBe("81%");
+  expect(sample("validated").text.resultCopy).toBe("Validated: destroyed · 81% agreement · 23 voters");
+  expect(sample("refused").text.resultCopy).toBe("Refused: chat split 54 / 46. Sent to expert review.");
+  expect(sample("refused-few").text.resultCopy).toBe("Refused: only 2 voters");
+  expect(sample("refused").attributes.photoStage!["data-refused"]).toBe("true");
+  expect(sample("gold").text.goldCopy).toBe("Hidden check: experts graded this building destroyed. Chat matched.");
+  expect(sample("gold-missed").text.goldCopy).toBe("Hidden check: experts graded this building destroyed. Chat missed this one.");
+  expect(sample("loading").text.imageStatus).toBe("Loading photos");
+  expect(sample("loading").hidden.scale).toBe(false);
+  expect(sample("loading").text.coordinates).not.toBe("—");
+  expect(sample("disconnected").text.connection).toBe("Reconnecting to server");
+  expect(sample("complete").text.question).toBe("Mission complete");
+  expect(sample("complete").text.completeCopy).toBe("Results are being exported for humanitarian mappers.");
+});
+it("shows intro for ten seconds at tiles 1, 21, 41, then restores debate", () => {
+  const snapshot = fixtureSnapshot("intro", 1000); const state = snapshot.state!;
+  for (const number of [1, 21, 41]) {
+    state.tile!.number = number;
+    expect(view(state, { now: 10999 }).hidden.explainer).toBe(false);
+    expect(view(state, { now: 11000 }).hidden.explainer).toBe(true);
+  }
+  state.tile!.number = 20; expect(view(state, { now: 1000 }).hidden.explainer).toBe(true);
+});
+it("delays the disconnected notice three seconds and hides stale gold outside decided", () => {
+  const snapshot = fixtureSnapshot("gold", 10000); snapshot.state!.phase = "voting";
+  expect(view(snapshot.state).text.goldCopy).toBe("");
+  expect(view(snapshot.state, { connection: "reconnecting", offlineSince: 1000, localNow: 3999 }).text.connection).toBe("");
+  expect(view(snapshot.state, { connection: "reconnecting", offlineSince: 1000, localNow: 4000 }).text.connection).toBe("Reconnecting to server");
+});
 it("shows a paused mission with its reason and an honest photo failure message", () => {
   const state = fixture(); state.phase = "stopped"; state.pauseReason = "Ledger write failed.";
   const model = view(state, { imageryStatus: "error" });
@@ -31,8 +70,8 @@ it("uses weighted shares, excludes unsure, and clamps the skew-corrected countdo
   const state = fixture();
   const model = view(state, { now: 5000 });
   expect(model.text.agreement).toBe("74%");
-  expect(model.styles.destroyedFill!.width).toBe("74%");
-  expect(model.styles.intactFill!.width).toBe("26%");
+  expect(model.styles.destroyedFill!.transform).toBe("scaleX(0.74)");
+  expect(model.styles.intactFill!.transform).toBe("scaleX(0.26)");
   expect(model.text.countdown).toBe("10 s");
   expect(view(state, { now: 16000 }).geometry.countdownFraction).toBe(0);
   expect(view(state, { now: -2000 }).geometry.countdownFraction).toBe(1);

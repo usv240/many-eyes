@@ -1,5 +1,6 @@
 ﻿@font-face { font-family: 'Public Sans'; src: url('/fonts/public-sans-latin.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 :root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ground: #0D0E0D; --surface: #171817; --raised: #202120; --border: #2C2E2C;
   --text: #F3F3F0; --muted: #B6B7B2; --faint: #959691;
   --destroyed: #E5484D; --intact: #4C9BE8;
@@ -24,8 +25,13 @@ h2 { font-size: var(--large); font-weight: var(--medium); line-height: var(--lin
 #scene { width: var(--scene-width); height: var(--scene-height); position: absolute; transform-origin: top left; background: var(--ground); }
 .photo-stage { position: absolute; left: var(--margin); top: var(--margin); width: var(--stage-size); height: var(--stage-size); overflow: hidden; background: var(--surface); border-radius: var(--panel-radius); }
 .photo { position: absolute; inset: var(--zero); width: var(--full); height: var(--full); object-fit: fill; }
-.after { clip-path: inset(var(--zero) var(--zero) var(--zero) var(--half)); }
-.wipe-divider { position: absolute; top: var(--zero); bottom: var(--zero); left: var(--half); width: var(--divider-width); transform: translateX(-50%); background: var(--text); }
+.photo-layer { position: absolute; inset: 0; opacity: 1; transition: opacity 200ms var(--ease-out), filter 200ms var(--ease-out); }
+.wipe-window { position: absolute; inset: 0; overflow: hidden; transform: translateX(50%); }
+.after { transform: translateX(-50%); }
+.wipe-window, .after { transition: transform 7000ms var(--ease-in-out); }
+.photo-stage[data-refused="true"] .photo-layer { filter: grayscale(0.8) brightness(0.7); }
+.photo-stage { background: repeating-linear-gradient(135deg, var(--surface) 0 24px, var(--raised) 24px 25px); }
+.wipe-divider { position: absolute; top: var(--zero); bottom: var(--zero); left: 0; width: var(--full); transform: translateX(50%); border-left: var(--divider-width) solid var(--text); transition: transform 7000ms var(--ease-in-out); pointer-events: none; background: transparent; }
 .target { position: absolute; inset: var(--zero); width: var(--full); height: var(--full); pointer-events: none; }
 .target circle { fill: none; }
 .ring-dark { stroke: var(--ground); stroke-width: var(--ring-outline); }
@@ -69,8 +75,9 @@ h1 { font-size: var(--large); font-weight: var(--bold); line-height: var(--line-
 .lead[data-tone="neutral"] { color: var(--muted); }
 .bar-labels { display: flex; justify-content: space-between; font-size: var(--small); }
 .vote-bar { position: relative; display: flex; width: var(--full); height: var(--bar-height); background: var(--surface); margin-top: var(--space-xs); }
-.destroyed-fill { background: var(--destroyed); }
-.intact-fill { background: var(--intact); margin-left: auto; }
+.destroyed-fill { background: var(--destroyed); transform-origin: left; }
+.intact-fill { background: var(--intact); transform-origin: right; }
+.destroyed-fill, .intact-fill { position: absolute; inset: 0; transition: transform 180ms var(--ease-out); }
 .tick { position: absolute; width: var(--hairline); height: var(--tick-height); background: var(--text); top: var(--zero); }
 .tick-left { left: var(--threshold-left); }
 .tick-right { left: var(--threshold-right); }
@@ -88,4 +95,19 @@ h1 { font-size: var(--large); font-weight: var(--bold); line-height: var(--line-
 .accuracy-value { display: flex; align-items: baseline; gap: var(--space-sm); }
 .checks { font-size: var(--small); color: var(--faint); }
 footer { position: absolute; top: var(--footer-top); left: var(--margin); right: var(--margin); height: var(--footer-height); font-size: var(--credit); color: var(--faint); line-height: var(--line-small); }
-.connection-status { position: absolute; left: var(--margin); top: var(--margin); padding: var(--space-xl); background: var(--ground); color: var(--muted); border-radius: var(--panel-radius); }
+.connection-status { position: absolute; right: 0; top: 48px; font-size: var(--small); color: var(--muted); background: var(--ground); }
+.tally { position: relative; }
+.empty-copy { position: absolute; top: 0; left: 0; right: 0; height: 106px; font-size: var(--body); color: var(--muted); padding-top: 24px; }
+/* Keep the 4b countdown position even when the empty/complete state hides the tally. */
+.tally [data-node="lead"][hidden], .tally [data-node="barLabels"][hidden],
+.tally [data-node="voteBar"][hidden] { display: flex !important; visibility: hidden; }
+.tally [data-node="threshold"][hidden] { display: block !important; visibility: hidden; }
+.countdown-track > div { width: 100%; transform-origin: left; }
+.result-plate { position: absolute; left: 24px; right: 24px; bottom: 132px; padding: 16px; background: var(--ground); font-size: var(--body); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.result-plate[data-visible="true"] { opacity: 1; transform: translateY(0); }
+.gold-copy { margin-top: 8px; font-size: var(--small); color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .wipe-window, .after, .wipe-divider, .destroyed-fill, .intact-fill { transition: none; }
+  .result-plate { transform: none; transition: opacity 200ms var(--ease-out); }
+  .photo-layer { transition: opacity 200ms var(--ease-out); }
+}

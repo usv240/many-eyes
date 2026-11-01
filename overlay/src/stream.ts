@@ -2,7 +2,7 @@
 import type { TileImages } from "./view.js";
 
 export interface Snapshot {
-  state: PublicState | null; receivedAt: number; imagery?: TileImages;
+  state: PublicState | null; receivedAt: number; offlineSince?: number; imagery?: TileImages;
   imageryStatus: "loading" | "ready" | "error"; connection: "connecting" | "open" | "reconnecting";
 }
 interface Events {
@@ -24,15 +24,16 @@ export function connectStream(update: (snapshot: Snapshot) => void,
   const connect = () => {
     if (stopped) return;
     events = factory("/api/stream");
-    // Bound attempts to establish an SSE connection; an established stream is intentionally long-lived.
-    const armDeadline = () => {
-      clearTimeout(deadline);
-      deadline = setTimeout(() => { events.close(); snapshot.connection = "reconnecting"; publish();
-        deadline = setTimeout(connect, 3000); }, 10000);
+    // EventSource owns retry/backoff. Preserve the snapshot throughout reconnects.
+    events.onopen = () => { clearTimeout(deadline); snapshot.connection = "open"; snapshot.offlineSince = undefined; publish(); };
+    events.onerror = () => {
+      snapshot.connection = "reconnecting";
+      if (snapshot.offlineSince === undefined) {
+        snapshot.offlineSince = now();
+        deadline = setTimeout(publish, 3000);
+      }
+      publish();
     };
-    armDeadline();
-    events.onopen = () => { clearTimeout(deadline); snapshot.connection = "open"; publish(); };
-    events.onerror = () => { snapshot.connection = "reconnecting"; publish(); armDeadline(); };
     events.onmessage = (event) => {
       if (stopped) return;
       let state: PublicState;
@@ -41,7 +42,7 @@ export function connectStream(update: (snapshot: Snapshot) => void,
         if (!Number.isFinite(state.serverNow) || !state.mission || !state.stats || !state.live ||
           (state.tile && !/^[a-f0-9]{12}$/.test(state.tile.token))) return;
       } catch { return; }
-      snapshot = { ...snapshot, state, receivedAt: now(), connection: "open" };
+      snapshot = { ...snapshot, state, receivedAt: now(), connection: "open", offlineSince: undefined };
       clearTimeout(deadline);
       const nextToken = state.tile?.token;
       if (nextToken !== token) {

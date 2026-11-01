@@ -6,7 +6,7 @@ export interface TileImages {
 }
 export interface ViewOptions {
   now?: number; imagery?: TileImages; imageryStatus?: "loading" | "ready" | "error";
-  connection?: "connecting" | "open" | "reconnecting";
+  connection?: "connecting" | "open" | "reconnecting"; offlineSince?: number; localNow?: number; intro?: boolean;
 }
 export interface ViewModel {
   text: Record<string, string>;
@@ -53,11 +53,24 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
   const countdownFraction = timeLeft / 15000;
   const destroyed = live.voters ? live.leading === "destroyed" ? live.agreement : live.leading === "intact" ? 1 - live.agreement : 0.5 : 0;
   const intact = live.voters ? 1 - destroyed : 0;
-  const result = state?.lastResult;
+  const result = state?.phase === "decided" ? state.lastResult : null;
+  const intro = options.intro ?? (!!tile && state?.phase === "voting" && (tile.number - 1) % 20 === 0 &&
+    (options.now ?? state.serverNow) - tile.openedAt < 10000);
+  const empty = state?.phase === "voting" && live.voters === 0;
+  const complete = state?.phase === "complete";
+  const share = Math.round((result?.agreement ?? 0) * 100);
+  const resultCopy = !result ? "" : result.status === "validated"
+    ? `Validated: ${result.label} · ${share}% agreement · ${result.voters} voters`
+    : result.reason === "too_few_voters" ? `Refused: only ${result.voters} voters`
+    : `Refused: chat split ${share} / ${100 - share}. Sent to expert review.`;
+  const goldCopy = result?.gold ? `Hidden check: experts graded this building ${result.gold.truth}. ` +
+    (result.gold.chatCorrect ? "Chat matched." : "Chat missed this one.") : "";
   const debate = state?.debate;
   const advocateBox = box(debate?.advocate); const skepticBox = box(debate?.skeptic);
   const ready = !!image && options.imageryStatus !== "error";
-  const status = options.connection === "reconnecting" ? "Reconnecting to the mission…" : !state ? "Connecting to the mission…" : "";
+  const status = options.connection === "reconnecting" && options.offlineSince !== undefined &&
+    (options.localNow ?? options.now ?? 0) - options.offlineSince >= 3000 ? "Reconnecting to server"
+    : !state ? "Connecting to the mission…" : "";
   const countdown = state?.phase === "voting" ? Math.ceil(timeLeft / 1000) + " s" : state?.phase === "decided" && result
     ? result.status === "validated" ? "Validated " + result.label : "Refused · sent to experts"
     : state?.phase === "complete" ? "Mission complete" : state?.phase === "stopped" ? "Mission paused" : "Waiting for a tile";
@@ -65,7 +78,7 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
     text: {
       wordmark: "Many Eyes", location: mission ? mission.place.replace(", Rasuwa", "") + " · flood of " + date(mission.eventDate) : "Waiting for the mission",
       tileCount: "Tile " + (tile?.number ?? 0) + " of " + stats.total, simulated: "Simulated crowd",
-      question: "Did the building in the ring survive?", key1: "1", key2: "2", key3: "3",
+      question: complete ? "Mission complete" : "Did the building in the ring survive?", key1: "1", key2: "2", key3: "3",
       destroyedKey: "destroyed", intactKey: "intact", unsureKey: "unsure",
       beforeDate: "Before · " + date(mission?.preDate), afterDate: "After · " + date(mission?.postDate),
       coordinates: tile ? Math.abs(tile.lat).toFixed(4) + "° " + (tile.lat >= 0 ? "N" : "S") + ", " +
@@ -78,6 +91,8 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       advocateClaim: claim(debate?.advocate), skepticClaim: claim(debate?.skeptic),
       advocateBoxLabel: "Advocate · destroyed", skepticBoxLabel: "Skeptic · intact",
       aiFootnote: "AI arguments. They never count as votes.",
+      emptyCopy: "Waiting for votes. Type 1, 2 or 3 in chat.", resultCopy, goldCopy,
+      completeCopy: "Results are being exported for humanitarian mappers.",
       agreement: live.voters ? Math.round(live.agreement * 100) + "%" : "—",
       leading: live.leading ? "say " + live.leading : live.voters ? "no leading label" : "waiting for votes",
       destroyedBarLabel: "destroyed", intactBarLabel: "intact", threshold: "66% needed",
@@ -87,20 +102,24 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       checks: stats.goldChecked ? "(" + stats.goldChecked + " checks)" : "no checks yet",
       validatedTitle: "Validated", validated: String(stats.validated), refusedTitle: "Refused", refused: String(stats.refused),
       remainingTitle: "Left", remaining: String(stats.remaining), attribution: mission?.attribution || "Waiting for mission attribution.",
-      imageStatus: options.imageryStatus === "error" ? "Photos unavailable for this tile" : "Loading satellite photos…", connection: status,
+      imageStatus: options.imageryStatus === "error" ? "Photos unavailable for this tile" : "Loading photos", connection: status,
     },
     attributes: {
       before: { src: ready ? image.pre : null, alt: "Satellite image before the flood" },
       after: { src: ready ? image.post : null, alt: "Satellite image after the flood" },
       lead: { "data-tone": live.leading ?? "neutral" },
+      photoStage: { "data-refused": String(result?.status === "refused") },
+      resultPlate: { "data-visible": String(!!result), "aria-hidden": String(!result) },
       ringDark: { r: String(ringRadiusPx) }, ringLight: { r: String(ringRadiusPx) },
     },
-    styles: { scaleBar: { width: scaleBarPx + "px" }, destroyedFill: { width: destroyed * 100 + "%" },
-      intactFill: { width: intact * 100 + "%" }, countdownFill: { width: countdownFraction * 100 + "%" },
+    styles: { scaleBar: { width: scaleBarPx + "px" }, destroyedFill: { transform: `scaleX(${destroyed})` },
+      intactFill: { transform: `scaleX(${intact})` },
       advocateBox: advocateBox ?? {}, skepticBox: skepticBox ?? {} },
-    hidden: { simulated: state?.source !== "sim", debate: !debate, explainer: !!debate,
+    hidden: { simulated: state?.source !== "sim", debate: !debate || intro || complete, explainer: !intro,
+      completeCopy: !complete, emptyCopy: !empty, lead: empty || complete, voteBar: empty || complete,
+      barLabels: empty || complete, threshold: empty || complete, goldCopy: !goldCopy,
       advocateBox: !ready || !advocateBox, skepticBox: !ready || !skepticBox, imageStatus: ready,
-      before: !ready, after: !ready, target: !ready, scale: !ready, divider: !ready, connection: !status,
+      before: !ready, after: !ready, target: !ready, scale: !tile, divider: !ready, connection: !status,
       pauseReason: state?.phase !== "stopped" },
     geometry: { metresPerPixel: mpp, ringRadiusPx, scaleBarPx, countdownFraction },
   };

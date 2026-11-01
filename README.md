@@ -54,7 +54,8 @@ HTTP mission summaries contain no building inventory. Stream coordinates have fo
 decimal places. Vite serves only overlay assets and dependencies, not mission data.
 
 Use a 1920×1080 OBS browser source. Smaller windows scale the entire scene to fit.
-The wipe is fixed at 50%. The caution occupies a bottom strip inside the photo
+The wipe travels between 15% and 85% over seven seconds per leg and parks at 50%
+during results. Reduced motion parks the wipe and removes travel while retaining fades. The caution occupies a bottom strip inside the photo
 stage because the specified stage/footer coordinates leave only an 8 px margin.
 Public Sans is bundled in `overlay/public/fonts/` with its OFL license; no external
 font request is needed. The font is from Google Fonts' Public Sans distribution.
@@ -83,6 +84,22 @@ reconnect transfers the existing subscription; a lost connection creates a new
 session and subscription. Twitch cannot replay chat missed during a disconnect.
 The bot currently logs votes only; per-user replacement and tile closure belong
 to the mission runner. Press Ctrl+C to stop the bot or runner.
+
+## Overlay states and fixtures
+
+Run `npm exec vite -- --config overlay/vite.config.ts` to preview fixtures without
+starting the mission server. Open `http://localhost:5180/?fixture=intro` and replace
+`intro` with `empty`, `voting`, `validated`, `refused`, `gold`, `loading`,
+`disconnected`, or `complete`. `refused-few` and `gold-missed` cover the alternate
+result copy. Fixtures use two bundled cached crops, verbatim mission attribution,
+and illustrative public outcomes; they make no API or EventSource connection.
+
+In live mode, the intro appears for ten seconds at tiles 1, 21, 41, and so on.
+EventSource owns reconnection; a header notice appears after three seconds offline
+while the last snapshot stays visible. Gold detail is displayed only in the decided
+phase. Vote bars retarget with 180 ms scale transitions; countdowns use one linear
+transition to the server deadline. Photos crossfade for 200 ms with a 2 px blur,
+and result plates fade and move 8 px over 200 ms. No keyframe animations are used.
 
 ## Scoring and reproducibility
 

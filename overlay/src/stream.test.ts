@@ -1,4 +1,4 @@
-﻿import { expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
 import { connectStream, type Snapshot } from "./stream.js";
 import { fixture, imagery } from "./test-fixtures.js";
 
@@ -44,12 +44,21 @@ it("ignores stale imagery after a tile switch and aborts work on close", async (
   } finally { close(); }
   expect(events.close).toHaveBeenCalledOnce(); expect(requests[1]!.signal.aborted).toBe(true);
 });
-it("bounds connection attempts and clears reconnect timers on shutdown", () => {
+it("leaves reconnects to EventSource and retains the snapshot for the three-second notice", () => {
   vi.useFakeTimers();
-  const factory = vi.fn(() => new FakeEvents());
-  const close = connectStream(() => {}, { events: factory });
+  const events = new FakeEvents(); const updates: Snapshot[] = [];
+  const factory = vi.fn(() => events);
+  const close = connectStream((snapshot) => updates.push(snapshot), { events: factory,
+    fetcher: vi.fn<typeof fetch>(() => new Promise(() => {})), now: () => Date.now() });
   try {
-    vi.advanceTimersByTime(13000); expect(factory).toHaveBeenCalledTimes(2);
+    events.onmessage!({ data: JSON.stringify(fixture()) });
+    events.onerror!(); const offline = updates.at(-1)!.offlineSince;
+    vi.advanceTimersByTime(2000); events.onerror!();
+    expect(updates.at(-1)!.offlineSince).toBe(offline);
+    vi.advanceTimersByTime(1000);
+    expect(updates.at(-1)!.state!.tile!.token).toBe("abcdef123456");
+    expect(factory).toHaveBeenCalledOnce(); expect(events.close).not.toHaveBeenCalled();
+    events.onopen!(); expect(updates.at(-1)!.offlineSince).toBeUndefined();
     close(); expect(vi.getTimerCount()).toBe(0);
   } finally { close(); vi.useRealTimers(); }
 });

@@ -31,5 +31,5 @@ it("makes no DOM writes for an unchanged model and patches only changed values",
   render(view(state)); const firstWrites = writes.length;
   render(view(state)); expect(writes).toHaveLength(firstWrites);
   state.live.agreement = 0.75; render(view(state));
-  expect(writes.slice(firstWrites)).toEqual(['[data-node="agreement"]textContent', '[data-node="destroyedFill"]width', '[data-node="intactFill"]width']);
+  expect(writes.slice(firstWrites)).toEqual(['[data-node="agreement"]textContent', '[data-node="destroyedFill"]transform', '[data-node="intactFill"]transform']);
 });
