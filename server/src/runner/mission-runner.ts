@@ -10,6 +10,7 @@ import { readConfig } from "../twitch/auth.js";
 import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
 import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
+import { readCachedDebate, publicDebate, type CachedDebate } from "../debate/cache.js";
 
 const publicTokenKey = randomBytes(32);
 export interface DebateArgument { claim: string; box?: { x: number; y: number; width: number; height: number } }
@@ -19,7 +20,8 @@ export interface PublicState {
   live: Preview;
   stats: { goldChecked: number; goldCorrect: number; validated: number; refused: number; remaining: number; total: number };
   lastResult: (Pick<Decision, "status" | "label" | "agreement" | "voters" | "reason"> & {
-    tileNumber: number; gold?: { truth: Truth; chatCorrect: boolean } }) | null;
+    tileNumber: number; gold?: { truth: Truth; chatCorrect: boolean };
+    ai?: { label: Truth; agreedWithChat: boolean } }) | null;
   serverNow: number;
   pauseReason?: string;
   debate?: { advocate: DebateArgument; skeptic: DebateArgument };
@@ -44,6 +46,7 @@ export interface RunnerOptions {
   virtual?: boolean; clock?: Clock; ledger?: LedgerPort;
   twitch?: TwitchSource;
   sendChat?: (text: string) => Promise<void>;
+  loadDebate?: (buildingId: string) => CachedDebate | null;
 }
 function makeClock(virtual: boolean): Clock {
   let now = 0;
@@ -155,6 +158,9 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         const token = createHmac("sha256", publicTokenKey).update(this.runId + buildingId).digest("hex").slice(0, 12);
         if (this.publicTiles.has(token) && this.publicTiles.get(token) !== buildingId) throw new Error("Public tile token collision.");
         this.publicTiles.set(token, buildingId);
+        // Disk-only, hash-checked context. Virtual benchmarks never consult live caches.
+        const cached = this.options.loadDebate ? this.options.loadDebate(buildingId)
+          : this.options.virtual ? null : readCachedDebate(buildingId, this.mission.id);
         const session = openSession(this.runId + ":" + (index + 1), this.clock.now());
         this.session = session;
         // Construct the public projection explicitly; no mission/building object is spread into it.
@@ -165,6 +171,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             status: this.state.lastResult.status, label: this.state.lastResult.label, agreement: this.state.lastResult.agreement,
             voters: this.state.lastResult.voters, reason: this.state.lastResult.reason } : null,
           attribution: this.mission.attribution, refusedCount: this.refused.length,
+          ...(cached ? { debate: publicDebate(cached.debate) } : {}),
           tile: { token, number: index + 1, lon: Number(building.lon.toFixed(4)), lat: Number(building.lat.toFixed(4)),
             openedAt: session.openedAt, closesAt: session.closesAt,
             imageryUrl: "/api/tiles/" + token },
@@ -189,7 +196,8 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         await this.clock.wait(Math.max(0, session.closesAt - this.clock.now()), signal);
         this.session = closeSession(this.session!, this.clock.now());
         const decision = this.ledger.recordDecision(this.session, { missionId: this.mission.id, runId: this.runId,
-          buildingId, ...(truth ? { truth } : {}), ...(difficulty ? { difficulty } : {}) });
+          buildingId, ...(truth ? { truth } : {}), ...(difficulty ? { difficulty } : {}),
+          ...(cached ? { model_label: cached.debate.model_label, ai_model: cached.model } : {}) });
         if (truth) {
           const updated = updateGoldWeights(this.weights, this.session, truth);
           for (const [userId, weight] of updated) {
@@ -211,6 +219,8 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             remaining: stats.remaining - 1, total: stats.total },
           lastResult: { tileNumber: index + 1, status: result.status, label: result.label,
             agreement: result.agreement, voters: result.voters, reason: result.reason,
+            ...(cached ? { ai: { label: cached.debate.model_label,
+              agreedWithChat: result.status === "validated" && result.label === cached.debate.model_label } } : {}),
             ...(truth ? { gold: { truth, chatCorrect } } : {}) },
           refusedCount: this.refused.length, ...(truth ? { reveal: { gold: true, truth } } : {}) };
         this.publish();

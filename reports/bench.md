@@ -35,3 +35,25 @@ Voter sensitivity and specificity are based on Herfort et al. 2019 (MapSwipe).
 The 65% easy, 25% hard, 10% misleading mix and both troll tactics are simulation assumptions.
 Intact gold is inferred from OSM buildings more than 40 m from any Copernicus damage point.
 The crowd is simulated; these results do not measure real Twitch viewers.
+
+<!-- AI-ALONE:START -->
+## AI alone (real cached imagery measurement)
+
+AI alone: 73.8% on 80 hidden checks (destroyed 100.0%, intact 47.5%).
+
+Model: gpt-6-luna. API measurement dates (UTC): 2026-11-01. Scored: 2026-11-01T20:08:18.627Z.
+
+One binary model prediction per building from the two centred crops; no gold membership, expert grade, building ID or coordinates were provided to the model.
+This is a real API measurement, not a simulated crowd. Intact gold is inferred from OSM distance to damage points, not a field survey.
+
+### Agreement with experts on the 110 work-queue tiles
+
+Binary agreement with experts: **not measurable (0/110 have comparable binary expert labels)**. Damaged and Possibly damaged are neither destroyed nor intact; no mapping has been invented. The cross-tab below reports AI labels by the original expert grade, not accuracy.
+
+| Expert grade | AI destroyed | AI intact | Total |
+|---|---:|---:|---:|
+| Possibly damaged | 46 | 32 | 78 |
+| Damaged | 25 | 7 | 32 |
+
+Per-building labels, confidence, crop hashes and timestamps are recorded in reports/ai-alone.json. Reproduce with npm run debates:score against the matching debate/crop caches.
+<!-- AI-ALONE:END -->

@@ -37,7 +37,7 @@ and 5-second result pauses. Closing the server stops the runner and its streams.
 `GET /api/stream` sends an unnamed SSE `data:` event containing the latest public
 state immediately, then on every state change. It sends a `: ping` comment every
 15 seconds. EventSource reconnects receive a fresh snapshot. `serverNow` is epoch
-milliseconds for clock correction. The optional `debate` field is reserved for Phase 5.
+milliseconds for clock correction. The optional `debate` field carries cached claims and normalized after-photo boxes.
 `live.voters` counts non-unsure voters and `live.unsure` counts unsure voters; ties
 have no leading label. `stats.goldChecked` counts decided gold tiles and
 `stats.goldCorrect` counts those validated with the correct label. `remaining`
@@ -61,7 +61,7 @@ Public Sans is bundled in `overlay/public/fonts/` with its OFL license; no exter
 font request is needed. The font is from Google Fonts' Public Sans distribution.
 The optional debate contract is `{ advocate: { claim, box? }, skeptic: { claim, box? } }`;
 boxes use normalized crop coordinates `{ x, y, width, height }`. Claims are capped
-at 30 words, and arguments never enter the consensus engine. The overlay converts
+at 22 words, and arguments never enter the consensus engine. The overlay converts
 crop scale to display pixels and uses server timestamps to correct its countdown.
 The server binds only `127.0.0.1`, on `PORT` (default `8791`). Vite also binds only
 `127.0.0.1`, on `OVERLAY_PORT` (default `5180`), with strict port selection.
@@ -176,3 +176,52 @@ does not itself validate the source point or a damage label.
 
 The bundled overlay fixture photos now use the corrected `cems-0052` crop:
 houses before, flood sediment after. Fixture decisions remain illustrative.
+
+## Cached AI debaters
+
+`npm run debates:warm` uses `OPENAI_API_KEY` and `OPENAI_MODEL` (default
+`gpt-6-luna`, verified with this key on 2026-11-01). It makes one structured Responses
+API request for both sides per building, with an 8-second AbortController timeout
+per attempt, one retry, and at most four requests in parallel. The only model inputs
+are the corrected pre/post JPEGs and a fixed centre-ring instruction. No building
+ID, geographic coordinates, gold membership or expert grade is included.
+The model is instructed to argue both sides honestly and may concede a weak side.
+Claims are Zod-validated, limited to 22 words, and reference visible evidence;
+after-photo boxes are clamped in 384-pixel crop coordinates.
+
+The warmup stores model name, timestamp, prompt version, both crop SHA-256 hashes,
+claims, pixel boxes, model_label and confidence in `data/cache/debate/`. Matching
+entries are skipped. All 190 entries were warmed with zero final failures. The live
+runner reads only this cache and rejects missing, invalid or stale entries; it never
+calls OpenAI and does not require an API key. A missing debate restores the explainer.
+Virtual crowd benchmarks do not consult the debate cache.
+
+During voting, the public projection contains claims and normalized boxes only.
+After `consensus.decide()`, `lastResult.ai` reveals the baseline label and whether it
+matched a validated chat label (false for a refusal). The tile_decided ledger event
+records model_label and ai_model as metadata, never as votes or scoring inputs.
+Tests replay identical votes with and without debate data and compare decisions and
+weights. The after-image boxes use A/S tags and remain clipped to the after half of
+the wipe. The result plate adds the muted AI-alone line only after a decision.
+
+`npm run debates:score` checks cache hashes and writes `reports/ai-alone.json`, then
+adds a real-measurement section to `reports/bench.md`. `npm run bench` preserves that
+section. The measured line is: **AI alone: 73.8% on 80 hidden checks (destroyed 100.0%,
+intact 47.5%).** Model: gpt-6-luna; API date: 2026-11-01. This is 59/80, including
+40/40 destroyed and 19/40 inferred intact, not simulated accuracy.
+
+Binary agreement with experts on the 110 work tiles is not measurable: their grades
+are Damaged or Possibly damaged, not destroyed/intact. The report instead retains
+those expert grades and cross-tabulates AI labels: Damaged 25 destroyed / 7 intact;
+Possibly damaged 46 destroyed / 32 intact. These are counts, not accuracy or an
+invented binary agreement score. The small geographically clustered gold set and
+inferred intact labels limit generalization; the model's high destroyed sensitivity
+comes with many false-destroyed classifications on intact gold.
+
+`?fixture=debate` uses the real cached cems-0052 arguments. Its source fixture stores
+only public claims/boxes; the two result fixtures demonstrate the post-decision
+AI-alone line. Headless Edge checks at 1920x1080 confirm two lines per claim at 28 px,
+with no overlap into the tally. Screenshots are in `reports/overlay/phase5-*.png`.
+
+Model and API references: [OpenAI model catalog](https://developers.openai.com/api/docs/models)
+and [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).

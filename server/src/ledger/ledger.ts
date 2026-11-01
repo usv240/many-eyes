@@ -8,7 +8,7 @@ export type EventType = "mission_started" | "tile_opened" | "vote" | "tile_decid
 export interface LedgerEvent { type: EventType; timestamp: number; data: Record<string, unknown> }
 export interface RecordLine extends LedgerEvent { prev_hash: string; hash: string }
 export interface DecisionContext { missionId: string; runId: string; buildingId: string; truth?: Truth;
-  difficulty?: "easy" | "hard" | "misleading" }
+  difficulty?: "easy" | "hard" | "misleading"; model_label?: Truth; ai_model?: string }
 export interface LedgerPort {
   append(type: Exclude<EventType, "tile_decided">, data: Record<string, unknown>, timestamp: number): void;
   recordDecision(session: TileSession, context: DecisionContext): ReturnType<typeof decisions>;

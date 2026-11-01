@@ -21,7 +21,7 @@ export function createMotion(root: HTMLElement) {
   const frame = (fn: () => void) => { const id = requestAnimationFrame(() => { frames.delete(id); fn(); }); frames.add(id); };
   const position = (percent: number, park = false) => {
     for (const [node, sign] of [[layer.querySelector<HTMLElement>(".wipe-window")!, 1],
-      [layer.querySelector<HTMLElement>(".after")!, -1], [divider, 1]] as const) {
+      [layer.querySelector<HTMLElement>(".after")!, -1], [layer.querySelector<HTMLElement>(".after-annotations")!, -1], [divider, 1]] as const) {
       node.style.transitionDuration = reduced.matches ? "0ms" : park ? "200ms" : "7000ms";
       node.style.transform = `translateX(${percent * sign}%)`;
     }
@@ -58,7 +58,7 @@ export function createMotion(root: HTMLElement) {
           // Establish the parked pose before the first paint; never sweep in from 0%.
           position(50, true);
           for (const node of [layer.querySelector<HTMLElement>(".wipe-window")!,
-            layer.querySelector<HTMLElement>(".after")!, divider]) node.style.transitionDuration = "0ms";
+            layer.querySelector<HTMLElement>(".after")!, layer.querySelector<HTMLElement>(".after-annotations")!, divider]) node.style.transitionDuration = "0ms";
           void layer.getBoundingClientRect();
           frame(() => { frame(() => { if (wiping) sweep(); }); });
         } else position(50, true);

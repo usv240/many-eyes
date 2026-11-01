@@ -1,6 +1,7 @@
+import { debateFixture } from "./debate-fixture.js";
 import type { PublicState } from "../../server/src/runner/mission-runner.js";
 import type { Snapshot } from "./stream.js";
-export const FIXTURE_NAMES = ["intro", "empty", "voting", "validated", "refused", "gold", "loading", "disconnected", "complete", "refused-few", "gold-missed"] as const;
+export const FIXTURE_NAMES = ["debate", "intro", "empty", "voting", "validated", "refused", "gold", "loading", "disconnected", "complete", "refused-few", "gold-missed"] as const;
 export type FixtureName = typeof FIXTURE_NAMES[number];
 export function isFixtureName(name: string): name is FixtureName { return (FIXTURE_NAMES as readonly string[]).includes(name); }
 /** Public-only sample state. Outcomes are illustrative, not mission measurements. */
@@ -13,6 +14,7 @@ export function fixtureSnapshot(name: FixtureName, now = Date.now()): Snapshot {
     tile: { token: "abcdef123456", number: 37, lon: 85.3362, lat: 28.1614, openedAt: now, closesAt: now + 15000, imageryUrl: "/fixtures/pre.jpg" },
     lastResult: null, votes: { destroyed: 19, intact: 4, unsure: 2, total: 25 },
   };
+  if (["debate", "validated", "refused"].includes(name)) state.debate = debateFixture;
   if (name === "intro") state.tile!.number = 1;
   if (name === "empty") { state.live = { agreement: 0, leading: null, voters: 0, unsure: 0 }; state.votes = { destroyed: 0, intact: 0, unsure: 0, total: 0 }; }
   if (["validated", "refused", "gold", "refused-few", "gold-missed"].includes(name)) {
@@ -21,6 +23,7 @@ export function fixtureSnapshot(name: FixtureName, now = Date.now()): Snapshot {
     state.lastResult = { tileNumber: 37, status: refused ? "refused" : "validated", label: refused ? null : "destroyed",
       agreement: refused ? 0.54 : 0.81, voters: name === "refused-few" ? 2 : 23,
       reason: refused ? name === "refused-few" ? "too_few_voters" : "low_agreement" : null };
+    state.lastResult.ai = { label: "destroyed", agreedWithChat: !refused };
     state.live = { ...state.live, agreement: state.lastResult.agreement, voters: state.lastResult.voters };
     if (name.startsWith("gold")) state.lastResult.gold = { truth: "destroyed", chatCorrect: name === "gold" };
     if (name === "gold-missed") { state.lastResult = { ...state.lastResult, label: "intact" }; state.live.leading = "intact"; }

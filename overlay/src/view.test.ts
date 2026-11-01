@@ -28,6 +28,7 @@ it("renders every overlay state's copy", () => {
 });
 it("shows intro for ten seconds at tiles 1, 21, 41, then restores debate", () => {
   const snapshot = fixtureSnapshot("intro", 1000); const state = snapshot.state!;
+  state.debate = fixtureSnapshot("debate").state!.debate;
   for (const number of [1, 21, 41]) {
     state.tile!.number = number;
     expect(view(state, { now: 10999 }).hidden.explainer).toBe(false);
@@ -82,7 +83,7 @@ it("bounds debate claims and boxes and keeps every displayed string dignified", 
   state.debate = { advocate: { claim: Array(40).fill("Evidence").join(" "), box: { x: -0.1, y: 0.8, width: 0.5, height: 0.5 } },
     skeptic: { claim: "wrecked KO points for destruction" } };
   const model = view(state, { imagery });
-  expect(model.text.advocateClaim!.split(/\s+/).length).toBeLessThanOrEqual(30);
+  expect(model.text.advocateClaim!.split(/\s+/).length).toBeLessThanOrEqual(22);
   expect(model.styles.advocateBox).toMatchObject({ left: "0%", top: "80%", width: "50%" });
   for (const text of Object.values(model.text)) expect(text).not.toMatch(/\b(?:wrecked|ko)\b|points for destruction/i);
   expect(model.hidden.debate).toBe(false); expect(model.hidden.explainer).toBe(true);

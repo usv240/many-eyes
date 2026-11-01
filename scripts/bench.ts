@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createHash, randomUUID } from "node:crypto";
 import { runGoldSimulation } from "../sim/src/benchmark.js";
 import { DIFFICULTY, type TileDifficulty } from "../sim/src/crowd.js";
@@ -114,7 +114,8 @@ const markdown = [headline, "", "## Cohorts", "", cohortTable, "", "Accuracy is 
   "The crowd is simulated; these results do not measure real Twitch viewers.", ""].join("\n");
 writeFileSync("reports/bench.json", json);
 writeFileSync("reports/latest.json", json);
-writeFileSync("reports/bench.md", markdown);
+const aiSection = existsSync("reports/bench.md") ? readFileSync("reports/bench.md", "utf8").match(/<!-- AI-ALONE:START -->[\s\S]*?<!-- AI-ALONE:END -->/)?.[0] : undefined;
+writeFileSync("reports/bench.md", markdown + (aiSection ? "\n" + aiSection + "\n" : ""));
 ledger.append("export_written", { path: "reports/bench.json", batchId,
   sha256: createHash("sha256").update(json).digest("hex") }, Date.now());
 console.log(headline);

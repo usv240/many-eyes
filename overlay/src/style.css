@@ -27,9 +27,10 @@ h2 { font-size: var(--large); font-weight: var(--medium); line-height: var(--lin
 .photo { position: absolute; inset: var(--zero); width: var(--full); height: var(--full); object-fit: fill; }
 .photo-layer { position: absolute; inset: 0; opacity: 1; transition: opacity 200ms var(--ease-out), filter 200ms var(--ease-out); }
 .wipe-window { position: absolute; inset: 0; overflow: hidden; transform: translateX(50%); }
-.after { transform: translateX(-50%); }
+.after { position: absolute; inset: 0; transform: translateX(-50%); }
 .wipe-window, .after { transition: transform 7000ms var(--ease-in-out); }
-.photo-stage[data-refused="true"] .photo-layer { filter: grayscale(0.8) brightness(0.7); }
+.photo { transition: filter 200ms var(--ease-out); }
+.photo-stage[data-refused="true"] .photo { filter: grayscale(0.8) brightness(0.7); }
 .photo-stage { background: repeating-linear-gradient(135deg, var(--surface) 0 24px, var(--raised) 24px 25px); }
 .wipe-divider { position: absolute; top: var(--zero); bottom: var(--zero); left: 0; width: var(--full); transform: translateX(50%); border-left: var(--divider-width) solid var(--text); transition: transform 7000ms var(--ease-in-out); pointer-events: none; background: transparent; }
 .target { position: absolute; inset: var(--zero); width: var(--full); height: var(--full); pointer-events: none; }
@@ -111,3 +112,9 @@ footer { position: absolute; top: var(--footer-top); left: var(--margin); right:
   .result-plate { transform: none; transition: opacity 200ms var(--ease-out); }
   .photo-layer { transition: opacity 200ms var(--ease-out); }
 }
+
+.after-annotations { position: absolute; inset: 0; transform: translateX(-50%); transition: transform 7000ms var(--ease-in-out); }
+.evidence-box.intact { border-style: dashed; }
+.evidence-box span { left: auto; right: 0; }
+.evidence-box.intact span { top: auto; bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .after-annotations { transition: none; } }

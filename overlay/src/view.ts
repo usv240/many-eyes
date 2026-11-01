@@ -29,7 +29,7 @@ function claim(argument: DebateArgument | undefined) {
   const text = argument?.claim?.trim() || "No argument available.";
   if (/\b(?:wrecked|ko)\b|points for destruction/i.test(text)) return "Review the visible evidence inside the ring.";
   const words = text.split(/\s+/);
-  return words.slice(0, 30).join(" ") + (words.length > 30 ? "…" : "");
+  return words.slice(0, 22).join(" ") + (words.length > 22 ? "…" : "");
 }
 function box(argument: DebateArgument | undefined) {
   const b = argument?.box;
@@ -89,9 +89,10 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       intro3: "Type 1, 2 or 3. At least three of you must agree, or the tile goes to expert review.",
       advocateTitle: "Advocate · argues destroyed", skepticTitle: "Skeptic · argues intact",
       advocateClaim: claim(debate?.advocate), skepticClaim: claim(debate?.skeptic),
-      advocateBoxLabel: "Advocate · destroyed", skepticBoxLabel: "Skeptic · intact",
+      advocateBoxLabel: "A", skepticBoxLabel: "S",
       aiFootnote: "AI arguments. They never count as votes.",
       emptyCopy: "Waiting for votes. Type 1, 2 or 3 in chat.", resultCopy, goldCopy,
+      aiCopy: result?.ai ? "AI alone said: " + result.ai.label + "." : "",
       completeCopy: "Results are being exported for humanitarian mappers.",
       agreement: live.voters ? Math.round(live.agreement * 100) + "%" : "—",
       leading: live.leading ? "say " + live.leading : live.voters ? "no leading label" : "waiting for votes",
@@ -115,9 +116,9 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
     styles: { scaleBar: { width: scaleBarPx + "px" }, destroyedFill: { transform: `scaleX(${destroyed})` },
       intactFill: { transform: `scaleX(${intact})` },
       advocateBox: advocateBox ?? {}, skepticBox: skepticBox ?? {} },
-    hidden: { simulated: state?.source !== "sim", debate: !debate || intro || complete, explainer: !intro,
+    hidden: { simulated: state?.source !== "sim", debate: !debate || intro || complete, explainer: complete || (!!debate && !intro),
       completeCopy: !complete, emptyCopy: !empty, lead: empty || complete, voteBar: empty || complete,
-      barLabels: empty || complete, threshold: empty || complete, goldCopy: !goldCopy,
+      barLabels: empty || complete, threshold: empty || complete, goldCopy: !goldCopy, aiCopy: !result?.ai,
       advocateBox: !ready || !advocateBox, skepticBox: !ready || !skepticBox, imageStatus: ready,
       before: !ready, after: !ready, target: !ready, scale: !tile, divider: !ready, connection: !status,
       pauseReason: state?.phase !== "stopped" },

@@ -21,7 +21,9 @@
     "tiles:warm": "tsx scripts/warm-tiles.ts",
     "bench": "tsx scripts/bench.ts",
     "mission": "node --env-file=.env --import tsx scripts/run-mission.ts",
-    "verify": "tsx server/src/verify.ts"
+    "verify": "tsx server/src/verify.ts",
+    "debates:warm": "node --env-file=.env --import tsx scripts/warm-debates.ts",
+    "debates:score": "tsx scripts/score-debates.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

@@ -11,15 +11,15 @@
   <section data-node="photoStage" class="photo-stage" aria-label="Before and after satellite imagery">
     <div class="photo-layer" data-node="photoLayer">
       <img data-node="before" class="photo" hidden />
-      <div class="wipe-window"><img data-node="after" class="photo after" hidden /></div>
+      <div class="wipe-window"><div class="after"><img data-node="after" class="photo" hidden /></div><div class="after-annotations">    <div data-node="advocateBox" class="evidence-box destroyed" hidden><span data-node="advocateBoxLabel"></span></div>
+    <div data-node="skepticBox" class="evidence-box intact" hidden><span data-node="skepticBoxLabel"></span></div>
+</div></div>
     </div>
     <div data-node="divider" class="wipe-divider" hidden></div>
     <svg data-node="target" class="target" viewBox="0 0 984 984" aria-label="Building target, 12 metre radius" hidden>
       <circle data-node="ringDark" cx="492" cy="492" class="ring-dark" />
       <circle data-node="ringLight" cx="492" cy="492" class="ring-light" />
     </svg>
-    <div data-node="advocateBox" class="evidence-box destroyed" hidden><span data-node="advocateBoxLabel"></span></div>
-    <div data-node="skepticBox" class="evidence-box intact" hidden><span data-node="skepticBoxLabel"></span></div>
     <div data-node="beforeDate" class="date-plate before-date"></div>
     <div data-node="afterDate" class="date-plate after-date"></div>
     <div data-node="imageStatus" class="image-status"></div>
@@ -28,7 +28,7 @@
       <span data-node="coordinates" class="coordinate-plate"></span>
     </div>
     <div data-node="resultPlate" class="result-plate" data-visible="false" aria-live="polite">
-      <p data-node="resultCopy"></p><p data-node="goldCopy" class="gold-copy" hidden></p>
+      <p data-node="resultCopy"></p><p data-node="goldCopy" class="gold-copy" hidden></p><p data-node="aiCopy" class="gold-copy" hidden></p>
     </div>
     <p data-node="caution" class="caution"></p>
   </section>
