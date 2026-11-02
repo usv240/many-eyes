@@ -84,6 +84,7 @@ h1 { font-size: var(--large); font-weight: var(--bold); line-height: var(--line-
 .tick-right { left: var(--threshold-right); }
 .threshold { text-align: center; font-size: var(--small); color: var(--faint); padding-top: var(--space-xs); }
 .voter-count { font-size: var(--small); color: var(--muted); margin-top: var(--space-sm); }
+.live-vote { margin-top: var(--space-xs); font-size: var(--small); color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .countdown { display: flex; align-items: center; gap: var(--space-lg); margin-top: var(--space-sm); font-size: var(--small); color: var(--muted); white-space: nowrap; }
 .countdown-track { flex: 1; height: var(--track-height); background: var(--surface); }
 .countdown-track > div { height: var(--full); background: var(--muted); }

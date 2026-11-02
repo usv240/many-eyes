@@ -26,6 +26,10 @@ export interface PublicState {
   serverNow: number;
   pauseReason?: string;
   debate?: { advocate: DebateArgument; skeptic: DebateArgument };
+  /** Mixed mode: real Twitch chat votes join the simulated crowd. */
+  liveChat?: boolean;
+  /** The newest accepted real chat vote, shown briefly on the overlay. */
+  liveVote?: { login: string; label: VoteLabel; at: number };
   attribution: string; refusedCount: number;
   tile?: { token: string; number: number; lon: number; lat: number;
     openedAt: number; closesAt: number; imageryUrl: string };
@@ -50,6 +54,10 @@ export interface RunnerOptions {
   loadDebate?: (buildingId: string) => CachedDebate | null;
   fixedTiles?: readonly string[]; votingMs?: number; pauseMs?: number; pauseAfterLast?: boolean;
   gradedWork?: boolean; video?: boolean;
+  /** Add real Twitch chat votes to a simulated crowd (mixed mode). */
+  liveChat?: boolean;
+  /** Called for every chat message after vote handling, for commands such as !why. */
+  onChat?: (message: ChatMessage, accepted: boolean) => void;
 }
 function makeClock(virtual: boolean): Clock {
   let now = 0;
@@ -82,13 +90,14 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.runId = options.runId ?? randomUUID();
     if (options.fixedTiles?.some((id) => !this.mission.buildings.some((b) => b.id === id))) throw new Error("Unknown fixed tile.");
     if (options.video && options.source !== "sim") throw new Error("Video mode requires a simulated crowd.");
+    if (options.liveChat && (options.virtual || options.source !== "sim")) throw new Error("Live chat mixing needs a real-time simulated crowd.");
     const total = Math.min(options.maxTiles ?? Infinity, options.fixedTiles?.length ?? (options.goldOnly ? this.mission.gold.length : this.mission.buildings.length));
     this.state = { missionId: this.mission.id, source: options.source, phase: "idle",
       mission: { name: this.mission.name, place: "Syaphru Besi, Rasuwa, Nepal", eventDate: this.mission.event_date,
         preDate: this.mission.pre_scene.acquired, postDate: this.mission.post_scene.acquired, attribution: this.mission.attribution },
       live: { agreement: 0, leading: null, voters: 0, unsure: 0 }, lastResult: null, serverNow: this.clock.now(),
       stats: { goldChecked: 0, goldCorrect: 0, validated: 0, refused: 0, remaining: total, total },
-      attribution: this.mission.attribution, refusedCount: 0,
+      attribution: this.mission.attribution, refusedCount: 0, ...(options.liveChat ? { liveChat: true } : {}),
       votes: { destroyed: 0, intact: 0, unsure: 0, total: 0 } };
   }
   getState() { return structuredClone({ ...this.state, serverNow: this.clock.now() }); }
@@ -102,10 +111,15 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
   private publish() { this.emit("state", this.getState()); }
 
   ingestChat(message: ChatMessage): boolean {
+    if (!message.messageId || this.seen.has(message.messageId)) return false;
     const label = parseVote(message.text);
-    return label ? this.acceptVote(message.messageId, message.userId, label, Date.parse(message.timestamp)) : false;
+    if (!label) this.seen.add(message.messageId);
+    const accepted = label ? this.acceptVote(message.messageId, message.userId, label, Date.parse(message.timestamp),
+      message.userLogin || message.userId) : false;
+    this.options.onChat?.(message, accepted);
+    return accepted;
   }
-  private acceptVote(messageId: string, userId: string, label: VoteLabel, timestamp: number): boolean {
+  private acceptVote(messageId: string, userId: string, label: VoteLabel, timestamp: number, login?: string): boolean {
     if (!messageId || this.seen.has(messageId)) return false;
     this.seen.add(messageId);
     const session = this.session;
@@ -120,6 +134,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.state.votes = { destroyed: 0, intact: 0, unsure: 0, total: next.votes.length };
     for (const item of next.votes) this.state.votes[item.label]++;
     this.state.live = preview(next);
+    if (login) this.state.liveVote = { login, label, at: now };
     this.publish();
     return true;
   }
@@ -133,7 +148,8 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     const crowd = this.options.source === "sim" ? createCrowd({ seed, voters: 10, ...this.options.crowd }) : [];
     let twitch = this.options.twitch;
     let sendChat = this.options.sendChat;
-    if (this.options.source === "twitch" && !twitch) {
+    const useTwitch = this.options.source === "twitch" || !!this.options.liveChat;
+    if (useTwitch && !twitch) {
       const config = readConfig();
       twitch = new EventSubClient(config);
       sendChat ??= createChatSender(config);
@@ -147,7 +163,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     };
     const onFault = (error: Error) => { this.fault = new Error("Twitch connection failed: " + error.message); this.stop(this.fault.message); };
     try {
-      if (this.options.source === "twitch") {
+      if (useTwitch) {
         if (!sendChat) throw new Error("A Twitch runner needs a chat sender.");
         twitch!.on("chatMessage", onChat); twitch!.on("fault", onFault);
         await twitch!.start();
@@ -178,6 +194,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             status: this.state.lastResult.status, label: this.state.lastResult.label, agreement: this.state.lastResult.agreement,
             voters: this.state.lastResult.voters, reason: this.state.lastResult.reason } : null,
           attribution: this.mission.attribution, refusedCount: this.refused.length,
+          ...(this.options.liveChat ? { liveChat: true } : {}),
           ...(cached ? { debate: publicDebate(cached.debate) } : {}),
           tile: { token, number: index + 1, lon: Number(building.lon.toFixed(4)), lat: Number(building.lat.toFixed(4)),
             openedAt: session.openedAt, closesAt: session.closesAt,
@@ -234,7 +251,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             ...(truth ? { gold: { truth, chatCorrect } } : {}) },
           refusedCount: this.refused.length, ...(truth ? { reveal: { gold: true, truth } } : {}) };
         this.publish();
-        if (this.options.source === "twitch") {
+        if (useTwitch) {
           const result = decision.weighted;
           const text = result.status === "validated"
             ? "Tile " + (index + 1) + ": validated " + result.label + " (" + Math.round(result.agreement * 100) + "% agreement, " + result.voters + " voters)"

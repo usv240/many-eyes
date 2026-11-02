@@ -1,4 +1,4 @@
-﻿import type { DebateArgument, PublicState } from "../../server/src/runner/mission-runner.js";
+import type { DebateArgument, PublicState } from "../../server/src/runner/mission-runner.js";
 
 export interface TileImages {
   pre: string; post: string; zoom: number; sizePx: number; lat: number; attribution: string;
@@ -72,13 +72,17 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
   const status = options.connection === "reconnecting" && options.offlineSince !== undefined &&
     (options.localNow ?? options.now ?? 0) - options.offlineSince >= 3000 ? "Reconnecting to server"
     : !state ? "Connecting to the mission…" : "";
+  const liveVote = state?.liveVote;
+  const liveVoteCopy = liveVote && state?.phase !== "complete" && (options.now ?? state.serverNow) - liveVote.at < 4000
+    ? "Live chat: " + liveVote.login + " voted " + ({ destroyed: "1", intact: "2", unsure: "3" } as const)[liveVote.label] +
+      " · " + liveVote.label : "";
   const countdown = state?.phase === "voting" ? Math.ceil(timeLeft / 1000) + " s" : state?.phase === "decided" && result
     ? result.status === "validated" ? "Validated " + result.label : "Refused · sent to experts"
     : state?.phase === "complete" ? "Mission complete" : state?.phase === "stopped" ? "Mission paused" : "Waiting for a tile";
   return {
     text: {
       wordmark: "Many Eyes", location: mission ? mission.place.replace(", Rasuwa", "") + " · flood of " + date(mission.eventDate) : "Waiting for the mission",
-      tileCount: "Tile " + (tile?.number ?? 0) + " of " + stats.total, simulated: "Simulated crowd",
+      tileCount: "Tile " + (tile?.number ?? 0) + " of " + stats.total, simulated: state?.liveChat ? "Simulated crowd + live chat" : "Simulated crowd", liveVote: liveVoteCopy,
       question: complete ? "Mission complete" : "Did the building in the ring survive?", key1: "1", key2: "2", key3: "3",
       destroyedKey: "destroyed", intactKey: "intact", unsureKey: "unsure",
       beforeDate: "Before · " + date(mission?.preDate), afterDate: "After · " + date(mission?.postDate),
@@ -120,7 +124,8 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
     hidden: { simulated: state?.source !== "sim", debate: !debate || intro || complete, explainer: complete || (!!debate && !intro),
       completeCopy: !complete, emptyCopy: !empty, lead: empty || complete, voteBar: empty || complete,
       barLabels: empty || complete, threshold: empty || complete, goldCopy: !goldCopy, aiCopy: !result?.ai,
-      advocateBox: !ready || !advocateBox, skepticBox: !ready || !skepticBox, imageStatus: ready,
+      advocateBox: !ready || !advocateBox || complete, skepticBox: !ready || !skepticBox || complete,
+      keys: complete, liveVote: !liveVoteCopy, imageStatus: ready,
       before: !ready, after: !ready, target: !ready, scale: !tile, divider: !ready, connection: !status,
       pauseReason: state?.phase !== "stopped" },
     geometry: { metresPerPixel: mpp, ringRadiusPx, scaleBarPx, countdownFraction },

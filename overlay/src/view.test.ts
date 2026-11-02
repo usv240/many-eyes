@@ -108,3 +108,20 @@ it("shows half of an eight-second recording window after four seconds", () => {
   snapshot.state!.tile!.closesAt = snapshot.state!.tile!.openedAt + 8000;
   expect(view(snapshot.state, { now: 5000 }).geometry.countdownFraction).toBe(0.5);
 });
+it("shows a real chat vote briefly in mixed mode and labels the crowd honestly", () => {
+  const snapshot = fixtureSnapshot("voting", 10000);
+  const state = { ...snapshot.state!, liveChat: true, liveVote: { login: "ujwal2400", label: "destroyed" as const, at: 9000 } };
+  const fresh = view(state, { ...snapshot, now: 10000, localNow: 10000 });
+  expect(fresh.text.simulated).toBe("Simulated crowd + live chat");
+  expect(fresh.text.liveVote).toBe("Live chat: ujwal2400 voted 1 · destroyed");
+  expect(fresh.hidden.liveVote).toBe(false);
+  expect(view(state, { ...snapshot, now: 14000, localNow: 14000 }).hidden.liveVote).toBe(true);
+  expect(sample("voting").text.simulated).toBe("Simulated crowd");
+});
+it("hides vote keys and evidence boxes once the mission is complete", () => {
+  const done = sample("complete");
+  expect(done.hidden.keys).toBe(true);
+  expect(done.hidden.advocateBox).toBe(true);
+  expect(done.hidden.skepticBox).toBe(true);
+  expect(sample("voting").hidden.keys).toBe(false);
+});

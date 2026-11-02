@@ -41,7 +41,7 @@
     </header>
     <section class="question-block">
       <h2 data-node="question"></h2>
-      <div class="keys" aria-label="Chat voting commands">
+      <div data-node="keys" class="keys" aria-label="Chat voting commands">
         <span class="key destroyed"><span data-node="key1" class="digit"></span><span data-node="destroyedKey"></span></span>
         <span class="key intact"><span data-node="key2" class="digit"></span><span data-node="intactKey"></span></span>
         <span class="key unsure"><span data-node="key3" class="digit"></span><span data-node="unsureKey"></span></span>
@@ -63,6 +63,7 @@
       <div data-node="voteBar" class="vote-bar"><div data-node="destroyedFill" class="destroyed-fill"></div><div data-node="intactFill" class="intact-fill"></div><i class="tick tick-left"></i><i class="tick tick-right"></i></div>
       <p data-node="threshold" class="threshold"></p>
       <p data-node="voters" class="voter-count"></p>
+      <p data-node="liveVote" class="live-vote" aria-live="polite" hidden></p>
       <div class="countdown"><div class="countdown-track"><div data-node="countdownFill"></div></div><span data-node="countdown"></span></div>
       <p data-node="pauseReason" class="pause-reason" hidden></p>
     </section>

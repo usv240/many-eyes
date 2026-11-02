@@ -121,3 +121,39 @@ it.each(["complete", "stopped"] as const)("keeps stats consistent and hidden fie
   expect(phases).toEqual(new Set(["idle", "voting", "decided", terminal]));
   expect(runner.getState().stats.remaining).toBe(terminal === "complete" ? 0 : 1);
 });
+it("mixes real chat votes with the simulated crowd through the same vote path", async () => {
+  let now = 5000;
+  const clock: Clock = { now: () => now, wait: async (ms) => { now += ms; } };
+  const twitch = new FakeTwitch(); const ledger = new MemoryLedger(); const sendChat = vi.fn().mockResolvedValue(undefined);
+  const seen: { message: ChatMessage; accepted: boolean }[] = [];
+  const runner = new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", liveChat: true, twitch, clock, ledger,
+    sendChat, maxTiles: 1, crowd: { voters: 5 }, onChat: (message, accepted) => { seen.push({ message, accepted }); } });
+  const states: PublicState[] = [];
+  let sent = false;
+  runner.on("state", (state) => {
+    states.push(state);
+    if (state.phase !== "voting" || sent) return;
+    sent = true;
+    const emit = (messageId: string, text: string) => twitch.emit("chatMessage",
+      { messageId, userId: "1599553311", userLogin: "viewer", text, timestamp: new Date(now).toISOString() });
+    emit("m1", "1"); emit("m2", "2"); emit("m2", "1"); emit("m3", "!why");
+  });
+  await runner.run();
+  const votes = ledger.events.filter((event) => event.type === "vote");
+  const real = votes.filter((event) => event.data.userId === "1599553311");
+  expect(real.map((event) => event.data.label)).toEqual(["destroyed", "intact"]);
+  expect(votes.some((event) => String(event.data.userId).startsWith("sim_"))).toBe(true);
+  const decided = ledger.events.find((event) => event.type === "tile_decided")!;
+  const session = decided.data.session as { votes: { userId: string; label: string }[] };
+  expect(session.votes.filter((vote) => vote.userId === "1599553311")).toEqual([expect.objectContaining({ label: "intact" })]);
+  expect(seen.map((item) => [item.message.text, item.accepted])).toEqual([["1", true], ["2", true], ["!why", false]]);
+  expect(states.some((state) => state.liveChat && state.liveVote?.login === "viewer")).toBe(true);
+  expect(sendChat).toHaveBeenCalledTimes(1);
+  expect(twitch.listenerCount("chatMessage")).toBe(0);
+});
+it("refuses live chat mixing in virtual time or with a Twitch-only source", () => {
+  expect(() => new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", liveChat: true, virtual: true,
+    ledger: new MemoryLedger() })).toThrow(/real-time simulated crowd/);
+  expect(() => new MissionRunner({ missionId: "nepal-flood-2026", source: "twitch", liveChat: true,
+    ledger: new MemoryLedger() })).toThrow(/real-time simulated crowd/);
+});

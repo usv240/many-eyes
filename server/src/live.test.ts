@@ -5,7 +5,7 @@ import { MemoryLedger } from "./ledger/ledger.js";
 it("starts one real-time simulation with empty configuration and stops its timer", async () => {
   const ledger = new MemoryLedger();
   const live = createLive({ env: {}, ledger });
-  expect(readLiveConfig({})).toEqual({ source: "sim", seed: 7 });
+  expect(readLiveConfig({})).toEqual({ source: "sim", seed: 7, liveChat: false });
   const before = Date.now();
   try {
     await Promise.all([live.start(), live.start()]);
@@ -25,6 +25,9 @@ it("starts one real-time simulation with empty configuration and stops its timer
 it("requires Twitch credentials only in twitch mode and rejects invalid live options", () => {
   expect(() => createLive({ env: { MANY_EYES_SOURCE: "twitch" }, ledger: new MemoryLedger() }))
     .toThrow("Missing required environment variable: TWITCH_CLIENT_ID");
+  expect(() => createLive({ env: { MANY_EYES_SOURCE: "mixed" }, ledger: new MemoryLedger() }))
+    .toThrow("Missing required environment variable: TWITCH_CLIENT_ID");
+  expect(readLiveConfig({ MANY_EYES_SOURCE: "mixed" })).toEqual({ source: "sim", seed: 7, liveChat: true });
   expect(() => readLiveConfig({ MANY_EYES_SOURCE: "invalid" })).toThrow("MANY_EYES_SOURCE");
   expect(() => readLiveConfig({ MANY_EYES_SEED: "NaN" })).toThrow("MANY_EYES_SEED");
   expect(() => readLiveConfig({ MANY_EYES_SEED: "1.5" })).toThrow("MANY_EYES_SEED");
