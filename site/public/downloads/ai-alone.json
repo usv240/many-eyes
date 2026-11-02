@@ -1,0 +1,2127 @@
+{
+  "headline": "AI alone: 73.8% on 80 hidden checks (destroyed 100.0%, intact 47.5%).",
+  "models": [
+    "gpt-6-luna"
+  ],
+  "dates": [
+    "2026-11-01"
+  ],
+  "gold": {
+    "correct": 59,
+    "total": 80,
+    "destroyed": {
+      "correct": 40,
+      "total": 40
+    },
+    "intact": {
+      "correct": 19,
+      "total": 40
+    }
+  },
+  "work": {
+    "Possibly damaged": {
+      "destroyed": 46,
+      "intact": 32,
+      "total": 78
+    },
+    "Damaged": {
+      "destroyed": 25,
+      "intact": 7,
+      "total": 32
+    }
+  },
+  "missing": [],
+  "expertAgreement": null,
+  "entries": [
+    {
+      "buildingId": "cems-0003",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:09.429Z",
+      "cropHashes": {
+        "pre": "f3ae869b37a358481a6a550817a07ba0478722e7394745598be3c16650cf8ec2",
+        "post": "0425775b81ef7db96178886312acea1c18949bfa6139e0a078de5b668b4e3ef8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0012",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:10.023Z",
+      "cropHashes": {
+        "pre": "223eff555eacf11469c4eaa2ddcd386bdc64359f59e45f3f6a65285a1985d690",
+        "post": "ab3ecc7d5058538a9b4cf92298a7418a4c2d619d6445c6d7b2093eec26b3c304"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.97
+    },
+    {
+      "buildingId": "cems-0013",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:09.211Z",
+      "cropHashes": {
+        "pre": "524658bd1337e54369c4dc2c29301fa3d271f79bdd28df2b22ccbf297cc39d93",
+        "post": "2047853ba31ca8e9b400a72d38e53d98a533793ae835ad483c5a52232adc5c03"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0015",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:08.921Z",
+      "cropHashes": {
+        "pre": "28176dbace0ea6ccbd4f2d70e6b76f1fc1dfdf0456ce128cd77bc221c82bab9a",
+        "post": "c115d0a4a2a9f75385e0b945c79dfac8b97f06f1093afddc2e791c3392b17f5c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0016",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:11.016Z",
+      "cropHashes": {
+        "pre": "d348ea7ee3209c9257faa0fc59cd8069b69ba9aa506d9ec0c28cb87148d6f40f",
+        "post": "ebe008a60159931b0cd2d2a8912dc1747b7ffa9f71b0f1bc64927255152e817b"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0022",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:11.196Z",
+      "cropHashes": {
+        "pre": "ae01bfc9a246dee1445aabd1f9fb0879ebb37be0168c0800db7f93340e63bb45",
+        "post": "fb7631efc5dcc92bc4038ff16326a7656390f01d5190a67d43d759a0725d65d3"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0044",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:11.510Z",
+      "cropHashes": {
+        "pre": "01150134b7103828f78a391fbdd3fbd6d0cec65fed3ee7773a7b9e42372508ce",
+        "post": "4d1f0f1672837a816dba9a6a69d5c572c8d95dfd336f42dcb1c7203f6047ca52"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0047",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:12.072Z",
+      "cropHashes": {
+        "pre": "9236e0ab23c686f18aaab55712f85bfc4123effd9e067e30cbd04f07719a89c7",
+        "post": "4c18ffc622d7d526fe9c9ad1ae0bb34a1c38ae1eac2e0f7214a2eb9b6dcfef91"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0049",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:12.903Z",
+      "cropHashes": {
+        "pre": "9f0fffd8e21a642a06ec9bae03d5e8598904c4ce5ed476704d49bcbad588ac98",
+        "post": "e9a747c6ee5567df5a46d7a28b5aede79ab6a11a6e92e09264c20f8056cf4e9f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0052",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:05:57.278Z",
+      "cropHashes": {
+        "pre": "7cc97ced11d0ad8cef57df0ef035dbdd363751ca00dcac23c8abd1711dc72051",
+        "post": "c274f2be6909f1ffc36dc17875d458eb796a6523d4b05ccc218dbe1e63f0e9d5"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.96
+    },
+    {
+      "buildingId": "cems-0057",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:12.900Z",
+      "cropHashes": {
+        "pre": "481eb4573e8ee9e200eae50448f29e6700ee86aaaf23371d696610a5fea9b8fb",
+        "post": "7b19652c3c3410b3f1362c2f45e7f8e4362ac51323d15fa26200d371df280942"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0071",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:13.706Z",
+      "cropHashes": {
+        "pre": "f0d0272d65ac04e523236d1ff63657c0047eeabea7c4c19d298d5662462213dd",
+        "post": "0e38dfb9ce802b08e2f6ee0c548c0918f331124e0ab2f5cd37837e2fac5d16ce"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0079",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:14.436Z",
+      "cropHashes": {
+        "pre": "9b73236c3e57e4de6f5dfd97bbcd5235a6ba2ffbff28bc782f1e6f669cefb6b0",
+        "post": "fa2e741660f8e7eefdec98076410137e6eedb70356d5a6dc7885060212b2d209"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0081",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:15.204Z",
+      "cropHashes": {
+        "pre": "1d9ee43ef6be164ab8041f329a44cdc65f7931897f83f0a3a6bee48d233fc6e8",
+        "post": "2a4baa18e295c9b3c6ba34d07c36e39bf93d42368ab522ff038a42879b5ccaf5"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0082",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:15.004Z",
+      "cropHashes": {
+        "pre": "c8e6ec0c91913d45140b23e7998ee023a78f78785b6c94b09cd2ca93939ccd3e",
+        "post": "691eb9707a4a73f5d3986755a4f5953b24ed40edd4652a41204192176e763c71"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.55
+    },
+    {
+      "buildingId": "cems-0083",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:15.666Z",
+      "cropHashes": {
+        "pre": "7cdf46fe7e407b8e60fe005941d947a73572111b7a963a31f81c24f53b98f68b",
+        "post": "88d6f1bceed85636c88f235e21ce0b7830617b12ab36f49773c992773007a826"
+      },
+      "model_label": "intact",
+      "confidence": 0.84
+    },
+    {
+      "buildingId": "cems-0084",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:16.337Z",
+      "cropHashes": {
+        "pre": "cafa623d434507ebf75327ed6184445ed796a755112bd7d606002b849836083d",
+        "post": "e8fc2e2db73c38fbc9289ad600fb01e5a6821a5110adcafd6cde7b0eec09e7c2"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0085",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:17.262Z",
+      "cropHashes": {
+        "pre": "67c05aec2bc1a0104a64bf70460813c0209109127e9bfc0635a61b78e55419cc",
+        "post": "b3dde80d1d8f03c87ebebb577b96bce4b44fe7fbceceea3807101948bed4789a"
+      },
+      "model_label": "intact",
+      "confidence": 0.69
+    },
+    {
+      "buildingId": "cems-0086",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:17.442Z",
+      "cropHashes": {
+        "pre": "694cd58d47f12872db53769186018d0c5834bdf8e4ee4b12d36e1cbf15416882",
+        "post": "e87c1b783400cfef285f6141198736a528d15b1d5fcca503fd10e5c6e3969118"
+      },
+      "model_label": "intact",
+      "confidence": 0.62
+    },
+    {
+      "buildingId": "cems-0087",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:17.332Z",
+      "cropHashes": {
+        "pre": "171d35d20d55c11a5075c7be7b68257d276f528d64283471c5a25f93291a0f22",
+        "post": "b47642cdaea3e38edaa9b0c22cc40aa6ef4b130449faca31b7e24d363534559a"
+      },
+      "model_label": "intact",
+      "confidence": 0.87
+    },
+    {
+      "buildingId": "cems-0088",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:18.421Z",
+      "cropHashes": {
+        "pre": "ab242d754e64ef9d0ca96d4e5e490ffe56bd626484f9125206e620f6575105c1",
+        "post": "98440d6858833371820c94f6ef3efd74a3e893b8bd0b9ab78834db5f45a5ed88"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0089",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:19.220Z",
+      "cropHashes": {
+        "pre": "c30cbc6cad690d555caf9d35878d7de104e6eb9c1b42dac4a4d3db3e22b99c76",
+        "post": "bd1ba2c876930bf676d79c1f62c461975f62f32cb80e351e0aaeb24e68e59c15"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0096",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:19.185Z",
+      "cropHashes": {
+        "pre": "088c2b446548ce8dbd4904247bce943bf056ba0d2c337ae47626fc84fc3dcdf8",
+        "post": "a5003d511f36bb1be4bcb9e13d737c869a6ba0daac47a8a9d8e3ce1837c9dce7"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.9
+    },
+    {
+      "buildingId": "cems-0110",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:19.203Z",
+      "cropHashes": {
+        "pre": "047662cc854dc25bf9ae15af76b227a01ab3462107030a9520042d19d1c384e8",
+        "post": "6df19725f69ef2a71d1e7b2cb443a555c1bf73591702792001992bf68a87fbe6"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0119",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:20.211Z",
+      "cropHashes": {
+        "pre": "6b9b809f0c15d6436afd20871bc990a5e23f1709c0e652a01d52eff8ccee911f",
+        "post": "e13af067c03372a84f7646dd4508e542654feb4d1b4f73fec31bfe57b82bdc48"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0120",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:20.833Z",
+      "cropHashes": {
+        "pre": "1378ea495cdce976a6d6578899445fd16cbd9d5698559d5ad64858edb9bb3e45",
+        "post": "a663a65815360fcf878c0849d0d3edddf7ba822cf9a2ee9e71563ec9d495b41a"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.96
+    },
+    {
+      "buildingId": "cems-0121",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:20.777Z",
+      "cropHashes": {
+        "pre": "ca8a3ca92106bed49a374d572fdb5e93d31eb6da65f2c6f265ba100c95988c7d",
+        "post": "d1f23c7aa459ea54b1064ad890fd6c45bd7e0e12b4e83baa561656520553b19d"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0123",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:20.791Z",
+      "cropHashes": {
+        "pre": "6327480ff16cbb768af5a996deb68910ddf95e689f9077c4b686456f7c1c4f38",
+        "post": "e9fe7201ecdab9cefb5f58cb9c16625eb7d734cccc70168e0b15f3e300770cdf"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0128",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:21.897Z",
+      "cropHashes": {
+        "pre": "830d3e1be354e889eccdeb599ffbf0d4b2c002213da40d2b1920cd12fd0ec80a",
+        "post": "133087b24a53f18e541aea2e74ef5adb810d48393307b1bd1a2e517366e576ad"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0134",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:22.553Z",
+      "cropHashes": {
+        "pre": "4929bdba0f40e11873718354472795c807fd3e722ba81fbd8b3699e989a269e9",
+        "post": "99839a66e9ee3e3161293dc56e683b02f9d0b74ec885596faed7c9e1a02c4467"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0144",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:22.784Z",
+      "cropHashes": {
+        "pre": "63b8a4f82b96c10c952af808f72b86d932b3d80e9ba2e56f0a2f44886a9edac6",
+        "post": "9524185c2fb806012a28f1801395424a695521a5a8fa25e19a943f81256b6660"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0149",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:23.106Z",
+      "cropHashes": {
+        "pre": "c8cde684aa2eca1d5f7eab41b3023b32a7ca42ef764a90994f473c2983ebdbef",
+        "post": "2d64455b15b728782548b225509770091041fbe1d71294108836e915a1cb1889"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0151",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:23.321Z",
+      "cropHashes": {
+        "pre": "f033350dfae1538dd21e3310ae6189378c15482c74af2046ffa19cf9339ddd2c",
+        "post": "bc6afabbbe490b04d720cc464aef2248869d4fdf3972044fa79989b8e98cb266"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0180",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:24.548Z",
+      "cropHashes": {
+        "pre": "db30b4bef9b06cd19e36e3d9301ecd6a2418d27959147a955f0965ba1516ce91",
+        "post": "4b9df9ddf8a8c365409451267a1527a123e77f2ed7b597d9235c487329fbb054"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.79
+    },
+    {
+      "buildingId": "cems-0181",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:24.710Z",
+      "cropHashes": {
+        "pre": "7803f29d56af8d442ba049ff1f56e626b6bde93aba77baa918fccb9d63a78034",
+        "post": "04fb8506275337043911496da3058791dfb7c4489332b45ce444b2e41180adab"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "cems-0182",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:24.801Z",
+      "cropHashes": {
+        "pre": "c5a545868bd49e327c9b87cd79465116a0178dc02581c56afe199f3e3d587a80",
+        "post": "f1f5af0a8b99bb9fe6e97c766bcfb3e5d860798dc4173959deafda6d4c62ea85"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0183",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:24.853Z",
+      "cropHashes": {
+        "pre": "dd583b2928525d2690cfcf20c4a42736f582dd36cadb88f4c911c64da5414fb5",
+        "post": "58731be03254b36964725c92fbd0ce8b51a53012f1f0a8cfc3925000ad85f17c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.82
+    },
+    {
+      "buildingId": "cems-0185",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:28.030Z",
+      "cropHashes": {
+        "pre": "b1c8bcba2037f9be37ff7fdd0eea55be25159e30051b82c6524dfc25db265620",
+        "post": "bd78becc190570b4bfcb527eb70dd528c6ee239b46c72d71b0430d7b2d8346af"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0186",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:26.442Z",
+      "cropHashes": {
+        "pre": "a675df189f7b89e4db4d5e72cff5fe04d7e41c298d634e35a0e5216aefedc587",
+        "post": "76f5d7d2c44ac33ec35ed7ec6c83e8c7ab853ed957c0e9c28095cdef7f475e42"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0187",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:26.459Z",
+      "cropHashes": {
+        "pre": "c9874b81c8a2d3666e684074ae32f856e72dda67b91048ab03585ad88f103813",
+        "post": "50cea6237483ca0b23d06ecf9ee7b784c1cb945faca2f3f42a2aa25ebe32c62a"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0188",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:26.800Z",
+      "cropHashes": {
+        "pre": "abb719421c0184a5f09728a6742813c39dbdcd8a0d454db17b92536db1d3d71d",
+        "post": "6599d8ac372140e4871a1b3e9f6cfee55ab1913814cc1b69cb3913fb6492db6b"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.62
+    },
+    {
+      "buildingId": "cems-0189",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:27.939Z",
+      "cropHashes": {
+        "pre": "a35d62df9ca6c1123329c016cb69e9f6fb2e67c5731c88f5aa6e027c3d1e7768",
+        "post": "0ad9332d9bb9adf1faccda8063f579e7e1a46fd00cded6207ac9f5b29d3faddb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "cems-0190",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:29.367Z",
+      "cropHashes": {
+        "pre": "bec8a2abb0d018dd2c5defb1a5ce2a09320fca7530ea949873e48179971aff08",
+        "post": "f9e3702c9d2b5186ba6329ad8b585bafe22945322f388a577a4146353cbb7cc2"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0191",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:28.656Z",
+      "cropHashes": {
+        "pre": "28cccb5876578279b3b7d70ae550f4432e6ab68024cac54a912cf93ca2286bb2",
+        "post": "3b9a07639b51da8452c4ef2ab1e1e6fb04c9859a2574f1410abbaf887c4b6f26"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0192",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:30.680Z",
+      "cropHashes": {
+        "pre": "ee2afa396f73c95ada69a6cf3be65047010178b33f9687038f34fb5d2aeb7d87",
+        "post": "0578e14d280282ecb2196cf509e29f996290e9575d1530621d29ce3333f9431e"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.92
+    },
+    {
+      "buildingId": "cems-0193",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:30.438Z",
+      "cropHashes": {
+        "pre": "48ab9f4ae8d6409827252c477a68da3a2f9eb9d4d8a8ce4ea809df952e3e5b15",
+        "post": "26e139385e1c31615f75dcbabd2d51c2dcc7da4fbfb62ad2220526fbb995e3cb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.65
+    },
+    {
+      "buildingId": "cems-0194",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:30.261Z",
+      "cropHashes": {
+        "pre": "bc77f36e8e8a338889db2ee37307bfa5eb202f37ba6bb7570fa38281a554281a",
+        "post": "b3f8469b69db3629e73dadf48cfe6cce0661e4a8f97adc45de6709d04ff83cef"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0195",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:31.894Z",
+      "cropHashes": {
+        "pre": "904cdcf66b1379e53ff136f6527d397386a4358a0ab29c847948ce21ddacddd7",
+        "post": "5ebf3cfdd3c6e0cdebf7e994e0bf93ddca392911468acef5ab9cc887b8b25bc3"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0196",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:32.926Z",
+      "cropHashes": {
+        "pre": "19b550d914615cdee3689e9210e5bf4fba36583d95730e63bcaf6b75fe4bcf78",
+        "post": "44569c2dfc2ca54023e8080f37cdbde0d3a65d5a58a2b8243490f03c20b74dec"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.73
+    },
+    {
+      "buildingId": "cems-0197",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:33.224Z",
+      "cropHashes": {
+        "pre": "e6be0219ea0d65799ad91da2a4dfb04fef66387ca145858f3409939f62afcc3f",
+        "post": "425bce2e0245b9e09e4691d23cbbcf47ed3c116657f263c08e627c2d327f14c3"
+      },
+      "model_label": "intact",
+      "confidence": 0.57
+    },
+    {
+      "buildingId": "cems-0198",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:33.218Z",
+      "cropHashes": {
+        "pre": "3040da2cf05dd18faab072aa2e6d4e3690d0c7af237272d0503ab5d0eec61b9c",
+        "post": "2db0526bab4f31752dcd97448f6f8064ed73add06359ad6f8012beabc48a80cf"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0199",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:33.567Z",
+      "cropHashes": {
+        "pre": "f8d933f706ce9ce2c4fea107ff83ccdfdd77b4b7ee703cd40f7d8589fc06ce48",
+        "post": "dc8f0e7b2eee203433e15361910bd9e17f9b981200995f7ac6c8d0979ea3f62b"
+      },
+      "model_label": "intact",
+      "confidence": 0.65
+    },
+    {
+      "buildingId": "cems-0200",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:35.975Z",
+      "cropHashes": {
+        "pre": "a71f08131c363c4e5700050f9221e115dccc684df37e4371ef40f0747fcd66b1",
+        "post": "f146d5d820f1eb0f19d8eecf4d42e9e90a097207369ae6a35bddc6f9ba7cbc46"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.59
+    },
+    {
+      "buildingId": "cems-0201",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:35.345Z",
+      "cropHashes": {
+        "pre": "07b2ce036f25a7328249cb12dc9d145f2002be356a3c916cfba27136859eb731",
+        "post": "b3d48b720f6f61f1373fa321d79fa6f65e06b95776928245ac8b5b6f1b661c3c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0202",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:35.686Z",
+      "cropHashes": {
+        "pre": "9ea89e084ef49d40976bf1ce3326b99f9c16fca2fe92ed91ec4a5062ba6ccf93",
+        "post": "fdd7cdbd0daebed435b5e2a3f2805fc6ef8d6ac8d0bc6869350d20bb7d62bef2"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "cems-0203",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:35.389Z",
+      "cropHashes": {
+        "pre": "9621cc03d6b64eeca0cb9ab71fc96cdd107f6e42d11721a4bdceb94735e4855d",
+        "post": "c27fba5fc03a9e308605c1a664ef0cf52359a80abe52ac374f00c35511cdf2ae"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0204",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:36.894Z",
+      "cropHashes": {
+        "pre": "34b9866385889d0e4a9952bbf42ba745c64b0f856f771d7be04f26566e6a64af",
+        "post": "b8c58a4d450d56d8a0d7eec1b56fcd1c063e05ae14d95d1bd41f8f497436e457"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0205",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:37.043Z",
+      "cropHashes": {
+        "pre": "072193726c8fce98ada22fb710fbc3dfc81119085b1ea4b2dbfdd205616fa0c5",
+        "post": "3e53fe432c5269b26c353dd432b891396c7b73844af1d779d76ff6f0cff1a1e8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0206",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:37.663Z",
+      "cropHashes": {
+        "pre": "c486cc5ae34a6d4c54c4b856e908bcbff98dc89b9107f8978b070f9485413df6",
+        "post": "5cbd09b6911c1d415563a58753cc9dc827c6b2d88968f40e24e743035c16622d"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0208",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:37.619Z",
+      "cropHashes": {
+        "pre": "1ac1e2481ff38edc418fc9c72d7aae16de9b030ba0c6a6c63e53f40f3f6e0197",
+        "post": "51bef86c9bf849d3d76d505549adf1a26f17d432f6bc6a74cdbd8e29d4244075"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.79
+    },
+    {
+      "buildingId": "cems-0209",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:38.951Z",
+      "cropHashes": {
+        "pre": "e8996bd7a2038e465386e8d65ccce69017ac302f758d6e4374a57270528bec2f",
+        "post": "cf8ccd0422df0f99173e6a0e4e3f01e4f22948c40d3a86112899fbba74688184"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0210",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:39.346Z",
+      "cropHashes": {
+        "pre": "0a23170c844a517ca5178344b2fdc09baea02bd4e5a0fae22d5393d629f70a41",
+        "post": "32751e15ce0262a7cbeb2bba94cb7a5f49fcae11338e9d6d34659796c12eb50e"
+      },
+      "model_label": "intact",
+      "confidence": 0.63
+    },
+    {
+      "buildingId": "cems-0211",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:39.555Z",
+      "cropHashes": {
+        "pre": "91ee728a5a07a53b2bb72e0752ae477370f596d6354ef153544bad620e6e9e43",
+        "post": "7f96f4dc55d7ad4704e05e2a98bb7ee3c27d93e36ff29be263697c486a7090ac"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0212",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:39.674Z",
+      "cropHashes": {
+        "pre": "e076e2428ff14163681c41d1e8237c773e5712421c23ceb3399897f90ae58ff7",
+        "post": "52608a9df00bcebb77425c1e511d6d46ef6844db7221e630ef7045203317a63b"
+      },
+      "model_label": "intact",
+      "confidence": 0.65
+    },
+    {
+      "buildingId": "cems-0213",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:41.016Z",
+      "cropHashes": {
+        "pre": "54eef018838ce89176eb31c3d3df67659f18e82fd31ca88b56e719076d2dd21d",
+        "post": "add76de12f50e6cfdede48d0ae0873d09fb5b41a3d85269c3d18440edbf0a11c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.62
+    },
+    {
+      "buildingId": "cems-0215",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:41.287Z",
+      "cropHashes": {
+        "pre": "fdb30cfa19fa9a3534b0817b9a8bcf3983bb71056f00fec9b63b45fa8c9fc914",
+        "post": "6047709a91ab02bcb7fa22afcf2b89923a815821ee0e1841ce5413d25f9f5832"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0218",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:42.125Z",
+      "cropHashes": {
+        "pre": "1f1631618b4930d0034f07d39598fba398cf041e5414d8849fcc9b8ab98a99f7",
+        "post": "6a84cb32bc36f4c3a3cbe6ab0ca0b8b62f9a40a4f2f7e272e502cf6dc9a1cf07"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.86
+    },
+    {
+      "buildingId": "cems-0219",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:41.637Z",
+      "cropHashes": {
+        "pre": "388e1a114f99127ea424f3d55a300601d5574595e12f443dc1c862d77af44a45",
+        "post": "7a1ac1314786136d2ac5aac76f96552abf0dd4bafcffb7d103b0d0d0b809fa88"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.86
+    },
+    {
+      "buildingId": "cems-0220",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:42.528Z",
+      "cropHashes": {
+        "pre": "e4355ab0e058d8bc1b7f296bed9fe009e5c51cde28356a73716fbc55af4e9bb3",
+        "post": "6e63ec22753a8a3e52f4ef2471eb1c920afdfdb94a6fc14e440b18949a40a317"
+      },
+      "model_label": "intact",
+      "confidence": 0.57
+    },
+    {
+      "buildingId": "cems-0221",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:43.635Z",
+      "cropHashes": {
+        "pre": "29f476466eac210d2d10a80898174c4e5c1e918931b23151408b242ee72f3a79",
+        "post": "4179ce04b647c2c4d9b56ad1a72a06a301a27dea07ee83bf419d398d89ad6c7c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0222",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:43.532Z",
+      "cropHashes": {
+        "pre": "a45ae0cc14e2958865a0b49e0c80fc1c8722e36b6c53f85bdd0880a3633e77bc",
+        "post": "c7a18d82f5547a759046e5a39a7892687c809dae9dfad63040514d80bf64407f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.88
+    },
+    {
+      "buildingId": "cems-0223",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:44.187Z",
+      "cropHashes": {
+        "pre": "ac3aea6ffd67b68c2f3254f17c8595f15c4c324741e096414a0f9a7e26ebb7c9",
+        "post": "d7e5cadf6158f8ba11cebc2f44f130dcffcb8a3b1b9951ca318657a47d9a0c79"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.87
+    },
+    {
+      "buildingId": "cems-0224",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:45.593Z",
+      "cropHashes": {
+        "pre": "d27c415a555f4cd3d357890794a1cbe71462dc3475803dcf0114f02a947006fc",
+        "post": "5c613c1e8234589af9554a22cabb0808a35eaa1cd0a2a6e767a0abf5be9fbc0f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0225",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:45.978Z",
+      "cropHashes": {
+        "pre": "3bbb569edab428ffac4c2448d0e6fc42a81080c19418e3d7bcab132311bf929c",
+        "post": "ca8ef59c21d7433704ef58acf262dab7bec7e8f44917755ce8ad71518182775c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.75
+    },
+    {
+      "buildingId": "cems-0226",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:45.478Z",
+      "cropHashes": {
+        "pre": "c9687c303af916173aeb73771845867b92c52943792406e7392a5fa07f3d1827",
+        "post": "ba45a3f91772dfcc7b2684bda6135a9bdcea57ea3d761543488cafcb410d9191"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0227",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:46.183Z",
+      "cropHashes": {
+        "pre": "ec300bd9c513e3c9a73fb01d9a1d64cffc8aff1646076fc53d17a96b02fbff68",
+        "post": "2d90de97e25ed504fa6d3d098c14a4e72359ae315e23974b703be2b75d6a0125"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0228",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:47.036Z",
+      "cropHashes": {
+        "pre": "066c8ad2b88c2250fbcb10ddbf302cbe4ff37f7567bf6489daed86c2e51f09c6",
+        "post": "cc870204595e3d5aaac0952794cbb74b13be0d8ebb22e7308b56070647a3bc5f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0229",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:48.007Z",
+      "cropHashes": {
+        "pre": "ba044869c53993d5a6fe90858352301baf81ccdb0951e14df8bba341e2c712ec",
+        "post": "833746a800d3f0d400b720add4789066cb950ffbb96ebaef50ab3b28d7b77eb0"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "cems-0230",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:47.706Z",
+      "cropHashes": {
+        "pre": "7c7c08e2b646ad1f99c24104604f2caf0387e6d401ac3adcb76fec48624b69fb",
+        "post": "fdf9431b207e00a646da6d93607978a15d92344c5cabb13b76fe873fba8ad150"
+      },
+      "model_label": "intact",
+      "confidence": 0.61
+    },
+    {
+      "buildingId": "cems-0231",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:48.532Z",
+      "cropHashes": {
+        "pre": "84fb646c4971382a090e03f99d859afd659006407103ca9ac040f3a955f5d8ff",
+        "post": "d51657bb0520418e1b8a90915c5bcd3feba0dcd45b8f9d9991eca9eb017d22b2"
+      },
+      "model_label": "intact",
+      "confidence": 0.65
+    },
+    {
+      "buildingId": "cems-0232",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:49.013Z",
+      "cropHashes": {
+        "pre": "224bf42131da15dae5e92cb96a4b1f4af1ddb6b5eaccca017f487ddac68d78d2",
+        "post": "8a997cae8cdf48310b8c464499964bd06b88108f24f3224f406c1717e0cb71e8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.76
+    },
+    {
+      "buildingId": "cems-0233",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:49.285Z",
+      "cropHashes": {
+        "pre": "df1dbed4d6c1ea8c1817a35f65b3dbd84c814912e978068473265abd3f8c970f",
+        "post": "78a8f0afa84df4da92f9ff0da83ce7454f9aa9639a93e2f494cc77eda51eb67f"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0234",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:49.953Z",
+      "cropHashes": {
+        "pre": "61f76ed78c229311846695c4f49e0b656689efe340e2893c44676b2a8530e324",
+        "post": "4ffc9a1e08fd26c27d0d427d7e80dcaf5bb9f15fdfc059703d393d5e0cf16dfa"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0235",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:51.180Z",
+      "cropHashes": {
+        "pre": "b61f504e047452d2b80c4e58a2fb9b4c8afc41d285302ba2e2e11bc26a9ceaac",
+        "post": "a913edae77b2224caaf50ac583951b9020c9b5bb5034a23d19eb34afc9d53a3d"
+      },
+      "model_label": "intact",
+      "confidence": 0.58
+    },
+    {
+      "buildingId": "cems-0236",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:51.089Z",
+      "cropHashes": {
+        "pre": "b64402e39b224e1c5e6e43507e5a525b2f4ab42698e47ed4bbcfb7ac961189ef",
+        "post": "10aaa02776e01dddc626ce8f00a31c5dc7fa4e52da9623cc69b9488eac5bd1d6"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.84
+    },
+    {
+      "buildingId": "cems-0238",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:51.308Z",
+      "cropHashes": {
+        "pre": "ad9490950721b1878a8483bf78de1aa9e36dd459e7b79eed34a261aa3a3069a3",
+        "post": "deba64819128672fc4de1852dc5a4536bde87d27dc6379b40b0bf8df66b1912c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.87
+    },
+    {
+      "buildingId": "cems-0239",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:51.902Z",
+      "cropHashes": {
+        "pre": "0052e0f7853d5aba5720d31176351f45198255c3701bd3756a614b3dd1380cdb",
+        "post": "29cc2f4c5816453a7dda4e77a0f711b55eef6d01188776a6c3f743d3ae8ba053"
+      },
+      "model_label": "intact",
+      "confidence": 0.62
+    },
+    {
+      "buildingId": "cems-0240",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:53.018Z",
+      "cropHashes": {
+        "pre": "653189618065f62c81d1dc66691874916eb184a77588d7e3e5c3330f2e30e793",
+        "post": "e68ac213256a581d3ed47d58da3fd891de195bf977ea6755a82a671c450941a1"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0241",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:52.792Z",
+      "cropHashes": {
+        "pre": "7eb181b515a92593fa0bc5a5f127b73e043ed59fb2d0e3afbbf744ae51346879",
+        "post": "07393068b1cf23f28375273508b12e414a691ac618f8d22a7a250f8d6867b9f8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.79
+    },
+    {
+      "buildingId": "cems-0242",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:53.427Z",
+      "cropHashes": {
+        "pre": "148d7f2c5320737289b0c32f0ac7725e666ba85f6875457a7ac231672fd4eb55",
+        "post": "81d30e8782508bc6132a234b35535075fb82118f9d46d8fc2e4e7043fccda932"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0243",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:53.905Z",
+      "cropHashes": {
+        "pre": "0b5397bea8eada1aa06cf4fdd3a8c751608731f619858a834f30f98f6bc8831d",
+        "post": "47913c154e8cb06addb49cbbf37930b9c92c79f270b5c19da21d9039faec227f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0244",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:54.430Z",
+      "cropHashes": {
+        "pre": "b4b1b9747fecbf0623203ecfc30dbedcff82cff504f09f94d9ec677f88997db2",
+        "post": "dbf4ecd25b1ceafea9052968a22d55896d9da07aad8a659246c0f6a5a4ab4c45"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.88
+    },
+    {
+      "buildingId": "cems-0245",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:54.836Z",
+      "cropHashes": {
+        "pre": "917a7cd01af2926cdad376d3eacfc28b1830a6ab103cb983542a629417fa552e",
+        "post": "818cc9ca61443f24406e62b948dac984f126b76cb2f6462c22b417ada9f7f743"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.81
+    },
+    {
+      "buildingId": "cems-0249",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:57.095Z",
+      "cropHashes": {
+        "pre": "336ef1a776eb01fff54aaead40d1fa9b397af99a5f18e464170edd06f2006eb7",
+        "post": "0233cd12a45b1c030e759d0ea755b14d9810ed13e0f7602e47c40c86318bf1c4"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0260",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:55.823Z",
+      "cropHashes": {
+        "pre": "95fe20dec7db97004c3fb94e8f7780e16aa3c2719cc3eb8476b159e660b55583",
+        "post": "bbeff5b4cbc24f894a145344f56e11e0eb98909dbed7bdcc2633b4a4ab19d3d7"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0280",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:56.078Z",
+      "cropHashes": {
+        "pre": "f4737b10bafea12cb96c67d2267603ba15585c6fe1fd5ef8d1114e8c0b4d4a57",
+        "post": "b1ef83345098291e62bb9c169762a785bb35fe6aca1803003494b4997411ad0d"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0282",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:56.738Z",
+      "cropHashes": {
+        "pre": "c397a8995b9d80807c48e84a976332161dfe90eb1a874e34de851368aed5db61",
+        "post": "be6f01ffe596bb3e98509029c9b11d971781e1df64604fb569c5bce9c598c9cd"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0295",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:57.994Z",
+      "cropHashes": {
+        "pre": "94fa662cb0f3453af53eb11dae35cfaae81b91004c75358bb79f5036e5ce9015",
+        "post": "d2bbb652c13ff830379150ac98417cf2fd9276ff08d105b69dde6eaed8803bf5"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0301",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:57.946Z",
+      "cropHashes": {
+        "pre": "662d754e7f89ce550eff404fe1c6cd206b8d15029d6330197afd968070b4825c",
+        "post": "550e7d2775c370de93f7fa8468fcfd887975a35606a7e03fa8d8e0ef9e31d843"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "cems-0324",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:58.682Z",
+      "cropHashes": {
+        "pre": "e9034462784e82d4cc9a4b7dce4483b5dfc62bd55b7db8d338411dc1ff84bdae",
+        "post": "020593319c2905a95bb78b15de6c05ff1c0812ed8244d081d329ec39e67ab3d0"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0330",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:58.745Z",
+      "cropHashes": {
+        "pre": "f09c719c9d33e9d6eb23678bf3ade5abd2fab78b5214bb58f6feb4e5a917a3ce",
+        "post": "6db458373d6d53d3037660ff3f0913cb147ebdfff4105ff4272f4dd72653ca1b"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.86
+    },
+    {
+      "buildingId": "cems-0331",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:59.781Z",
+      "cropHashes": {
+        "pre": "2cdd1031653c70e7f05c51c99f551c6a896655d39547f6eb3fe5268da9d214a8",
+        "post": "d37d4eb797193d3a0e8fa263b9c82298c3d494eac12b119486475a60fe24edeb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0332",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:06:59.993Z",
+      "cropHashes": {
+        "pre": "1202ce41317e2b77dde4fa01c328f305f4d87e90cecedccb3cf1774dcb455aab",
+        "post": "83c4a88f0769314e33a060f0fcf6a3538577e5d67d1e56c68fdbb63adf4dab49"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0333",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:00.840Z",
+      "cropHashes": {
+        "pre": "fe909ef5cb3e2a613a1273f65da3d8d7776ee2dcbc2aa5fbd958d627d3bc2157",
+        "post": "6cf7c738bd8d45ea7dd7ea6c1b28676549c990fb1ba825fb441042d41b3abb29"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.57
+    },
+    {
+      "buildingId": "cems-0335",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:01.005Z",
+      "cropHashes": {
+        "pre": "f7fe8329f49ad4aef3d56fceac085f42a689df92de54a16e11a01c062e4ed1d3",
+        "post": "c1ae03a30a23a7316e6983e173fb5d87537b924e39dbbc994ae476125b2fefeb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.66
+    },
+    {
+      "buildingId": "cems-0346",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:02.318Z",
+      "cropHashes": {
+        "pre": "0cbfb8355e82fd57d81de757ffa6c6f8f5a78abc5184ae27865fd23afd803a32",
+        "post": "ebe080be7641e22d7053e0020511ad4c88325869821f9ec73917334a1e52d975"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.89
+    },
+    {
+      "buildingId": "cems-0349",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:02.700Z",
+      "cropHashes": {
+        "pre": "896505f40e5a2d4a5da51b25ffbd7637e683e0db67007f93b4b7a6885d714a60",
+        "post": "492564af4f9b0cf7edadf6b39b0aca195782f06a243e1cbd0fc24fd01d46d34b"
+      },
+      "model_label": "intact",
+      "confidence": 0.66
+    },
+    {
+      "buildingId": "cems-0350",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:02.922Z",
+      "cropHashes": {
+        "pre": "170922bb034a0fb1b0cfae0634e68b8066657d10c0b83e765cb9ba82d6900121",
+        "post": "05ee743fff7bdb5d89729c5797f0a1be298e024dfc878c32a727ded0e5028045"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0351",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:02.951Z",
+      "cropHashes": {
+        "pre": "efe078ca288a7aa924fe619f22cef9f2a523ee060407738590eec365600a539b",
+        "post": "bba7be8e44d09bea8013d832dfbf58da0771829a65634910c5ffe66226d4702a"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0352",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:04.023Z",
+      "cropHashes": {
+        "pre": "aa33a7ff93c0683e39ca4a82ed4f09e256148e842efd57494e86a918d1b81cf8",
+        "post": "31e07ed30e69dce6f52a44934699d0556da4cf99f45454dcd8d8e417d4505780"
+      },
+      "model_label": "intact",
+      "confidence": 0.63
+    },
+    {
+      "buildingId": "cems-0353",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:04.239Z",
+      "cropHashes": {
+        "pre": "e10e5054a15f50fb57d7d23d8484c07953f5a389bd36d7d459df1091c61b5e26",
+        "post": "dd3b3ca0d805b4012ad284d6739256d17912770d8da10e24e1782f0701c8560c"
+      },
+      "model_label": "intact",
+      "confidence": 0.73
+    },
+    {
+      "buildingId": "cems-0354",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:05.204Z",
+      "cropHashes": {
+        "pre": "50b562e1039677cd9029c8e43c76f719fa8e6f827a58232a2ab6fae924b0120d",
+        "post": "58b6fb50c64eabdc482e1a6b5b67b733fd84880303f325bad4c447873b988f3f"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0355",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:05.405Z",
+      "cropHashes": {
+        "pre": "9620eb5f65a6ccf59a03b17502b6e2b642c19b3699a5ed01f99aed8d03bfb847",
+        "post": "e87be0625eb0c3aab21d3beddc0ebd2c1325024d77e20209ff0e50d57c41f587"
+      },
+      "model_label": "intact",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "cems-0356",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:06.159Z",
+      "cropHashes": {
+        "pre": "d198638b4dbc3c9f9e12ddc9b0a5ffafeb6cfe458b7cc9b7caa7aeb9a41a35ca",
+        "post": "c65bf7aa39d57d94c5a9aa362d08878c3856fe70db4e701ce1bf2e01eb0d8396"
+      },
+      "model_label": "intact",
+      "confidence": 0.76
+    },
+    {
+      "buildingId": "cems-0357",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:05.853Z",
+      "cropHashes": {
+        "pre": "3c4d120820ef5a24cd3d1066885428b91c8ab06b6db9224c456062ab19fcdfd2",
+        "post": "648bb34024a6d1cc3ad3815f2e59c1d5df03538960de83e2a926ee86a39c9807"
+      },
+      "model_label": "intact",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0358",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:08.319Z",
+      "cropHashes": {
+        "pre": "330dc20652bc8d9c3aef0a29e4656d509edac56f78caeb243b9282b0bb1d2163",
+        "post": "2e17b0052efbfc0146f2e5cc8b02ae71584ed7a05bf41061202ae754b6d1d1b4"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.93
+    },
+    {
+      "buildingId": "cems-0361",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:07.413Z",
+      "cropHashes": {
+        "pre": "9683eac97e61d47e1c82d1eeedb48ba8bbbcdf3110974ec412583314c3892ac0",
+        "post": "fb7529f7f0822e448b5b3f1ec47b50905f1290a5d0f062ce95858f727c7ef5b8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0366",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:07.940Z",
+      "cropHashes": {
+        "pre": "dceb15bfe0963126f021e1ced25ad5042b5f916f8246507f0ce8ceba54a39fee",
+        "post": "5936525933134a64b74bdbfe05ed4afbc7eb86d19b50ac17ba3b2730ace166c6"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.95
+    },
+    {
+      "buildingId": "cems-0367",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:07.938Z",
+      "cropHashes": {
+        "pre": "3b4d33cdaea086406576f5638f42a648038b8c4f7400454eab11f19406fce157",
+        "post": "cd4f7811e4f0b22115e9d5b8a9352d3ba23b2a87eeae61429b77b45e4491502b"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0368",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:09.536Z",
+      "cropHashes": {
+        "pre": "b8167762abe07959176761a2a82c97ada89f6737a828e00082522040e6e9b3fc",
+        "post": "b8babda9223d82765d36753b6deb759bf819e82e983c3425db7fd90d317dc3ab"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0369",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:10.032Z",
+      "cropHashes": {
+        "pre": "6fcab645831fecb77a77435321728af3685d801f7192af55c32c08fbc2b7891b",
+        "post": "5a70ffb4e89a36ea8e73c321006c88d91be469007456b701cb998568ae01cffa"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.85
+    },
+    {
+      "buildingId": "cems-0370",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:09.917Z",
+      "cropHashes": {
+        "pre": "47ad783ebefed959ef3069d89d8e8e327558f3cc27d1e3d139335386ce189be8",
+        "post": "efac086f9ff7e8d390cb4ba8f9786b17e4ddc5af30126b1a547e8e0f62cb6550"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.77
+    },
+    {
+      "buildingId": "cems-0371",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:10.499Z",
+      "cropHashes": {
+        "pre": "b7494e874010856f85bfde1723b13c33235b7d30ac93dfe4bf703975ee50f418",
+        "post": "bc041284c4b16a63097ee68fd1243bcc677f084590594bd30885d4e93773256f"
+      },
+      "model_label": "intact",
+      "confidence": 0.7
+    },
+    {
+      "buildingId": "cems-0372",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:11.103Z",
+      "cropHashes": {
+        "pre": "82ef1acd1d2630246793ead660997e1f0624b8921f8d5800790c507938fec391",
+        "post": "e6711593337293ba61cae23bb63ac227e2ab92696bc0f9807e006a568af1bfe0"
+      },
+      "model_label": "intact",
+      "confidence": 0.87
+    },
+    {
+      "buildingId": "cems-0373",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:11.926Z",
+      "cropHashes": {
+        "pre": "19697672f521d8acfbf19827945c1a1b60117a482d59da7154cc119ee54eb23c",
+        "post": "2f94e09de345b248540a0641bac1f99ad09919e31b117aaf5552418f1482de99"
+      },
+      "model_label": "intact",
+      "confidence": 0.75
+    },
+    {
+      "buildingId": "cems-0374",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:12.060Z",
+      "cropHashes": {
+        "pre": "e880ddad2084ec0128a6756c0e4eb7da27db82031c3f491ba479864dec6b731c",
+        "post": "72490f5b3360aea0edca685ebbb433c572ca0cd6b15c012b64bdb04d07127ac5"
+      },
+      "model_label": "intact",
+      "confidence": 0.69
+    },
+    {
+      "buildingId": "cems-0375",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:12.666Z",
+      "cropHashes": {
+        "pre": "bd90700d1c09f981b829a8027c1ad7b312b376a1c89a50c251f18404d0d1524c",
+        "post": "196208eb0a25876020bb3fc35e5c5964789a532815e46008a4868527bbb9de1d"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.89
+    },
+    {
+      "buildingId": "cems-0376",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:13.443Z",
+      "cropHashes": {
+        "pre": "c030ed885b38ebdee1c4528970962cb4c47e862286cda1a9f4d64dee05eaf013",
+        "post": "159b3c3e9a4708c28023b9ed212e8a260bb38c1956021c92b6aedc6c632b03cb"
+      },
+      "model_label": "intact",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0378",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:13.665Z",
+      "cropHashes": {
+        "pre": "ac121e435d01930da199f029b05655e1eb212f4a621b67b603a73da11b749d06",
+        "post": "c34875747a1beb729a4958aeac00a97aa9b7ba1ec2a6a696ced7264fde0f12bc"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "cems-0379",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:14.286Z",
+      "cropHashes": {
+        "pre": "2fdcba55d5f1c93ffd982ceee21c1b463679bfb44d7e4450b5e3bcfb1b87e9e9",
+        "post": "6cca0071041b09e9e505e0d3d57be5dfc1ab9e924e80dedbf13b066600645809"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0381",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:15.071Z",
+      "cropHashes": {
+        "pre": "c38194e33015821ce836427764cfd408b9001c0ec3f23530fda781ed439051c3",
+        "post": "aa396af220a9977190bdf4dbbfc941a68353c08127eea77d143b47efafe52abb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0382",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:15.328Z",
+      "cropHashes": {
+        "pre": "c181d858f8793add0f9915dbb12cf49051bb65f6fa1b48c75721312a9a7b990a",
+        "post": "b4bfafc93885e76c40cca684309beadcf4a3444e9c5a3c9e5dba6b5970912270"
+      },
+      "model_label": "intact",
+      "confidence": 0.64
+    },
+    {
+      "buildingId": "cems-0383",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:15.389Z",
+      "cropHashes": {
+        "pre": "41169e5eb631403bc62dd984850fbafbc39eec2637c0f4732fa5e89b9e7a6895",
+        "post": "db5ef9ec61072b4c67b992997a4e2ba99c000f542eab4fbeb25a016d6b188271"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0385",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:16.203Z",
+      "cropHashes": {
+        "pre": "6fabe37dd8016800667d765895457dd781ea411ec7be4530aa6b5f585abb2bbd",
+        "post": "748785e2688ae9ec5d251a7e12d4e13eb3782f81342faebb8e07f55f803a80fb"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.84
+    },
+    {
+      "buildingId": "cems-0386",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:16.688Z",
+      "cropHashes": {
+        "pre": "891dff5d735adc3a24feb5132c6c9802b7a67993651c2ee3bd14920fa92ea351",
+        "post": "7259cf77e633b7259a9fed4f43b1efc81ccb8b4e708b481996090b221a1224ec"
+      },
+      "model_label": "intact",
+      "confidence": 0.76
+    },
+    {
+      "buildingId": "cems-0387",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:17.423Z",
+      "cropHashes": {
+        "pre": "c5f600c52bc9896740d2952358bc2f5121fdbe4ffa4e12476af54f2104990d58",
+        "post": "e5a6e74d4a337cfae0cc5c4d320233b45b6abc84a3dd452a019f51b1103f947a"
+      },
+      "model_label": "intact",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "cems-0388",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:17.422Z",
+      "cropHashes": {
+        "pre": "df0af32836871ae7518d7febc1ced29a2e70523780d03b8fa6fb35a5fe65a90f",
+        "post": "547e1f485eb7bd26baeb86df7d47506a6f8a9e59fca30f05b9d8f225a74e34da"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0389",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:18.056Z",
+      "cropHashes": {
+        "pre": "c6e7fb1aeb8487ad5522315301819004a0044803f83e404dada141a2116fdc8a",
+        "post": "f8e95fdd036e24cf2fa9b1690d54e2c76b8b4a37973f3e5e99872d35b9dfd3f6"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.86
+    },
+    {
+      "buildingId": "cems-0390",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:18.761Z",
+      "cropHashes": {
+        "pre": "b9e7261da25bf771631d89ea7eb829146ee7d7124baac9a74c1eec647d418639",
+        "post": "d3c8cde09d4c35101345f264134d73a38dbc5839d3a9258eda068071c405b7a6"
+      },
+      "model_label": "intact",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0391",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:22.395Z",
+      "cropHashes": {
+        "pre": "66d91226a18a91f0660fee0889dc6f5a62ab8faebcf128c38dc10412e0d5b78c",
+        "post": "4b9853f272807c43cc7ac746a365c2f19ad73cd2445e259e2d14384da514d8e8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0392",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:19.635Z",
+      "cropHashes": {
+        "pre": "cf81621dca44be7d5596455a98b64558fec0a196e213aeb8499490f703042d3e",
+        "post": "0fcbdce4f25353e3c71ebb75af2b1f5d19d921f1fbf04e3627515c3573a3f6c9"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0393",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:20.416Z",
+      "cropHashes": {
+        "pre": "34e28d3725b0ef684d01fa2b5bf13202fe7f15533e179f1006ddcc869480598c",
+        "post": "52b934331b158ffd146a57b8eaf8f7fbc2988acfcb09e15bf63f8348cdd15e0c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "cems-0402",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:20.988Z",
+      "cropHashes": {
+        "pre": "f9c49ad77882cf4a1240bebd4e7c82ea519ec5cd23a3f0bb6abada4dce50f309",
+        "post": "19e712a75eae8ff89c3e36b3dbc68f2ac6deee55be241813dd6db6d99403cec5"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.94
+    },
+    {
+      "buildingId": "cems-0408",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:21.395Z",
+      "cropHashes": {
+        "pre": "76b6a6982a83e23517d2a0eea7ec2988f98d0972791d647350d55b9073e352c2",
+        "post": "8625ba416162e8567b5c8399105b770d0d4cdb170123fe094a0c3ca1a59a5e6b"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "cems-0409",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:22.312Z",
+      "cropHashes": {
+        "pre": "94de80080872bace6441b71a64b1625eed75c1100ceaef2d3ef73aac0a3f2509",
+        "post": "96815586b60e6d10fb230999981737d5fb364186fdd677e15232c3cb1c2a24c4"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "cems-0410",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:22.740Z",
+      "cropHashes": {
+        "pre": "9039a5b18b359181d071810431aa1c6831f05218f3335c0c960cb9003ee92bf4",
+        "post": "63fbfd1af880234fc144ba2f051043217cb82ba3c7ebcca9a3abe2fcb41b06ff"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.89
+    },
+    {
+      "buildingId": "cems-0415",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:23.416Z",
+      "cropHashes": {
+        "pre": "908bf367ffcccdef54ecc7ea23e8437a6929f547163614a726f7b3c1cd689d17",
+        "post": "c0a134498409816ac6bab4372a231138e26d44311bfb1400acccbd3050071445"
+      },
+      "model_label": "intact",
+      "confidence": 0.57
+    },
+    {
+      "buildingId": "cems-0416",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:23.855Z",
+      "cropHashes": {
+        "pre": "1defd5c795f03d60b2a347e111f82adce06fca8ff664777766b4ff6d43926f24",
+        "post": "e064166f2f20cb059fcf11c95238b903ab756b95776562995c92278195f71658"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.69
+    },
+    {
+      "buildingId": "cems-0418",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:24.326Z",
+      "cropHashes": {
+        "pre": "1bcde778ef181013d20528f3f16f903d0cb72fcddcdfccda2ef0ce46903f7ba0",
+        "post": "94016e73f9ad4460611a7691ba6ced9c018e91b885e4c82650c8f6754c55b37d"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.99
+    },
+    {
+      "buildingId": "cems-0419",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:27.200Z",
+      "cropHashes": {
+        "pre": "1f4f59c45cb0c95e832710759a8aa4efb7a652bb432dc03260a46b8f551ed329",
+        "post": "897ba457b16e88cfc7d89bdc756facea3fe43ab4ace7b44443ec429289ed8eec"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.98
+    },
+    {
+      "buildingId": "osm-w1132149393",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:25.217Z",
+      "cropHashes": {
+        "pre": "5ab0d4e9140e50d06d8604777a9bcb4a4cd42337635946da92212a6f7fff24e8",
+        "post": "ad96f1aefb420932aa9463b638f8c08a5bee89764696a1d0c21f7d4962d9e477"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "osm-w1132149395",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:25.865Z",
+      "cropHashes": {
+        "pre": "b1be587ddd5c3bd4e07946caf8326e857eec2ea93ae1151b5a74e63450ca16a7",
+        "post": "d067cc7474fb4d31660d669fdd2e7ecf014e68e83bfc9386167b8af4172d0292"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.76
+    },
+    {
+      "buildingId": "osm-w1552968617",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:26.114Z",
+      "cropHashes": {
+        "pre": "04be948a18af3565b0f764797d00ad37f30707f7ec4378742846fa99ca488223",
+        "post": "f97a13b6927c823218a26aa94e917346b14489a051da1269a94f03e46b452aff"
+      },
+      "model_label": "intact",
+      "confidence": 0.84
+    },
+    {
+      "buildingId": "osm-w1552972093",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:27.175Z",
+      "cropHashes": {
+        "pre": "4b4ef878beeef29fe2d18ca1541a896c21746addb1414393fe7807203835aa30",
+        "post": "304e16ae1aacad2d23fd0f79d67e249b4a756f91dbe2e9c5d62b65ad43a4c18e"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "osm-w1552972098",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:27.488Z",
+      "cropHashes": {
+        "pre": "98ab7accafb3a8673a9b9bffe08c2191c32f1f76b71de65f6306ac02672de3be",
+        "post": "17d7e6fae0f28cf921d89281df46a657a00cd6aca2718acc9778a557760a296c"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.78
+    },
+    {
+      "buildingId": "osm-w1553017131",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:28.089Z",
+      "cropHashes": {
+        "pre": "9a0de6ba366b25a3aad5565e5493309e233451e09b5c4c854f4c0a03485a1d0d",
+        "post": "9b563a13c2b8b7b82b93a1f533d4a5644b50faa3535230ecc57bd3e0f2091fbe"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.82
+    },
+    {
+      "buildingId": "osm-w1553639562",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:29.085Z",
+      "cropHashes": {
+        "pre": "bd6ff1dba395d678485e6364cdb8fa3ed06b194adcb66f84ff26fa6f1f107f1a",
+        "post": "9216a1032526f95f50ca15ed38798be5510787700f442ea837ed2c7114cf7674"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.82
+    },
+    {
+      "buildingId": "osm-w1554247674",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:28.799Z",
+      "cropHashes": {
+        "pre": "ee3170aad10301ad155b185bd62c4af9d2abd175168e9435c1ac920492653efc",
+        "post": "acdb38a449d3e434d0755ecd524d2134a642549fef6bfb3b2559e713386fbca9"
+      },
+      "model_label": "intact",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "osm-w1554274560",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:29.380Z",
+      "cropHashes": {
+        "pre": "8c7d2dcf08461a579931451c5ad81d6b6dc3943b9ca0edb8663b6abf1a86ee73",
+        "post": "1b3204aeacc8d62f4363abc7a034acd2101010994fe758dcc2cbc82a7e711dfc"
+      },
+      "model_label": "intact",
+      "confidence": 0.66
+    },
+    {
+      "buildingId": "osm-w1554274561",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:29.592Z",
+      "cropHashes": {
+        "pre": "66e7c25097ed1db0508babb2934bb119269c4b82ca3d99807d318a7ed3e023c3",
+        "post": "950c85b7be4b5ed76144417399c4af9153ed0191b3ed20e44c1c3977da62a5bb"
+      },
+      "model_label": "intact",
+      "confidence": 0.61
+    },
+    {
+      "buildingId": "osm-w1554274567",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:30.922Z",
+      "cropHashes": {
+        "pre": "f5953265812bec5fff06f5fc72510ca77f44f74b56e7a71cea114124379a8a47",
+        "post": "730701cc127fddd62ab4f5dc99d87e30242368bade80e6b0a1c508bd3587a1ac"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "osm-w1554274572",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:30.680Z",
+      "cropHashes": {
+        "pre": "08091b3990b3b305473591f1a2728fcd2e3e7fe61a07d8c0ea3824debfbcaa13",
+        "post": "5d1ac76a3483d284849e32c70d8fbe728d05650ed59c5e15cbf793affcfdfd34"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "osm-w1554274573",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:31.291Z",
+      "cropHashes": {
+        "pre": "7afe3e1579e000d826874b2600ddd81046bcd02bcc4ba6c90f017361f3deca8f",
+        "post": "3d5b4ecd1443aaafcd1578211be62a9563ef1b7707406c6353e1c28b7970deb8"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.91
+    },
+    {
+      "buildingId": "osm-w1554274579",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:32.417Z",
+      "cropHashes": {
+        "pre": "648257fe324fa2b4f4cc9f478f34e54a186de09f6024c49ea745f3e42561d6eb",
+        "post": "28f62d16280841c06f11f6d53f3e501ed70ba8cad377a3242426de6920923777"
+      },
+      "model_label": "intact",
+      "confidence": 0.63
+    },
+    {
+      "buildingId": "osm-w850782558",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:32.301Z",
+      "cropHashes": {
+        "pre": "097b7d62572741765e5d746e4aae5e206563cf22717cc5cbb6b949494a21fe7a",
+        "post": "44337ab30e633ff9ad3c9d2372ad6b01e24a96e7a828cccd38c72831f570ede9"
+      },
+      "model_label": "intact",
+      "confidence": 0.75
+    },
+    {
+      "buildingId": "osm-w850782559",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:36.494Z",
+      "cropHashes": {
+        "pre": "65a152ef8556a537f5a7cb3f60bc5aab1cd3fa7d1d1b0f78e19e8cd7f8b76a23",
+        "post": "ada1e97c6e4096c69d22fc4d5bd68fc144189759e7765df8c47dd7d7cae88a09"
+      },
+      "model_label": "intact",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "osm-w850782560",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:35.575Z",
+      "cropHashes": {
+        "pre": "0c4d10f021a27c1338ba23c0e3f17807ec59b5728fc72fe83ac171ee31b44923",
+        "post": "77d21d11d6485c1897d0b04cf2ffb4f301cb8c1fa4803718948536c111ca23b6"
+      },
+      "model_label": "intact",
+      "confidence": 0.84
+    },
+    {
+      "buildingId": "osm-w850782562",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:33.922Z",
+      "cropHashes": {
+        "pre": "e68301bb330df637ba65def7f67b0d4c270fcf2201291911b1042aea2c05f7e0",
+        "post": "a95e2dc5905481a7a8a19c69ff7be407cdd535387408e0f02fde435882a4b7c0"
+      },
+      "model_label": "intact",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "osm-w850782564",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:34.521Z",
+      "cropHashes": {
+        "pre": "5b8fd1a2bbfb266f6c48b8d8f0eea4e7309d9ffcb0bffa304ed02f26a9881a31",
+        "post": "133edfcf6941074ed9315059ac2ec4372dccb84bb75d776747a869c008cba3d8"
+      },
+      "model_label": "intact",
+      "confidence": 0.68
+    },
+    {
+      "buildingId": "osm-w851001710",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:36.244Z",
+      "cropHashes": {
+        "pre": "9ea5551fa7284a495e5f9ba8d477505ccae3921370255587fa2379760235fec4",
+        "post": "8b244cf1bd275b0da05c99457b7c301eeef826f02ea86dd9cda6deadeb921d84"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.87
+    },
+    {
+      "buildingId": "osm-w851001711",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:36.588Z",
+      "cropHashes": {
+        "pre": "ac474981f9e8414a355ef84ef47e05891d9b85f1f15f97f1b3310fc4f656bde8",
+        "post": "3e88fb21c2480e0b7379892f93f442adcf2f0c95f42794dc6addc28ab5b635d7"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.93
+    },
+    {
+      "buildingId": "osm-w851001712",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:37.794Z",
+      "cropHashes": {
+        "pre": "01850752a50ba5358ab36c02f60eb62083e2b62cca04e1223c5efa78a1b0d2b1",
+        "post": "215df45a7db0edc8104825d7adbf408966c2024315eb10618179b75213b1e130"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.72
+    },
+    {
+      "buildingId": "osm-w851001721",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:38.673Z",
+      "cropHashes": {
+        "pre": "643daef853b6ecabcb907d1f1bb46b87fdd60bc11043eef29f774acd0747d316",
+        "post": "0bec0aab0e5891aade6d3669620f0e14815b9db3e923b88000a177e405821fdd"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.95
+    },
+    {
+      "buildingId": "osm-w854113167",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:38.281Z",
+      "cropHashes": {
+        "pre": "f2d47cc8598d38f97904229a0052cd88b4a6bcc0eb21d04cdb2ddbc37c2beece",
+        "post": "9a61e1c29787efa9ec9dc4ec85fe4fb92f4a3e39e541232d15dc52a2128feab4"
+      },
+      "model_label": "intact",
+      "confidence": 0.64
+    },
+    {
+      "buildingId": "osm-w854113173",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:38.455Z",
+      "cropHashes": {
+        "pre": "0fc624b21293528b7cce0704c43627401ad3feef1f9b500e150d9f8fb5a7649c",
+        "post": "bf1a50d03f6815c57b02997a258f39cb44d819fbc4b02c3e6c851689dd7e47e8"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "osm-w854113195",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:40.051Z",
+      "cropHashes": {
+        "pre": "3c803edbbd8afd47b567187823612936b2397dbe71f8a5daf869bc2b81dcafcc",
+        "post": "1f140329df629a1bc756323901304c4ab95e8d0302122df47e93a55bcafadbb7"
+      },
+      "model_label": "intact",
+      "confidence": 0.65
+    },
+    {
+      "buildingId": "osm-w854113196",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:40.607Z",
+      "cropHashes": {
+        "pre": "7204716da28a89d1b127af95aa11e64b4c33cc347c643680c8fa31f61a1270d9",
+        "post": "c8c20f9dbc03fbac93298cd8c51febda6a65a1fdcee72521dbe0f0761e646105"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "osm-w854115570",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:40.571Z",
+      "cropHashes": {
+        "pre": "36198cf875991082391b74740f9d7e9778ceac8e83436b909749cedd44bd4542",
+        "post": "6ed6b990cf57ca476f4ec1922775102f337f339326acfc2000b0b0f29cb79120"
+      },
+      "model_label": "intact",
+      "confidence": 0.61
+    },
+    {
+      "buildingId": "osm-w854115581",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:41.236Z",
+      "cropHashes": {
+        "pre": "79c3b189fa30b86b32e35c12db84423325d751103dd65f742e84db6fb5a763d4",
+        "post": "26019337062a226d9a992970c6a109df1642d2dce9101ab652a2140c021370ff"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.83
+    },
+    {
+      "buildingId": "osm-w854116032",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:42.390Z",
+      "cropHashes": {
+        "pre": "fb8e35021ba7c41f95d764e487c20115a0607d8772a59cf24cf545fdefa0065e",
+        "post": "b88edd9b17e790f5719a218de23a367a83ebfc0b0f7f77307bc74ad6fe6af952"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.76
+    },
+    {
+      "buildingId": "osm-w854116033",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:42.155Z",
+      "cropHashes": {
+        "pre": "4e14feb04c473b589ccba1d63ad1ec48dc0e4ee0ec27c61e5bcc07f45e7338fb",
+        "post": "3cfd759937bac8616e65fd69ff9519a6418a11f2a580b42304492c98d007b40f"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.58
+    },
+    {
+      "buildingId": "osm-w854385655",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:42.391Z",
+      "cropHashes": {
+        "pre": "26589e14157fc6e544602e87616b74e2f987e38f04193be2b957660eee1c7b6e",
+        "post": "41c3f4a50944ef80982ce285938b9d5cf33980faf705b342b555054401c39ab6"
+      },
+      "model_label": "intact",
+      "confidence": 0.77
+    },
+    {
+      "buildingId": "osm-w854385659",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:43.567Z",
+      "cropHashes": {
+        "pre": "d343c973be4fb5b3938ee222a778c23c5ab9f0e7270500eb49429ceb99b432bc",
+        "post": "1d11723d1dd227765c02e80bddd86f406fe56bea19ae94e84c0a09458a1072dc"
+      },
+      "model_label": "intact",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "osm-w854385660",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:44.303Z",
+      "cropHashes": {
+        "pre": "9f0d046f5283b7cdc9899c942e7f34b6c2b56fe34999fee9e721504cc41846ac",
+        "post": "7090a23d63e30cb753c689bfe39eeaa6bc8529be8dd61021379f77f2fe315c0e"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.67
+    },
+    {
+      "buildingId": "osm-w854385662",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:44.386Z",
+      "cropHashes": {
+        "pre": "244f1f60dbdb816fa4ff7126208195565ed545804a6c408f34a1b025e72f3540",
+        "post": "eeeb26180ec628effe012c66377a60874702f5aa0d27e063408ae51794955de1"
+      },
+      "model_label": "intact",
+      "confidence": 0.58
+    },
+    {
+      "buildingId": "osm-w854385669",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:44.427Z",
+      "cropHashes": {
+        "pre": "b98ebbf3befbac883058092855ca126daab6675914ce80b722a0d1478dff2ec5",
+        "post": "1a3370c36c14818d96a039bfe357bafa6c61b1660613fb48a22d74bb3f9f8640"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.64
+    },
+    {
+      "buildingId": "osm-w854385675",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:45.154Z",
+      "cropHashes": {
+        "pre": "c8263ffed7118bdb01704f4ee27ec13c9bd2105ea86ab4b96b001751d67642a7",
+        "post": "fc72b8933f601a0f8e73c5e2329097e0bc6db32d4b439eb5b64c3201db180256"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.82
+    },
+    {
+      "buildingId": "osm-w854385676",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:46.111Z",
+      "cropHashes": {
+        "pre": "063961b98910f6b7e6a48f0dd6871decd55f54e3a4668c91a9ba715a7fddf2a8",
+        "post": "2eaa2b73e7b9f0dda21de030f26c960ecfeecdecfa834117f3dd0333396273ec"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.88
+    },
+    {
+      "buildingId": "osm-w854385677",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:46.085Z",
+      "cropHashes": {
+        "pre": "170daed9e509ad9c527eac1bbe1cb90472c3d849f93c27eb1803fcf53eeeff1b",
+        "post": "436416c14a4c2fe266f0028a0397cb66a811bd2492d0b277c13cd396f7cd9188"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.74
+    },
+    {
+      "buildingId": "osm-w854385679",
+      "model": "gpt-6-luna",
+      "createdAt": "2026-11-01T20:07:46.838Z",
+      "cropHashes": {
+        "pre": "7d5fd6720ee3340ee49be69f9e9c29713b31728adf5d6b9bcc7d60fba7440820",
+        "post": "770121807e0a35a1ee9b6faa82b59b40fbee357b8bc98d1fa8054abfd373c510"
+      },
+      "model_label": "destroyed",
+      "confidence": 0.68
+    }
+  ]
+}

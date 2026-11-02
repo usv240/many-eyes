@@ -4,14 +4,16 @@ import { pathToFileURL } from "node:url";
 import { registerMissionRoutes } from "./http/missions.js";
 import { registerStreamRoutes } from "./http/stream.js";
 import { createLive, type LiveMission } from "./live.js";
+import { registerApiRoutes, type ApiOptions } from "./api/routes.js";
 
-export function createApp(options: { live?: LiveMission; instanceId?: string } = {}) {
+export function createApp(options: { live?: LiveMission; instanceId?: string; api?: ApiOptions } = {}) {
   const app = Fastify({ logger: false });
   const instanceId = options.instanceId ?? randomUUID();
   app.addHook("onRequest", async (_request, reply) => { reply.header("x-many-eyes-instance", instanceId); });
   const live = options.live ?? createLive();
   void registerMissionRoutes(app, live.runner);
   registerStreamRoutes(app, live.runner);
+  registerApiRoutes(app, options.api);
   app.addHook("onReady", async () => { await live.start(); });
   app.addHook("preClose", async () => { await live.stop(); });
   return app;

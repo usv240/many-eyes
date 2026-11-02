@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Many Eyes · Developer API</title>
+  <meta name="description" content="Request an API key and send crowd votes to the Many Eyes consensus engine over HTTP. Try it live in the browser." />
+  <script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("many-eyes-theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="wordmark" href="./">Many Eyes</a>
+    <nav class="nav" data-nav aria-label="Main">
+      <a href="./#how">How it works</a>
+      <a href="./#try">Try it</a>
+      <a href="./#results">Results</a>
+      <a href="data.html">Your data</a>
+      <a href="api.html" aria-current="page">API</a>
+      <a href="https://github.com/usv240/many-eyes">GitHub</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">Dark mode</button>
+    <button class="menu" type="button" data-menu aria-expanded="false" aria-label="Open the menu">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap" style="display:grid;gap:24px">
+      <h1>Use the engine in your own tools.</h1>
+      <p class="lede measure">Any app that collects votes, from a Discord bot to a mapping event, can send them to Many Eyes and get back validated labels, refusals, accuracy on hidden checks and map-ready GeoJSON. Request a key, send one request, read the answer. You can do all three on this page.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:72px">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Try it live</h2>
+        <p class="measure muted">Pick where requests go. The sandbox runs the real engine inside this page, so it always works. If you run the server yourself with <code>npm run demo</code>, choose your server and the same requests go over HTTP.<span data-info="The sandbox and the server call the same decideBatch function from the repository, so their answers are identical. The sandbox key exists only in this browser tab." data-info-label="Sandbox and server"></span></p>
+      </div>
+      <div class="split">
+        <div style="display:grid;gap:20px">
+          <div>
+            <label for="target">Send requests to</label>
+            <select id="target" data-target>
+              <option value="sandbox">Sandbox in this browser</option>
+              <option value="server">My server</option>
+            </select>
+          </div>
+          <div data-server-row hidden>
+            <label for="server-url">Server address</label>
+            <input id="server-url" type="url" value="http://127.0.0.1:8791" data-server />
+          </div>
+          <div style="display:grid;gap:10px">
+            <h3>Get a key</h3>
+            <label for="key-name">Name for your key</label>
+            <input id="key-name" type="text" value="my-app" maxlength="60" data-key-name />
+            <div class="actions"><button class="button" type="button" data-issue>Request a key</button></div>
+            <p class="small" data-key-out aria-live="polite"></p>
+          </div>
+        </div>
+        <div style="display:grid;gap:12px">
+          <h3>Send votes</h3>
+          <label for="body">Request body for POST /v1/decide</label>
+          <textarea id="body" data-body spellcheck="false" style="min-height:260px"></textarea>
+          <div class="actions"><button class="button" type="button" data-send disabled>Send request</button><span class="status" data-status role="status">Request a key first.</span></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:12px;margin-top:40px" data-response hidden>
+        <h3>Response</h3>
+        <pre><code data-response-body></code></pre>
+        <h3 style="margin-top:12px">The same request with curl</h3>
+        <pre><code data-curl></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head"><h2>Reference</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method and path</th><th>What it does</th><th>Auth</th></tr></thead>
+          <tbody>
+            <tr><td><code>POST /v1/keys</code></td><td>Issues a key. Shown once, stored only as a SHA-256 hash. Five per hour per address.</td><td>None</td></tr>
+            <tr><td><code>POST /v1/decide</code></td><td>Decides a batch of up to 5,000 tiles and 200,000 votes. Sixty requests per minute per key.</td><td>Bearer key</td></tr>
+            <tr><td><code>GET /v1/health</code></td><td>Service status.</td><td>None</td></tr>
+            <tr><td><code>GET /v1/openapi.json</code></td><td>The full OpenAPI 3.1 description.</td><td>None</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="split" style="margin-top:56px">
+        <div style="display:grid;gap:14px">
+          <h3>Request</h3>
+          <ul class="ticks small">
+            <li><code>tiles</code>: a list of tiles, decided in order.</li>
+            <li><code>id</code>: any unique text up to 128 characters.</li>
+            <li><code>votes</code>: <code>{ "user": "...", "vote": "1" }</code>. A vote is 1, 2, 3, destroyed, intact or unsure. A later vote from the same user replaces the earlier one.</li>
+            <li><code>truth</code>, optional: the known answer. It makes the tile a hidden check that measures accuracy and adjusts weights for the tiles after it.<span data-info="Weights move only after a hidden check is decided: plus 0.1 for a matching vote, minus 0.2 for a wrong one, kept between 0.2 and 2.0." data-info-label="Hidden checks in the API"></span></li>
+            <li><code>lon</code> and <code>lat</code>, optional: include the tile in the GeoJSON.</li>
+          </ul>
+        </div>
+        <div style="display:grid;gap:14px">
+          <h3>Response</h3>
+          <ul class="ticks small">
+            <li><code>tiles</code>: status validated or refused, the label, agreement, voters, the reason for a refusal, the unweighted result for comparison, and the hidden check outcome.</li>
+            <li><code>summary</code>: counts, and accuracy on hidden checks with and without weighting.</li>
+            <li><code>weights</code>: each voter's final weight.</li>
+            <li><code>geojson</code>: a FeatureCollection of tiles that had coordinates.</li>
+            <li>Errors: 400 with a list of issues, 401 for a missing key, 429 with Retry-After when rate limited.</li>
+          </ul>
+          <div class="actions"><a class="button quiet" href="downloads/openapi.json" download>Download OpenAPI</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap split">
+      <div style="display:grid;gap:16px">
+        <h2>Run your own server</h2>
+        <p class="muted">The API ships with the stream server. Start it, request a key, and call it from anything that speaks HTTP. Keys are stored as hashes in <code>data/api-keys.json</code>.</p>
+      </div>
+      <pre><code>npm run demo
+curl -X POST http://127.0.0.1:8791/v1/keys \
+  -H "Content-Type: application/json" -d '{"name":"my-app"}'
+curl -X POST http://127.0.0.1:8791/v1/decide \
+  -H "Authorization: Bearer me_..." \
+  -H "Content-Type: application/json" \
+  -d @votes.json</code></pre>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="name">Many Eyes</p>
+    <div class="footer-grid">
+      <p>The API, the stream and the data page share one engine: weighted agreement of at least 66% from at least 3 voters validates a label; anything else is refused. Code under the MIT licence.</p>
+      <div><a href="./">Home</a><a href="./#try">Try it</a><a href="data.html">Your data</a></div>
+      <div><a href="https://github.com/usv240/many-eyes">Source code</a><a href="downloads/openapi.json" download>OpenAPI</a></div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="/src/api-page.ts"></script>
+</body>
+</html>

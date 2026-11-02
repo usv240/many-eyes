@@ -1,0 +1,182 @@
+[
+  {
+    "id": "cems-0052",
+    "truth": "destroyed",
+    "lat": 28.1614,
+    "lon": 85.3362,
+    "grade": "Destroyed",
+    "ai": {
+      "label": "destroyed",
+      "confidence": 0.96,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "Grey sediment covers the central roof area that was red and blue before.",
+      "box": [
+        38,
+        35.9,
+        25,
+        28.1
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is obscured by broad grey sediment, with no clear roof visible.",
+      "box": [
+        20.8,
+        20.8,
+        57.3,
+        57.3
+      ]
+    }
+  },
+  {
+    "id": "osm-w850782564",
+    "truth": "intact",
+    "lat": 28.1761,
+    "lon": 85.3475,
+    "grade": "Not affected (inferred)",
+    "ai": {
+      "label": "intact",
+      "confidence": 0.68,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "The central roof looks partly stripped, with exposed brown-grey patches replacing the pale roof panels.",
+      "box": [
+        31,
+        55.7,
+        18.2,
+        23.4
+      ]
+    },
+    "skeptic": {
+      "claim": "The main pale roof remains visible in the same spot beside the road, with similar overall shape.",
+      "box": [
+        31,
+        55.7,
+        18.2,
+        23.4
+      ]
+    }
+  },
+  {
+    "id": "cems-0121",
+    "truth": "destroyed",
+    "lat": 28.1631,
+    "lon": 85.3375,
+    "grade": "Destroyed",
+    "ai": {
+      "label": "destroyed",
+      "confidence": 0.99,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment covers the former roof and surrounding trees and roads are gone.",
+      "box": [
+        38,
+        38,
+        24,
+        24
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image is uniformly grey sediment, so no roof or shadow remains to confirm the building itself.",
+      "box": [
+        38,
+        38,
+        24,
+        24
+      ]
+    }
+  },
+  {
+    "id": "osm-w1554274567",
+    "truth": "intact",
+    "lat": 28.1626,
+    "lon": 85.3354,
+    "grade": "Not affected (inferred)",
+    "ai": {
+      "label": "destroyed",
+      "confidence": 0.74,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "The central roof is broken into pale, irregular patches, with grey sediment where a solid roof was visible before.",
+      "box": [
+        41.1,
+        28.1,
+        21.6,
+        18
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark rectangular roof remains beside the road, though it looks altered and the intact case is weak.",
+      "box": [
+        34.6,
+        37.2,
+        11.2,
+        18.8
+      ]
+    }
+  },
+  {
+    "id": "cems-0016",
+    "truth": "destroyed",
+    "lat": 28.1606,
+    "lon": 85.3367,
+    "grade": "Destroyed",
+    "ai": {
+      "label": "destroyed",
+      "confidence": 0.98,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "Hard to argue intact: the roof is gone, replaced by broad grey sediment and scattered debris.",
+      "box": [
+        38,
+        38,
+        24,
+        24
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image is uniformly muddy, so building edges are hard to separate from sediment.",
+      "box": [
+        38,
+        38,
+        24,
+        24
+      ]
+    }
+  },
+  {
+    "id": "osm-w854385662",
+    "truth": "intact",
+    "lat": 28.163,
+    "lon": 85.3356,
+    "grade": "Not affected (inferred)",
+    "ai": {
+      "label": "intact",
+      "confidence": 0.58,
+      "model": "gpt-6-luna"
+    },
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof looks patchy and dark, with pale debris or sediment around it.",
+      "box": [
+        37.8,
+        53.9,
+        29.9,
+        23.2
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has light roof panels and a defined footprint beside the road; dark areas may be shadow.",
+      "box": [
+        37.8,
+        54.2,
+        26,
+        19.8
+      ]
+    }
+  }
+]

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Many Eyes · Twitch chat checks the AI's disaster map</title>
+  <meta name="description" content="Many Eyes puts buildings from the August 2026 Nepal flood on stream. Two AI debaters argue, Twitch chat votes, hidden expert checks keep the crowd honest, and anything unclear goes to experts." />
+  <script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("many-eyes-theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}document.documentElement.classList.add("js")</script>
+  <link rel="preload" href="fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="wordmark" href="./">Many Eyes</a>
+    <nav class="nav" data-nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#try">Try it</a>
+      <a href="#results">Results</a>
+      <a href="#streamers">For streamers</a>
+      <a href="data.html">Your data</a>
+      <a href="api.html">API</a>
+      <a href="https://github.com/usv240/many-eyes">GitHub</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">Dark mode</button>
+    <button class="menu" type="button" data-menu aria-expanded="false" aria-label="Open the menu">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <h1>Twitch chat checks the AI's disaster map.</h1>
+      <div class="hero-copy">
+        <p class="lede measure">After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. Many Eyes puts each building on stream, before and after, and lets chat decide whether it survived. Hidden expert checks keep the crowd honest. Anything unclear goes to experts.</p>
+        <div class="actions">
+          <a class="button" href="#try">Judge six real buildings</a>
+          <a class="button quiet" href="#how">See how it works</a>
+        </div>
+        <p class="info-legend"><span class="info" aria-hidden="true">i</span>Hover over or tap any <b>i</b> to learn what something means.</p>
+      </div>
+      <figure style="margin:0">
+        <div class="stage" data-hero-stage style="--wipe:50%">
+          <img src="tiles/cems-0052-pre.jpg" alt="Satellite photo before the flood: houses with red and blue roofs" width="384" height="384" />
+          <img class="after" src="tiles/cems-0052-post.jpg" alt="Satellite photo after the flood: grey sediment where the houses stood" width="384" height="384" />
+          <div class="divider"></div><div class="ring"></div>
+          <span class="tag left">Before · 17 Sep 2023</span><span class="tag right">After · 27 Aug 2026</span>
+        </div>
+        <label class="skip" for="hero-wipe">Move the line between before and after</label>
+        <input id="hero-wipe" class="wipe-control" type="range" min="0" max="100" value="50" data-hero-wipe />
+        <figcaption class="caption">Syaphru Besi, Nepal. Drag the slider: houses before the flood of 26 August 2026, flood sediment after. The ring marks the building to judge.<span data-info="The white ring has a 12 metre radius. The before photo is from 2023 and the after photo from the day after the flood. They line up within about 2 metres on average." data-info-label="The ring"></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="why">
+    <div class="wrap split">
+      <h2>AI is fast. Trust is slow.</h2>
+      <div class="measure" style="display:grid;gap:20px">
+        <p>On 26 August 2026 a glacier collapse sent a flood down the Bhote Koshi valley in Nepal. Within 48 hours the Humanitarian OpenStreetMap Team's AI model had scored over 1,000 buildings for damage, and 8,421 by 12 September. Its output was published as not yet human validated.<span data-info="HOT (Humanitarian OpenStreetMap Team) runs fAIr, an open AI model that finds buildings in imagery. Volunteers then check its results on MapSwipe. Source: HOT, Mapping the Nepal Floods." data-info-label="HOT and fAIr"></span></p>
+        <p>Checking is the bottleneck. Trained volunteers on MapSwipe agree with experts 91 to 96% of the time on simple tasks, but damage is harder, and there are never enough of them in the first week.<span data-info="Herfort et al. 2019 measured MapSwipe crowds at 91 to 96% accuracy for finding settlements. Gross et al. 2023 tested building damage after the 2021 Haiti earthquake and reached an F1 score of 0.63: damage is a hard task even for volunteers." data-info-label="The research"></span></p>
+        <p>Twitch has millions of people who already watch together, type together and vote together. Many Eyes points some of that attention at the bottleneck, with rules that keep a crowd honest and a way to say "we are not sure".</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>How it works on stream</h2>
+        <p class="lede measure">The whole stream is one browser page in OBS. Tap each <b>i</b> on the screenshot to see what that part does.</p>
+      </div>
+      <div class="annotated">
+        <img src="img/overlay-live.jpg" alt="The Many Eyes overlay during a live tile: before and after photos with a ring on the left, AI arguments, vote keys and a live tally on the right" width="1600" height="900" loading="lazy" />
+        <span class="hotspot" style="left:12%;top:30%"><span data-info="One building, seen before and after the flood. The line sweeps between the two photos. The ring marks the building to judge, and the scale bar shows 20 metres." data-info-label="Before and after photos"></span></span>
+        <span class="hotspot" style="left:35.5%;top:33%"><span data-info="Each AI debater draws a box on the evidence it is talking about. A is the advocate, who argues destroyed. S is the skeptic, who argues intact." data-info-label="Evidence boxes"></span></span>
+        <span class="hotspot" style="left:85%;top:20.6%"><span data-info="Viewers type 1 for destroyed, 2 for intact or 3 for unsure. If someone changes their mind, their newer vote replaces the older one. Each chat message counts once." data-info-label="Voting in chat"></span></span>
+        <span class="hotspot" style="left:98.2%;top:36%"><span data-info="Two AI debaters argue every building, one for destroyed and one for intact. They help people look closely. They never vote, and the AI's own guess stays hidden until chat has decided." data-info-label="AI debaters"></span></span>
+        <span class="hotspot" style="left:82%;top:62%"><span data-info="The live share of weighted votes for the leading answer. A label is validated only when at least 66% agree and at least 3 people voted. Otherwise the building is refused and sent to experts." data-info-label="Live agreement"></span></span>
+        <span class="hotspot" style="left:69%;top:92.5%"><span data-info="About 40% of tiles are hidden checks: buildings that Copernicus experts already graded. They show chat's accuracy live. People who get them right count a little more on later tiles, and people who get them wrong count less." data-info-label="Hidden checks"></span></span>
+        <span class="hotspot" style="left:78.5%;top:6.7%"><span data-info="The badge says where votes come from. The demo crowd is simulated so the stream works with no viewers. In mixed mode, real Twitch chat votes join it through the same code." data-info-label="Simulated crowd badge"></span></span>
+      </div>
+      <ol class="steps">
+        <li><b>A tile opens for 15 seconds.</b> The stream shows one building from the Nepal flood, before and after.</li>
+        <li><b>Two AI debaters make their case.</b> One argues destroyed, one argues intact, and each points at the photo.</li>
+        <li><b>Chat votes 1, 2 or 3.</b> Votes arrive through Twitch EventSub in real time.<span data-info="EventSub is Twitch's live event feed. Many Eyes subscribes to every chat message in the channel, follows reconnects, and ignores duplicate deliveries." data-info-label="EventSub"></span></li>
+        <li><b>The engine validates or refuses.</b> At least 66% weighted agreement from at least 3 voters, or the tile goes to expert review.<span data-info="Refusing is a feature. A split chat, too few voters, or a coordinated raid produces a refusal, not a wrong label on a humanitarian map." data-info-label="Refused"></span></li>
+        <li><b>The bot posts the result in chat,</b> and an append-only ledger records every vote so anyone can recompute every number.<span data-info="Each ledger line carries the SHA-256 hash of the line before it, so editing any vote breaks the chain. npm run verify replays the ledger and checks every published number." data-info-label="The ledger"></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="try">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Judge six real buildings</h2>
+        <p class="lede measure">These are hidden checks from the Nepal mission. Copernicus experts graded each one. Drag the line, read the debate, then decide. You will see what the experts said and what the AI said on its own.</p>
+      </div>
+      <div class="trial" data-trial>
+        <div>
+          <div class="stage" data-stage style="--wipe:50%">
+            <img data-pre alt="" width="384" height="384" />
+            <img class="after" data-post alt="" width="384" height="384" />
+            <div class="box advocate" data-box="advocate" hidden><span>A</span></div>
+            <div class="box skeptic" data-box="skeptic" hidden><span>S</span></div>
+            <div class="divider"></div><div class="ring"></div>
+            <span class="tag left">Before</span><span class="tag right">After</span>
+          </div>
+          <label class="skip" for="trial-wipe">Move the line between before and after</label>
+          <input id="trial-wipe" class="wipe-control" type="range" min="0" max="100" value="50" data-wipe />
+          <p class="caption" data-caption></p>
+        </div>
+        <div class="trial-panel" aria-live="polite">
+          <p class="progress" data-progress></p>
+          <h3>Did the building in the ring survive?</h3>
+          <div class="argument"><b class="destroyed">Advocate · argues destroyed</b><p data-advocate></p></div>
+          <div class="argument"><b class="intact">Skeptic · argues intact</b><p data-skeptic></p></div>
+          <p class="small muted">AI arguments help you look. In Many Eyes they never count as votes.</p>
+          <div class="vote-row" role="group" aria-label="Your vote">
+            <button class="vote d" type="button" data-vote="destroyed"><span class="digit">1</span>destroyed</button>
+            <button class="vote i" type="button" data-vote="intact"><span class="digit">2</span>intact</button>
+            <button class="vote" type="button" data-vote="unsure"><span class="digit">3</span>unsure</button>
+          </div>
+          <p class="small muted">Keyboard: press 1, 2 or 3.</p>
+          <div class="reveal" data-reveal hidden></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="results">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>What we measured, and what we simulated</h2>
+        <p class="lede measure">The AI's score is a real measurement. The crowd scores come from a simulation, because judging needs numbers before a real audience exists. Every number below can be recomputed from the repository with <code>npm run verify</code>.</p>
+      </div>
+      <div class="figures">
+        <div class="figure"><span class="value">73.8%</span><p>AI alone, on 80 hidden checks<span data-info="gpt-6-luna looked at the same before and after photos for every building, measured on 1 November 2026. It got all 40 destroyed buildings right but called 21 of 40 standing buildings destroyed." data-info-label="AI alone"></span></p><p class="kind">Real measurement</p></div>
+        <div class="figure"><span class="value destroyed">52.5%</span><p>of standing buildings the AI called destroyed<span data-info="These false alarms are the reason people check the AI, and not the other way round. A false destroyed label can send help to the wrong street." data-info-label="AI false alarms"></span></p><p class="kind">Real measurement</p></div>
+        <div class="figure"><span class="value">75.9%</span><p>one viewer alone<span data-info="Simulated viewers use accuracy rates measured for MapSwipe volunteers (Herfort et al. 2019), with hard tiles that pull everyone toward a coin flip and misleading tiles that fool everyone." data-info-label="One viewer alone"></span></p><p class="kind">Simulation</p></div>
+        <div class="figure"><span class="value">89.2%</span><p>ten viewers including three trolls, weighted by hidden checks, on the 81.3% of tiles they validated<span data-info="Three of ten simulated viewers are trolls: one always votes the wrong answer and two join coordinated raids. Weighting by hidden checks lets honest viewers count for more. The other 18.7% of tiles were refused and sent to experts." data-info-label="Ten viewers with trolls"></span></p><p class="kind">Simulation</p></div>
+      </div>
+      <div class="bars" role="img" aria-label="Accuracy: AI alone 73.8%, one viewer 75.9%, ten viewers with trolls weighted 89.2%">
+        <div class="bar-row ai"><span>AI alone</span><div class="bar-track"><div class="bar-fill" style="--w:73.8%"></div></div><b>73.8%</b></div>
+        <div class="bar-row"><span>One viewer alone</span><div class="bar-track"><div class="bar-fill" style="--w:75.9%"></div></div><b>75.9%</b></div>
+        <div class="bar-row"><span>Ten viewers, three trolls, weighted</span><div class="bar-track"><div class="bar-fill" style="--w:89.2%"></div></div><b>89.2%</b></div>
+      </div>
+      <p class="small muted" style="margin-top:20px;max-width:70ch">One honest failure: on tiles that mislead everyone, such as shadows or debris that looks like a roof, the crowd is wrong too. Consensus cannot catch a mistake everybody makes, so those cases still need experts.</p>
+      <div class="actions" style="margin-top:28px">
+        <a class="button quiet" href="downloads/benchmark.md" download>Benchmark report</a>
+        <a class="button quiet" href="downloads/mission-report.md" download>Mission report</a>
+        <a class="button quiet" href="downloads/ai-alone.json" download>AI predictions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="streamers">
+    <div class="wrap split">
+      <div style="display:grid;gap:22px">
+        <h2>Run it on your channel</h2>
+        <p class="lede">Many Eyes is an OBS browser source and a chat bot. It needs no Twitch extension review, no affiliate status, and no audience to try it.</p>
+        <ul class="ticks">
+          <li><b>Three modes.</b> <code>demo</code> uses a simulated crowd and needs no keys. <code>demo:mixed</code> adds your real chat to it. <code>live</code> uses real chat only.<span data-info="Mixed mode is how the project is shown live on Twitch without an audience: a few real viewers vote alongside the simulated crowd, through exactly the same vote path." data-info-label="Modes"></span></li>
+          <li><b>Chat commands.</b> <code>1</code>, <code>2</code>, <code>3</code> to vote, and <code>!why</code> for a two-sentence explanation. First-time voters get one short welcome.</li>
+          <li><b>Careful words.</b> The stream says destroyed, intact, unsure, validated and refused. Nothing scores or celebrates destruction.</li>
+          <li><b>Light on data.</b> The ledger keeps Twitch user ids and votes for the mission, nothing else.</li>
+        </ul>
+      </div>
+      <div style="display:grid;gap:16px">
+        <pre><code>git clone https://github.com/usv240/many-eyes
+cd many-eyes
+npm ci
+cp .env.example .env
+npm run demo          # simulated crowd, no keys
+npm run demo:mixed    # plus your real Twitch chat
+npm run live          # real chat only</code></pre>
+        <p class="small muted">In OBS, add a Browser Source at <code>http://localhost:5180</code>, 1920 by 1080. Live modes need a Twitch user token; the README has the one command that creates it.</p>
+        <img src="img/overlay-result.jpg" alt="The overlay after a decision: validated destroyed, 89% agreement, with the hidden check result" width="1600" height="900" loading="lazy" style="border-radius:var(--radius);border:1px solid var(--border)" />
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="use">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Use the results, or the engine</h2>
+      </div>
+      <div class="split">
+        <div style="display:grid;gap:14px">
+          <h3>Map data for responders<span data-info="GeoJSON is the standard file format for map features. Validated buildings load straight into QGIS, JOSM or the HOT Tasking Manager. Refused buildings form a separate queue for expert review." data-info-label="GeoJSON"></span></h3>
+          <p class="muted">Every validated building exports as a GeoJSON point with its label, agreement and voter count. Refused buildings export as a separate queue for experts.</p>
+          <div class="actions"><a class="button quiet" href="downloads/nepal-flood-2026-validated.geojson" download>Validated buildings</a><a class="button quiet" href="downloads/nepal-flood-2026-refused.geojson" download>Expert queue</a></div>
+        </div>
+        <div style="display:grid;gap:28px">
+          <div style="display:grid;gap:10px">
+            <h3>Bring your own data</h3>
+            <p class="muted">Upload votes from your own crowd, classroom or mapping event, and get validated or refused labels back, in your browser.</p>
+            <p><a href="data.html">Open the data page</a></p>
+          </div>
+          <div style="display:grid;gap:10px">
+            <h3>Developer API</h3>
+            <p class="muted">Request a key and send votes over HTTP. Same engine, same rules, with an OpenAPI description.</p>
+            <p><a href="api.html">Read the API guide</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="built">
+    <div class="wrap">
+      <div class="block-head"><h2>How it was built</h2></div>
+      <div class="stack">
+        <div><h3>OpenAI Codex<span data-info="Codex wrote the core in one thread, phase by phase: Twitch EventSub and chat, missions and imagery, consensus and ledger, simulated crowd, overlay, AI debaters, exports and reports. AGENTS.md held the rules and two repository skills taught it Twitch EventSub and the report format. Session 01a18e68-04f2-73b0-b14f-b84aa906c1c5." data-info-label="OpenAI Codex"></span></h3><p class="muted">Built the core in one thread, guided by AGENTS.md rules and two repository skills. Each phase was run, screenshotted and reviewed, then Codex fixed each finding with a test.</p></div>
+        <div><h3>OpenAI API<span data-info="gpt-6-luna wrote the debaters' arguments and evidence boxes for all 190 buildings, cached so the stream never waits on it. The model sees only the photos, never the expert answer." data-info-label="OpenAI API"></span></h3><p class="muted">Writes both sides of every debate from the photos alone. Its own label is measured, and never used to decide.</p></div>
+        <div><h3>Twitch EventSub<span data-info="WebSocket transport with a user token: subscribes to channel.chat.message within 10 seconds of the welcome message, handles keepalives, reconnects to the URL Twitch gives, and dedupes on message id." data-info-label="Twitch EventSub"></span></h3><p class="muted">Reads every chat message in real time over a WebSocket, follows reconnects, and ignores duplicates.</p></div>
+        <div><h3>Twitch Chat API<span data-info="POST /helix/chat/messages, at most one message per second, one result per tile." data-info-label="Twitch Chat API"></span></h3><p class="muted">Posts one result per tile, answers !why, and welcomes first-time voters, within Twitch's rate limits.</p></div>
+        <div><h3>Twitch CLI and OBS<span data-info="The Twitch CLI creates the user token with four scopes: user:read:chat, user:write:chat, user:bot and channel:bot. OBS shows the overlay as a 1920 by 1080 browser source." data-info-label="Twitch CLI and OBS"></span></h3><p class="muted">The CLI creates the bot's token in one command. OBS shows the overlay as a browser source, so no extension review is needed.</p></div>
+        <div><h3>Claude Code<span data-info="Claude Code wrote the phase prompts, reviewed every phase by running it, found the image crop and benchmark problems, and built the mixed live mode, the API, the bring-your-own-data page and this website." data-info-label="Claude Code"></span></h3><p class="muted">Planned and reviewed each phase, and built the later parts: mixed live mode, the API, and this site.</p></div>
+        <div><h3>Open data<span data-info="Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: Copernicus Emergency Management Service, activation EMSR927. Buildings: OpenStreetMap contributors, ODbL." data-info-label="Open data"></span></h3><p class="muted">Satellite photos from OpenAerialMap, expert damage grading from Copernicus EMS, and buildings from OpenStreetMap.</p></div>
+        <div><h3>Engineering<span data-info="TypeScript on Node 22, Fastify with Server-Sent Events, Vite, sharp for imagery, zod for validation, Vitest for the tests, and a SHA-256 hash-chained ledger." data-info-label="Engineering"></span></h3><p class="muted">TypeScript, Fastify, Vite and a hash-chained ledger, with over 170 automated tests.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="limits">
+    <div class="wrap split">
+      <h2>What this does not prove yet</h2>
+      <ul class="ticks measure">
+        <li>The crowd numbers are simulated. Real streams will measure real viewers, and the hidden checks will report it live.</li>
+        <li>Standing buildings in the hidden checks are inferred: OpenStreetMap buildings more than 40 metres from any Copernicus damage point.</li>
+        <li>Tiles that mislead everyone stay wrong. Consensus cannot catch a shared mistake, so those still need experts.</li>
+        <li>The AI score is one model on one day. It will change as models change, which is why the repository can measure it again.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap split">
+      <h2>Questions, in plain words</h2>
+      <div>
+        <details><summary>Is this a game?</summary><p>It plays like one: a timer, a vote and a reveal. The results are real map data about real buildings, so the words stay careful and nothing rewards destruction.</p></details>
+        <details><summary>What is a hidden check?</summary><p>A building whose answer experts already know. Viewers cannot tell which tiles are checks. Checks measure the crowd's accuracy live and adjust how much each person's vote counts later.</p></details>
+        <details><summary>Why not just trust the AI?</summary><p>On the same photos, the AI called more than half of the standing buildings destroyed. People catch those false alarms, and the hidden checks show whether they did.</p></details>
+        <details><summary>What happens to a refused building?</summary><p>It goes into an expert review queue, exported as its own file. Refusing is safer than guessing on a humanitarian map.</p></details>
+        <details><summary>Can trolls ruin it?</summary><p>A raid can split a tile, which then gets refused. Trolls who keep missing hidden checks lose weight, down to 0.2 of a normal vote. The benchmark tests raids and always-wrong trolls.</p></details>
+        <details><summary>Do I need Twitch to try it?</summary><p>No. The section above, the data page and <code>npm run demo</code> all work without Twitch. Live voting needs a Twitch channel and one token.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sources">
+    <div class="wrap split">
+      <h2>Sources</h2>
+      <ul class="ticks small measure">
+        <li><a href="https://www.hotosm.org/en/news/mapping-the-nepal-floods/">HOT: Mapping the Nepal Floods</a>, AI scoring and MapSwipe validation after the August 2026 flood.</li>
+        <li><a href="https://mapping.emergency.copernicus.eu/activations/EMSR927">Copernicus EMS activation EMSR927</a>, expert damage grading used for the hidden checks.</li>
+        <li><a href="https://www.mdpi.com/2072-4292/11/15/1799">Herfort et al. 2019, Remote Sensing</a>, MapSwipe crowd accuracy used to calibrate the simulation.</li>
+        <li><a href="https://agile-giss.copernicus.org/articles/4/5/2023/">Gross et al. 2023, AGILE GIScience</a>, building damage mapping with MapSwipe after the 2021 Haiti earthquake.</li>
+        <li><a href="https://arxiv.org/abs/2402.06782">Khan et al. 2024, ICML</a>, debate helps non-experts judge more accurately, the idea behind the two debaters.</li>
+        <li><a href="https://dl.acm.org/doi/fullHtml/10.1145/3461778.3462097">Polyphonic, ACM DIS 2021</a>, Twitch viewers contributing data together on stream.</li>
+        <li><a href="https://openaerialmap.org">OpenAerialMap</a> and <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, imagery and building data.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="name">Many Eyes</p>
+    <div class="footer-grid">
+      <p>Built for the Codex x TwitchCon Hackathon, 2026. Code under the MIT licence. Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: European Union, Copernicus Emergency Management Service (EMSR927). Buildings: OpenStreetMap contributors, ODbL.</p>
+      <div><a href="#how">How it works</a><a href="#try">Try it</a><a href="#results">Results</a><a href="data.html">Your data</a><a href="api.html">API</a></div>
+      <div><a href="https://github.com/usv240/many-eyes">Source code</a><a href="downloads/benchmark.md" download>Benchmark</a><a href="downloads/openapi.json" download>OpenAPI</a></div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="/src/home.ts"></script>
+</body>
+</html>

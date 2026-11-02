@@ -15,3 +15,5 @@ dist/
 coverage/
 
 data/video-ledger.jsonl.head.tmp
+data/api-keys.json
+data/api-keys.json.tmp

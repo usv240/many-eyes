@@ -1,31 +1,120 @@
 # Many Eyes
 
-## What this is
-Many Eyes turns Twitch chat into a verified disaster-mapping crew.
-The overlay shows a building before and after a disaster.
-Two AI debaters discuss whether the building survived.
-Chat votes `1` for destroyed, `2` for intact, or `3` for unsure.
-A consensus engine validates supported labels and refuses uncertain ones.
-Hidden gold tiles measure chat accuracy in real time.
-Votes are recorded in an append-only, hash-chained ledger.
-Results can be exported as GeoJSON for humanitarian mappers.
-The OBS browser-source overlay is designed for 1920×1080.
-Imagery attribution is shown directly on the overlay.
+**Twitch chat checks the AI's disaster map.**
+
+Website: https://usv240.github.io/many-eyes/ · Code: https://github.com/usv240/many-eyes · Built for the Codex x TwitchCon Hackathon 2026
+
+## In 60 seconds
+
+After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. After the Nepal flood of 26 August 2026, the Humanitarian OpenStreetMap Team's AI scored over 1,000 buildings in 48 hours, published as "not yet human validated". Checking is the bottleneck.
+
+Many Eyes puts each building on a Twitch stream, before and after the flood:
+
+1. A tile opens for 15 seconds with real satellite photos of one building in Syaphru Besi, Nepal.
+2. Two AI debaters argue, one for destroyed and one for intact, each pointing at the photo. They never vote.
+3. Chat types `1` destroyed, `2` intact or `3` unsure. Votes arrive through Twitch EventSub.
+4. A label is **validated** only with at least 66% weighted agreement from at least 3 voters. Otherwise the building is **refused** and sent to experts.
+5. About 40% of tiles are **hidden checks** with known expert answers from Copernicus EMS. They show chat's accuracy live, and voters who get them right count for more.
+6. The bot posts each result in chat. Validated buildings export as GeoJSON for humanitarian mappers, and every vote sits in a hash-chained ledger that `npm run verify` re-checks.
+
+## The numbers
+
+| Measurement | Result | Kind |
+|---|---|---|
+| AI alone (gpt-6-luna, 80 hidden checks) | 73.8% (destroyed 100%, intact 47.5%) | Real API measurement, 1 Nov 2026 |
+| AI false alarms on standing buildings | 52.5% | Real API measurement |
+| One viewer alone | 75.9% | Simulation, MapSwipe-derived rates (Herfort et al. 2019) |
+| Ten viewers including three trolls, weighted by hidden checks | 89.2% on the 81.3% of tiles validated; the rest refused | Simulation |
+
+The AI calls half of the standing buildings destroyed. That is why people check the AI, and not the other way round. Every number above is recomputed from the committed ledgers by `npm run verify`.
+
+## Try it in 2 minutes (no keys needed)
+
+```
+git clone https://github.com/usv240/many-eyes
+cd many-eyes
+npm ci
+cp .env.example .env
+npm run demo        # open http://localhost:5180 (the OBS overlay)
+npm test            # 170+ tests
+npm run verify      # recompute every published number from the ledgers
+```
+
+The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch or OpenAI keys and works offline. The website runs locally with `npm run site:dev`.
+
+## Glossary
+
+- **EventSub**: Twitch's live event feed. Many Eyes reads every chat message through it over a WebSocket.
+- **Hidden check (gold tile)**: a building whose answer experts already know. Viewers cannot tell which tiles are checks.
+- **Consensus**: the rule that turns votes into a label, at least 66% weighted agreement from at least 3 voters.
+- **Refused**: no label, because chat split or too few voted. The building goes to an expert queue.
+- **Weighting**: every voter starts at 1.0; a right hidden check adds 0.1, a wrong one removes 0.2, kept between 0.2 and 2.0.
+- **Copernicus EMS**: the European Union's emergency mapping service, whose experts graded the damage (activation EMSR927).
+- **OpenAerialMap**: open satellite imagery; the photos here are Vantor imagery under CC BY-NC 4.0.
+- **MapSwipe**: a volunteer app for checking map imagery; its measured accuracy calibrates the simulation.
+- **GeoJSON**: the standard file format for map features, readable by QGIS, JOSM and the HOT Tasking Manager.
+
+## Run it live on Twitch
+
+1. Register a Twitch app (category Chat Bot) and create a user token with the Twitch CLI:
+   ```
+   twitch token -u -s "user:read:chat user:write:chat user:bot channel:bot"
+   ```
+2. Fill `TWITCH_CLIENT_ID`, `TWITCH_USER_TOKEN`, `TWITCH_REFRESH_TOKEN`, `TWITCH_BOT_USER_ID` and `TWITCH_BROADCASTER_USER_ID` in `.env`. To refresh later, run `twitch token -R <refresh token>` (capital R; lowercase -r revokes).
+3. Choose a mode:
+   - `npm run demo:mixed`: simulated crowd **plus** your real chat. Real votes go through the same parse, dedupe and replace path, and the overlay shows "Simulated crowd + live chat".
+   - `npm run live`: real chat only.
+4. In OBS, add a Browser Source at `http://localhost:5180`, 1920 by 1080.
+
+Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why` for a short explanation with the repo link. First-time voters get one welcome reply. The bot sends at most one message per second.
+
+## Bring your own data, and the developer API
+
+- **Website data page**: upload a CSV of `tile_id,user_id,vote[,truth][,lon][,lat]` and get validated or refused labels, accuracy on your own hidden checks, voter weights and GeoJSON. It runs the same engine in the browser. Three presets are included and downloadable.
+- **Developer API**, served by `npm run demo` on port 8791:
+  - `POST /v1/keys` issues a key, shown once and stored only as a SHA-256 hash, 5 per hour per address.
+  - `POST /v1/decide` decides up to 5,000 tiles and 200,000 votes, with a Bearer key, 60 requests per minute.
+  - `GET /v1/openapi.json` describes it all.
+- The website's API page can issue a key and call a running server, or use an in-browser sandbox of the same function.
+
+## How it was built
+
+**OpenAI Codex** wrote the core in one main thread, session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`, phase by phase: Twitch EventSub and vote parsing; missions and imagery; consensus engine, ledger and simulated crowd; the live state stream and broadcast overlay; the AI debaters; exports and reports. `AGENTS.md` held the rules Codex followed in every phase (no extra dependencies, votes deduplicated by message id, no label written without `consensus.decide()`, careful wording, code-review rules), and two repository skills in `.agents/skills` taught it the Twitch EventSub protocol and the mission report format.
+
+**Claude Code** wrote the phase prompts and reviewed every phase by running it and looking at screenshots. Review found two problems that Codex then fixed with regression tests. The first benchmark scored about 100% because simulated errors were independent, so it was rebuilt with shared hard and misleading tiles, always-wrong trolls and raids. And every satellite crop had been cut from the wrong corner of the map, because the image library runs extract before composite. Claude Code also built the later parts directly: mixed live mode, `!why` and welcome replies, the developer API, the bring-your-own-data page and the website.
+
+## Sources
+
+- HOT, [Mapping the Nepal Floods](https://www.hotosm.org/en/news/mapping-the-nepal-floods/)
+- Copernicus EMS, [activation EMSR927](https://mapping.emergency.copernicus.eu/activations/EMSR927)
+- Herfort et al. 2019, [Remote Sensing 11(15)](https://www.mdpi.com/2072-4292/11/15/1799)
+- Gross et al. 2023, [AGILE GIScience Series 4](https://agile-giss.copernicus.org/articles/4/5/2023/)
+- Khan et al. 2024, [Debating with more persuasive LLMs leads to more truthful answers](https://arxiv.org/abs/2402.06782)
+- [OpenAerialMap](https://openaerialmap.org) and [OpenStreetMap](https://www.openstreetmap.org/copyright)
+
+## Licences
+
+Code: MIT, see `LICENSE`. Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: European Union, Copernicus Emergency Management Service (EMSR927). Buildings: OpenStreetMap contributors, ODbL. These data licences apply to the files in `data/` and are not changed by the code licence.
+
+# Technical details
 
 ## Run commands
 
-- `npm install` — install workspace dependencies.
-- `npm run dev` — alias for the simulated broadcast scene.
-- `npm run demo` — run a simulated mission and Vite; prints the OBS URL (`http://localhost:5180/`).
-- `npm run live` — run the same scene with Twitch chat as its vote source.
-- `npm run dev:server` — run the HTTP server and one real-time mission, with SSE at `/api/stream`.
-- `npm run dev:bot` — connect to Twitch, send one startup announcement, and log parsed votes.
-- `npm test` — run Vitest.
-- `npm run lint` — run ESLint and TypeScript checks.
-- `npm run verify` — verify published report data against the ledger.
-- `npm run mission -- nepal-flood-2026 sim` — run 15-second voting windows and 5-second pauses.
-- `npm run mission -- nepal-flood-2026 twitch` — use Twitch votes and announce one result per tile.
-- `npm run bench` — simulate 80 gold tiles at 1, 5, 10, 15, and 25 voters over 20 seeds, with shared hard tiles and troll raids.
+- `npm install`: install workspace dependencies.
+- `npm run dev`: alias for the simulated broadcast scene.
+- `npm run demo`: run a simulated mission and Vite; prints the OBS URL (`http://localhost:5180/`).
+- `npm run live`: run the same scene with Twitch chat as its vote source.
+- `npm run dev:server`: run the HTTP server and one real-time mission, with SSE at `/api/stream`.
+- `npm run dev:bot`: connect to Twitch, send one startup announcement, and log parsed votes.
+- `npm test`: run Vitest.
+- `npm run lint`: run ESLint and TypeScript checks.
+- `npm run verify`: verify published report data against the ledger.
+- `npm run mission -- nepal-flood-2026 sim`: run 15-second voting windows and 5-second pauses.
+- `npm run mission -- nepal-flood-2026 twitch`: use Twitch votes and announce one result per tile.
+- `npm run bench`: simulate 80 gold tiles at 1, 5, 10, 15, and 25 voters over 20 seeds, with shared hard tiles and troll raids.
+- `npm run demo:mixed`: simulated crowd plus real Twitch chat votes.
+- `npm run demo:video`: the scripted six-tile run used for the demo video.
+- `npm run site:dev` and `npm run site:build`: the project website (landing page, bring-your-own-data page, API page).
 
 Copy `.env.example` to `.env` and fill in credentials before connecting Twitch or OpenAI.
 

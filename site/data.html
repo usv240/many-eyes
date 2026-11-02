@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Many Eyes · Bring your own data</title>
+  <meta name="description" content="Upload crowd votes and get validated or refused labels back, using the same consensus engine as the Many Eyes stream. Runs in your browser." />
+  <script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("many-eyes-theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="wordmark" href="./">Many Eyes</a>
+    <nav class="nav" data-nav aria-label="Main">
+      <a href="./#how">How it works</a>
+      <a href="./#try">Try it</a>
+      <a href="./#results">Results</a>
+      <a href="data.html" aria-current="page">Your data</a>
+      <a href="api.html">API</a>
+      <a href="https://github.com/usv240/many-eyes">GitHub</a>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">Dark mode</button>
+    <button class="menu" type="button" data-menu aria-expanded="false" aria-label="Open the menu">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap" style="display:grid;gap:24px">
+      <h1>Bring your own votes.</h1>
+      <p class="lede measure">Have a crowd, a classroom or a mapping event label anything as destroyed, intact or unsure. Upload the votes here and get back which labels are validated and which should go to experts. It runs the same engine as the stream, entirely in your browser. Nothing is uploaded anywhere.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:72px">
+    <div class="wrap">
+      <div class="block-head">
+        <h2>Start from a preset</h2>
+        <p class="measure muted">Each preset is a real file you can open, download and edit. Choose one to load it below.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Preset</th><th>What it shows</th><th class="num">Votes</th><th>Use it</th></tr></thead>
+          <tbody>
+            <tr><td><b>Recorded stream run</b><span data-info="The six tiles from the recorded demo stream, exported from the hash-chained video ledger: four hidden checks and two ordinary tiles, ten simulated viewers." data-info-label="Recorded stream run"></span></td><td>The demo stream, vote by vote</td><td class="num">60</td><td><button class="button quiet" data-preset="recorded-run">Load</button> <a href="downloads/recorded-run.csv" download>CSV</a></td></tr>
+            <tr><td><b>Troll raid</b><span data-info="Ten viewers, three of them trolls: one always votes the wrong answer, the others join coordinated raids. The first 16 tiles are hidden checks, the last 8 are not. Watch the trolls' weights fall." data-info-label="Troll raid"></span></td><td>How hidden checks blunt trolls</td><td class="num">240</td><td><button class="button quiet" data-preset="troll-raid">Load</button> <a href="downloads/troll-raid.csv" download>CSV</a></td></tr>
+            <tr><td><b>Small stream</b><span data-info="Five viewers and twelve tiles, half of them hidden checks. Small crowds get refused more often, which is the safe outcome." data-info-label="Small stream"></span></td><td>What five viewers can and cannot settle</td><td class="num">60</td><td><button class="button quiet" data-preset="small-stream">Load</button> <a href="downloads/small-stream.csv" download>CSV</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:96px">
+    <div class="wrap split">
+      <div style="display:grid;gap:18px">
+        <h2>Or use your own file</h2>
+        <p class="muted">A CSV with a header row. Required columns: <code>tile_id</code>, <code>user_id</code> and <code>vote</code>. Optional: <code>truth</code>, <code>lon</code> and <code>lat</code>.<span data-info="vote accepts 1, 2, 3, destroyed, intact or unsure. If a user votes twice on a tile, the later row wins. Rows are processed in file order, so put hidden checks early if you want them to set weights for later tiles." data-info-label="CSV format"></span></p>
+        <ul class="ticks small">
+          <li><b>truth</b> marks a hidden check. Write the known answer, destroyed or intact, on any row of that tile.<span data-info="Hidden checks measure accuracy and adjust weights: plus 0.1 for a right answer, minus 0.2 for a wrong one, kept between 0.2 and 2.0. A tile is decided before its own answer changes anyone's weight." data-info-label="truth"></span></li>
+          <li><b>lon</b> and <b>lat</b> add the tile to the GeoJSON download, so results open in any map tool.</li>
+          <li>Up to 5,000 tiles and 200,000 votes per run.</li>
+        </ul>
+        <pre><code>tile_id,user_id,vote,truth,lon,lat
+house-1,ana,1,destroyed,85.3362,28.1614
+house-1,ben,1,,,
+house-1,cai,2,,,
+house-2,ana,2,,85.3354,28.1626</code></pre>
+      </div>
+      <div style="display:grid;gap:16px">
+        <div class="drop" data-drop>
+          <p><b>Drop a CSV file here</b></p>
+          <p class="small">or <label style="display:inline;font-weight:600;text-decoration:underline;cursor:pointer">choose a file<input type="file" accept=".csv,text/csv" data-file class="skip" /></label></p>
+        </div>
+        <label for="csv">Or paste CSV</label>
+        <textarea id="csv" data-csv spellcheck="false" placeholder="tile_id,user_id,vote,truth,lon,lat"></textarea>
+        <div class="actions"><button class="button" type="button" data-run>Decide labels</button><span class="status" data-status role="status"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:96px" data-results hidden>
+    <div class="wrap">
+      <div class="block-head"><h2>Results</h2></div>
+      <div class="figures" data-figures></div>
+      <div class="actions" style="margin:28px 0">
+        <button class="button quiet" type="button" data-download="csv">Download results CSV</button>
+        <button class="button quiet" type="button" data-download="geojson">Download GeoJSON</button>
+        <button class="button quiet" type="button" data-download="json">Download full JSON</button>
+      </div>
+      <div class="split">
+        <div style="display:grid;gap:12px"><h3>Each tile</h3><div class="table-wrap" data-tiles></div></div>
+        <div style="display:grid;gap:12px"><h3>Voter weights<span data-info="Weights after all hidden checks. Everyone starts at 1.0. People who matched the known answers count for more; people who missed them count for less." data-info-label="Voter weights"></span></h3><div class="table-wrap" data-weights></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="name">Many Eyes</p>
+    <div class="footer-grid">
+      <p>The engine on this page is the one the stream uses: weighted agreement of at least 66% from at least 3 voters validates a label; anything else is refused. Code under the MIT licence.</p>
+      <div><a href="./">Home</a><a href="./#try">Try it</a><a href="api.html">API</a></div>
+      <div><a href="https://github.com/usv240/many-eyes">Source code</a><a href="downloads/openapi.json" download>OpenAPI</a></div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="/src/data-page.ts"></script>
+</body>
+</html>

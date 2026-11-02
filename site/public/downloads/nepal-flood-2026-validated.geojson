@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "attribution": "Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: © European Union, Copernicus Emergency Management Service (EMSR927). Buildings: © OpenStreetMap contributors, ODbL.",
+  "source": "simulated crowd",
+  "runId": "fb204a6a-030e-478e-87ff-98dc353eccd7",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3361613,
+          28.161423
+        ]
+      },
+      "properties": {
+        "building_id": "cems-0052",
+        "label": "destroyed",
+        "agreement": 0.8888888888888888,
+        "voters": 9,
+        "decided_at": "2026-11-02T04:47:34.743Z",
+        "gold": true,
+        "ai_label": "destroyed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3474567,
+          28.1760521
+        ]
+      },
+      "properties": {
+        "building_id": "osm-w850782564",
+        "label": "intact",
+        "agreement": 1,
+        "voters": 10,
+        "decided_at": "2026-11-02T04:47:45.895Z",
+        "gold": true,
+        "ai_label": "intact"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3354485,
+          28.1625661
+        ]
+      },
+      "properties": {
+        "building_id": "osm-w1554274567",
+        "label": "intact",
+        "agreement": 1,
+        "voters": 10,
+        "decided_at": "2026-11-02T04:47:56.979Z",
+        "gold": true,
+        "ai_label": "destroyed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3360932,
+          28.1621437
+        ]
+      },
+      "properties": {
+        "building_id": "cems-0083",
+        "label": "destroyed",
+        "agreement": 0.6904761904761905,
+        "voters": 10,
+        "decided_at": "2026-11-02T04:48:19.154Z",
+        "gold": false,
+        "ai_label": "intact"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3457001,
+          28.1767547
+        ]
+      },
+      "properties": {
+        "building_id": "osm-w1553017131",
+        "label": "intact",
+        "agreement": 1,
+        "voters": 10,
+        "decided_at": "2026-11-02T04:48:30.180Z",
+        "gold": true,
+        "ai_label": "destroyed"
+      }
+    }
+  ]
+}

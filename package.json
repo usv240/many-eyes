@@ -8,7 +8,8 @@
   "workspaces": [
     "server",
     "overlay",
-    "sim"
+    "sim",
+    "site"
   ],
   "scripts": {
     "dev": "npm run demo",
@@ -26,7 +27,10 @@
     "mission": "node --env-file=.env --import tsx scripts/run-mission.ts",
     "verify": "tsx server/src/verify.ts",
     "debates:warm": "node --env-file=.env --import tsx scripts/warm-debates.ts",
-    "debates:score": "tsx scripts/score-debates.ts"
+    "debates:score": "tsx scripts/score-debates.ts",
+    "site:data": "tsx scripts/site-data.ts",
+    "site:dev": "npm run dev --workspace site",
+    "site:build": "npm run site:data && npm run build --workspace site"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
