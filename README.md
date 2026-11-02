@@ -97,6 +97,8 @@ While the channel is live, every decided building also drops a **Twitch stream m
 
 **Review loop.** Every phase was run and checked from screenshots before the next began. Review found two problems that Codex then fixed with regression tests. The first benchmark scored about 100% because simulated errors were independent, so it was rebuilt with shared hard and misleading tiles, always-wrong trolls and raids. And every satellite crop had been cut from the wrong corner of the map, because the image library runs extract before composite. The later parts were built after the core phases: mixed live mode, `!why` and welcome replies, stream markers, the developer API, the bring-your-own-data page and the website.
 
+**Codex review of the later parts.** Back in the same thread, Codex reviewed every later module against the Code Review Rules in `AGENTS.md`: timeouts on every network call, no vote counted twice, no label or weight written outside `consensus.decide()` and the gold-check update, no secret reaching a log or the browser, and bounded memory. It found and fixed 19 problems, each with a regression test (26 new tests, commit `2308ec0`). Examples: real chat users could pose as simulated voters by choosing a `sim_` name; the API rate limiter evicted live windows when full, letting a caller start over; a quoted CSV field could shift votes into the wrong column; CSV exports could carry spreadsheet formulas from untrusted voter names; and the hourly token check needed to stop the bot on a revoked token rather than retry it.
+
 ## Sources
 
 - HOT, [Mapping the Nepal Floods](https://www.hotosm.org/en/news/mapping-the-nepal-floods/)
