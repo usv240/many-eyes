@@ -10,8 +10,16 @@ interface Dependencies {
   fetcher?: typeof fetch;
   socketFactory?: (url: string) => Socket;
   saveTokens?: (access: string, refresh: string) => Promise<void>;
+  now?: () => number;
 }
 const endpoint = "wss://eventsub.wss.twitch.tv/ws";
+/** Twitch: reject events older than 10 minutes (replay protection) and revalidate a kept session hourly. */
+export const MAX_EVENT_AGE_MS = 10 * 60 * 1000;
+export const VALIDATE_EVERY_MS = 60 * 60 * 1000;
+export const isStale = (timestamp: string, now = Date.now()) => {
+  const at = Date.parse(timestamp);
+  return !Number.isFinite(at) || now - at > MAX_EVENT_AGE_MS;
+};
 const envelope = z.object({
   metadata: z.object({ message_id: z.string(), message_type: z.string(),
     message_timestamp: z.string(), subscription_type: z.string().optional() }),
@@ -37,6 +45,8 @@ export class EventSubClient extends EventEmitter<{
   private pending?: Socket;
   private timers = new Map<Socket, ReturnType<typeof setTimeout>>();
   private retryTimer?: ReturnType<typeof setTimeout>;
+  private validateTimer?: ReturnType<typeof setInterval>;
+  private readonly now: () => number;
   private seen = new Map<string, true>();
   private stopped = true;
   private attempts = 0;
@@ -46,6 +56,16 @@ export class EventSubClient extends EventEmitter<{
     super();
     this.fetcher = deps.fetcher ?? fetch;
     this.factory = deps.socketFactory ?? ((url) => new WebSocket(url));
+    this.now = deps.now ?? Date.now;
+  }
+
+  /** Hourly check required by Twitch for apps that keep a user session; refreshes when a client secret is set. */
+  async revalidate(): Promise<boolean> {
+    try { await validateToken(this.config, this.fetcher, this.deps.saveTokens); return true; }
+    catch (error) {
+      this.emit("status", "Twitch token check failed: " + (error instanceof Error ? error.message : "unknown error"));
+      return false;
+    }
   }
 
   async start(): Promise<void> {
@@ -54,6 +74,8 @@ export class EventSubClient extends EventEmitter<{
     try { await validateToken(this.config, this.fetcher, this.deps.saveTokens); }
     catch (error) { this.stopped = true; throw error; }
     if (this.stopped) return;
+    this.validateTimer = setInterval(() => { void this.revalidate(); }, VALIDATE_EVERY_MS);
+    this.validateTimer.unref?.();
     return new Promise<void>((resolve, reject) => {
       this.initial = { resolve, reject };
       this.connect(endpoint, false);
@@ -63,6 +85,7 @@ export class EventSubClient extends EventEmitter<{
   stop() {
     this.stopped = true;
     clearTimeout(this.retryTimer);
+    clearInterval(this.validateTimer);
     for (const socket of [...this.timers.keys()]) this.drop(socket);
     this.active = this.pending = undefined;
     this.initial?.reject(new Error("EventSub stopped before it was ready."));
@@ -156,6 +179,7 @@ export class EventSubClient extends EventEmitter<{
         this.seen.set(metadata.message_id, true);
         if (this.seen.size > 10000) this.seen.delete(this.seen.keys().next().value!);
         if (metadata.subscription_type !== "channel.chat.message" || !payload.event) return;
+        if (isStale(metadata.message_timestamp, this.now())) return;
         this.emit("chatMessage", { messageId: metadata.message_id,
           userId: payload.event.chatter_user_id, userLogin: payload.event.chatter_user_login,
           text: payload.event.message.text, timestamp: metadata.message_timestamp });

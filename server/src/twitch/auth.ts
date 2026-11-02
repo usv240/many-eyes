@@ -20,10 +20,24 @@ export function readConfig(env = process.env): TwitchConfig {
   };
 }
 
+/** How long to wait before the one retry Helix allows: 429 waits for Ratelimit-Reset (at most 5 s), 503 waits 1 s. */
+export function retryDelay(response: Response, now = Date.now()): number | undefined {
+  if (response.status === 503) return 1000;
+  if (response.status !== 429) return undefined;
+  const reset = Number(response.headers.get("Ratelimit-Reset")) * 1000;
+  return Number.isFinite(reset) && reset > 0 ? Math.min(Math.max(reset - now, 0), 5000) : 1000;
+}
+
 // Never include response bodies, credentials, or underlying network errors in errors.
-export async function requestJson(url: string, init: RequestInit, fetcher = fetch): Promise<unknown> {
+export async function requestJson(url: string, init: RequestInit, fetcher = fetch,
+  sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))): Promise<unknown> {
   try {
-    const response = await fetcher(url, { ...init, signal: AbortSignal.timeout(5000) });
+    let response = await fetcher(url, { ...init, signal: AbortSignal.timeout(5000) });
+    const wait = retryDelay(response);
+    if (wait !== undefined) {
+      await sleep(wait);
+      response = await fetcher(url, { ...init, signal: AbortSignal.timeout(5000) });
+    }
     if (!response.ok) throw new HttpError(response.status);
     return await response.json();
   } catch (error) {

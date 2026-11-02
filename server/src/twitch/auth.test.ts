@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { readConfig, rewriteTokens, validateToken, requestJson } from "./auth.js";
+import { readConfig, rewriteTokens, validateToken, requestJson, retryDelay } from "./auth.js";
 
 const config = () => ({ clientId: "test-client", userToken: "test-access", refreshToken: "test-refresh",
   botUserId: "test-bot", broadcasterUserId: "test-channel", clientSecret: "test-secret" });
@@ -34,4 +34,21 @@ it("does not refresh a healthy token", async () => {
 it("sanitizes network failures", async () => {
   const fetcher = vi.fn<typeof fetch>().mockRejectedValue(new Error("sensitive response"));
   await expect(requestJson("https://example.test", {}, fetcher)).rejects.toThrow("Twitch request failed or exceeded its 5 second timeout.");
+});
+it("retries once after 429 (waiting for Ratelimit-Reset) and after 503", async () => {
+  const now = Date.now();
+  expect(retryDelay(new Response(null, { status: 429, headers: { "Ratelimit-Reset": String(Math.floor(now / 1000) + 3) } }), now))
+    .toBeGreaterThan(1000);
+  expect(retryDelay(new Response(null, { status: 429, headers: { "Ratelimit-Reset": String(Math.floor(now / 1000) + 600) } }), now))
+    .toBe(5000);
+  expect(retryDelay(new Response(null, { status: 503 }))).toBe(1000);
+  expect(retryDelay(new Response(null, { status: 500 }))).toBeUndefined();
+  const sleep = vi.fn().mockResolvedValue(undefined);
+  const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response(null, { status: 503 }))
+    .mockResolvedValueOnce(Response.json({ ok: true }));
+  await expect(requestJson("https://api.twitch.tv/helix/x", {}, fetcher, sleep)).resolves.toEqual({ ok: true });
+  expect(sleep).toHaveBeenCalledWith(1000);
+  const twice = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 429 }));
+  await expect(requestJson("https://api.twitch.tv/helix/x", {}, twice, sleep)).rejects.toThrow("HTTP 429");
+  expect(twice).toHaveBeenCalledTimes(2);
 });

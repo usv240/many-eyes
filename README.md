@@ -70,6 +70,16 @@ Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why
 
 While the channel is live, every decided building also drops a **Twitch stream marker** ("Many Eyes · Tile 14: validated intact, 81% agreement, 23 voters"), so the saved broadcast becomes an index a responder can jump through. Markers need the `channel:manage:broadcast` scope; without it they switch off quietly.
 
+**Twitch platform rules the code follows**, each with a test:
+- Chat is read with EventSub over WebSocket (`channel.chat.message`, subscribed right after the welcome) and sent with the Send Chat Message API, not IRC.
+- The token is checked with `/oauth2/validate` at startup and every hour after, and refreshed automatically when `TWITCH_CLIENT_SECRET` is set.
+- EventSub keepalives are watched; a silent socket reconnects and resubscribes, `session_reconnect` follows the given URL unchanged, and close codes 4000 to 4007 are handled.
+- Every event is deduplicated by `message_id`, and events older than 10 minutes are dropped.
+- Helix calls time out after 5 seconds, wait for `Ratelimit-Reset` after a 429 and retry once after a 503.
+- The bot sends at most one message per second and one result per building.
+
+**What is stored.** Only what scoring needs: the Twitch user id, the vote and its time, in the local ledger. No message text, and logins appear only on the overlay for four seconds. Nothing is sent anywhere except the bot's own chat messages and markers to Twitch.
+
 ## Bring your own data, and the developer API
 
 - **Website data page**: upload a CSV of `tile_id,user_id,vote[,truth][,lon][,lat]` and get validated or refused labels, accuracy on your own hidden checks, voter weights and GeoJSON. It runs the same engine in the browser. Three presets are included and downloadable.

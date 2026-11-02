@@ -4,18 +4,18 @@ import { EventSubClient } from "./eventsub.js";
 class FakeSocket extends EventTarget {
   closed = false;
   close() { this.closed = true; }
-  message(type: string, payload: unknown, id = type) {
+  message(type: string, payload: unknown, id = type, timestamp = "2026-10-30T00:00:00Z") {
     this.dispatchEvent(new MessageEvent("message", { data: JSON.stringify({
-      metadata: { message_id: id, message_type: type, message_timestamp: "2026-10-30T00:00:00Z",
+      metadata: { message_id: id, message_type: type, message_timestamp: timestamp,
         subscription_type: "channel.chat.message" }, payload,
     }) }));
   }
   welcome(id = "session") {
     this.message("session_welcome", { session: { id, keepalive_timeout_seconds: 10 } });
   }
-  notification(id = "notification") {
+  notification(id = "notification", timestamp?: string) {
     this.message("notification", { event: { chatter_user_id: "viewer", chatter_user_login: "viewer_login",
-      message: { text: "!1" } } }, id);
+      message: { text: "!1" } } }, id, timestamp);
   }
 }
 let client: EventSubClient;
@@ -28,7 +28,7 @@ async function setup() {
       ? { client_id: "test-client", user_id: "test-bot", expires_in: 3600 } : { data: [] }));
   client = new EventSubClient({ clientId: "test-client", botUserId: "test-bot",
     broadcasterUserId: "test-channel", userToken: "test-only", refreshToken: "test-only" }, {
-    fetcher, socketFactory: (url) => { const socket = new FakeSocket(); sockets.push(socket); urls.push(url); return socket; },
+    fetcher, now: () => Date.parse("2026-10-30T00:05:00Z"), socketFactory: (url) => { const socket = new FakeSocket(); sockets.push(socket); urls.push(url); return socket; },
   });
   const started = client.start();
   await flush();
@@ -97,4 +97,20 @@ it("times out a socket that never welcomes", async () => {
   await vi.advanceTimersByTimeAsync(11000);
   expect(sockets).toHaveLength(3);
   expect(sockets[1].closed).toBe(true);
+});
+it("drops chat events older than ten minutes (replay protection)", async () => {
+  const { sockets } = await setup(); const listener = vi.fn(); client.on("chatMessage", listener);
+  sockets[0].notification("old", "2026-10-29T23:54:00Z");
+  sockets[0].notification("fresh", "2026-10-29T23:56:00Z");
+  expect(listener).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ messageId: "fresh" }));
+});
+it("revalidates the token every hour while running", async () => {
+  const { sockets, fetcher } = await setup();
+  const validations = () => fetcher.mock.calls.filter(([url]) => String(url).endsWith("validate")).length;
+  expect(validations()).toBe(1);
+  for (let second = 0; second < 3600; second += 5) {
+    sockets[0].message("session_keepalive", {});
+    await vi.advanceTimersByTimeAsync(5000);
+  }
+  expect(validations()).toBe(2);
 });
