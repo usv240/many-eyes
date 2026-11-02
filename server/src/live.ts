@@ -1,4 +1,4 @@
-import { MissionRunner } from "./runner/mission-runner.js";
+import { MissionRunner, type RunnerOptions } from "./runner/mission-runner.js";
 import type { LedgerPort } from "./ledger/ledger.js";
 import { readConfig } from "./twitch/auth.js";
 import { EventSubClient } from "./twitch/eventsub.js";
@@ -14,12 +14,14 @@ export function readLiveConfig(env: NodeJS.ProcessEnv = process.env): { source: 
 }
 
 /** One real-time mission per server instance. start() resolves when the first tile opens. */
-export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPort; onError?: (error: Error) => void } = {}): LiveMission {
+export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPort; onError?: (error: Error) => void;
+  runnerOptions?: Partial<RunnerOptions>; onComplete?: (runId: string) => void } = {}): LiveMission {
   const env = options.env ?? process.env;
   const config = readLiveConfig(env);
   const twitch = config.source === "twitch" ? readConfig(env) : undefined;
   const runner = new MissionRunner({ missionId: "nepal-flood-2026", ...config, virtual: false,
-    ledger: options.ledger, ...(twitch ? { twitch: new EventSubClient(twitch), sendChat: createChatSender(twitch) } : {}) });
+    ledger: options.ledger, ...options.runnerOptions,
+    ...(twitch ? { twitch: new EventSubClient(twitch), sendChat: createChatSender(twitch) } : {}) });
   let ready: Promise<void> | undefined;
   let task: Promise<void> | undefined;
   return {
@@ -38,7 +40,8 @@ export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPo
         task = runner.run().then(() => {
           runner.off("state", onState);
           if (!opened) reject(new Error("Live mission stopped before the first tile opened."));
-        }, (error: unknown) => {
+          if (runner.getState().phase === "complete") options.onComplete?.(runner.runId);
+        }).catch((error: unknown) => {
           runner.off("state", onState);
           if (!opened) reject(config.source === "twitch"
             ? new Error("Live Twitch mission failed to start. Check Twitch configuration and connectivity.")

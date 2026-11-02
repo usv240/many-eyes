@@ -14,3 +14,9 @@ it("parks result wipes and drops blur and travel with reduced motion", () => {
   expect(motionPlan(fixtureSnapshot("validated"), 0, false).wipe).toBe(false);
   expect(motionPlan(fixtureSnapshot("voting"), 0, true)).toMatchObject({ wipe: false, blur: "none" });
 });
+
+it("uses the shortened video voting window for the countdown scale", () => {
+  const snapshot = fixtureSnapshot("voting", 1000);
+  snapshot.state!.tile!.closesAt = snapshot.state!.tile!.openedAt + 8000;
+  expect(motionPlan(snapshot, 5000, false)).toMatchObject({ countdown: 4000, duration: 8000 });
+});

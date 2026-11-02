@@ -44,7 +44,7 @@ it("dedupes IDs across tiles, replaces per-user votes, and sends one result per 
   expect(decisions[0]!.data.weighted).toMatchObject({ status: "validated", label: "intact", voters: 3 });
   expect(decisions[1]!.data.weighted).toMatchObject({ status: "refused", reason: "too_few_voters", voters: 1 });
   expect(sendChat).toHaveBeenCalledTimes(2);
-  expect(sendChat.mock.calls[0]![0]).toBe("Tile 1: VALIDATED intact (agreement 1.00, 3 voters)");
+  expect(sendChat.mock.calls[0]![0]).toBe("Tile 1: validated intact (100% agreement, 3 voters)");
   expect(runner.getRefusedQueue()).toHaveLength(1);
   expect(twitch.listenerCount("chatMessage")).toBe(0);
 });

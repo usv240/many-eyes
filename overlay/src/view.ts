@@ -49,8 +49,9 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
   const displayPixelsPerCropPixel = STAGE_SIZE / (image?.sizePx ?? 384);
   const ringRadiusPx = 12 / mpp * displayPixelsPerCropPixel;
   const scaleBarPx = 20 / mpp * displayPixelsPerCropPixel;
-  const timeLeft = state?.phase === "voting" && tile ? clamp(tile.closesAt - (options.now ?? state.serverNow), 15000) : 0;
-  const countdownFraction = timeLeft / 15000;
+  const duration = tile ? tile.closesAt - tile.openedAt : 15000;
+  const timeLeft = state?.phase === "voting" && tile ? clamp(tile.closesAt - (options.now ?? state.serverNow), duration) : 0;
+  const countdownFraction = timeLeft / duration;
   const destroyed = live.voters ? live.leading === "destroyed" ? live.agreement : live.leading === "intact" ? 1 - live.agreement : 0.5 : 0;
   const intact = live.voters ? 1 - destroyed : 0;
   const result = state?.phase === "decided" ? state.lastResult : null;

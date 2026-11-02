@@ -1,3 +1,4 @@
+import { verifyMissionReport } from "./exports/report.js";
 import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import { isDeepStrictEqual } from "node:util";
@@ -91,3 +92,5 @@ if (existsSync("reports/latest.json")) {
   if (!isDeepStrictEqual(report.model.difficulty, DIFFICULTY)) throw new Error("Difficulty assumptions differ from the benchmark model.");
 }
 console.log("Verified " + liveIntegrity.lines + " live and " + integrity.lines + " benchmark ledger events; published metrics match benchmark replay.");
+
+console.log("Verified " + verifyMissionReport() + " video events and all mission exports/report artifacts.");

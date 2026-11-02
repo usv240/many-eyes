@@ -74,7 +74,7 @@ export async function validateToken(config: TwitchConfig, fetcher = fetch,
   catch (error) { if (!(error instanceof HttpError) || error.status !== 401) throw error; }
   if (expires >= 600) return;
   if (!config.clientSecret)
-    throw new Error("Twitch token needs refreshing. Run `twitch token -r <refresh token>` and update .env, or set TWITCH_CLIENT_SECRET.");
+    throw new Error("Twitch token needs refreshing. Run `twitch token -R <refresh token>` and update .env, or set TWITCH_CLIENT_SECRET.");
   const raw = await requestJson("https://id.twitch.tv/oauth2/token", {
     method: "POST", body: new URLSearchParams({ grant_type: "refresh_token",
       client_id: config.clientId, client_secret: config.clientSecret, refresh_token: config.refreshToken }),

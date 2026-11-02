@@ -3,9 +3,11 @@ import { randomUUID } from "node:crypto";
 import { createApp } from "../server/src/index.js";
 import { assertOwnServer, assertPortUnused } from "../server/src/http/health.js";
 
+import { createVideoLive } from "../server/src/runner/video.js";
+
 const source = process.argv[2] ?? "sim";
-if (source !== "sim" && source !== "twitch") throw new Error("Use sim or twitch.");
-process.env.MANY_EYES_SOURCE = source;
+if (source !== "sim" && source !== "twitch" && source !== "video") throw new Error("Use sim, twitch or video.");
+process.env.MANY_EYES_SOURCE = source === "video" ? "sim" : source;
 const port = Number(process.env.PORT || 8791);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PORT must be a valid TCP port.");
 let app: ReturnType<typeof createApp> | undefined;
@@ -20,7 +22,7 @@ for (const signal of ["SIGINT", "SIGTERM"] as const) process.once(signal, () => 
 try {
   await assertPortUnused(port);
   const instanceId = randomUUID();
-  app = createApp({ instanceId });
+  app = createApp({ instanceId, ...(source === "video" ? { live: createVideoLive() } : {}) });
   vite = await createServer({ configFile: "overlay/vite.config.ts" });
   await app.listen({ port, host: "127.0.0.1" });
   await assertOwnServer(port, instanceId);

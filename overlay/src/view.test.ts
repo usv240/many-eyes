@@ -102,3 +102,9 @@ it("keeps every text colour at 4.5:1 on each surface where it is used", () => {
   expect(readFileSync("overlay/public/fonts/public-sans-latin.woff2").subarray(0, 4).toString()).toBe("wOF2");
   expect(readFileSync("overlay/public/fonts/OFL.txt", "utf8")).toContain("SIL OPEN FONT LICENSE");
 });
+
+it("shows half of an eight-second recording window after four seconds", () => {
+  const snapshot = fixtureSnapshot("voting", 1000);
+  snapshot.state!.tile!.closesAt = snapshot.state!.tile!.openedAt + 8000;
+  expect(view(snapshot.state, { now: 5000 }).geometry.countdownFraction).toBe(0.5);
+});

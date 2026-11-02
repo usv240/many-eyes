@@ -4,6 +4,7 @@ export function motionPlan(snapshot: Snapshot, now: number, reduced: boolean) {
   const state = snapshot.state; const tile = state?.tile;
   return { wipe: !reduced && state?.phase === "voting" && snapshot.imageryStatus === "ready",
     countdown: state?.phase === "voting" && tile ? Math.max(0, tile.closesAt - now) : 0,
+    duration: tile ? tile.closesAt - tile.openedAt : 15000,
     key: `${tile?.token}:${state?.phase}`, blur: reduced ? "none" : "blur(2px)" };
 }
 
@@ -65,13 +66,13 @@ export function createMotion(root: HTMLElement) {
       }
       if (clockKey !== plan.key) {
         clockKey = plan.key; countdown.style.transition = "none";
-        countdown.style.transform = `scaleX(${Math.min(1, plan.countdown / 15000)})`;
+        countdown.style.transform = `scaleX(${Math.min(1, plan.countdown / plan.duration)})`;
         if (!reduced.matches) frame(() => { frame(() => {
           countdown.style.transition = `transform ${plan.countdown}ms linear`;
           countdown.style.transform = "scaleX(0)";
         }); });
       }
-      if (reduced.matches) countdown.style.transform = `scaleX(${Math.min(1, plan.countdown / 15000)})`;
+      if (reduced.matches) countdown.style.transform = `scaleX(${Math.min(1, plan.countdown / plan.duration)})`;
     },
     close() { clearTimeout(wipeTimer); clearTimeout(fadeTimer); frames.forEach(cancelAnimationFrame);
       reduced.removeEventListener("change", reset); old?.remove(); },

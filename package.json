@@ -13,6 +13,8 @@
   "scripts": {
     "dev": "npm run demo",
     "demo": "node --env-file=.env --import tsx scripts/broadcast.ts sim",
+    "demo:video": "node --env-file=.env --import tsx scripts/broadcast.ts video",
+    "report": "tsx scripts/mission-report.ts",
     "live": "node --env-file=.env --import tsx scripts/broadcast.ts twitch",
     "dev:server": "node --env-file=.env --watch --import tsx server/src/index.ts",
     "dev:bot": "node --env-file=.env --import tsx server/src/bot.ts",

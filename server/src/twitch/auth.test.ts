@@ -24,7 +24,7 @@ it.each([401, 200])("refreshes expired or nearly expired credentials (%i)", asyn
 it("instructs manual refresh without exposing actual tokens", async () => {
   const settings = { ...config(), clientSecret: undefined };
   const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 401 }));
-  await expect(validateToken(settings, fetcher)).rejects.toThrow("twitch token -r <refresh token>");
+  await expect(validateToken(settings, fetcher)).rejects.toThrow("twitch token -R <refresh token>");
   expect(fetcher).toHaveBeenCalledTimes(1);
 });
 it("does not refresh a healthy token", async () => {

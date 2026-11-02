@@ -2,7 +2,8 @@ import { isDeepStrictEqual } from "node:util";
 import { openSession, closeSession, collectVote, decide, decideUnweighted, updateGoldWeights, type TileSession } from "../consensus/engine.js";
 import type { DecidedGold } from "../consensus/metrics.js";
 import type { VoteLabel } from "../votes/parse.js";
-import { goldTruth } from "../missions/mission.js";
+import { goldTruth, getMission } from "../missions/mission.js";
+import { liveScenario } from "../runner/scenario.js";
 import { createCrowd, createTileScenario, type TileDifficulty } from "../../../sim/src/crowd.js";
 import type { LedgerEvent } from "./ledger.js";
 
@@ -10,6 +11,7 @@ interface Run {
   missionId: string; weights: Map<string, number>; seen: Set<string>; gold: DecidedGold[];
   session?: TileSession; buildingId?: string;
   seed: number; source: string; crowd: Record<string, unknown>; tileNumber: number;
+  simulationPolicy?: string;
   individual: { correct: number; classified: number; total: number };
   voterScores: Map<string, { correct: number; classified: number; total: number }>;
 }
@@ -24,6 +26,7 @@ export class LedgerReplay {
       if (this.runs.has(runId)) throw new Error("Duplicate run ID in ledger.");
       this.runs.set(runId, { missionId: String(data.missionId), weights: new Map(), seen: new Set(), gold: [],
         seed: Number(data.seed ?? 1), source: String(data.source), crowd: (data.crowd ?? {}) as Record<string, unknown>,
+        simulationPolicy: data.simulationPolicy as string | undefined,
         tileNumber: 0, individual: { correct: 0, classified: 0, total: 0 }, voterScores: new Map() });
       return;
     }
@@ -31,7 +34,7 @@ export class LedgerReplay {
     if (!run) throw new Error("Ledger event has no mission_started.");
     if (event.type === "tile_opened") {
       if (run.session && !run.session.closed) throw new Error("Previous tile was not decided.");
-      run.session = openSession(String(data.id), Number(data.openedAt));
+      run.session = openSession(String(data.id), Number(data.openedAt), Number(data.closesAt) - Number(data.openedAt));
       run.buildingId = String(data.buildingId);
       run.tileNumber = Number(data.number);
     } else if (event.type === "vote") {
@@ -55,8 +58,11 @@ export class LedgerReplay {
       let difficulty: TileDifficulty | undefined;
       if (run.source === "sim" && data.difficulty !== undefined) {
         if (!truth) {
-          const scenario = createTileScenario(run.seed ^ Math.imul(run.tileNumber, 0x9e3779b1), "possibly damaged",
-            Number(run.crowd.raidProbability ?? 0.25));
+          const seed = run.seed ^ Math.imul(run.tileNumber, 0x9e3779b1);
+          const grade = getMission(run.missionId).buildings.find((b) => b.id === run.buildingId)!.expert_grade;
+          const scenario = run.simulationPolicy === "graded-work-v1"
+            ? liveScenario(seed, null, grade, Number(run.crowd.raidProbability ?? 0.25))
+            : createTileScenario(seed, "possibly damaged", Number(run.crowd.raidProbability ?? 0.25));
           difficulty = scenario.difficulty;
         } else {
           difficulty = createTileScenario(run.seed ^ Math.imul(run.tileNumber, 0x9e3779b1), truth,

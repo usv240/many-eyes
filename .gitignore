@@ -12,3 +12,7 @@ data/bench-ledger.jsonl.head
 data/bench-ledger.jsonl.head.tmp
 dist/
 coverage/
+
+data/video-ledger.jsonl
+data/video-ledger.jsonl.head
+data/video-ledger.jsonl.head.tmp

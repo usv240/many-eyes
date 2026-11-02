@@ -11,6 +11,7 @@ import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
 import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
 import { readCachedDebate, publicDebate, type CachedDebate } from "../debate/cache.js";
+import { liveScenario } from "./scenario.js";
 
 const publicTokenKey = randomBytes(32);
 export interface DebateArgument { claim: string; box?: { x: number; y: number; width: number; height: number } }
@@ -47,6 +48,8 @@ export interface RunnerOptions {
   twitch?: TwitchSource;
   sendChat?: (text: string) => Promise<void>;
   loadDebate?: (buildingId: string) => CachedDebate | null;
+  fixedTiles?: readonly string[]; votingMs?: number; pauseMs?: number; pauseAfterLast?: boolean;
+  gradedWork?: boolean; video?: boolean;
 }
 function makeClock(virtual: boolean): Clock {
   let now = 0;
@@ -77,7 +80,9 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.ledger = options.ledger ?? new Ledger();
     this.clock = options.clock ?? makeClock(options.virtual ?? false);
     this.runId = options.runId ?? randomUUID();
-    const total = Math.min(options.maxTiles ?? Infinity, options.goldOnly ? this.mission.gold.length : this.mission.buildings.length);
+    if (options.fixedTiles?.some((id) => !this.mission.buildings.some((b) => b.id === id))) throw new Error("Unknown fixed tile.");
+    if (options.video && options.source !== "sim") throw new Error("Video mode requires a simulated crowd.");
+    const total = Math.min(options.maxTiles ?? Infinity, options.fixedTiles?.length ?? (options.goldOnly ? this.mission.gold.length : this.mission.buildings.length));
     this.state = { missionId: this.mission.id, source: options.source, phase: "idle",
       mission: { name: this.mission.name, place: "Syaphru Besi, Rasuwa, Nepal", eventDate: this.mission.event_date,
         preDate: this.mission.pre_scene.acquired, postDate: this.mission.post_scene.acquired, attribution: this.mission.attribution },
@@ -149,11 +154,13 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
       }
       signal.throwIfAborted();
       this.ledger.append("mission_started", { missionId: this.mission.id, runId: this.runId,
+        ...((this.options.gradedWork ?? !this.options.virtual) ? { simulationPolicy: "graded-work-v1" } : {}),
+        ...(this.options.video ? { video: true, fixedTiles: this.options.fixedTiles } : {}),
         source: this.options.source, seed, crowd: this.options.source === "sim" ? { voters: 10, ...this.options.crowd } : null },
       this.clock.now());
       const limit = this.state.stats.total;
       for (let index = 0; index < limit && !signal.aborted; index++) {
-        const buildingId = this.options.goldOnly ? this.mission.gold[index]!.building_id : nextTile(this.mission.id, rng).buildingId;
+        const buildingId = this.options.fixedTiles?.[index] ?? (this.options.goldOnly ? this.mission.gold[index]!.building_id : nextTile(this.mission.id, rng).buildingId);
         const building = this.mission.buildings.find(({ id }) => id === buildingId)!;
         const token = createHmac("sha256", publicTokenKey).update(this.runId + buildingId).digest("hex").slice(0, 12);
         if (this.publicTiles.has(token) && this.publicTiles.get(token) !== buildingId) throw new Error("Public tile token collision.");
@@ -161,7 +168,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         // Disk-only, hash-checked context. Virtual benchmarks never consult live caches.
         const cached = this.options.loadDebate ? this.options.loadDebate(buildingId)
           : this.options.virtual ? null : readCachedDebate(buildingId, this.mission.id);
-        const session = openSession(this.runId + ":" + (index + 1), this.clock.now());
+        const session = openSession(this.runId + ":" + (index + 1), this.clock.now(), this.options.votingMs);
         this.session = session;
         // Construct the public projection explicitly; no mission/building object is spread into it.
         this.state = { missionId: this.mission.id, source: this.options.source, phase: "voting",
@@ -183,14 +190,17 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         let difficulty: "easy" | "hard" | "misleading" | undefined;
         if (this.options.source === "sim") {
           const tileSeed = seed ^ Math.imul(index + 1, 0x9e3779b1);
-          const scenario = createTileScenario(tileSeed, truth ?? "possibly damaged", this.options.crowd?.raidProbability);
+          const scenario = (this.options.gradedWork ?? !this.options.virtual)
+            ? liveScenario(tileSeed, truth, building.expert_grade, this.options.crowd?.raidProbability)
+            : createTileScenario(tileSeed, truth ?? "possibly damaged", this.options.crowd?.raidProbability);
           difficulty = scenario.difficulty;
           const votes = simulateVotes(crowd, truth ?? "possibly damaged", tileSeed, session.id,
             { hardAccuracyMultiplier: this.options.crowd?.hardAccuracyMultiplier,
               raidProbability: this.options.crowd?.raidProbability, scenario });
           for (const vote of votes) {
-            await this.clock.wait(Math.max(0, session.openedAt + vote.delayMs - this.clock.now()), signal);
-            this.acceptVote(vote.messageId, vote.userId, vote.label, session.openedAt + vote.delayMs);
+            const delay = Math.floor(vote.delayMs * (session.closesAt - session.openedAt) / 15000);
+            await this.clock.wait(Math.max(0, session.openedAt + delay - this.clock.now()), signal);
+            this.acceptVote(vote.messageId, vote.userId, vote.label, session.openedAt + delay);
           }
         }
         await this.clock.wait(Math.max(0, session.closesAt - this.clock.now()), signal);
@@ -227,11 +237,11 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
         if (this.options.source === "twitch") {
           const result = decision.weighted;
           const text = result.status === "validated"
-            ? "Tile " + (index + 1) + ": VALIDATED " + result.label + " (agreement " + result.agreement.toFixed(2) + ", " + result.voters + " voters)"
-            : "Tile " + (index + 1) + ": REFUSED (" + result.reason + "), sent to experts";
+            ? "Tile " + (index + 1) + ": validated " + result.label + " (" + Math.round(result.agreement * 100) + "% agreement, " + result.voters + " voters)"
+            : "Tile " + (index + 1) + ": refused (" + (result.reason === "low_agreement" ? "chat split" : "too few voters") + "), sent to expert review";
           try { await sendChat!(text); } catch { this.emit("warning", "Tile result could not be sent to Twitch."); }
         }
-        if (index + 1 < limit) await this.clock.wait(5000, signal);
+        if (index + 1 < limit || this.options.pauseAfterLast) await this.clock.wait(this.options.pauseMs ?? 5000, signal);
       }
     } catch (error) {
       if (this.fault) throw this.fault;

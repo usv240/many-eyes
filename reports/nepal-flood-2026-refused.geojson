@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "attribution": "Imagery: Vantor via OpenAerialMap, CC BY-NC 4.0. Damage grading: © European Union, Copernicus Emergency Management Service (EMSR927). Buildings: © OpenStreetMap contributors, ODbL.",
+  "source": "simulated crowd",
+  "runId": "fb204a6a-030e-478e-87ff-98dc353eccd7",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3358042,
+          28.1620696
+        ]
+      },
+      "properties": {
+        "building_id": "cems-0082",
+        "label": null,
+        "agreement": 0.6190476190476191,
+        "voters": 10,
+        "decided_at": "2026-11-02T04:48:08.120Z",
+        "gold": false,
+        "ai_label": "destroyed",
+        "reason": "low_agreement"
+      }
+    }
+  ]
+}

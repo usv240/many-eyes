@@ -76,7 +76,7 @@ and `user:write:chat` scopes. The bot uses outbound connections; it does not bin
 
 Set optional `TWITCH_CLIENT_SECRET` to refresh an invalid token or one with less
 than ten minutes remaining at startup. Refreshed tokens replace their entries in
-`.env`. Without the secret, run `twitch token -r <refresh token>` when prompted and
+`.env`. Without the secret, run `twitch token -R <refresh token>` when prompted and
 update `.env`. Credentials and Twitch response bodies are never logged.
 
 EventSub deduplicates the most recent 10,000 notification IDs. A server-directed
@@ -225,3 +225,24 @@ with no overlap into the tally. Screenshots are in `reports/overlay/phase5-*.png
 
 Model and API references: [OpenAI model catalog](https://developers.openai.com/api/docs/models)
 and [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+
+## Recording and mission exports
+
+`npm run demo:video` plays six fixed tiles with seed 20, 8 s voting and 3 s result pauses, finishing in about 66 s. Leave the completion screen up to record about 75 s. The overlay continues to say Simulated crowd. The searched plan and reasons are in `scripts/video-plan.json`; this intentionally selected run is not a benchmark. Its events append to `data/video-ledger.jsonl` only. At completion, ledger replay generates `reports/nepal-flood-2026-{validated,refused}.geojson`, the mission report and its provenance manifest. `npm run report` regenerates them; `npm run verify` compares the outputs and checks all three ledgers. The six-tile video exports are demonstration inputs for expert review, not operational mapping results.
+
+### Limits: live simulation assumption
+
+For live simulation only, a Damaged work tile uses destroyed as the crowd's private truth at hard difficulty. A Possibly damaged work tile keeps a shared 50/50 truth at hard difficulty. These are assumptions for generating simulated votes, not binary expert grades. They never supply ledger labels or change consensus.decide(), and they do not enter published benchmark metrics. The benchmark remains gold-only and unchanged. Misleading tiles achieve 0% weighted accuracy in the ten-viewer benchmark; they comprise 10% of the difficulty mix, not 0% of tiles. Shared errors remain a limitation.
+
+Twitch CLI refresh uses `twitch token -R <refresh token>` (`--refresh`); lowercase `-r` revokes a token. Never paste token values into logs or reports.
+
+
+<!-- MISSION-NUMBERS:START -->
+| Measurement | Result | Source |
+|---|---|---|
+| One viewer alone (simulated, Herfort 2019 rates) | 75.9% | Honest-voter raw accuracy; [benchmark](reports/bench.md), bench ledger replay |
+| Ten viewers with three trolls, weighted by hidden checks (simulated) | 89.2% on 81.3% validated | [Benchmark](reports/bench.md), bench ledger replay |
+| AI alone (real API measurement) | 73.8% (destroyed 100.0%, intact 47.5%) | gpt-6-luna; 2026-11-01; [cached predictions](reports/ai-alone.json) |
+| AI false alarms on intact buildings | 52.5% | 21/40 intact hidden checks; same API measurement |
+<!-- MISSION-NUMBERS:END -->

@@ -14,9 +14,9 @@ export type Decision = Scores & (
 );
 export const VOTING_MS = 15000;
 
-export function openSession(id: string, openedAt: number): TileSession {
-  if (!id || !Number.isFinite(openedAt)) throw new Error("Invalid tile session.");
-  return { id, openedAt, closesAt: openedAt + VOTING_MS, closed: false, votes: [] };
+export function openSession(id: string, openedAt: number, durationMs = VOTING_MS): TileSession {
+  if (!id || !Number.isFinite(openedAt) || !Number.isSafeInteger(durationMs) || durationMs <= 0) throw new Error("Invalid tile session.");
+  return { id, openedAt, closesAt: openedAt + durationMs, closed: false, votes: [] };
 }
 
 export function collectVote(session: TileSession, vote: Vote, at: number): TileSession {

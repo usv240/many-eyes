@@ -1,0 +1,33 @@
+{
+  "missionId": "nepal-flood-2026",
+  "seed": 20,
+  "voters": 10,
+  "votingMs": 8000,
+  "pauseMs": 3000,
+  "tiles": [
+    {
+      "buildingId": "cems-0052",
+      "reason": "Destroyed hidden check; chat validates and matches experts."
+    },
+    {
+      "buildingId": "osm-w850782564",
+      "reason": "Intact hidden check; chat validates and matches experts."
+    },
+    {
+      "buildingId": "osm-w1554274567",
+      "reason": "AI predicted destroyed; chat validates intact."
+    },
+    {
+      "buildingId": "cems-0082",
+      "reason": "Ambiguous work tile splits chat and is refused for expert review."
+    },
+    {
+      "buildingId": "cems-0083",
+      "reason": "Damaged work tile is validated destroyed by the simulated crowd."
+    },
+    {
+      "buildingId": "osm-w1553017131",
+      "reason": "Closing intact hidden check before the completion screen."
+    }
+  ]
+}
