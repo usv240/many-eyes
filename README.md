@@ -4,6 +4,10 @@
 
 Website: https://usv240.github.io/many-eyes/ · Code: https://github.com/usv240/many-eyes · Built for the Codex x TwitchCon Hackathon 2026
 
+![The Many Eyes overlay: before and after photos of one building, two AI debaters, and a validated result where the AI alone said destroyed and the experts graded the building intact](site/public/img/overlay-decided.jpg)
+
+**Judging in a hurry?** Open the [website](https://usv240.github.io/many-eyes/) and judge six real buildings yourself (no install), or follow [Try it in 2 minutes](#try-it-in-2-minutes-no-keys-needed) and open http://localhost:5180 (no keys needed). Codex built the core in session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`; see [How it was built](#how-it-was-built).
+
 ## In 60 seconds
 
 After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. After the Nepal flood of 26 August 2026, the Humanitarian OpenStreetMap Team's AI scored over 1,000 buildings in 48 hours, published as "not yet human validated". Checking is the bottleneck.
