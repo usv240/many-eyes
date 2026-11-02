@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: the central roof is gone, with grey sediment covering the area beside the road.",
+      "box": [
+        184,
+        169,
+        50,
+        48
+      ]
+    },
+    "skeptic": {
+      "claim": "The pale roof by the road remains visible, though much of the surrounding area is now grey sediment.",
+      "box": [
+        142,
+        181,
+        45,
+        43
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:36.894Z",
+  "cropHashes": {
+    "pre": "34b9866385889d0e4a9952bbf42ba745c64b0f856f771d7be04f26566e6a64af",
+    "post": "b8c58a4d450d56d8a0d7eec1b56fcd1c063e05ae14d95d1bd41f8f497436e457"
+  }
+}

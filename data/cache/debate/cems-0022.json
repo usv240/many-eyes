@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment covers the former roof and nearby fields.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image shows no clear roof or walls, but uniform sediment makes the building outline uncertain.",
+      "box": [
+        125,
+        125,
+        110,
+        110
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:11.196Z",
+  "cropHashes": {
+    "pre": "ae01bfc9a246dee1445aabd1f9fb0879ebb37be0168c0800db7f93340e63bb45",
+    "post": "fb7631efc5dcc92bc4038ff16326a7656390f01d5190a67d43d759a0725d65d3"
+  }
+}

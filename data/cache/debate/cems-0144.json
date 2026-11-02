@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central ring; the former roofs and surrounding tree cover are no longer visible.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the after image shows grey sediment, not a visible roof or nearby road.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:22.784Z",
+  "cropHashes": {
+    "pre": "63b8a4f82b96c10c952af808f72b86d932b3d80e9ba2e56f0a2f44886a9edac6",
+    "post": "9524185c2fb806012a28f1801395424a695521a5a8fa25e19a943f81256b6660"
+  }
+}

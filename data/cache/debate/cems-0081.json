@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the former roof area, and the nearby road and buildings are no longer visible.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains in the grey sediment covering the centre.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:15.204Z",
+  "cropHashes": {
+    "pre": "1d9ee43ef6be164ab8041f329a44cdc65f7931897f83f0a3a6bee48d233fc6e8",
+    "post": "2a4baa18e295c9b3c6ba34d07c36e39bf93d42368ab522ff038a42879b5ccaf5"
+  }
+}

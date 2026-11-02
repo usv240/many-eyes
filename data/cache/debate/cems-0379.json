@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central red roof remains, though grey debris and sediment appear along its right side.",
+      "box": [
+        147,
+        96,
+        106,
+        98
+      ]
+    },
+    "skeptic": {
+      "claim": "The main red roof is still visible in the same position and shape; nearby grey sediment alone does not show destruction.",
+      "box": [
+        134,
+        112,
+        63,
+        94
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:14.286Z",
+  "cropHashes": {
+    "pre": "2fdcba55d5f1c93ffd982ceee21c1b463679bfb44d7e4450b5e3bcfb1b87e9e9",
+    "post": "6cca0071041b09e9e505e0d3d57be5dfc1ab9e924e80dedbf13b066600645809"
+  }
+}

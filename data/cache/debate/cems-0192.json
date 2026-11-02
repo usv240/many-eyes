@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: broad grey sediment replaces the central roof and nearby vegetation.",
+      "box": [
+        205,
+        0,
+        179,
+        283
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark tree canopy remains at the centre, but no clear intact roof is visible.",
+      "box": [
+        199,
+        212,
+        64,
+        59
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.92
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:30.680Z",
+  "cropHashes": {
+    "pre": "ee2afa396f73c95ada69a6cf3be65047010178b33f9687038f34fb5d2aeb7d87",
+    "post": "0578e14d280282ecb2196cf509e29f996290e9575d1530621d29ce3333f9431e"
+  }
+}

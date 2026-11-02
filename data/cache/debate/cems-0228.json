@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is no longer visible; broad grey-brown sediment occupies the area beside the road.",
+      "box": [
+        173,
+        165,
+        72,
+        66
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former central roof is obscured by sediment, though nearby roofs remain visible.",
+      "box": [
+        173,
+        165,
+        72,
+        66
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:47.036Z",
+  "cropHashes": {
+    "pre": "066c8ad2b88c2250fbcb10ddbf302cbe4ff37f7567bf6489daed86c2e51f09c6",
+    "post": "cc870204595e3d5aaac0952794cbb74b13be0d8ebb22e7308b56070647a3bc5f"
+  }
+}

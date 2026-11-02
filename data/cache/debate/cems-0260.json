@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment and rubble replace the red and pale roofs in the centre ring.",
+      "box": [
+        146,
+        143,
+        92,
+        84
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image is unclear; a dark patch and uneven shadow could obscure the roof rather than prove loss.",
+      "box": [
+        145,
+        143,
+        92,
+        84
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:55.823Z",
+  "cropHashes": {
+    "pre": "95fe20dec7db97004c3fb94e8f7780e16aa3c2719cc3eb8476b159e660b55583",
+    "post": "bbeff5b4cbc24f894a145344f56e11e0eb98909dbed7bdcc2633b4a4ab19d3d7"
+  }
+}

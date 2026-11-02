@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: the central roof is gone, replaced by broad grey sediment.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "A faint dark roof-like patch remains, but grey sediment makes intact difficult to support.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:12.072Z",
+  "cropHashes": {
+    "pre": "9236e0ab23c686f18aaab55712f85bfc4123effd9e067e30cbd04f07719a89c7",
+    "post": "4c18ffc622d7d526fe9c9ad1ae0bb34a1c38ae1eac2e0f7214a2eb9b6dcfef91"
+  }
+}

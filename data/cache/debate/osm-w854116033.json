@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "A small tan roof visible before is absent after, with vegetation covering its former spot.",
+      "box": [
+        145,
+        119,
+        42,
+        40
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the after image shows no clear roof, though dense foliage makes the change uncertain.",
+      "box": [
+        140,
+        112,
+        54,
+        54
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.58
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:42.155Z",
+  "cropHashes": {
+    "pre": "4e14feb04c473b589ccba1d63ad1ec48dc0e4ee0ec27c61e5bcc07f45e7338fb",
+    "post": "3cfd759937bac8616e65fd69ff9519a6418a11f2a580b42304492c98d007b40f"
+  }
+}

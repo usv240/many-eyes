@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the bright roof is replaced by a muted patch amid grey sediment.",
+      "box": [
+        172,
+        198,
+        82,
+        74
+      ]
+    },
+    "skeptic": {
+      "claim": "A small pale roof-like spot remains among trees, though surrounding sediment has changed substantially.",
+      "box": [
+        208,
+        201,
+        40,
+        40
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:59.993Z",
+  "cropHashes": {
+    "pre": "1202ce41317e2b77dde4fa01c328f305f4d87e90cecedccb3cf1774dcb455aab",
+    "post": "83c4a88f0769314e33a060f0fcf6a3538577e5d67d1e56c68fdbb63adf4dab49"
+  }
+}

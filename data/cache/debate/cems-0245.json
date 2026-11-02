@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment has spread across the central area, and the former roof is no longer clearly visible.",
+      "box": [
+        130,
+        150,
+        93,
+        100
+      ]
+    },
+    "skeptic": {
+      "claim": "Some blue and pale roof panels remain among the central structures, though the area is heavily altered.",
+      "box": [
+        136,
+        155,
+        82,
+        76
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.81
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:54.836Z",
+  "cropHashes": {
+    "pre": "917a7cd01af2926cdad376d3eacfc28b1830a6ab103cb983542a629417fa552e",
+    "post": "818cc9ca61443f24406e62b948dac984f126b76cb2f6462c22b417ada9f7f743"
+  }
+}

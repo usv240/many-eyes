@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is partly obscured by grey debris, with disturbed bare ground beside the road.",
+      "box": [
+        174,
+        181,
+        82,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale rectangular roof remains beside the road; nearby trees and road appear broadly unchanged.",
+      "box": [
+        131,
+        218,
+        79,
+        65
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.61
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:47.706Z",
+  "cropHashes": {
+    "pre": "7c7c08e2b646ad1f99c24104604f2caf0387e6d401ac3adcb76fec48624b69fb",
+    "post": "fdf9431b207e00a646da6d93607978a15d92344c5cabb13b76fe873fba8ad150"
+  }
+}

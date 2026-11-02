@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; pale grey sediment and open ground replace the clustered roofs seen before.",
+      "box": [
+        148,
+        164,
+        81,
+        77
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former roof area looks open and grey, though nearby roofs remain.",
+      "box": [
+        148,
+        164,
+        81,
+        77
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.88
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:43.532Z",
+  "cropHashes": {
+    "pre": "a45ae0cc14e2958865a0b49e0c80fc1c8722e36b6c53f85bdd0880a3633e77bc",
+    "post": "c7a18d82f5547a759046e5a39a7892687c809dae9dfad63040514d80bf64407f"
+  }
+}

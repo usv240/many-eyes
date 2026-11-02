@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central red roof remains, though grey sediment reaches the nearby road.",
+      "box": [
+        155,
+        148,
+        57,
+        55
+      ]
+    },
+    "skeptic": {
+      "claim": "The red roof and pale roof sections remain visible among trees beside the diagonal road.",
+      "box": [
+        154,
+        145,
+        64,
+        65
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.87
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:11.103Z",
+  "cropHashes": {
+    "pre": "82ef1acd1d2630246793ead660997e1f0624b8921f8d5800790c507938fec391",
+    "post": "e6711593337293ba61cae23bb63ac227e2ab92696bc0f9807e006a568af1bfe0"
+  }
+}

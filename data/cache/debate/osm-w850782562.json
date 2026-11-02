@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks more broken and pale in the after image, with exposed light sediment beside it.",
+      "box": [
+        223,
+        229,
+        60,
+        73
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a broad grey roof, and the adjacent road and trees look largely unchanged.",
+      "box": [
+        228,
+        233,
+        53,
+        67
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:33.922Z",
+  "cropHashes": {
+    "pre": "e68301bb330df637ba65def7f67b0d4c270fcf2201291911b1042aea2c05f7e0",
+    "post": "a95e2dc5905481a7a8a19c69ff7be407cdd535387408e0f02fde435882a4b7c0"
+  }
+}

@@ -1,3 +1,4 @@
+import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { appendFileSync, closeSync, existsSync, mkdirSync, openSync, readFileSync, renameSync, writeFileSync, readSync, unlinkSync } from "node:fs";
 import { dirname } from "node:path";
@@ -44,6 +45,8 @@ function promoteHead(path: string, state: { lines: number; head: string }, opera
 
 /** Both the full-line chain and record checksums are verified, including the final record. */
 export function verify(path = LIVE_LEDGER_PATH, operations: HeadOperations = {}): { lines: number; head: string } {
+  // Large ledgers may ship compressed (the 84 MB benchmark ships as .gz); unpack once so a fresh clone can verify.
+  if (!existsSync(path) && existsSync(path + ".gz")) writeFileSync(path, gunzipSync(readFileSync(path + ".gz")));
   if (!existsSync(path)) {
     if (existsSync(path + ".head") || existsSync(path + ".head.tmp")) broken(1);
     return { lines: 0, head: GENESIS };

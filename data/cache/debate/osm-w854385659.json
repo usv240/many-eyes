@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks partly broken up, with pale debris or sediment around the blue-roofed structure.",
+      "box": [
+        148,
+        117,
+        81,
+        94
+      ]
+    },
+    "skeptic": {
+      "claim": "The blue roof remains visible in much the same place, and nearby roads and trees look largely unchanged.",
+      "box": [
+        151,
+        118,
+        70,
+        67
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:43.567Z",
+  "cropHashes": {
+    "pre": "d343c973be4fb5b3938ee222a778c23c5ab9f0e7270500eb49429ceb99b432bc",
+    "post": "1d11723d1dd227765c02e80bddd86f406fe56bea19ae94e84c0a09458a1072dc"
+  }
+}

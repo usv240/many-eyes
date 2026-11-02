@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof looks patchy and dark, with pale debris or sediment around it.",
+      "box": [
+        145,
+        207,
+        115,
+        89
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has light roof panels and a defined footprint beside the road; dark areas may be shadow.",
+      "box": [
+        145,
+        208,
+        100,
+        76
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.58
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:44.386Z",
+  "cropHashes": {
+    "pre": "244f1f60dbdb816fa4ff7126208195565ed545804a6c408f34a1b025e72f3540",
+    "post": "eeeb26180ec628effe012c66377a60874702f5aa0d27e063408ae51794955de1"
+  }
+}

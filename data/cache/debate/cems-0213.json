@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof changes from dark and irregular to pale, fragmented panels, with grey sediment surrounding it.",
+      "box": [
+        151,
+        165,
+        99,
+        76
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale roof remains beside the curved road; nearby red roofs and tree cover also persist.",
+      "box": [
+        153,
+        166,
+        98,
+        63
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.62
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:41.016Z",
+  "cropHashes": {
+    "pre": "54eef018838ce89176eb31c3d3df67659f18e82fd31ca88b56e719076d2dd21d",
+    "post": "add76de12f50e6cfdede48d0ae0873d09fb5b41a3d85269c3d18440edbf0a11c"
+  }
+}

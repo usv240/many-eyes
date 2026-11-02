@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken and dark in both photos; after, grey debris and sediment cover more of the building.",
+      "box": [
+        145,
+        169,
+        82,
+        85
+      ]
+    },
+    "skeptic": {
+      "claim": "A red roof patch and pale roof sections remain visible after; the nearby road and trees are still present.",
+      "box": [
+        170,
+        179,
+        75,
+        64
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.62
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:26.800Z",
+  "cropHashes": {
+    "pre": "abb719421c0184a5f09728a6742813c39dbdcd8a0d454db17b92536db1d3d71d",
+    "post": "6599d8ac372140e4871a1b3e9f6cfee55ab1913814cc1b69cb3913fb6492db6b"
+  }
+}

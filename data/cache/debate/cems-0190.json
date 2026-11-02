@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is partly replaced by pale debris and grey sediment in the after image.",
+      "box": [
+        165,
+        260,
+        88,
+        88
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image still shows roof sections and building-shaped walls; much of the pale area may be exposed ground.",
+      "box": [
+        165,
+        260,
+        88,
+        88
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:29.367Z",
+  "cropHashes": {
+    "pre": "bec8a2abb0d018dd2c5defb1a5ce2a09320fca7530ea949873e48179971aff08",
+    "post": "f9e3702c9d2b5186ba6329ad8b585bafe22945322f388a577a4146353cbb7cc2"
+  }
+}

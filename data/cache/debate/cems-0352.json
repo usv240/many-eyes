@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof is partly replaced by blue and pale patches, with grey sediment covering the surrounding area.",
+      "box": [
+        104,
+        179,
+        94,
+        79
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a visible roof and walls; the road remains beside it, though the roof appears altered.",
+      "box": [
+        104,
+        179,
+        94,
+        79
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.63
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:04.023Z",
+  "cropHashes": {
+    "pre": "aa33a7ff93c0683e39ca4a82ed4f09e256148e842efd57494e86a918d1b81cf8",
+    "post": "31e07ed30e69dce6f52a44934699d0556da4cf99f45454dcd8d8e417d4505780"
+  }
+}

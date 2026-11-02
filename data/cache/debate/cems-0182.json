@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof area looks pale and broken up after, with grey sediment where darker roof sections appeared before.",
+      "box": [
+        145,
+        146,
+        67,
+        69
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof panels remain visible after; the nearby road and building outlines are still present.",
+      "box": [
+        150,
+        151,
+        54,
+        49
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:24.801Z",
+  "cropHashes": {
+    "pre": "c5a545868bd49e327c9b87cd79465116a0178dc02581c56afe199f3e3d587a80",
+    "post": "f1f5af0a8b99bb9fe6e97c766bcfb3e5d860798dc4173959deafda6d4c62ea85"
+  }
+}

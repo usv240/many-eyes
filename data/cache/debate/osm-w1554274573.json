@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The orange roof is gone; pale rubble and exposed sediment now cover the central building.",
+      "box": [
+        164,
+        107,
+        66,
+        108
+      ]
+    },
+    "skeptic": {
+      "claim": "The dark rectangular roof remains at the north end, so some of the building appears intact.",
+      "box": [
+        168,
+        101,
+        59,
+        53
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:31.291Z",
+  "cropHashes": {
+    "pre": "7afe3e1579e000d826874b2600ddd81046bcd02bcc4ba6c90f017361f3deca8f",
+    "post": "3d5b4ecd1443aaafcd1578211be62a9563ef1b7707406c6353e1c28b7970deb8"
+  }
+}

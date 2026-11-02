@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken and pale debris or sediment spreads across the building area after.",
+      "box": [
+        151,
+        178,
+        101,
+        103
+      ]
+    },
+    "skeptic": {
+      "claim": "The blue roof and adjoining roof sections remain visible; trees and shadows obscure changes, so intact is plausible.",
+      "box": [
+        99,
+        207,
+        70,
+        80
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.64
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:38.281Z",
+  "cropHashes": {
+    "pre": "f2d47cc8598d38f97904229a0052cd88b4a6bcc0eb21d04cdb2ddbc37c2beece",
+    "post": "9a61e1c29787efa9ec9dc4ec85fe4fb92f4a3e39e541232d15dc52a2128feab4"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken and patchy after, with pale rubble-like areas replacing the more continuous roof.",
+      "box": [
+        135,
+        213,
+        53,
+        64
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building remains a compact rectangular structure beside the road, with roof sections still visible.",
+      "box": [
+        135,
+        213,
+        53,
+        64
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:46.838Z",
+  "cropHashes": {
+    "pre": "7d5fd6720ee3340ee49be69f9e9c29713b31728adf5d6b9bcc7d60fba7440820",
+    "post": "770121807e0a35a1ee9b6faa82b59b40fbee357b8bc98d1fa8054abfd373c510"
+  }
+}

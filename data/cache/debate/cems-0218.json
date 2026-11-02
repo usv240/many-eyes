@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into pale fragments, with broad grey sediment filling the area around it.",
+      "box": [
+        115,
+        115,
+        101,
+        106
+      ]
+    },
+    "skeptic": {
+      "claim": "A compact pale roof still shows among the central buildings, though sediment makes intactness uncertain.",
+      "box": [
+        133,
+        119,
+        83,
+        81
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.86
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:42.125Z",
+  "cropHashes": {
+    "pre": "1f1631618b4930d0034f07d39598fba398cf041e5414d8849fcc9b8ab98a99f7",
+    "post": "6a84cb32bc36f4c3a3cbe6ab0ca0b8b62f9a40a4f2f7e272e502cf6dc9a1cf07"
+  }
+}

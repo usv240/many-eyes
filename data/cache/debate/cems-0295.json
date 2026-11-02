@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; grey sediment now covers the building site.",
+      "box": [
+        146,
+        143,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the after image shows sediment, with no visible roof or clear building outline.",
+      "box": [
+        130,
+        120,
+        110,
+        110
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:57.994Z",
+  "cropHashes": {
+    "pre": "94fa662cb0f3453af53eb11dae35cfaae81b91004c75358bb79f5036e5ce9015",
+    "post": "d2bbb652c13ff830379150ac98417cf2fd9276ff08d105b69dde6eaed8803bf5"
+  }
+}

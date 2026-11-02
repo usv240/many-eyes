@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The dark roof is broken up, with pale sediment spreading across the central building area.",
+      "box": [
+        142,
+        239,
+        89,
+        81
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof remains visible beside the red roof; the building footprint still looks largely intact.",
+      "box": [
+        143,
+        232,
+        91,
+        91
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:28.656Z",
+  "cropHashes": {
+    "pre": "28cccb5876578279b3b7d70ae550f4432e6ab68024cac54a912cf93ca2286bb2",
+    "post": "3b9a07639b51da8452c4ef2ab1e1e6fb04c9859a2574f1410abbaf887c4b6f26"
+  }
+}

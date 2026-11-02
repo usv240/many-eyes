@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the former roof area, with no clear building outline remaining.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is not visible beneath the grey sediment.",
+      "box": [
+        140,
+        130,
+        110,
+        120
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:08.921Z",
+  "cropHashes": {
+    "pre": "28176dbace0ea6ccbd4f2d70e6b76f1fc1dfdf0456ce128cd77bc221c82bab9a",
+    "post": "c115d0a4a2a9f75385e0b945c79dfac8b97f06f1093afddc2e791c3392b17f5c"
+  }
+}

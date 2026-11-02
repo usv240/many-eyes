@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken and patchy, with pale debris or sediment around it.",
+      "box": [
+        145,
+        154,
+        72,
+        77
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale, roughly rectangular roof remains visible at the centre, so intact is plausible.",
+      "box": [
+        160,
+        157,
+        56,
+        41
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.61
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:40.571Z",
+  "cropHashes": {
+    "pre": "36198cf875991082391b74740f9d7e9778ceac8e83436b909749cedd44bd4542",
+    "post": "6ed6b990cf57ca476f4ec1922775102f337f339326acfc2000b0b0f29cb79120"
+  }
+}

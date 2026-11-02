@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof looks pale and partly obscured, with grey sediment replacing visible roof detail.",
+      "box": [
+        166,
+        87,
+        64,
+        76
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a pale roof and defined edges; nearby road and trees remain visible too.",
+      "box": [
+        166,
+        87,
+        64,
+        76
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.65
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:33.567Z",
+  "cropHashes": {
+    "pre": "f8d933f706ce9ce2c4fea107ff83ccdfdd77b4b7ee703cd40f7d8589fc06ce48",
+    "post": "dc8f0e7b2eee203433e15361910bd9e17f9b981200995f7ac6c8d0979ea3f62b"
+  }
+}

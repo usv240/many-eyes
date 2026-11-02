@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central red roof is partly replaced by pale grey patches, suggesting roof damage.",
+      "box": [
+        202,
+        115,
+        50,
+        70
+      ]
+    },
+    "skeptic": {
+      "claim": "Much of the central red roof remains visible, and the surrounding road and trees look similar.",
+      "box": [
+        202,
+        115,
+        50,
+        70
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:13.665Z",
+  "cropHashes": {
+    "pre": "ac121e435d01930da199f029b05655e1eb212f4a621b67b603a73da11b749d06",
+    "post": "c34875747a1beb729a4958aeac00a97aa9b7ba1ec2a6a696ced7264fde0f12bc"
+  }
+}

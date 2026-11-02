@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment now surrounds the building, and its pale roof has uneven patches; this suggests damage.",
+      "box": [
+        101,
+        148,
+        183,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "The long pale roof remains largely intact in the same position, though grey sediment around it is conspicuous.",
+      "box": [
+        106,
+        153,
+        172,
+        77
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.66
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:02.700Z",
+  "cropHashes": {
+    "pre": "896505f40e5a2d4a5da51b25ffbd7637e683e0db67007f93b4b7a6885d714a60",
+    "post": "492564af4f9b0cf7edadf6b39b0aca195782f06a243e1cbd0fc24fd01d46d34b"
+  }
+}

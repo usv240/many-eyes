@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment replaces the central roof, with debris and dark roof fragments nearby.",
+      "box": [
+        145,
+        126,
+        111,
+        132
+      ]
+    },
+    "skeptic": {
+      "claim": "The lower central building still has a broad, pale roof and visible edges; it may remain intact despite sediment around it.",
+      "box": [
+        163,
+        209,
+        96,
+        91
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:19.635Z",
+  "cropHashes": {
+    "pre": "cf81621dca44be7d5596455a98b64558fec0a196e213aeb8499490f703042d3e",
+    "post": "0fcbdce4f25353e3c71ebb75af2b1f5d19d921f1fbf04e3627515c3573a3f6c9"
+  }
+}

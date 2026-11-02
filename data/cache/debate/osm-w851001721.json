@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; pale grey sediment and exposed ground replace the reddish roof seen before.",
+      "box": [
+        219,
+        322,
+        87,
+        62
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is mostly absent, though a small reddish patch remains amid grey debris.",
+      "box": [
+        224,
+        322,
+        79,
+        62
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.95
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:38.673Z",
+  "cropHashes": {
+    "pre": "643daef853b6ecabcb907d1f1bb46b87fdd60bc11043eef29f774acd0747d316",
+    "post": "0bec0aab0e5891aade6d3669620f0e14815b9db3e923b88000a177e405821fdd"
+  }
+}

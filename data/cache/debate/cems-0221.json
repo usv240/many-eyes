@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone in the after image; broad grey sediment now covers the building area.",
+      "box": [
+        168,
+        152,
+        70,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof-like blocks remain near the centre, so intact is possible, though the broad grey area is troubling.",
+      "box": [
+        151,
+        157,
+        55,
+        67
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:43.635Z",
+  "cropHashes": {
+    "pre": "29f476466eac210d2d10a80898174c4e5c1e918931b23151408b242ee72f3a79",
+    "post": "4179ce04b647c2c4d9b56ad1a72a06a301a27dea07ee83bf419d398d89ad6c7c"
+  }
+}

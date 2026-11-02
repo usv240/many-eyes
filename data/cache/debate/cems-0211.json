@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment has replaced the central roof, with debris-like marks nearby.",
+      "box": [
+        146,
+        179,
+        92,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former roof is not clearly visible beneath the grey sediment.",
+      "box": [
+        145,
+        181,
+        94,
+        78
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:39.555Z",
+  "cropHashes": {
+    "pre": "91ee728a5a07a53b2bb72e0752ae477370f596d6354ef153544bad620e6e9e43",
+    "post": "7f96f4dc55d7ad4704e05e2a98bb7ee3c27d93e36ff29be263697c486a7090ac"
+  }
+}

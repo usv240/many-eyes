@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central roof area; the earlier reddish roof is no longer visible.",
+      "box": [
+        145,
+        140,
+        78,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof looks fragmented, though nearby small roofs remain visible.",
+      "box": [
+        145,
+        140,
+        78,
+        83
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:53.018Z",
+  "cropHashes": {
+    "pre": "653189618065f62c81d1dc66691874916eb184a77588d7e3e5c3330f2e30e793",
+    "post": "e68ac213256a581d3ed47d58da3fd891de195bf977ea6755a82a671c450941a1"
+  }
+}

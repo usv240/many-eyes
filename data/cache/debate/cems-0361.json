@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue otherwise: grey sediment now covers the central building, replacing its distinct roof.",
+      "box": [
+        146,
+        143,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Intact is difficult to support; the after image shows sediment, with no visible roof or nearby trees.",
+      "box": [
+        120,
+        118,
+        145,
+        150
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:07.413Z",
+  "cropHashes": {
+    "pre": "9683eac97e61d47e1c82d1eeedb48ba8bbbcdf3110974ec412583314c3892ac0",
+    "post": "fb7529f7f0822e448b5b3f1ec47b50905f1290a5d0f062ce95858f727c7ef5b8"
+  }
+}

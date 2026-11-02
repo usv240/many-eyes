@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is replaced by a broad grey-brown sediment patch, with the dark roof edge still visible.",
+      "box": [
+        150,
+        148,
+        90,
+        105
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central area is mostly bare grey-brown ground rather than a clear roof.",
+      "box": [
+        150,
+        148,
+        90,
+        105
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.79
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:24.548Z",
+  "cropHashes": {
+    "pre": "db30b4bef9b06cd19e36e3d9301ecd6a2418d27959147a955f0965ba1516ce91",
+    "post": "4b9df9ddf8a8c365409451267a1527a123e77f2ed7b597d9235c487329fbb054"
+  }
+}

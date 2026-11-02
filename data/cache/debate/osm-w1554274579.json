@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small central roof looks less distinct; pale disturbed ground appears where the roof was.",
+      "box": [
+        178,
+        178,
+        62,
+        50
+      ]
+    },
+    "skeptic": {
+      "claim": "A small brown roof remains near the centre, with nearby pale roofs still visible.",
+      "box": [
+        212,
+        177,
+        32,
+        39
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.63
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:32.417Z",
+  "cropHashes": {
+    "pre": "648257fe324fa2b4f4cc9f478f34e54a186de09f6024c49ea745f3e42561d6eb",
+    "post": "28f62d16280841c06f11f6d53f3e501ed70ba8cad377a3242426de6920923777"
+  }
+}

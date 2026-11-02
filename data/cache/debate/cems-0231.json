@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central pale roof is broken into irregular debris, with grey sediment around it after the change.",
+      "box": [
+        110,
+        238,
+        65,
+        51
+      ]
+    },
+    "skeptic": {
+      "claim": "The pale roof remains a coherent rectangular shape; the nearby road and red-roofed building also remain visible.",
+      "box": [
+        108,
+        236,
+        67,
+        54
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.65
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:48.532Z",
+  "cropHashes": {
+    "pre": "84fb646c4971382a090e03f99d859afd659006407103ca9ac040f3a955f5d8ff",
+    "post": "d51657bb0520418e1b8a90915c5bcd3feba0dcd45b8f9d9991eca9eb017d22b2"
+  }
+}

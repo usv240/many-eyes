@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small light roof is gone; broad grey sediment covers the central area.",
+      "box": [
+        116,
+        78,
+        179,
+        209
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains, only grey sediment across the central area.",
+      "box": [
+        116,
+        78,
+        179,
+        209
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:12.900Z",
+  "cropHashes": {
+    "pre": "481eb4573e8ee9e200eae50448f29e6700ee86aaaf23371d696610a5fea9b8fb",
+    "post": "7b19652c3c3410b3f1362c2f45e7f8e4362ac51323d15fa26200d371df280942"
+  }
+}

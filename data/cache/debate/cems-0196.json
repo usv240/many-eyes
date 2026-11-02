@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central dark roof area is replaced by pale debris and grey sediment in the after image.",
+      "box": [
+        174,
+        304,
+        59,
+        65
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof-like patch remains near the trees, though the after image is muddy and hard to read.",
+      "box": [
+        185,
+        328,
+        41,
+        39
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.73
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:32.926Z",
+  "cropHashes": {
+    "pre": "19b550d914615cdee3689e9210e5bf4fba36583d95730e63bcaf6b75fe4bcf78",
+    "post": "44569c2dfc2ca54023e8080f37cdbde0d3a65d5a58a2b8243490f03c20b74dec"
+  }
+}

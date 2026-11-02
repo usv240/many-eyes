@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into pale debris, and grey sediment now surrounds the structure.",
+      "box": [
+        164,
+        137,
+        57,
+        64
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof looks fragmented, though the building footprint remains visible.",
+      "box": [
+        164,
+        137,
+        57,
+        64
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.84
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:51.089Z",
+  "cropHashes": {
+    "pre": "b64402e39b224e1c5e6e43507e5a525b2f4ab42698e47ed4bbcfb7ac961189ef",
+    "post": "10aaa02776e01dddc626ce8f00a31c5dc7fa4e52da9623cc69b9488eac5bd1d6"
+  }
+}

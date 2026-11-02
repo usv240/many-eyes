@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small roadside roofs are disrupted, with bare grey sediment replacing the clustered roofs and road-edge vegetation.",
+      "box": [
+        45,
+        155,
+        310,
+        170
+      ]
+    },
+    "skeptic": {
+      "claim": "The long central building still has a pale, largely continuous roof, with no clear collapse visible.",
+      "box": [
+        145,
+        246,
+        175,
+        82
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:05.204Z",
+  "cropHashes": {
+    "pre": "50b562e1039677cd9029c8e43c76f719fa8e6f827a58232a2ab6fae924b0120d",
+    "post": "58b6fb50c64eabdc482e1a6b5b67b733fd84880303f325bad4c447873b988f3f"
+  }
+}

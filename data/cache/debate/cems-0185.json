@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into dark fragments, with grey-brown sediment filling the former building area.",
+      "box": [
+        175,
+        184,
+        84,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof sections remain beside the road, so the building is not clearly gone.",
+      "box": [
+        190,
+        164,
+        55,
+        54
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:28.030Z",
+  "cropHashes": {
+    "pre": "b1c8bcba2037f9be37ff7fdd0eea55be25159e30051b82c6524dfc25db265620",
+    "post": "bd78becc190570b4bfcb527eb70dd528c6ee239b46c72d71b0430d7b2d8346af"
+  }
+}

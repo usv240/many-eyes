@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The pale roof is gone; grey sediment and disturbed ground cover the former building site.",
+      "box": [
+        165,
+        143,
+        78,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains, though trees and vegetation obscure the site.",
+      "box": [
+        165,
+        143,
+        78,
+        82
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.86
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:58.745Z",
+  "cropHashes": {
+    "pre": "f09c719c9d33e9d6eb23678bf3ade5abd2fab78b5214bb58f6feb4e5a917a3ce",
+    "post": "6db458373d6d53d3037660ff3f0913cb147ebdfff4105ff4272f4dd72653ca1b"
+  }
+}

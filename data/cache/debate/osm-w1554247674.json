@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks dark and uneven, but there is no clear visible evidence it was destroyed.",
+      "box": [
+        140,
+        155,
+        49,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "A distinct red roof remains in the same spot, with its edges intact and no obvious debris.",
+      "box": [
+        140,
+        155,
+        49,
+        57
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:28.799Z",
+  "cropHashes": {
+    "pre": "ee3170aad10301ad155b185bd62c4af9d2abd175168e9435c1ac920492653efc",
+    "post": "acdb38a449d3e434d0755ecd524d2134a642549fef6bfb3b2559e713386fbca9"
+  }
+}

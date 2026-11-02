@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken and pale debris or sediment spreads around it in the after image.",
+      "box": [
+        140,
+        117,
+        54,
+        61
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the after roof remains partly visible, but its edges look damaged and pale debris surrounds it.",
+      "box": [
+        141,
+        120,
+        44,
+        42
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:27.488Z",
+  "cropHashes": {
+    "pre": "98ab7accafb3a8673a9b9bffe08c2191c32f1f76b71de65f6306ac02672de3be",
+    "post": "17d7e6fae0f28cf921d89281df46a657a00cd6aca2718acc9778a557760a296c"
+  }
+}

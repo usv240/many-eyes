@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The blue roof beside the road disappears; grey sediment covers the central building area.",
+      "box": [
+        145,
+        220,
+        85,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains, though rubble-like texture is ambiguous.",
+      "box": [
+        145,
+        220,
+        85,
+        83
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.89
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:22.740Z",
+  "cropHashes": {
+    "pre": "9039a5b18b359181d071810431aa1c6831f05218f3335c0c960cb9003ee92bf4",
+    "post": "63fbfd1af880234fc144ba2f051043217cb82ba3c7ebcca9a3abe2fcb41b06ff"
+  }
+}

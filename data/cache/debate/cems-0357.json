@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the after image shows a blue roof where the before image shows a grey roof.",
+      "box": [
+        229,
+        239,
+        78,
+        67
+      ]
+    },
+    "skeptic": {
+      "claim": "The blue roof remains beside the road, and the adjacent pale roof also appears intact.",
+      "box": [
+        229,
+        238,
+        78,
+        68
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:05.853Z",
+  "cropHashes": {
+    "pre": "3c4d120820ef5a24cd3d1066885428b91c8ab06b6db9224c456062ab19fcdfd2",
+    "post": "648bb34024a6d1cc3ad3815f2e59c1d5df03538960de83e2a926ee86a39c9807"
+  }
+}

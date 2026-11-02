@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; broad grey sediment covers the former building area in the after photo.",
+      "box": [
+        146,
+        151,
+        98,
+        91
+      ]
+    },
+    "skeptic": {
+      "claim": "A red roof remains beside the central area, though the broad grey sediment makes an intact-building case weak.",
+      "box": [
+        81,
+        164,
+        45,
+        32
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:38.951Z",
+  "cropHashes": {
+    "pre": "e8996bd7a2038e465386e8d65ccce69017ac302f758d6e4374a57270528bec2f",
+    "post": "cf8ccd0422df0f99173e6a0e4e3f01e4f22948c40d3a86112899fbba74688184"
+  }
+}

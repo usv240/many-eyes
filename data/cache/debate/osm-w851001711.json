@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The orange roof is gone; the after image shows a pale, debris-covered roof area.",
+      "box": [
+        148,
+        201,
+        49,
+        66
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof section remains at the north end, so some roof is still visible.",
+      "box": [
+        147,
+        164,
+        50,
+        43
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.93
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:36.588Z",
+  "cropHashes": {
+    "pre": "ac474981f9e8414a355ef84ef47e05891d9b85f1f15f97f1b3310fc4f656bde8",
+    "post": "3e88fb21c2480e0b7379892f93f442adcf2f0c95f42794dc6addc28ab5b635d7"
+  }
+}

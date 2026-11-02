@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central orange roof is partly obscured by green-grey material, suggesting roof damage, though it remains visible.",
+      "box": [
+        162,
+        118,
+        49,
+        72
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a distinct orange roof, with its outline and nearby road largely unchanged.",
+      "box": [
+        164,
+        117,
+        53,
+        76
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:13.443Z",
+  "cropHashes": {
+    "pre": "c030ed885b38ebdee1c4528970962cb4c47e862286cda1a9f4d64dee05eaf013",
+    "post": "159b3c3e9a4708c28023b9ed212e8a260bb38c1956021c92b6aedc6c632b03cb"
+  }
+}

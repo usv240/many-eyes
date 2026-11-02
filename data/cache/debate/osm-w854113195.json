@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks darker and more broken up after, with pale debris or sediment around it.",
+      "box": [
+        167,
+        151,
+        49,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "The same long roof and nearby road remain visible; the roof appears largely intact despite color changes.",
+      "box": [
+        166,
+        157,
+        49,
+        82
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.65
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:40.051Z",
+  "cropHashes": {
+    "pre": "3c803edbbd8afd47b567187823612936b2397dbe71f8a5daf869bc2b81dcafcc",
+    "post": "1f140329df629a1bc756323901304c4ab95e8d0302122df47e93a55bcafadbb7"
+  }
+}

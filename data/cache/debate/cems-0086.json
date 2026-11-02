@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "After, grey sediment surrounds the central roof, and its dark roof section looks damaged compared with before.",
+      "box": [
+        143,
+        137,
+        86,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "The pale central roof remains visible after, with a similar outline; nearby trees and road look largely unchanged.",
+      "box": [
+        143,
+        137,
+        86,
+        83
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.62
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:17.442Z",
+  "cropHashes": {
+    "pre": "694cd58d47f12872db53769186018d0c5834bdf8e4ee4b12d36e1cbf15416882",
+    "post": "e87c1b783400cfef285f6141198736a528d15b1d5fcca503fd10e5c6e3969118"
+  }
+}

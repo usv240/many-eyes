@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central dark roof is gone, replaced by pale rubble and grey sediment.",
+      "box": [
+        197,
+        169,
+        77,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "The pale central roof sections and nearby walls remain visible; a dark roof patch is still present.",
+      "box": [
+        198,
+        168,
+        84,
+        89
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:26.459Z",
+  "cropHashes": {
+    "pre": "c9874b81c8a2d3666e684074ae32f856e72dda67b91048ab03585ad88f103813",
+    "post": "50cea6237483ca0b23d06ecf9ee7b784c1cb945faca2f3f42a2aa25ebe32c62a"
+  }
+}

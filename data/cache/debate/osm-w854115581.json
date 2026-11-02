@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken into pale rubble, with scattered debris replacing its earlier roof surface.",
+      "box": [
+        176,
+        187,
+        64,
+        76
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof is still partly visible, though much of it looks damaged.",
+      "box": [
+        176,
+        187,
+        64,
+        76
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:41.236Z",
+  "cropHashes": {
+    "pre": "79c3b189fa30b86b32e35c12db84423325d751103dd65f742e84db6fb5a763d4",
+    "post": "26019337062a226d9a992970c6a109df1642d2dce9101ab652a2140c021370ff"
+  }
+}

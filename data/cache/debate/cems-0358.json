@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment replaces the small roof, while the nearby road and tree remain visible.",
+      "box": [
+        165,
+        162,
+        65,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is not clearly visible, though a pale patch could be debris or a roof.",
+      "box": [
+        165,
+        162,
+        65,
+        57
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.93
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:08.319Z",
+  "cropHashes": {
+    "pre": "330dc20652bc8d9c3aef0a29e4656d509edac56f78caeb243b9282b0bb1d2163",
+    "post": "2e17b0052efbfc0146f2e5cc8b02ae71584ed7a05bf41061202ae754b6d1d1b4"
+  }
+}

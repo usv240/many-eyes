@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks more broken and mottled after; nearby pale debris or sediment appears along its edge.",
+      "box": [
+        146,
+        166,
+        71,
+        106
+      ]
+    },
+    "skeptic": {
+      "claim": "The blue roof remains clearly present after, with a similar shape; no obvious collapse or broad sediment replacement.",
+      "box": [
+        142,
+        171,
+        78,
+        102
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:38.455Z",
+  "cropHashes": {
+    "pre": "0fc624b21293528b7cce0704c43627401ad3feef1f9b500e150d9f8fb5a7649c",
+    "post": "bf1a50d03f6815c57b02997a258f39cb44d819fbc4b02c3e6c851689dd7e47e8"
+  }
+}

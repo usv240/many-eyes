@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof is replaced by pale rubble and grey sediment in the after image.",
+      "box": [
+        123,
+        197,
+        92,
+        89
+      ]
+    },
+    "skeptic": {
+      "claim": "Some intact walls and roof fragments remain, but the central building is difficult to call intact.",
+      "box": [
+        124,
+        193,
+        89,
+        94
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:53.427Z",
+  "cropHashes": {
+    "pre": "148d7f2c5320737289b0c32f0ac7725e666ba85f6875457a7ac231672fd4eb55",
+    "post": "81d30e8782508bc6132a234b35535075fb82118f9d46d8fc2e4e7043fccda932"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small red roof is mostly gone; pale grey sediment fills the site beside the road.",
+      "box": [
+        171,
+        165,
+        63,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "A small red roof remains beside the road, though grey sediment obscures much of the surrounding site.",
+      "box": [
+        172,
+        168,
+        52,
+        47
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:07.938Z",
+  "cropHashes": {
+    "pre": "3b4d33cdaea086406576f5638f42a648038b8c4f7400454eab11f19406fce157",
+    "post": "cd4f7811e4f0b22115e9d5b8a9352d3ba23b2a87eeae61429b77b45e4491502b"
+  }
+}

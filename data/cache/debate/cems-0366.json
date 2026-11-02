@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central red roof is gone; grey sediment now covers the area beside the road.",
+      "box": [
+        155,
+        145,
+        68,
+        62
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the red roof appears replaced by grey sediment, though small red roofs remain.",
+      "box": [
+        155,
+        145,
+        68,
+        62
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.95
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:07.940Z",
+  "cropHashes": {
+    "pre": "dceb15bfe0963126f021e1ced25ad5042b5f916f8246507f0ce8ceba54a39fee",
+    "post": "5936525933134a64b74bdbfe05ed4afbc7eb86d19b50ac17ba3b2730ace166c6"
+  }
+}

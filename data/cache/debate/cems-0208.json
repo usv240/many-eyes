@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment replaces the central roof, and nearby green ground is bare.",
+      "box": [
+        197,
+        147,
+        90,
+        87
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale roof remains beside the road, though sediment and bare ground make intact difficult to support.",
+      "box": [
+        92,
+        79,
+        77,
+        53
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.79
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:37.619Z",
+  "cropHashes": {
+    "pre": "1ac1e2481ff38edc418fc9c72d7aae16de9b030ba0c6a6c63e53f40f3f6e0197",
+    "post": "51bef86c9bf849d3d76d505549adf1a26f17d432f6bc6a74cdbd8e29d4244075"
+  }
+}

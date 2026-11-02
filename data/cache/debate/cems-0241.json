@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into pale fragments, with grey sediment replacing much of its dark roof.",
+      "box": [
+        99,
+        204,
+        81,
+        78
+      ]
+    },
+    "skeptic": {
+      "claim": "The same roof footprint and several dark roof sections remain visible, so intact is still possible.",
+      "box": [
+        98,
+        203,
+        83,
+        79
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.79
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:52.792Z",
+  "cropHashes": {
+    "pre": "7eb181b515a92593fa0bc5a5f127b73e043ed59fb2d0e3afbbf744ae51346879",
+    "post": "07393068b1cf23f28375273508b12e414a691ac618f8d22a7a250f8d6867b9f8"
+  }
+}

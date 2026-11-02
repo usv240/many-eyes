@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment replaces the roof, and the surrounding trees are gone.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image is uniformly grey; no distinct roof or building shadow remains to support intactness.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:58.682Z",
+  "cropHashes": {
+    "pre": "e9034462784e82d4cc9a4b7dce4483b5dfc62bd55b7db8d338411dc1ff84bdae",
+    "post": "020593319c2905a95bb78b15de6c05ff1c0812ed8244d081d329ec39e67ab3d0"
+  }
+}

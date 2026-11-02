@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone, replaced by pale sediment across the building footprint.",
+      "box": [
+        144,
+        119,
+        92,
+        93
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: pale sediment covers the roof, though the square roof outline remains visible.",
+      "box": [
+        144,
+        119,
+        92,
+        93
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:17.422Z",
+  "cropHashes": {
+    "pre": "df0af32836871ae7518d7febc1ced29a2e70523780d03b8fa6fb35a5fe65a90f",
+    "post": "547e1f485eb7bd26baeb86df7d47506a6f8a9e59fca30f05b9d8f225a74e34da"
+  }
+}

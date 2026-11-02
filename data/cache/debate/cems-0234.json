@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken up after, with pale sediment and debris replacing much of its dark roof.",
+      "box": [
+        215,
+        212,
+        72,
+        63
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a compact dark roof outline, so intact is plausible despite surrounding sediment.",
+      "box": [
+        215,
+        212,
+        72,
+        63
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:49.953Z",
+  "cropHashes": {
+    "pre": "61f76ed78c229311846695c4f49e0b656689efe340e2893c44676b2a8530e324",
+    "post": "4ffc9a1e08fd26c27d0d427d7e80dcaf5bb9f15fdfc059703d393d5e0cf16dfa"
+  }
+}

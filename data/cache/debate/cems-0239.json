@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof still shows pale rectangular sections, though debris and dark gaps are visible.",
+      "box": [
+        116,
+        220,
+        82,
+        89
+      ]
+    },
+    "skeptic": {
+      "claim": "The central roof remains partly intact, with pale roof panels and a defined building outline amid debris.",
+      "box": [
+        116,
+        220,
+        82,
+        89
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.62
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:51.902Z",
+  "cropHashes": {
+    "pre": "0052e0f7853d5aba5720d31176351f45198255c3701bd3756a614b3dd1380cdb",
+    "post": "29cc2f4c5816453a7dda4e77a0f711b55eef6d01188776a6c3f743d3ae8ba053"
+  }
+}

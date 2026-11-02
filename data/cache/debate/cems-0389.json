@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment and rubble cover the former upper roof area, while the orange-roofed section remains visible.",
+      "box": [
+        180,
+        75,
+        105,
+        112
+      ]
+    },
+    "skeptic": {
+      "claim": "The lower orange roof and adjoining roof sections remain visible, so some of the central building appears intact.",
+      "box": [
+        120,
+        214,
+        93,
+        110
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.86
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:18.056Z",
+  "cropHashes": {
+    "pre": "c6e7fb1aeb8487ad5522315301819004a0044803f83e404dada141a2116fdc8a",
+    "post": "f8e95fdd036e24cf2fa9b1690d54e2c76b8b4a37973f3e5e99872d35b9dfd3f6"
+  }
+}

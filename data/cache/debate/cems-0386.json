@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the red roof remains, though grey debris or sediment covers part of the building.",
+      "box": [
+        208,
+        191,
+        82,
+        95
+      ]
+    },
+    "skeptic": {
+      "claim": "The central red roof and adjoining orange roof remain visible, with no clear change to the building.",
+      "box": [
+        211,
+        190,
+        91,
+        103
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.76
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:16.688Z",
+  "cropHashes": {
+    "pre": "891dff5d735adc3a24feb5132c6c9802b7a67993651c2ee3bd14920fa92ea351",
+    "post": "7259cf77e633b7259a9fed4f43b1efc81ccb8b4e708b481996090b221a1224ec"
+  }
+}

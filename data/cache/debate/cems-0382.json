@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The long red roof remains, but debris and pale sediment replace the roof area near the upper-right side.",
+      "box": [
+        280,
+        22,
+        82,
+        67
+      ]
+    },
+    "skeptic": {
+      "claim": "The central long red roof and adjacent red-roofed building still appear intact, with no clear collapse.",
+      "box": [
+        157,
+        128,
+        120,
+        164
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.64
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:15.328Z",
+  "cropHashes": {
+    "pre": "c181d858f8793add0f9915dbb12cf49051bb65f6fa1b48c75721312a9a7b990a",
+    "post": "b4bfafc93885e76c40cca684309beadcf4a3444e9c5a3c9e5dba6b5970912270"
+  }
+}

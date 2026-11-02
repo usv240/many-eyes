@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is no longer clear; grey-brown sediment and disturbed ground occupy its former spot.",
+      "box": [
+        164,
+        159,
+        73,
+        67
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale roof remains beside the curved road, though it looks shifted and partly obscured.",
+      "box": [
+        168,
+        149,
+        69,
+        76
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:45.593Z",
+  "cropHashes": {
+    "pre": "d27c415a555f4cd3d357890794a1cbe71462dc3475803dcf0114f02a947006fc",
+    "post": "5c613c1e8234589af9554a22cabb0808a35eaa1cd0a2a6e767a0abf5be9fbc0f"
+  }
+}

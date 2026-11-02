@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The blue roof inside the ring is gone; grey sediment covers its former spot.",
+      "box": [
+        145,
+        145,
+        94,
+        94
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof is obscured, with no clear roof or shadow remaining.",
+      "box": [
+        145,
+        145,
+        94,
+        94
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:23.106Z",
+  "cropHashes": {
+    "pre": "c8cde684aa2eca1d5f7eab41b3023b32a7ca42ef764a90994f473c2983ebdbef",
+    "post": "2d64455b15b728782548b225509770091041fbe1d71294108836e915a1cb1889"
+  }
+}

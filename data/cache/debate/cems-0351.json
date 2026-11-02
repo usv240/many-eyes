@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is mostly covered by bright blue tarp, with bare grey ground and sediment spread around the building.",
+      "box": [
+        145,
+        163,
+        70,
+        65
+      ]
+    },
+    "skeptic": {
+      "claim": "The building still has a visible roof beneath the blue covering; its walls and nearby road remain recognizable.",
+      "box": [
+        145,
+        163,
+        70,
+        65
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:02.951Z",
+  "cropHashes": {
+    "pre": "efe078ca288a7aa924fe619f22cef9f2a523ee060407738590eec365600a539b",
+    "post": "bba7be8e44d09bea8013d832dfbf58da0771829a65634910c5ffe66226d4702a"
+  }
+}

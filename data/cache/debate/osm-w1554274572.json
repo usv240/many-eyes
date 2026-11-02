@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken and pale rubble or sediment covers much of the building in the after photo.",
+      "box": [
+        177,
+        135,
+        57,
+        104
+      ]
+    },
+    "skeptic": {
+      "claim": "Some dark roof remains at the north end, so intact is possible, though the rest looks heavily damaged.",
+      "box": [
+        177,
+        135,
+        57,
+        104
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:30.680Z",
+  "cropHashes": {
+    "pre": "08091b3990b3b305473591f1a2728fcd2e3e7fe61a07d8c0ea3824debfbcaa13",
+    "post": "5d1ac76a3483d284849e32c70d8fbe728d05650ed59c5e15cbf793affcfdfd34"
+  }
+}

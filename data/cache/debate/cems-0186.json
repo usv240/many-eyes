@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "A pale grey debris-like patch replaces the central roof, with scattered material around it.",
+      "box": [
+        145,
+        195,
+        84,
+        75
+      ]
+    },
+    "skeptic": {
+      "claim": "Some rectangular roof sections remain visible, so the central building is not clearly gone.",
+      "box": [
+        145,
+        195,
+        84,
+        75
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:26.442Z",
+  "cropHashes": {
+    "pre": "a675df189f7b89e4db4d5e72cff5fe04d7e41c298d634e35a0e5216aefedc587",
+    "post": "76f5d7d2c44ac33ec35ed7ec6c83e8c7ab853ed957c0e9c28095cdef7f475e42"
+  }
+}

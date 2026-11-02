@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment covers the former roof and surrounding trees.",
+      "box": [
+        90,
+        95,
+        110,
+        100
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no roof or building shadow is visible beneath the grey sediment.",
+      "box": [
+        90,
+        95,
+        110,
+        100
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.96
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:20.833Z",
+  "cropHashes": {
+    "pre": "1378ea495cdce976a6d6578899445fd16cbd9d5698559d5ad64858edb9bb3e45",
+    "post": "a663a65815360fcf878c0849d0d3edddf7ba822cf9a2ee9e71563ec9d495b41a"
+  }
+}

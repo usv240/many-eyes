@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; pale rubble and grey sediment cover the building footprint after the change.",
+      "box": [
+        165,
+        252,
+        72,
+        72
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former roof is replaced by pale rubble, though nearby trees and roads remain.",
+      "box": [
+        165,
+        252,
+        72,
+        72
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.87
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:36.244Z",
+  "cropHashes": {
+    "pre": "9ea5551fa7284a495e5f9ba8d477505ccae3921370255587fa2379760235fec4",
+    "post": "8b244cf1bd275b0da05c99457b7c301eeef826f02ea86dd9cda6deadeb921d84"
+  }
+}

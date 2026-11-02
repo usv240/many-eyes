@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone; broad grey sediment covers the former building area.",
+      "box": [
+        146,
+        157,
+        92,
+        94
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof-like sections remain near the road, so intact is possible, though sediment obscures much of the site.",
+      "box": [
+        135,
+        143,
+        85,
+        85
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.86
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:41.637Z",
+  "cropHashes": {
+    "pre": "388e1a114f99127ea424f3d55a300601d5574595e12f443dc1c862d77af44a45",
+    "post": "7a1ac1314786136d2ac5aac76f96552abf0dd4bafcffb7d103b0d0d0b809fa88"
+  }
+}

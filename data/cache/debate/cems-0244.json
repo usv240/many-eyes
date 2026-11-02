@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into dark and pale fragments, with grey-brown debris where a roof should be.",
+      "box": [
+        149,
+        267,
+        80,
+        73
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof looks fragmented, though nearby road and tree cover obscure detail.",
+      "box": [
+        149,
+        267,
+        80,
+        73
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.88
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:54.430Z",
+  "cropHashes": {
+    "pre": "b4b1b9747fecbf0623203ecfc30dbedcff82cff504f09f94d9ec677f88997db2",
+    "post": "dbf4ecd25b1ceafea9052968a22d55896d9da07aad8a659246c0f6a5a4ab4c45"
+  }
+}

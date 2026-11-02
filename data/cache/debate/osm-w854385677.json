@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destruction: the former orange roof area now looks like exposed pale debris and sediment.",
+      "box": [
+        212,
+        126,
+        51,
+        60
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark rectangular roof remains at the north end, and the building’s footprint is still visible.",
+      "box": [
+        211,
+        87,
+        57,
+        42
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.74
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:46.085Z",
+  "cropHashes": {
+    "pre": "170daed9e509ad9c527eac1bbe1cb90472c3d849f93c27eb1803fcf53eeeff1b",
+    "post": "436416c14a4c2fe266f0028a0397cb66a811bd2492d0b277c13cd396f7cd9188"
+  }
+}

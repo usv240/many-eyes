@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof appears replaced by pale grey sediment, with dark debris along its edge.",
+      "box": [
+        151,
+        181,
+        56,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: a pale roof remains near the centre, though it looks altered.",
+      "box": [
+        91,
+        180,
+        65,
+        59
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:45.478Z",
+  "cropHashes": {
+    "pre": "c9687c303af916173aeb73771845867b92c52943792406e7392a5fa07f3d1827",
+    "post": "ba45a3f91772dfcc7b2684bda6135a9bdcea57ea3d761543488cafcb410d9191"
+  }
+}

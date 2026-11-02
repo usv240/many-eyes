@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small pale roof is gone; exposed grey sediment and rubble appear nearby in the after image.",
+      "box": [
+        82,
+        0,
+        184,
+        151
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former pale roof is not clearly visible, though trees obscure the central area.",
+      "box": [
+        174,
+        185,
+        42,
+        45
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.82
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:28.089Z",
+  "cropHashes": {
+    "pre": "9a0de6ba366b25a3aad5565e5493309e233451e09b5c4c854f4c0a03485a1d0d",
+    "post": "9b563a13c2b8b7b82b93a1f533d4a5644b50faa3535230ecc57bd3e0f2091fbe"
+  }
+}

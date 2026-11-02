@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central roof area, replacing the visible roof and surrounding greenery.",
+      "box": [
+        142,
+        111,
+        131,
+        103
+      ]
+    },
+    "skeptic": {
+      "claim": "A small grey roof remains visible near the centre, though sediment makes intact hard to argue.",
+      "box": [
+        181,
+        123,
+        65,
+        73
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.89
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:12.666Z",
+  "cropHashes": {
+    "pre": "bd90700d1c09f981b829a8027c1ad7b312b376a1c89a50c251f18404d0d1524c",
+    "post": "196208eb0a25876020bb3fc35e5c5964789a532815e46008a4868527bbb9de1d"
+  }
+}

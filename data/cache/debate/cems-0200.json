@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks fragmented in the after image, with pale debris or sediment replacing part of it.",
+      "box": [
+        174,
+        115,
+        52,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is still partly visible, but its condition is unclear amid the shadows.",
+      "box": [
+        174,
+        115,
+        52,
+        57
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.59
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:35.975Z",
+  "cropHashes": {
+    "pre": "a71f08131c363c4e5700050f9221e115dccc684df37e4371ef40f0747fcd66b1",
+    "post": "f146d5d820f1eb0f19d8eecf4d42e9e90a097207369ae6a35bddc6f9ba7cbc46"
+  }
+}

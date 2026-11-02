@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is obscured or gone, with broad grey sediment replacing the green area beside it.",
+      "box": [
+        220,
+        0,
+        164,
+        270
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: grey sediment covers the central area, and no clear roof remains visible.",
+      "box": [
+        220,
+        0,
+        164,
+        270
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.74
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:35.686Z",
+  "cropHashes": {
+    "pre": "9ea89e084ef49d40976bf1ce3326b99f9c16fca2fe92ed91ec4a5062ba6ccf93",
+    "post": "fdd7cdbd0daebed435b5e2a3f2805fc6ef8d6ac8d0bc6869350d20bb7d62bef2"
+  }
+}

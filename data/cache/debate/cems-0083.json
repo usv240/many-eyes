@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof remains visible, though grey sediment now surrounds it.",
+      "box": [
+        101,
+        39,
+        99,
+        99
+      ]
+    },
+    "skeptic": {
+      "claim": "The same pale roof and reddish outline remain; nearby trees and small structures also appear intact.",
+      "box": [
+        101,
+        39,
+        99,
+        99
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.84
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:15.666Z",
+  "cropHashes": {
+    "pre": "7cdf46fe7e407b8e60fe005941d947a73572111b7a963a31f81c24f53b98f68b",
+    "post": "88d6f1bceed85636c88f235e21ce0b7830617b12ab36f49773c992773007a826"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is partly replaced by pale debris and broad grey sediment in the after photo.",
+      "box": [
+        145,
+        250,
+        75,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "Blue and pale roof panels remain visible beside the central building, so some roof structure appears intact.",
+      "box": [
+        167,
+        273,
+        52,
+        50
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.74
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:27.939Z",
+  "cropHashes": {
+    "pre": "a35d62df9ca6c1123329c016cb69e9f6fb2e67c5731c88f5aa6e027c3d1e7768",
+    "post": "0ad9332d9bb9adf1faccda8063f579e7e1a46fd00cded6207ac9f5b29d3faddb"
+  }
+}

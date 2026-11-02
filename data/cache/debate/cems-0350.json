@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is now a bright blue patch, while broad grey sediment covers the ground around it.",
+      "box": [
+        176,
+        157,
+        75,
+        64
+      ]
+    },
+    "skeptic": {
+      "claim": "The roof remains in place beside the road; the blue covering could be an intact roof rather than destruction.",
+      "box": [
+        176,
+        157,
+        75,
+        64
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:02.922Z",
+  "cropHashes": {
+    "pre": "170922bb034a0fb1b0cfae0634e68b8066657d10c0b83e765cb9ba82d6900121",
+    "post": "05ee743fff7bdb5d89729c5797f0a1be298e024dfc878c32a727ded0e5028045"
+  }
+}

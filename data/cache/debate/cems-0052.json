@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central roof area that was red and blue before.",
+      "box": [
+        146,
+        138,
+        96,
+        108
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is obscured by broad grey sediment, with no clear roof visible.",
+      "box": [
+        80,
+        80,
+        220,
+        220
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.96
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:05:57.278Z",
+  "cropHashes": {
+    "pre": "7cc97ced11d0ad8cef57df0ef035dbdd363751ca00dcac23c8abd1711dc72051",
+    "post": "c274f2be6909f1ffc36dc17875d458eb796a6523d4b05ccc218dbe1e63f0e9d5"
+  }
+}

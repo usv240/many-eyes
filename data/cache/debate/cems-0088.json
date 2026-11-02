@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken and dark in the after image, with pale sediment-like ground beside it.",
+      "box": [
+        176,
+        230,
+        88,
+        85
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has a light roof and recognizable rectangular outline; its shape is largely unchanged.",
+      "box": [
+        178,
+        230,
+        83,
+        83
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:18.421Z",
+  "cropHashes": {
+    "pre": "ab242d754e64ef9d0ca96d4e5e490ffe56bd626484f9125206e620f6575105c1",
+    "post": "98440d6858833371820c94f6ef3efd74a3e893b8bd0b9ab78834db5f45a5ed88"
+  }
+}

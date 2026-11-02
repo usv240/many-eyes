@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The blue roof appears smaller, with pale sediment and bare ground spreading across the right side.",
+      "box": [
+        270,
+        135,
+        114,
+        249
+      ]
+    },
+    "skeptic": {
+      "claim": "A blue roof remains beside the road, though it looks smaller and intactness is hard to argue.",
+      "box": [
+        180,
+        165,
+        32,
+        38
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.69
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:23.855Z",
+  "cropHashes": {
+    "pre": "1defd5c795f03d60b2a347e111f82adce06fca8ff664777766b4ff6d43926f24",
+    "post": "e064166f2f20cb059fcf11c95238b903ab756b95776562995c92278195f71658"
+  }
+}

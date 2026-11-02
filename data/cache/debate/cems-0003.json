@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment and debris cover the former roof area.",
+      "box": [
+        135,
+        145,
+        65,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "The AFTER image shows no clear roof or intact building, so evidence for survival is weak.",
+      "box": [
+        130,
+        134,
+        75,
+        75
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:09.429Z",
+  "cropHashes": {
+    "pre": "f3ae869b37a358481a6a550817a07ba0478722e7394745598be3c16650cf8ec2",
+    "post": "0425775b81ef7db96178886312acea1c18949bfa6139e0a078de5b668b4e3ef8"
+  }
+}

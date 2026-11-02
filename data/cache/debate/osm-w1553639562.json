@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The dark roof in the before image is replaced by pale grey sediment across the site after.",
+      "box": [
+        111,
+        123,
+        155,
+        75
+      ]
+    },
+    "skeptic": {
+      "claim": "A small light roof remains visible near the centre after, so intact is possible despite the surrounding grey ground.",
+      "box": [
+        178,
+        143,
+        32,
+        30
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.82
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:29.085Z",
+  "cropHashes": {
+    "pre": "bd6ff1dba395d678485e6364cdb8fa3ed06b194adcb66f84ff26fa6f1f107f1a",
+    "post": "9216a1032526f95f50ca15ed38798be5510787700f442ea837ed2c7114cf7674"
+  }
+}

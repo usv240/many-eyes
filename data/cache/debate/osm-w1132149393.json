@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central rust-colored roof remains visible, but its surrounding roof sections look pale and damaged.",
+      "box": [
+        174,
+        176,
+        41,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "The rust-colored central roof and nearby pale roof sections remain in place beside the same road.",
+      "box": [
+        172,
+        175,
+        44,
+        85
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:25.217Z",
+  "cropHashes": {
+    "pre": "5ab0d4e9140e50d06d8604777a9bcb4a4cd42337635946da92212a6f7fff24e8",
+    "post": "ad96f1aefb420932aa9463b638f8c08a5bee89764696a1d0c21f7d4962d9e477"
+  }
+}

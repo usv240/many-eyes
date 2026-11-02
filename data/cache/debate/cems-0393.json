@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central red roof is gone; pale rubble and grey sediment now surround the building.",
+      "box": [
+        145,
+        157,
+        87,
+        95
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the former red roof is absent, though the pale central roof remains visible.",
+      "box": [
+        151,
+        211,
+        72,
+        70
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:20.416Z",
+  "cropHashes": {
+    "pre": "34e28d3725b0ef684d01fa2b5bf13202fe7f15533e179f1006ddcc869480598c",
+    "post": "52b934331b158ffd146a57b8eaf8f7fbc2988acfcb09e15bf63f8348cdd15e0c"
+  }
+}

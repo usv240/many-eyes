@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof is mostly gone, with pale exposed debris or sediment replacing it.",
+      "box": [
+        192,
+        145,
+        52,
+        48
+      ]
+    },
+    "skeptic": {
+      "claim": "The nearby dark roof and building outline remain visible, though the central roof looks disrupted.",
+      "box": [
+        255,
+        65,
+        48,
+        48
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.82
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:45.154Z",
+  "cropHashes": {
+    "pre": "c8263ffed7118bdb01704f4ee27ec13c9bd2105ea86ab4b96b001751d67642a7",
+    "post": "fc72b8933f601a0f8e73c5e2329097e0bc6db32d4b439eb5b64c3201db180256"
+  }
+}

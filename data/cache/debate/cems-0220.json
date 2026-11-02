@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destruction: the central roof is still visible, though surrounding ground looks more exposed.",
+      "box": [
+        151,
+        137,
+        77,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building retains a pale roof and dark roof sections; no clear collapse is visible.",
+      "box": [
+        151,
+        137,
+        77,
+        82
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.57
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:42.528Z",
+  "cropHashes": {
+    "pre": "e4355ab0e058d8bc1b7f296bed9fe009e5c51cde28356a73716fbc55af4e9bb3",
+    "post": "6e63ec22753a8a3e52f4ef2471eb1c920afdfdb94a6fc14e440b18949a40a317"
+  }
+}

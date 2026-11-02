@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The pale roof is replaced by a grey, exposed patch with sediment around it.",
+      "box": [
+        170,
+        151,
+        43,
+        58
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof looks altered, though nearby trees and road remain.",
+      "box": [
+        171,
+        151,
+        43,
+        58
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.76
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:42.390Z",
+  "cropHashes": {
+    "pre": "fb8e35021ba7c41f95d764e487c20115a0607d8772a59cf24cf545fdefa0065e",
+    "post": "b88edd9b17e790f5719a218de23a367a83ebfc0b0f7f77307bc74ad6fe6af952"
+  }
+}

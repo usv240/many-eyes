@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destruction: the central roof remains, though grey sediment and debris-like patches cover it.",
+      "box": [
+        178,
+        228,
+        171,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "The long central roof is still intact in shape, with visible roof panels beside the road.",
+      "box": [
+        178,
+        228,
+        171,
+        80
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.73
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:04.239Z",
+  "cropHashes": {
+    "pre": "e10e5054a15f50fb57d7d23d8484c07953f5a389bd36d7d459df1091c61b5e26",
+    "post": "dd3b3ca0d805b4012ad284d6739256d17912770d8da10e24e1782f0701c8560c"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The upper-right roof is gone; pale rubble and grey sediment now occupy the cleared area beside the road.",
+      "box": [
+        177,
+        0,
+        109,
+        95
+      ]
+    },
+    "skeptic": {
+      "claim": "The central red and orange roofs remain visible, with their shapes largely unchanged; the main loss is beyond the building.",
+      "box": [
+        79,
+        106,
+        111,
+        140
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:15.389Z",
+  "cropHashes": {
+    "pre": "41169e5eb631403bc62dd984850fbafbc39eec2637c0f4732fa5e89b9e7a6895",
+    "post": "db5ef9ec61072b4c67b992997a4e2ba99c000f542eab4fbeb25a016d6b188271"
+  }
+}

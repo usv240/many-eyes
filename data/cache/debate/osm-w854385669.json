@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof appears reduced to scattered pale debris, with surrounding vegetation and bare ground visible.",
+      "box": [
+        163,
+        188,
+        57,
+        49
+      ]
+    },
+    "skeptic": {
+      "claim": "A small pale roof remains near the center; nearby trees and roads look broadly similar.",
+      "box": [
+        165,
+        190,
+        52,
+        43
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.64
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:44.427Z",
+  "cropHashes": {
+    "pre": "b98ebbf3befbac883058092855ca126daab6675914ce80b722a0d1478dff2ec5",
+    "post": "1a3370c36c14818d96a039bfe357bafa6c61b1660613fb48a22d74bb3f9f8640"
+  }
+}

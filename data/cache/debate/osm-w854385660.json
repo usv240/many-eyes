@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken into pale, uneven patches, with grey debris or sediment replacing a clear roof surface.",
+      "box": [
+        167,
+        178,
+        82,
+        89
+      ]
+    },
+    "skeptic": {
+      "claim": "The same central roof footprint and nearby road remain visible; pale roof sections could be intact, though damage is plausible.",
+      "box": [
+        167,
+        178,
+        82,
+        89
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:44.303Z",
+  "cropHashes": {
+    "pre": "9f0d046f5283b7cdc9899c942e7f34b6c2b56fe34999fee9e721504cc41846ac",
+    "post": "7090a23d63e30cb753c689bfe39eeaa6bc8529be8dd61021379f77f2fe315c0e"
+  }
+}

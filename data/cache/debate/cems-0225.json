@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment replaces the central building’s roof, with debris-like patches where the roof was.",
+      "box": [
+        151,
+        145,
+        92,
+        93
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof-like surfaces remain near the ring, but the former roof is obscured by grey sediment.",
+      "box": [
+        142,
+        143,
+        104,
+        106
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.75
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:45.978Z",
+  "cropHashes": {
+    "pre": "3bbb569edab428ffac4c2448d0e6fc42a81080c19418e3d7bcab132311bf929c",
+    "post": "ca8ef59c21d7433704ef58acf262dab7bec7e8f44917755ce8ad71518182775c"
+  }
+}

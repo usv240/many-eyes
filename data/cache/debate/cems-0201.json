@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey debris and disturbed ground replace the central building's roof; its former roof outline is no longer clear.",
+      "box": [
+        173,
+        164,
+        58,
+        70
+      ]
+    },
+    "skeptic": {
+      "claim": "Some pale roof-like sections remain beside the road, so the central building may be partly intact; evidence is weak.",
+      "box": [
+        177,
+        177,
+        47,
+        53
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:35.345Z",
+  "cropHashes": {
+    "pre": "07b2ce036f25a7328249cb12dc9d145f2002be356a3c916cfba27136859eb731",
+    "post": "b3d48b720f6f61f1373fa321d79fa6f65e06b95776928245ac8b5b6f1b661c3c"
+  }
+}

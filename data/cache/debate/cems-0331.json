@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment and disturbed ground replace the bright roof visible before.",
+      "box": [
+        0,
+        0,
+        112,
+        384
+      ]
+    },
+    "skeptic": {
+      "claim": "A small bright roof remains near the centre, though it is faint among the disturbed ground.",
+      "box": [
+        184,
+        178,
+        34,
+        29
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:59.781Z",
+  "cropHashes": {
+    "pre": "2cdd1031653c70e7f05c51c99f551c6a896655d39547f6eb3fe5268da9d214a8",
+    "post": "d37d4eb797193d3a0e8fa263b9c82298c3d494eac12b119486475a60fe24edeb"
+  }
+}

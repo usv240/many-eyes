@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks smaller and partly obscured; pale sediment now spreads beside it.",
+      "box": [
+        143,
+        125,
+        81,
+        62
+      ]
+    },
+    "skeptic": {
+      "claim": "The blue roof and narrow dark roof remain visible in similar positions, supporting an intact building.",
+      "box": [
+        145,
+        127,
+        75,
+        58
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.57
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:23.416Z",
+  "cropHashes": {
+    "pre": "908bf367ffcccdef54ecc7ea23e8437a6929f547163614a726f7b3c1cd689d17",
+    "post": "c0a134498409816ac6bab4372a231138e26d44311bfb1400acccbd3050071445"
+  }
+}

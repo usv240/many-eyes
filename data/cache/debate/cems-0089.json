@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central roof still shows pale panels, though some look displaced.",
+      "box": [
+        161,
+        151,
+        60,
+        68
+      ]
+    },
+    "skeptic": {
+      "claim": "The central pale roof remains visible after, with nearby road and trees in similar positions.",
+      "box": [
+        162,
+        153,
+        58,
+        62
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:19.220Z",
+  "cropHashes": {
+    "pre": "c30cbc6cad690d555caf9d35878d7de104e6eb9c1b42dac4a4d3db3e22b99c76",
+    "post": "bd1ba2c876930bf676d79c1f62c461975f62f32cb80e351e0aaeb24e68e59c15"
+  }
+}

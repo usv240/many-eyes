@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central building’s former roof, while nearby roof structures remain visible.",
+      "box": [
+        146,
+        55,
+        68,
+        63
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof is obscured by broad grey sediment, with no clear intact roof visible.",
+      "box": [
+        135,
+        45,
+        95,
+        95
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:41.287Z",
+  "cropHashes": {
+    "pre": "fdb30cfa19fa9a3534b0817b9a8bcf3983bb71056f00fec9b63b45fa8c9fc914",
+    "post": "6047709a91ab02bcb7fa22afcf2b89923a815821ee0e1841ce5413d25f9f5832"
+  }
+}

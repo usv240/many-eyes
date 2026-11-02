@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment has spread beside the small pale roof, which looks reduced after the change.",
+      "box": [
+        174,
+        160,
+        65,
+        65
+      ]
+    },
+    "skeptic": {
+      "claim": "The pale roof remains visible among trees, and the nearby curved track is still discernible despite surrounding sediment.",
+      "box": [
+        165,
+        145,
+        85,
+        110
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:21.395Z",
+  "cropHashes": {
+    "pre": "76b6a6982a83e23517d2a0eea7ec2988f98d0972791d647350d55b9073e352c2",
+    "post": "8625ba416162e8567b5c8399105b770d0d4cdb170123fe094a0c3ca1a59a5e6b"
+  }
+}

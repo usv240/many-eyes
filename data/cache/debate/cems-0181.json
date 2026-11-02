@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is mostly absent; broad grey-brown sediment and debris occupy the former building area.",
+      "box": [
+        195,
+        231,
+        103,
+        105
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof outline and clustered pale roof sections remain, so some structure may still be standing.",
+      "box": [
+        203,
+        246,
+        67,
+        72
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.74
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:24.710Z",
+  "cropHashes": {
+    "pre": "7803f29d56af8d442ba049ff1f56e626b6bde93aba77baa918fccb9d63a78034",
+    "post": "04fb8506275337043911496da3058791dfb7c4489332b45ce444b2e41180adab"
+  }
+}

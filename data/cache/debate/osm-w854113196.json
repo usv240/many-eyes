@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks more broken and grey in the after image, with pale sediment around its lower edge.",
+      "box": [
+        178,
+        112,
+        55,
+        87
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building remains in place; its rust-striped roof and curved road beside it are still visible.",
+      "box": [
+        177,
+        109,
+        61,
+        102
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:40.607Z",
+  "cropHashes": {
+    "pre": "7204716da28a89d1b127af95aa11e64b4c33cc347c643680c8fa31f61a1270d9",
+    "post": "c8c20f9dbc03fbac93298cd8c51febda6a65a1fdcee72521dbe0f0761e646105"
+  }
+}

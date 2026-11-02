@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The roof remains orange, but grey rubble and disturbed ground replace the upper roof area.",
+      "box": [
+        232,
+        49,
+        93,
+        72
+      ]
+    },
+    "skeptic": {
+      "claim": "The central orange roofs remain largely intact, with no clear roof collapse visible.",
+      "box": [
+        128,
+        101,
+        119,
+        209
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:17.423Z",
+  "cropHashes": {
+    "pre": "c5f600c52bc9896740d2952358bc2f5121fdbe4ffa4e12476af54f2104990d58",
+    "post": "e5a6e74d4a337cfae0cc5c4d320233b45b6abc84a3dd452a019f51b1103f947a"
+  }
+}

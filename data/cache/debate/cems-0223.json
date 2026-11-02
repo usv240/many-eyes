@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central dark roof is gone, replaced by broad grey sediment.",
+      "box": [
+        146,
+        143,
+        81,
+        88
+      ]
+    },
+    "skeptic": {
+      "claim": "Some roof fragments remain near the ring, though the central area looks heavily covered by sediment.",
+      "box": [
+        148,
+        147,
+        76,
+        79
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.87
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:44.187Z",
+  "cropHashes": {
+    "pre": "ac3aea6ffd67b68c2f3254f17c8595f15c4c324741e096414a0f9a7e26ebb7c9",
+    "post": "d7e5cadf6158f8ba11cebc2f44f130dcffcb8a3b1b9951ca318657a47d9a0c79"
+  }
+}

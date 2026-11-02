@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey, uneven sediment covers the central roof area, replacing the distinct reddish roof visible before.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the after image shows no clear roof, only grey sediment and indistinct shadows.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:13.706Z",
+  "cropHashes": {
+    "pre": "f0d0272d65ac04e523236d1ff63657c0047eeabea7c4c19d298d5662462213dd",
+    "post": "0e38dfb9ce802b08e2f6ee0c548c0918f331124e0ab2f5cd37837e2fac5d16ce"
+  }
+}

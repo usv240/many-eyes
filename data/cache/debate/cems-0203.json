@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment replaces much of the green field, but the central roof is partly visible.",
+      "box": [
+        146,
+        145,
+        92,
+        94
+      ]
+    },
+    "skeptic": {
+      "claim": "The small pale central roof remains visible beside the road, with no clear collapse in this view.",
+      "box": [
+        168,
+        157,
+        51,
+        41
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:35.389Z",
+  "cropHashes": {
+    "pre": "9621cc03d6b64eeca0cb9ab71fc96cdd107f6e42d11721a4bdceb94735e4855d",
+    "post": "c27fba5fc03a9e308605c1a664ef0cf52359a80abe52ac374f00c35511cdf2ae"
+  }
+}

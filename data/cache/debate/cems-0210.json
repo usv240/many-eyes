@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destruction: a pale roof remains near the centre, though grey sediment covers much of the surrounding area.",
+      "box": [
+        93,
+        126,
+        62,
+        53
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale roof is still visible near the centre, but the area to its right is now broad grey sediment.",
+      "box": [
+        93,
+        126,
+        62,
+        53
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.63
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:39.346Z",
+  "cropHashes": {
+    "pre": "0a23170c844a517ca5178344b2fdc09baea02bd4e5a0fae22d5393d629f70a41",
+    "post": "32751e15ce0262a7cbeb2bba94cb7a5f49fcae11338e9d6d34659796c12eb50e"
+  }
+}

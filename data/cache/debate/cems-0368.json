@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: a broad grey, bare surface replaces the trees beside the small red roof.",
+      "box": [
+        180,
+        180,
+        204,
+        204
+      ]
+    },
+    "skeptic": {
+      "claim": "The small central red roof remains visible after, with nearby trees and the road still in place.",
+      "box": [
+        145,
+        164,
+        70,
+        78
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:09.536Z",
+  "cropHashes": {
+    "pre": "b8167762abe07959176761a2a82c97ada89f6737a828e00082522040e6e9b3fc",
+    "post": "b8babda9223d82765d36753b6deb759bf819e82e983c3425db7fd90d317dc3ab"
+  }
+}

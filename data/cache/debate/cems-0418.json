@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: grey sediment covers the former roof, with only a small tree patch at the edge.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "skeptic": {
+      "claim": "The AFTER view shows no roof or building outline, only grey sediment; there is little visible evidence for intactness.",
+      "box": [
+        0,
+        0,
+        384,
+        384
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:24.326Z",
+  "cropHashes": {
+    "pre": "1bcde778ef181013d20528f3f16f903d0cb72fcddcdfccda2ef0ce46903f7ba0",
+    "post": "94016e73f9ad4460611a7691ba6ced9c018e91b885e4c82650c8f6754c55b37d"
+  }
+}

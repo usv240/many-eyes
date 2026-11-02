@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue intact: the roof is gone, replaced by broad grey sediment and scattered debris.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "The after image is uniformly muddy, so building edges are hard to separate from sediment.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.98
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:11.016Z",
+  "cropHashes": {
+    "pre": "d348ea7ee3209c9257faa0fc59cd8069b69ba9aa506d9ec0c28cb87148d6f40f",
+    "post": "ebe008a60159931b0cd2d2a8912dc1747b7ffa9f71b0f1bc64927255152e817b"
+  }
+}

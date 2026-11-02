@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the left side of the central area, while the small roof seen before is no longer clear.",
+      "box": [
+        80,
+        135,
+        125,
+        120
+      ]
+    },
+    "skeptic": {
+      "claim": "The central pale roof remains visible among green vegetation, so the building may still be intact.",
+      "box": [
+        172,
+        180,
+        35,
+        48
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.66
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:01.005Z",
+  "cropHashes": {
+    "pre": "f7fe8329f49ad4aef3d56fceac085f42a689df92de54a16e11a01c062e4ed1d3",
+    "post": "c1ae03a30a23a7316e6983e173fb5d87537b924e39dbbc994ae476125b2fefeb"
+  }
+}

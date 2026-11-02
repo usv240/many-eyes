@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central building’s orange roof appears partly replaced by pale grey debris or sediment in the after image.",
+      "box": [
+        169,
+        136,
+        66,
+        49
+      ]
+    },
+    "skeptic": {
+      "claim": "The orange roof sections and adjacent roof shapes remain visible; the surrounding road and trees also look largely unchanged.",
+      "box": [
+        155,
+        28,
+        112,
+        135
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.69
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:12.060Z",
+  "cropHashes": {
+    "pre": "e880ddad2084ec0128a6756c0e4eb7da27db82031c3f491ba479864dec6b731c",
+    "post": "72490f5b3360aea0edca685ebbb433c572ca0cd6b15c012b64bdb04d07127ac5"
+  }
+}

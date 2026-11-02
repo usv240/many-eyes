@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken up, with pale debris or sediment where a solid roof appeared before.",
+      "box": [
+        178,
+        155,
+        42,
+        83
+      ]
+    },
+    "skeptic": {
+      "claim": "The narrow central roof remains visible beside the road, though its condition is unclear.",
+      "box": [
+        178,
+        155,
+        42,
+        83
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.76
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:25.865Z",
+  "cropHashes": {
+    "pre": "b1be587ddd5c3bd4e07946caf8326e857eec2ea93ae1151b5a74e63450ca16a7",
+    "post": "d067cc7474fb4d31660d669fdd2e7ecf014e68e83bfc9386167b8af4172d0292"
+  }
+}

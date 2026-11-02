@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central grey roof remains visible, though surrounding sediment has expanded.",
+      "box": [
+        145,
+        167,
+        57,
+        57
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building's muted roof is still present, with no clear roof collapse visible.",
+      "box": [
+        145,
+        167,
+        57,
+        57
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.7
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:10.499Z",
+  "cropHashes": {
+    "pre": "b7494e874010856f85bfde1723b13c33235b7d30ac93dfe4bf703975ee50f418",
+    "post": "bc041284c4b16a63097ee68fd1243bcc677f084590594bd30885d4e93773256f"
+  }
+}

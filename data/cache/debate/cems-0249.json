@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the former roof and surrounding ground; the building is no longer visible.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central area is buried under grey sediment, with no clear roof visible.",
+      "box": [
+        146,
+        146,
+        92,
+        92
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:57.095Z",
+  "cropHashes": {
+    "pre": "336ef1a776eb01fff54aaead40d1fa9b397af99a5f18e464170edd06f2006eb7",
+    "post": "0233cd12a45b1c030e759d0ea755b14d9810ed13e0f7602e47c40c86318bf1c4"
+  }
+}

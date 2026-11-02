@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment now surrounds the small roof, replacing the green grounds and nearby structures visible before.",
+      "box": [
+        80,
+        105,
+        225,
+        140
+      ]
+    },
+    "skeptic": {
+      "claim": "A pale roof remains near the center, though it appears smaller and exposed amid grey sediment.",
+      "box": [
+        165,
+        140,
+        74,
+        79
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.89
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:02.318Z",
+  "cropHashes": {
+    "pre": "0cbfb8355e82fd57d81de757ffa6c6f8f5a78abc5184ae27865fd23afd803a32",
+    "post": "ebe080be7641e22d7053e0020511ad4c88325869821f9ec73917334a1e52d975"
+  }
+}

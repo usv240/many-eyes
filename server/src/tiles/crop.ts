@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import sharp from "sharp";
 import { getMission, type Mission, type MissionScene } from "../missions/mission.js";
 import { fetchTile, sceneId, type FetchOptions, type TileCoordinate } from "./fetch.js";
@@ -6,7 +9,7 @@ const TILE_SIZE = 256;
 export const CROP_ZOOM = 19;
 export const CROP_SIZE = 384;
 export interface PixelPosition { pixelX: number; pixelY: number; tileX: number; tileY: number; localX: number; localY: number }
-export interface CropOptions extends FetchOptions { zoom?: number }
+export interface CropOptions extends FetchOptions { zoom?: number; cropRoot?: string }
 export interface SceneCrop { image: Buffer; scene: MissionScene; usedFallback: boolean }
 export interface BuildingCrops { pre: SceneCrop; post: SceneCrop; zoom: number; sizePx: number; lat: number }
 
@@ -77,6 +80,17 @@ export async function cropBuilding(mission: Mission, buildingId: string, options
   return { pre, post, zoom: options.zoom ?? CROP_ZOOM, sizePx: CROP_SIZE, lat: building.lat };
 }
 
-export async function cropMissionBuilding(missionId: string, buildingId: string, options: CropOptions = {}) {
-  return cropBuilding(getMission(missionId), buildingId, options);
+/** Serve committed crops when present, so the demo runs offline from a fresh clone; otherwise crop from tiles. */
+export async function cropMissionBuilding(missionId: string, buildingId: string, options: CropOptions = {}): Promise<BuildingCrops> {
+  const mission = getMission(missionId);
+  const building = mission.buildings.find(({ id }) => id === buildingId);
+  const zoom = options.zoom ?? CROP_ZOOM;
+  const directory = join(options.cropRoot ?? join(process.cwd(), "data", "cache", "crops"), missionId, buildingId);
+  if (building && zoom === CROP_ZOOM && /^[a-z0-9-]+$/i.test(buildingId) &&
+      existsSync(join(directory, "pre.jpg")) && existsSync(join(directory, "post.jpg"))) {
+    const [pre, post] = await Promise.all([readFile(join(directory, "pre.jpg")), readFile(join(directory, "post.jpg"))]);
+    return { pre: { image: pre, scene: mission.pre_scene, usedFallback: false },
+      post: { image: post, scene: mission.post_scene, usedFallback: false }, zoom, sizePx: CROP_SIZE, lat: building.lat };
+  }
+  return cropBuilding(mission, buildingId, options);
 }

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment and scattered pale debris replace the orange roof; the nearby road and tree line are obscured.",
+      "box": [
+        144,
+        223,
+        95,
+        105
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains, though trees and muddy water could obscure it rather than prove destruction.",
+      "box": [
+        140,
+        215,
+        105,
+        110
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:20.988Z",
+  "cropHashes": {
+    "pre": "f9c49ad77882cf4a1240bebd4e7c82ea519ec5cd23a3f0bb6abada4dce50f309",
+    "post": "19e712a75eae8ff89c3e36b3dbc68f2ac6deee55be241813dd6db6d99403cec5"
+  }
+}

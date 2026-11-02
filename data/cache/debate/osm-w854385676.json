@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The bright roof is gone; pale rubble and scattered debris now cover the building footprint.",
+      "box": [
+        240,
+        143,
+        57,
+        68
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof section remains at the north end, so some roof is still visible.",
+      "box": [
+        240,
+        101,
+        54,
+        47
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.88
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:46.111Z",
+  "cropHashes": {
+    "pre": "063961b98910f6b7e6a48f0dd6871decd55f54e3a4668c91a9ba715a7fddf2a8",
+    "post": "2eaa2b73e7b9f0dda21de030f26c960ecfeecdecfa834117f3dd0333396273ec"
+  }
+}

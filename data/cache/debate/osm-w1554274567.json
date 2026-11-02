@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into pale, irregular patches, with grey sediment where a solid roof was visible before.",
+      "box": [
+        158,
+        108,
+        83,
+        69
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark rectangular roof remains beside the road, though it looks altered and the intact case is weak.",
+      "box": [
+        133,
+        143,
+        43,
+        72
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.74
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:30.922Z",
+  "cropHashes": {
+    "pre": "f5953265812bec5fff06f5fc72510ca77f44f74b56e7a71cea114124379a8a47",
+    "post": "730701cc127fddd62ab4f5dc99d87e30242368bade80e6b0a1c508bd3587a1ac"
+  }
+}

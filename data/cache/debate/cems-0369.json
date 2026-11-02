@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is replaced by a bare grey patch with disturbed soil around it.",
+      "box": [
+        183,
+        121,
+        69,
+        56
+      ]
+    },
+    "skeptic": {
+      "claim": "A faint rectangular roof-like shape remains, though vegetation and blur make intact hard to argue.",
+      "box": [
+        184,
+        121,
+        68,
+        57
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.85
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:10.032Z",
+  "cropHashes": {
+    "pre": "6fcab645831fecb77a77435321728af3685d801f7192af55c32c08fbc2b7891b",
+    "post": "5a70ffb4e89a36ea8e73c321006c88d91be469007456b701cb998568ae01cffa"
+  }
+}

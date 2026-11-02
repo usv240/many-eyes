@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The small roof beside the dark patch looks reduced, with pale debris or sediment around it.",
+      "box": [
+        148,
+        228,
+        45,
+        48
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the same dark patch and nearby reddish roof remain visible beside the road.",
+      "box": [
+        145,
+        216,
+        49,
+        47
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.57
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:33.224Z",
+  "cropHashes": {
+    "pre": "e6be0219ea0d65799ad91da2a4dfb04fef66387ca145858f3409939f62afcc3f",
+    "post": "425bce2e0245b9e09e4691d23cbbcf47ed3c116657f263c08e627c2d327f14c3"
+  }
+}

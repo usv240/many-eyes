@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is obscured by dark debris and trees in the after image, suggesting damage, though evidence is limited.",
+      "box": [
+        150,
+        102,
+        91,
+        95
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof is mostly hidden by dense tree cover in both images.",
+      "box": [
+        149,
+        104,
+        91,
+        94
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.55
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:15.004Z",
+  "cropHashes": {
+    "pre": "c8e6ec0c91913d45140b23e7998ee023a78f78785b6c94b09cd2ca93939ccd3e",
+    "post": "691eb9707a4a73f5d3986755a4f5953b24ed40edd4652a41204192176e763c71"
+  }
+}

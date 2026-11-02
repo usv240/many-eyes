@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The nearby small roof is mottled and partly bare in the after image, with pale debris-like ground beside it.",
+      "box": [
+        150,
+        178,
+        91,
+        60
+      ]
+    },
+    "skeptic": {
+      "claim": "The long central roof remains pale and largely continuous, with its roof pattern still visible after.",
+      "box": [
+        44,
+        269,
+        179,
+        79
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.76
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:06.159Z",
+  "cropHashes": {
+    "pre": "d198638b4dbc3c9f9e12ddc9b0a5ffafeb6cfe458b7cc9b7caa7aeb9a41a35ca",
+    "post": "c65bf7aa39d57d94c5a9aa362d08878c3856fe70db4e701ce1bf2e01eb0d8396"
+  }
+}

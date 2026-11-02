@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is mostly absent in the after image, with pale debris or sediment where the dark roof was.",
+      "box": [
+        174,
+        144,
+        49,
+        81
+      ]
+    },
+    "skeptic": {
+      "claim": "A narrow reddish roof remains visible beside the road; the building is partly obscured by trees, so intact is plausible.",
+      "box": [
+        176,
+        145,
+        42,
+        74
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:37.794Z",
+  "cropHashes": {
+    "pre": "01850752a50ba5358ab36c02f60eb62083e2b62cca04e1223c5efa78a1b0d2b1",
+    "post": "215df45a7db0edc8104825d7adbf408966c2024315eb10618179b75213b1e130"
+  }
+}

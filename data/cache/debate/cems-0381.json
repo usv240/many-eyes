@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "A broad grey sediment area replaces the curved roof and open yard on the right of the central building.",
+      "box": [
+        190,
+        0,
+        194,
+        225
+      ]
+    },
+    "skeptic": {
+      "claim": "The central red roof remains visible, with its long roof sections and nearby buildings still intact.",
+      "box": [
+        95,
+        130,
+        135,
+        156
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.91
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:15.071Z",
+  "cropHashes": {
+    "pre": "c38194e33015821ce836427764cfd408b9001c0ec3f23530fda781ed439051c3",
+    "post": "aa396af220a9977190bdf4dbbfc941a68353c08127eea77d143b47efafe52abb"
+  }
+}

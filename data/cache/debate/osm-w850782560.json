@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof remains visible, but its edges look disrupted and pale debris sits beside it.",
+      "box": [
+        151,
+        126,
+        72,
+        94
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building still has two clear grey roof sections, with no obvious replacement by sediment.",
+      "box": [
+        153,
+        127,
+        64,
+        87
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.84
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:35.575Z",
+  "cropHashes": {
+    "pre": "0c4d10f021a27c1338ba23c0e3f17807ec59b5728fc72fe83ac171ee31b44923",
+    "post": "77d21d11d6485c1897d0b04cf2ffb4f301cb8c1fa4803718948536c111ca23b6"
+  }
+}

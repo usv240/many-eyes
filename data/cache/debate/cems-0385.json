@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey debris and bare sediment replace the central building’s roof, with roof fragments scattered nearby.",
+      "box": [
+        177,
+        51,
+        70,
+        52
+      ]
+    },
+    "skeptic": {
+      "claim": "The orange and grey roof sections remain visible in the central courtyard; the footprint is still partly covered.",
+      "box": [
+        122,
+        168,
+        78,
+        94
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.84
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:16.203Z",
+  "cropHashes": {
+    "pre": "6fabe37dd8016800667d765895457dd781ea411ec7be4530aa6b5f585abb2bbd",
+    "post": "748785e2688ae9ec5d251a7e12d4e13eb3782f81342faebb8e07f55f803a80fb"
+  }
+}

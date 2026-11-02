@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment now surrounds the building, and the roof looks more damaged and patchy than before.",
+      "box": [
+        88,
+        255,
+        177,
+        80
+      ]
+    },
+    "skeptic": {
+      "claim": "The long pale roof remains in place with a similar outline; grey ground alone does not prove destruction.",
+      "box": [
+        88,
+        255,
+        177,
+        80
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:05.405Z",
+  "cropHashes": {
+    "pre": "9620eb5f65a6ccf59a03b17502b6e2b642c19b3699a5ed01f99aed8d03bfb847",
+    "post": "e87be0625eb0c3aab21d3beddc0ebd2c1325024d77e20209ff0e50d57c41f587"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The pale roof remains visible, but grey sediment and bare ground spread across the area beside it.",
+      "box": [
+        215,
+        145,
+        169,
+        180
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building’s pale roof and reddish outline still look largely intact, with no clear roof collapse.",
+      "box": [
+        134,
+        45,
+        91,
+        90
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.67
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:16.337Z",
+  "cropHashes": {
+    "pre": "cafa623d434507ebf75327ed6184445ed796a755112bd7d606002b849836083d",
+    "post": "e8fc2e2db73c38fbc9289ad600fb01e5a6821a5110adcafd6cde7b0eec09e7c2"
+  }
+}

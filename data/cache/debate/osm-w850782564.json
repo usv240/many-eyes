@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks partly stripped, with exposed brown-grey patches replacing the pale roof panels.",
+      "box": [
+        119,
+        214,
+        70,
+        90
+      ]
+    },
+    "skeptic": {
+      "claim": "The main pale roof remains visible in the same spot beside the road, with similar overall shape.",
+      "box": [
+        119,
+        214,
+        70,
+        90
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.68
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:34.521Z",
+  "cropHashes": {
+    "pre": "5b8fd1a2bbfb266f6c48b8d8f0eea4e7309d9ffcb0bffa304ed02f26a9881a31",
+    "post": "133edfcf6941074ed9315059ac2ec4372dccb84bb75d776747a869c008cba3d8"
+  }
+}

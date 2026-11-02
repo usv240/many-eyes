@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The roof remains visible, but broad grey sediment and bare ground now cover the surrounding area.",
+      "box": [
+        221,
+        112,
+        163,
+        272
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building’s pale roof and reddish outline remain visible in the after image.",
+      "box": [
+        77,
+        207,
+        94,
+        92
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.87
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:17.332Z",
+  "cropHashes": {
+    "pre": "171d35d20d55c11a5075c7be7b68257d276f528d64283471c5a25f93291a0f22",
+    "post": "b47642cdaea3e38edaa9b0c22cc40aa6ef4b130449faca31b7e24d363534559a"
+  }
+}

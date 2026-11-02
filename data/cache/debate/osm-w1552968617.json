@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof appears red and more intact after; destruction is difficult to argue from these views.",
+      "box": [
+        127,
+        196,
+        58,
+        55
+      ]
+    },
+    "skeptic": {
+      "claim": "The same small building remains, with a clear red roof and no obvious debris replacing it.",
+      "box": [
+        127,
+        196,
+        58,
+        55
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.84
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:26.114Z",
+  "cropHashes": {
+    "pre": "04be948a18af3565b0f764797d00ad37f30707f7ec4378742846fa99ca488223",
+    "post": "f97a13b6927c823218a26aa94e917346b14489a051da1269a94f03e46b452aff"
+  }
+}

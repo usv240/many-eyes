@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central grey roof is still visible, but the adjacent pale area may be exposed sediment after damage.",
+      "box": [
+        82,
+        142,
+        81,
+        99
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building retains a defined grey roof beside the road, with no clear replacement by sediment.",
+      "box": [
+        83,
+        145,
+        72,
+        86
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.75
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:32.301Z",
+  "cropHashes": {
+    "pre": "097b7d62572741765e5d746e4aae5e206563cf22717cc5cbb6b949494a21fe7a",
+    "post": "44337ab30e633ff9ad3c9d2372ad6b01e24a96e7a828cccd38c72831f570ede9"
+  }
+}

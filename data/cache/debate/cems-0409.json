@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment covers the central roof area, and the dark roof-like shape is partly buried.",
+      "box": [
+        158,
+        140,
+        75,
+        77
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the central roof is obscured by sediment, with no clear standing roof visible.",
+      "box": [
+        150,
+        136,
+        86,
+        91
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:22.312Z",
+  "cropHashes": {
+    "pre": "94de80080872bace6441b71a64b1625eed75c1100ceaef2d3ef73aac0a3f2509",
+    "post": "96815586b60e6d10fb230999981737d5fb364186fdd677e15232c3cb1c2a24c4"
+  }
+}

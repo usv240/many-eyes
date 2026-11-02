@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central dark roof is replaced by a pale, broken-looking roof area after; nearby road and trees remain.",
+      "box": [
+        151,
+        170,
+        63,
+        67
+      ]
+    },
+    "skeptic": {
+      "claim": "The central roof area remains partly visible among trees; shadow and foliage make damage hard to judge.",
+      "box": [
+        150,
+        167,
+        67,
+        72
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.65
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:30.438Z",
+  "cropHashes": {
+    "pre": "48ab9f4ae8d6409827252c477a68da3a2f9eb9d4d8a8ce4ea809df952e3e5b15",
+    "post": "26e139385e1c31615f75dcbabd2d51c2dcc7da4fbfb62ad2220526fbb995e3cb"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is broken into pale rubble, with grey sediment spread across the cleared ground.",
+      "box": [
+        195,
+        184,
+        93,
+        103
+      ]
+    },
+    "skeptic": {
+      "claim": "Some dark roof sections remain beside the road, so intact is possible, though the evidence is weak.",
+      "box": [
+        190,
+        92,
+        83,
+        75
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.78
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:53.905Z",
+  "cropHashes": {
+    "pre": "0b5397bea8eada1aa06cf4fdd3a8c751608731f619858a834f30f98f6bc8831d",
+    "post": "47913c154e8cb06addb49cbbf37930b9c92c79f270b5c19da21d9039faec227f"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The roof is gone; grey sediment and scattered debris cover the former building area.",
+      "box": [
+        146,
+        147,
+        92,
+        90
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: no clear roof remains, only rubble-like grey ground.",
+      "box": [
+        146,
+        147,
+        92,
+        90
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.99
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:56.738Z",
+  "cropHashes": {
+    "pre": "c397a8995b9d80807c48e84a976332161dfe90eb1a874e34de851368aed5db61",
+    "post": "be6f01ffe596bb3e98509029c9b11d971781e1df64604fb569c5bce9c598c9cd"
+  }
+}

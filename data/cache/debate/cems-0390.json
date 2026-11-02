@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roofs remain red and intact; the nearby road and tree line show no clear change indicating destruction.",
+      "box": [
+        153,
+        166,
+        179,
+        209
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue destroyed: the central red roofs remain visible, with no clear roof replacement or debris.",
+      "box": [
+        153,
+        166,
+        179,
+        209
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.83
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:18.761Z",
+  "cropHashes": {
+    "pre": "b9e7261da25bf771631d89ea7eb829146ee7d7124baac9a74c1eec647d418639",
+    "post": "d3c8cde09d4c35101345f264134d73a38dbc5839d3a9258eda068071c405b7a6"
+  }
+}

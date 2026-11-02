@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: grey sediment covers the former central roof, with scattered pale debris visible.",
+      "box": [
+        153,
+        145,
+        76,
+        79
+      ]
+    },
+    "skeptic": {
+      "claim": "Some central pale roof sections remain, but the building looks heavily altered and surrounded by sediment.",
+      "box": [
+        155,
+        151,
+        72,
+        69
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.87
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:51.308Z",
+  "cropHashes": {
+    "pre": "ad9490950721b1878a8483bf78de1aa9e36dd459e7b79eed34a261aa3a3069a3",
+    "post": "deba64819128672fc4de1852dc5a4536bde87d27dc6379b40b0bf8df66b1912c"
+  }
+}

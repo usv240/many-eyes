@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks disrupted, with pale debris or sediment along its right edge after the change.",
+      "box": [
+        119,
+        162,
+        64,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building remains: its blue-grey roof is still visible, and nearby road and roof shapes persist.",
+      "box": [
+        119,
+        162,
+        64,
+        82
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:36.494Z",
+  "cropHashes": {
+    "pre": "65a152ef8556a537f5a7cb3f60bc5aab1cd3fa7d1d1b0f78e19e8cd7f8b76a23",
+    "post": "ada1e97c6e4096c69d22fc4d5bd68fc144189759e7765df8c47dd7d7cae88a09"
+  }
+}

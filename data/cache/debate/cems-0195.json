@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The dark central roof area expands into a broad black patch, with grey-brown debris beside it.",
+      "box": [
+        140,
+        207,
+        55,
+        56
+      ]
+    },
+    "skeptic": {
+      "claim": "A small orange roof remains visible beside the dark patch, so some roof structure appears intact.",
+      "box": [
+        180,
+        216,
+        26,
+        29
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.72
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:31.894Z",
+  "cropHashes": {
+    "pre": "904cdcf66b1379e53ff136f6527d397386a4358a0ab29c847948ce21ddacddd7",
+    "post": "5ebf3cfdd3c6e0cdebf7e994e0bf93ddca392911468acef5ab9cc887b8b25bc3"
+  }
+}

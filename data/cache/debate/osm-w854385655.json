@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks darker and disrupted after; pale sediment and debris surround the building.",
+      "box": [
+        163,
+        121,
+        58,
+        128
+      ]
+    },
+    "skeptic": {
+      "claim": "The central building remains roofed, with its brown roof and walls still visible; the nearby road is also intact.",
+      "box": [
+        157,
+        122,
+        62,
+        132
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.77
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:42.391Z",
+  "cropHashes": {
+    "pre": "26589e14157fc6e544602e87616b74e2f987e38f04193be2b957660eee1c7b6e",
+    "post": "41c3f4a50944ef80982ce285938b9d5cf33980faf705b342b555054401c39ab6"
+  }
+}

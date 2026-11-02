@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken and irregular in the after image, with pale debris or sediment around it.",
+      "box": [
+        174,
+        125,
+        78,
+        106
+      ]
+    },
+    "skeptic": {
+      "claim": "A grey roof remains visible in the same spot; the after image does not clearly show the building gone.",
+      "box": [
+        185,
+        137,
+        65,
+        74
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.66
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:29.380Z",
+  "cropHashes": {
+    "pre": "8c7d2dcf08461a579931451c5ad81d6b6dc3943b9ca0edb8663b6abf1a86ee73",
+    "post": "1b3204aeacc8d62f4363abc7a034acd2101010994fe758dcc2cbc82a7e711dfc"
+  }
+}

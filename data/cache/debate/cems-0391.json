@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof is gone, replaced by pale rubble and grey sediment around the building site.",
+      "box": [
+        158,
+        158,
+        75,
+        76
+      ]
+    },
+    "skeptic": {
+      "claim": "The image is muddy, but a rectangular roof-like surface remains beside the rubble; intact is difficult to support.",
+      "box": [
+        214,
+        211,
+        70,
+        61
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:22.395Z",
+  "cropHashes": {
+    "pre": "66d91226a18a91f0660fee0889dc6f5a62ab8faebcf128c38dc10412e0d5b78c",
+    "post": "4b9853f272807c43cc7ac746a365c2f19ad73cd2445e259e2d14384da514d8e8"
+  }
+}

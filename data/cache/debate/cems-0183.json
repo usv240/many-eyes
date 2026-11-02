@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destruction: grey sediment covers the former green ground beside the central roof cluster.",
+      "box": [
+        151,
+        146,
+        100,
+        105
+      ]
+    },
+    "skeptic": {
+      "claim": "The central blue and tan roofs remain visible, with nearby structures and road edges still present.",
+      "box": [
+        133,
+        156,
+        83,
+        91
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.82
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:24.853Z",
+  "cropHashes": {
+    "pre": "dd583b2928525d2690cfcf20c4a42736f582dd36cadb88f4c911c64da5414fb5",
+    "post": "58731be03254b36964725c92fbd0ce8b51a53012f1f0a8cfc3925000ad85f17c"
+  }
+}

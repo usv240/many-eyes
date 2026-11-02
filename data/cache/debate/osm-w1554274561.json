@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "The central roof looks broken into pale fragments, with exposed grey sediment beside it.",
+      "box": [
+        183,
+        96,
+        68,
+        77
+      ]
+    },
+    "skeptic": {
+      "claim": "A dark roof section remains in place, and the nearby road and buildings look unchanged.",
+      "box": [
+        184,
+        95,
+        66,
+        72
+      ]
+    },
+    "model_label": "intact",
+    "confidence": 0.61
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:29.592Z",
+  "cropHashes": {
+    "pre": "66e7c25097ed1db0508babb2934bb119269c4b82ca3d99807d318a7ed3e023c3",
+    "post": "950c85b7be4b5ed76144417399c4af9153ed0191b3ed20e44c1c3977da62a5bb"
+  }
+}

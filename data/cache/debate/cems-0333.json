@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Hard to argue destroyed: the central dark roof is less distinct, with grey sediment and exposed ground around it.",
+      "box": [
+        150,
+        170,
+        92,
+        82
+      ]
+    },
+    "skeptic": {
+      "claim": "A small dark roof-like patch remains at the centre, though it is partly obscured by trees and ground.",
+      "box": [
+        150,
+        170,
+        92,
+        82
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.57
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:07:00.840Z",
+  "cropHashes": {
+    "pre": "fe909ef5cb3e2a613a1273f65da3d8d7776ee2dcbc2aa5fbd958d627d3bc2157",
+    "post": "6cf7c738bd8d45ea7dd7ea6c1b28676549c990fb1ba825fb441042d41b3abb29"
+  }
+}

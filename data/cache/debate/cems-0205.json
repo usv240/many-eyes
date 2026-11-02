@@ -1,0 +1,32 @@
+{
+  "debate": {
+    "advocate": {
+      "claim": "Grey sediment replaces the central building's roof, with bare ground spreading across the ring.",
+      "box": [
+        235,
+        142,
+        88,
+        93
+      ]
+    },
+    "skeptic": {
+      "claim": "Hard to argue intact: the roof is gone, though nearby roofs and the road remain visible.",
+      "box": [
+        235,
+        142,
+        88,
+        93
+      ]
+    },
+    "model_label": "destroyed",
+    "confidence": 0.94
+  },
+  "model": "gpt-6-luna",
+  "requestedModel": "gpt-6-luna",
+  "promptVersion": "centre-ring-v1",
+  "createdAt": "2026-11-01T20:06:37.043Z",
+  "cropHashes": {
+    "pre": "072193726c8fce98ada22fb710fbc3dfc81119085b1ea4b2dbfdd205616fa0c5",
+    "post": "3e53fe432c5269b26c353dd432b891396c7b73844af1d779d76ff6f0cff1a1e8"
+  }
+}
