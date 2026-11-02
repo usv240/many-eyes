@@ -11,6 +11,8 @@ const json = (value: unknown) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value: string | Buffer) => createHash("sha256").update(value).digest("hex");
 const pct = (value: number | null) => value === null ? "n/a" : (value * 100).toFixed(1) + "%";
 function readJson<T>(path: string): T { return JSON.parse(readFileSync(path, "utf8")) as T; }
+/** Source files are hashed with LF line endings, so a Windows checkout and CI agree. */
+export const textOf = (path: string) => readFileSync(path, "utf8").replace(/\r\n/g, "\n");
 export function readVideoEvents() {
   verify(VIDEO_LEDGER_PATH);
   return readFileSync(VIDEO_LEDGER_PATH, "utf8").trim().split("\n").filter(Boolean).map((line) => JSON.parse(line) as LedgerEvent);
@@ -45,7 +47,7 @@ export function renderArtifacts(events: readonly LedgerEvent[], runId: string) {
   const validated = collections.validated.features.length, refused = collections.refused.features.length;
   const manifest = { missionId: "nepal-flood-2026", runId, ledger: VIDEO_LEDGER_PATH, source: "simulated crowd",
     scripted: true, validated, refused,
-    sources: Object.fromEntries(["reports/latest.json", "reports/ai-alone.json", "reports/overlay/offset-measurement.json"].map((path) => [path, hash(readFileSync(path))])) };
+    sources: Object.fromEntries(["reports/latest.json", "reports/ai-alone.json", "reports/overlay/offset-measurement.json"].map((path) => [path, hash(textOf(path))])) };
   const markdown = table.replaceAll("(reports/", "(") + "\n\n" + [
     "# Nepal flood mission report", "",
     "The AI's false alarms are the reason chat checks the AI rather than the reverse. AI arguments never enter consensus.decide().",
@@ -88,7 +90,7 @@ export function verifyMissionReport() {
   const exported = [...events].reverse().find((event) => event.type === "export_written" && event.data.runId === manifest.runId);
   const hashes = exported?.data.files as Record<string, string> | undefined;
   for (const [path, content] of Object.entries(result.files)) {
-    if (readFileSync(path, "utf8") !== content || hashes?.[path] !== hash(content)) throw new Error("Mission artifact differs from ledger replay: " + path);
+    if (textOf(path) !== content || hashes?.[path] !== hash(content)) throw new Error("Mission artifact differs from ledger replay: " + path);
   }
   if (!readFileSync("README.md", "utf8").includes(start + "\n" + result.table + "\n" + end)) throw new Error("README headline differs from measurements.");
   return events.length;

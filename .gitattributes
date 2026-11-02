@@ -1,0 +1,6 @@
+# Published reports and ledgers are hashed; keep every checkout on LF so Windows and CI agree.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.mp4 binary
