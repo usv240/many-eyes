@@ -7,7 +7,7 @@
   <meta name="description" content="Upload crowd votes and get validated or refused labels back, using the same consensus engine as the Many Eyes stream. Runs in your browser." />
   <script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("many-eyes-theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="tool">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar">
   <div class="wrap">
@@ -40,7 +40,7 @@
         <p class="measure muted">Each preset is a real file you can open, download and edit. Choose one to load it below.</p>
       </div>
       <div class="table-wrap">
-        <table>
+        <table class="presets">
           <thead><tr><th>Preset</th><th>What it shows</th><th class="num">Votes</th><th>Use it</th></tr></thead>
           <tbody>
             <tr><td><b>Recorded stream run</b><span data-info="The six tiles from the recorded demo stream, exported from the hash-chained video ledger: four hidden checks and two ordinary tiles, ten simulated viewers." data-info-label="Recorded stream run"></span></td><td>The demo stream, vote by vote</td><td class="num">60</td><td><button class="button quiet" data-preset="recorded-run">Load</button> <a href="downloads/recorded-run.csv" download>CSV</a></td></tr>
@@ -71,7 +71,7 @@ house-2,ana,2,,85.3354,28.1626</code></pre>
       <div style="display:grid;gap:16px">
         <div class="drop" data-drop>
           <p><b>Drop a CSV file here</b></p>
-          <p class="small">or <label style="display:inline;font-weight:600;text-decoration:underline;cursor:pointer">choose a file<input type="file" accept=".csv,text/csv" data-file class="skip" /></label></p>
+          <p class="small">or <label style="display:inline;font-weight:600;text-decoration:underline;cursor:pointer">choose a file<input type="file" accept=".csv,text/csv" data-file class="sr" /></label></p>
         </div>
         <label for="csv">Or paste CSV</label>
         <textarea id="csv" data-csv spellcheck="false" placeholder="tile_id,user_id,vote,truth,lon,lat"></textarea>

@@ -19,15 +19,50 @@ function bindWipe(stage: HTMLElement, range: HTMLInputElement) {
   return set;
 }
 
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const heroStage = document.querySelector<HTMLElement>("[data-hero-stage]");
 const heroRange = document.querySelector<HTMLInputElement>("[data-hero-wipe]");
-if (heroStage && heroRange) bindWipe(heroStage, heroRange);
+if (heroStage && heroRange) {
+  const set = bindWipe(heroStage, heroRange);
+  heroStage.dataset.ready = "";
+  // The signature move: the flood passes once across the photo, from before to after, then the line is yours.
+  if (!reduced) {
+    set(100);
+    let cancelled = false;
+    const cancel = () => { cancelled = true; };
+    heroStage.addEventListener("pointerdown", cancel, { once: true });
+    heroRange.addEventListener("input", cancel, { once: true });
+    const ease = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+    const start = performance.now() + 500;
+    const step = (now: number) => {
+      if (cancelled) return;
+      const t = Math.max(0, Math.min(1, (now - start) / 1600));
+      set(100 - 50 * ease(t));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+}
 
-/** Sections rise in once as they enter the viewport. Content never stays hidden without JavaScript. */
+/** Parts of each section rise in once, staggered, as they enter the viewport. Content never stays hidden without JavaScript. */
 const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
   for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add("seen"); observer?.unobserve(entry.target); }
-}, { rootMargin: "0px 0px -10% 0px" }) : null;
-document.querySelectorAll(".reveal-up").forEach((element) => observer ? observer.observe(element) : element.classList.add("seen"));
+}, { rootMargin: "0px 0px -8% 0px" }) : null;
+const containers = ":not(.block-head):not(.split):not(.steps):not(.figures):not(.stack):not(.faq)";
+for (const wrap of document.querySelectorAll<HTMLElement>("main section.block > .wrap")) {
+  const parts = wrap.querySelectorAll<HTMLElement>(`:scope > *${containers}, :scope > .block-head > *, :scope > .split > *${containers},
+    :scope > .split > .faq > *, :scope > .faq > *, :scope > .steps > li, :scope > .figures > *, :scope > .stack > *`);
+  parts.forEach((part, index) => { part.classList.add("reveal-up"); part.style.setProperty("--delay", Math.min(index % 6, 5) * 70 + "ms"); });
+}
+/** The overlay clip plays only while on screen, and never under reduced motion; the poster frame stands in otherwise. */
+const clips = document.querySelectorAll<HTMLVideoElement>("video[data-autoplay]");
+if (!reduced && "IntersectionObserver" in window) {
+  const player = new IntersectionObserver((entries) => {
+    for (const entry of entries) { const video = entry.target as HTMLVideoElement; if (entry.isIntersecting) void video.play().catch(() => {}); else video.pause(); }
+  }, { threshold: 0.25 });
+  clips.forEach((video) => { video.preload = "auto"; player.observe(video); });
+} else clips.forEach((video) => { video.controls = true; });
+document.querySelectorAll(".reveal-up, .bars").forEach((element) => observer ? observer.observe(element) : element.classList.add("seen"));
 
 const trial = document.querySelector<HTMLElement>("[data-trial]");
 if (trial) void startTrial(trial);

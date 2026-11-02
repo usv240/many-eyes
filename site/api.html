@@ -7,7 +7,7 @@
   <meta name="description" content="Request an API key and send crowd votes to the Many Eyes consensus engine over HTTP. Try it live in the browser." />
   <script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("many-eyes-theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}document.documentElement.classList.add("js")</script>
 </head>
-<body>
+<body class="tool">
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar">
   <div class="wrap">
@@ -40,7 +40,7 @@
         <p class="measure muted">Pick where requests go. The sandbox runs the real engine inside this page, so it always works. If you run the server yourself with <code>npm run demo</code>, choose your server and the same requests go over HTTP.<span data-info="The sandbox and the server call the same decideBatch function from the repository, so their answers are identical. The sandbox key exists only in this browser tab." data-info-label="Sandbox and server"></span></p>
       </div>
       <div class="split">
-        <div style="display:grid;gap:20px">
+        <div style="display:grid;gap:36px">
           <div>
             <label for="target">Send requests to</label>
             <select id="target" data-target>

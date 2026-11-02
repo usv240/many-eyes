@@ -30,23 +30,23 @@
 <main id="main">
   <section class="hero">
     <div class="wrap hero-grid">
-      <h1>Twitch chat checks the AI's disaster map.</h1>
       <div class="hero-copy">
-        <p class="lede measure">After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. Many Eyes puts each building on stream, before and after, and lets chat decide whether it survived. Hidden expert checks keep the crowd honest. Anything unclear goes to experts.</p>
+        <h1>Chat checks the AI's map.</h1>
+        <p class="lede">After a disaster, AI marks thousands of buildings as damaged in days. Many Eyes puts each one on a Twitch stream, before and after, and chat decides whether it survived. Hidden expert answers keep the crowd honest.</p>
         <div class="actions">
           <a class="button" href="#try">Judge six real buildings</a>
           <a class="button quiet" href="#how">See how it works</a>
         </div>
         <p class="info-legend"><span class="info" aria-hidden="true">i</span>Hover over or tap any <b>i</b> to learn what something means.</p>
       </div>
-      <figure style="margin:0">
+      <figure class="hero-figure">
         <div class="stage" data-hero-stage style="--wipe:50%">
           <img src="tiles/cems-0052-pre.jpg" alt="Satellite photo before the flood: houses with red and blue roofs" width="384" height="384" />
           <img class="after" src="tiles/cems-0052-post.jpg" alt="Satellite photo after the flood: grey sediment where the houses stood" width="384" height="384" />
           <div class="divider"></div><div class="ring"></div>
-          <span class="tag left">Before · 17 Sep 2023</span><span class="tag right">After · 27 Aug 2026</span>
+          <span class="tag left">Before<span class="date"> · 17 Sep 2023</span></span><span class="tag right">After<span class="date"> · 27 Aug 2026</span></span>
         </div>
-        <label class="skip" for="hero-wipe">Move the line between before and after</label>
+        <label class="sr" for="hero-wipe">Move the line between before and after</label>
         <input id="hero-wipe" class="wipe-control" type="range" min="0" max="100" value="50" data-hero-wipe />
         <figcaption class="caption">Syaphru Besi, Nepal. Drag the slider: houses before the flood of 26 August 2026, flood sediment after. The ring marks the building to judge.<span data-info="The white ring has a 12 metre radius. The before photo is from 2023 and the after photo from the day after the flood. They line up within about 2 metres on average." data-info-label="The ring"></span></figcaption>
       </figure>
@@ -64,7 +64,7 @@
     </div>
   </section>
 
-  <section class="block" id="how">
+  <section class="block field" id="how">
     <div class="wrap">
       <div class="block-head">
         <h2>How it works on stream</h2>
@@ -106,7 +106,7 @@
             <div class="divider"></div><div class="ring"></div>
             <span class="tag left">Before</span><span class="tag right">After</span>
           </div>
-          <label class="skip" for="trial-wipe">Move the line between before and after</label>
+          <label class="sr" for="trial-wipe">Move the line between before and after</label>
           <input id="trial-wipe" class="wipe-control" type="range" min="0" max="100" value="50" data-wipe />
           <p class="caption" data-caption></p>
         </div>
@@ -135,10 +135,10 @@
         <p class="lede measure">The AI's score is a real measurement. The crowd scores come from a simulation, because judging needs numbers before a real audience exists. Every number below can be recomputed from the repository with <code>npm run verify</code>.</p>
       </div>
       <div class="figures">
-        <div class="figure"><span class="value">73.8%</span><p>AI alone, on 80 hidden checks<span data-info="gpt-6-luna looked at the same before and after photos for every building, measured on 1 November 2026. It got all 40 destroyed buildings right but called 21 of 40 standing buildings destroyed." data-info-label="AI alone"></span></p><p class="kind">Real measurement</p></div>
-        <div class="figure"><span class="value destroyed">52.5%</span><p>of standing buildings the AI called destroyed<span data-info="These false alarms are the reason people check the AI, and not the other way round. A false destroyed label can send help to the wrong street." data-info-label="AI false alarms"></span></p><p class="kind">Real measurement</p></div>
-        <div class="figure"><span class="value">75.9%</span><p>one viewer alone<span data-info="Simulated viewers use accuracy rates measured for MapSwipe volunteers (Herfort et al. 2019), with hard tiles that pull everyone toward a coin flip and misleading tiles that fool everyone." data-info-label="One viewer alone"></span></p><p class="kind">Simulation</p></div>
-        <div class="figure"><span class="value">89.2%</span><p>ten viewers including three trolls, weighted by hidden checks, on the 81.3% of tiles they validated<span data-info="Three of ten simulated viewers are trolls: one always votes the wrong answer and two join coordinated raids. Weighting by hidden checks lets honest viewers count for more. The other 18.7% of tiles were refused and sent to experts." data-info-label="Ten viewers with trolls"></span></p><p class="kind">Simulation</p></div>
+        <div class="figure"><span class="value">73.8%</span><p>AI alone, on 80 hidden checks<span data-info="gpt-6-luna looked at the same before and after photos for every building, measured on 1 November 2026. It got all 40 destroyed buildings right but called 21 of 40 standing buildings destroyed." data-info-label="AI alone"></span> <span class="kind">Measured.</span></p></div>
+        <div class="figure"><span class="value destroyed">52.5%</span><p>of standing buildings the AI called destroyed<span data-info="These false alarms are the reason people check the AI, and not the other way round. A false destroyed label can send help to the wrong street." data-info-label="AI false alarms"></span> <span class="kind">Measured.</span></p></div>
+        <div class="figure"><span class="value">75.9%</span><p>one viewer alone<span data-info="Simulated viewers use accuracy rates measured for MapSwipe volunteers (Herfort et al. 2019), with hard tiles that pull everyone toward a coin flip and misleading tiles that fool everyone." data-info-label="One viewer alone"></span> <span class="kind">Simulated.</span></p></div>
+        <div class="figure"><span class="value">89.2%</span><p>ten viewers including three trolls, weighted by hidden checks, on the 81.3% of tiles they validated<span data-info="Three of ten simulated viewers are trolls: one always votes the wrong answer and two join coordinated raids. Weighting by hidden checks lets honest viewers count for more. The other 18.7% of tiles were refused and sent to experts." data-info-label="Ten viewers with trolls"></span> <span class="kind">Simulated.</span></p></div>
       </div>
       <div class="bars" role="img" aria-label="Accuracy: AI alone 73.8%, one viewer 75.9%, ten viewers with trolls weighted 89.2%">
         <div class="bar-row ai"><span>AI alone</span><div class="bar-track"><div class="bar-fill" style="--w:73.8%"></div></div><b>73.8%</b></div>
@@ -175,7 +175,11 @@ npm run demo          # simulated crowd, no keys
 npm run demo:mixed    # plus your real Twitch chat
 npm run live          # real chat only</code></pre>
         <p class="small muted">In OBS, add a Browser Source at <code>http://localhost:5180</code>, 1920 by 1080. Live modes need a Twitch user token; the README has the one command that creates it.</p>
-        <img src="img/overlay-result.jpg" alt="The overlay after a decision: validated destroyed, 89% agreement, with the hidden check result" width="1600" height="900" loading="lazy" style="border-radius:var(--radius);border:1px solid var(--border)" />
+        <figure class="clip">
+          <video class="shot" src="img/overlay-loop.mp4" poster="img/overlay-loop.jpg" width="1280" height="720" muted loop playsinline preload="none" data-autoplay
+            aria-label="34 seconds of the overlay running with a simulated crowd: a hidden check is validated intact with 100% agreement, a split vote, and a building refused"></video>
+          <figcaption class="caption">The real overlay, recorded from the running demo: a hidden check validated, a split vote, a building refused.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -239,7 +243,7 @@ npm run live          # real chat only</code></pre>
   <section class="block" id="faq">
     <div class="wrap split">
       <h2>Questions, in plain words</h2>
-      <div>
+      <div class="faq">
         <details><summary>Is this a game?</summary><p>It plays like one: a timer, a vote and a reveal. The results are real map data about real buildings, so the words stay careful and nothing rewards destruction.</p></details>
         <details><summary>What is a hidden check?</summary><p>A building whose answer experts already know. Viewers cannot tell which tiles are checks. Checks measure the crowd's accuracy live and adjust how much each person's vote counts later.</p></details>
         <details><summary>Why not just trust the AI?</summary><p>On the same photos, the AI called more than half of the standing buildings destroyed. People catch those false alarms, and the hidden checks show whether they did.</p></details>
