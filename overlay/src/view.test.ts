@@ -24,7 +24,7 @@ it("renders every overlay state's copy", () => {
   expect(sample("loading").text.coordinates).not.toBe("—");
   expect(sample("disconnected").text.connection).toBe("Reconnecting to server");
   expect(sample("complete").text.question).toBe("Mission complete");
-  expect(sample("complete").text.completeCopy).toBe("Results are being exported for humanitarian mappers.");
+  expect(sample("complete").text.completeCopy).toMatch(/Validated buildings are exported for humanitarian mappers.$/);
 });
 it("shows intro for ten seconds at tiles 1, 21, 41, then restores debate", () => {
   const snapshot = fixtureSnapshot("intro", 1000); const state = snapshot.state!;
@@ -124,4 +124,17 @@ it("hides vote keys and evidence boxes once the mission is complete", () => {
   expect(done.hidden.advocateBox).toBe(true);
   expect(done.hidden.skepticBox).toBe(true);
   expect(sample("voting").hidden.keys).toBe(false);
+});
+it("credits the sharpest eyes with each result and at the end, never during voting", () => {
+  const crew = [{ name: "ana_maps", matched: 3, checked: 3, live: true }, { name: "viewer 9", matched: 2, checked: 3, live: false }];
+  const decided = fixtureSnapshot("gold", 1000);
+  const shown = view({ ...decided.state!, crew }, { now: 1000 });
+  expect(shown.text.crew).toBe("Sharpest eyes: ana_maps 3/3 · viewer 9 2/3");
+  expect(shown.hidden.crew).toBe(false);
+  const voting = fixtureSnapshot("voting", 1000);
+  expect(view({ ...voting.state!, crew }, { now: 1000 }).hidden.crew).toBe(true);
+  expect(sample("validated").hidden.crew).toBe(true);
+  expect(sample("complete").hidden.crew).toBe(true);
+  expect(sample("complete").text.completeCopy).toBe("Thank you, crew. Sharpest eyes on the hidden checks: ana_maps 7/7, viewer 9 7/8, riverwatch 6/7. " +
+    "Validated buildings are exported for humanitarian mappers.");
 });

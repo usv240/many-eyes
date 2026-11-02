@@ -3,7 +3,7 @@ import { expect, it, vi } from "vitest";
 import { MissionRunner, type Clock, type PublicState } from "./mission-runner.js";
 import { MemoryLedger } from "../ledger/ledger.js";
 import type { ChatMessage } from "../twitch/eventsub.js";
-import { getMission } from "../missions/mission.js";
+import { getMission, goldTruth } from "../missions/mission.js";
 
 class FakeTwitch extends EventEmitter<{ chatMessage: [ChatMessage]; fault: [Error]; ready: []; status: [string] }> {
   async start() {}
@@ -43,8 +43,10 @@ it("dedupes IDs across tiles, replaces per-user votes, and sends one result per 
   const decisions = ledger.events.filter((event) => event.type === "tile_decided");
   expect(decisions[0]!.data.weighted).toMatchObject({ status: "validated", label: "intact", voters: 3 });
   expect(decisions[1]!.data.weighted).toMatchObject({ status: "refused", reason: "too_few_voters", voters: 1 });
-  expect(sendChat).toHaveBeenCalledTimes(2);
+  // One result per tile, then one mission summary.
+  expect(sendChat).toHaveBeenCalledTimes(3);
   expect(sendChat.mock.calls[0]![0]).toBe("Tile 1: validated intact (100% agreement, 3 voters)");
+  expect(sendChat.mock.calls[2]![0]).toBe("Mission complete: 1 validated, 1 sent to expert review. Thank you, crew.");
   expect(runner.getRefusedQueue()).toHaveLength(1);
   expect(twitch.listenerCount("chatMessage")).toBe(0);
 });
@@ -148,8 +150,30 @@ it("mixes real chat votes with the simulated crowd through the same vote path", 
   expect(session.votes.filter((vote) => vote.userId === "1599553311")).toEqual([expect.objectContaining({ label: "intact" })]);
   expect(seen.map((item) => [item.message.text, item.accepted])).toEqual([["1", true], ["2", true], ["!why", false]]);
   expect(states.some((state) => state.liveChat && state.liveVote?.login === "viewer")).toBe(true);
-  expect(sendChat).toHaveBeenCalledTimes(1);
+  expect(sendChat).toHaveBeenCalledTimes(2);
+  expect(sendChat.mock.calls[1]![0]).toMatch(/^Mission complete: /);
   expect(twitch.listenerCount("chatMessage")).toBe(0);
+});
+it("credits real viewers who matched the experts on a hidden check, after it is decided", async () => {
+  let now = 5000;
+  const clock: Clock = { now: () => now, wait: async (ms) => { now += ms; } };
+  const twitch = new FakeTwitch(); const ledger = new MemoryLedger(); const sendChat = vi.fn().mockResolvedValue(undefined);
+  const runner = new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", liveChat: true, twitch, clock, ledger,
+    sendChat, maxTiles: 1, goldOnly: true, crowd: { voters: 5 } });
+  const truth = goldTruth(getMission("nepal-flood-2026").gold[0]!.building_id, "nepal-flood-2026")!;
+  const states: PublicState[] = [];
+  runner.on("state", (state) => {
+    states.push(state);
+    if (state.phase !== "voting" || states.filter((item) => item.phase === "voting").length > 1) return;
+    twitch.emit("chatMessage", { messageId: "c1", userId: "42", userLogin: "ana_maps",
+      text: truth === "destroyed" ? "1" : "2", timestamp: new Date(now).toISOString() });
+  });
+  await runner.run();
+  expect(states.filter((state) => state.phase === "voting").every((state) => !state.crew)).toBe(true);
+  const decided = states.find((state) => state.phase === "decided")!;
+  expect(decided.crew).toEqual(expect.arrayContaining([{ name: "ana_maps", matched: 1, checked: 1, live: true }]));
+  expect(sendChat.mock.calls[0]![0]).toContain("matched the experts: ana_maps");
+  expect(sendChat.mock.calls[1]![0]).toMatch(/hidden checks\. Thank you, crew\.$/);
 });
 it("refuses live chat mixing in virtual time or with a Twitch-only source", () => {
   expect(() => new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", liveChat: true, virtual: true,

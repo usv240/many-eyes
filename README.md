@@ -68,6 +68,8 @@ The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch
 
 Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why` for a short explanation with the repo link. First-time voters get one welcome reply. The bot sends at most one message per second.
 
+**Credit for the crew.** When a hidden check is decided, the result message thanks the real viewers who matched the experts by name, the overlay shows a "Sharpest eyes" line, and the mission ends with one summary message and a thank-you that names the three sharpest viewers. Credit never changes a label or a weight; those come only from the consensus engine.
+
 While the channel is live, every decided building also drops a **Twitch stream marker** ("Many Eyes · Tile 14: validated intact, 81% agreement, 23 voters"), so the saved broadcast becomes an index a responder can jump through. Markers need the `channel:manage:broadcast` scope; without it they switch off quietly.
 
 **Twitch platform rules the code follows**, each with a test:

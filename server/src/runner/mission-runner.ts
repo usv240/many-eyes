@@ -11,6 +11,7 @@ import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
 import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
 import { readCachedDebate, publicDebate, type CachedDebate } from "../debate/cache.js";
+import { Crew, type CrewMember } from "./crew.js";
 import { liveScenario } from "./scenario.js";
 
 const publicTokenKey = randomBytes(32);
@@ -30,6 +31,8 @@ export interface PublicState {
   liveChat?: boolean;
   /** The newest accepted real chat vote, shown briefly on the overlay. */
   liveVote?: { login: string; label: VoteLabel; at: number };
+  /** Who matched the experts most often on decided hidden checks; credit only, never a weight or a label. */
+  crew?: CrewMember[];
   attribution: string; refusedCount: number;
   tile?: { token: string; number: number; lon: number; lat: number;
     openedAt: number; closesAt: number; imageryUrl: string };
@@ -73,6 +76,8 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
   private readonly seen = new Set<string>();
   private readonly publicTiles = new Map<string, string>();
   private weights = new Map<string, number>();
+  private readonly crew = new Crew();
+  private readonly logins = new Map<string, string>();
   private session?: TileSession;
   private started = false;
   private fault?: Error;
@@ -134,7 +139,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
     this.state.votes = { destroyed: 0, intact: 0, unsure: 0, total: next.votes.length };
     for (const item of next.votes) this.state.votes[item.label]++;
     this.state.live = preview(next);
-    if (login) this.state.liveVote = { login, label, at: now };
+    if (login) { this.state.liveVote = { login, label, at: now }; if (this.logins.size < 10_000) this.logins.set(userId, login); }
     this.publish();
     return true;
   }
@@ -194,7 +199,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             status: this.state.lastResult.status, label: this.state.lastResult.label, agreement: this.state.lastResult.agreement,
             voters: this.state.lastResult.voters, reason: this.state.lastResult.reason } : null,
           attribution: this.mission.attribution, refusedCount: this.refused.length,
-          ...(this.options.liveChat ? { liveChat: true } : {}),
+          ...(this.options.liveChat ? { liveChat: true } : {}), ...(this.crew.top().length ? { crew: this.crew.top() } : {}),
           ...(cached ? { debate: publicDebate(cached.debate) } : {}),
           tile: { token, number: index + 1, lon: Number(building.lon.toFixed(4)), lat: Number(building.lat.toFixed(4)),
             openedAt: session.openedAt, closesAt: session.closesAt,
@@ -204,6 +209,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
           number: index + 1, lon: building.lon, lat: building.lat, openedAt: session.openedAt, closesAt: session.closesAt }, session.openedAt);
         this.publish();
         const truth = goldTruth(buildingId, this.mission.id);
+        let matchedLive: string[] = [];
         let difficulty: "easy" | "hard" | "misleading" | undefined;
         if (this.options.source === "sim") {
           const tileSeed = seed ^ Math.imul(index + 1, 0x9e3779b1);
@@ -233,6 +239,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
               { missionId: this.mission.id, runId: this.runId, tileId: session.id, userId, previous, weight }, session.closesAt);
           }
           this.weights = updated;
+          matchedLive = this.crew.credit(this.session.votes, truth, this.logins);
           this.gold.push({ truth, ...decision, ...(difficulty ? { difficulty } : {}) });
         }
         if (decision.weighted.status === "refused") this.refused.push(buildingId);
@@ -249,16 +256,26 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
             ...(cached ? { ai: { label: cached.debate.model_label,
               agreedWithChat: result.status === "validated" && result.label === cached.debate.model_label } } : {}),
             ...(truth ? { gold: { truth, chatCorrect } } : {}) },
-          refusedCount: this.refused.length, ...(truth ? { reveal: { gold: true, truth } } : {}) };
+          refusedCount: this.refused.length, ...(truth ? { reveal: { gold: true, truth } } : {}),
+          ...(this.crew.top().length ? { crew: this.crew.top() } : {}) };
         this.publish();
         if (useTwitch) {
           const result = decision.weighted;
           const text = result.status === "validated"
             ? "Tile " + (index + 1) + ": validated " + result.label + " (" + Math.round(result.agreement * 100) + "% agreement, " + result.voters + " voters)"
             : "Tile " + (index + 1) + ": refused (" + (result.reason === "low_agreement" ? "chat split" : "too few voters") + "), sent to expert review";
-          try { await sendChat!(text); } catch { this.emit("warning", "Tile result could not be sent to Twitch."); }
+          // Hidden checks are revealed once decided, so the bot can thank the real viewers who matched the experts.
+          const thanks = matchedLive.length ? " · matched the experts: " + matchedLive.slice(0, 3).join(", ") +
+            (matchedLive.length > 3 ? " and " + (matchedLive.length - 3) + " more" : "") : "";
+          try { await sendChat!(text + thanks); } catch { this.emit("warning", "Tile result could not be sent to Twitch."); }
         }
         if (index + 1 < limit || this.options.pauseAfterLast) await this.clock.wait(this.options.pauseMs ?? 5000, signal);
+      }
+      if (useTwitch && !signal.aborted) {
+        const { validated, refused, goldChecked, goldCorrect } = this.state.stats;
+        const checks = goldChecked ? `. Chat matched the experts on ${goldCorrect} of ${goldChecked} hidden checks` : "";
+        try { await sendChat!(`Mission complete: ${validated} validated, ${refused} sent to expert review${checks}. Thank you, crew.`); }
+        catch { this.emit("warning", "Mission summary could not be sent to Twitch."); }
       }
     } catch (error) {
       if (this.fault) throw this.fault;

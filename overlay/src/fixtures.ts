@@ -28,6 +28,8 @@ export function fixtureSnapshot(name: FixtureName, now = Date.now()): Snapshot {
     if (name.startsWith("gold")) state.lastResult.gold = { truth: "destroyed", chatCorrect: name === "gold" };
     if (name === "gold-missed") { state.lastResult = { ...state.lastResult, label: "intact" }; state.live.leading = "intact"; }
   }
+  if (name.startsWith("gold") || name === "complete") state.crew = [{ name: "ana_maps", matched: 7, checked: 7, live: true },
+    { name: "viewer 9", matched: 7, checked: 8, live: false }, { name: "riverwatch", matched: 6, checked: 7, live: true }];
   if (name === "complete") { state.phase = "complete"; state.stats = { goldChecked: 80, goldCorrect: 69, validated: 154, refused: 36, remaining: 0, total: 190 }; }
   return { state, receivedAt: now, connection: name === "disconnected" ? "reconnecting" : "open",
     ...(name === "disconnected" ? { offlineSince: now - 4000 } : {}),

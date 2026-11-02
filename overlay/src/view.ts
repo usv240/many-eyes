@@ -76,13 +76,16 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
   const liveVoteCopy = liveVote && state?.phase !== "complete" && (options.now ?? state.serverNow) - liveVote.at < 4000
     ? "Live chat: " + liveVote.login + " voted " + ({ destroyed: "1", intact: "2", unsure: "3" } as const)[liveVote.label] +
       " · " + liveVote.label : "";
+  // Credit, not score: who matched the experts most often on hidden checks. Shown with each result and at the end.
+  const crewCopy = state?.crew?.length && (state.phase === "decided" || complete)
+    ? "Sharpest eyes: " + state.crew.map((member) => member.name + " " + member.matched + "/" + member.checked).join(" · ") : "";
   const countdown = state?.phase === "voting" ? Math.ceil(timeLeft / 1000) + " s" : state?.phase === "decided" && result
     ? result.status === "validated" ? "Validated " + result.label : "Refused · sent to experts"
     : state?.phase === "complete" ? "Mission complete" : state?.phase === "stopped" ? "Mission paused" : "Waiting for a tile";
   return {
     text: {
       wordmark: "Many Eyes", location: mission ? mission.place.replace(", Rasuwa", "") + " · flood of " + date(mission.eventDate) : "Waiting for the mission",
-      tileCount: "Tile " + (tile?.number ?? 0) + " of " + stats.total, simulated: state?.liveChat ? "Simulated crowd + live chat" : "Simulated crowd", liveVote: liveVoteCopy,
+      tileCount: "Tile " + (tile?.number ?? 0) + " of " + stats.total, simulated: state?.liveChat ? "Simulated crowd + live chat" : "Simulated crowd", liveVote: liveVoteCopy, crew: crewCopy,
       question: complete ? "Mission complete" : "Did the building in the ring survive?", key1: "1", key2: "2", key3: "3",
       destroyedKey: "destroyed", intactKey: "intact", unsureKey: "unsure",
       beforeDate: "Before · " + date(mission?.preDate), afterDate: "After · " + date(mission?.postDate),
@@ -98,7 +101,9 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       aiFootnote: "AI arguments. They never count as votes.",
       emptyCopy: "Waiting for votes. Type 1, 2 or 3 in chat.", resultCopy, goldCopy,
       aiCopy: result?.ai ? "AI alone said: " + result.ai.label + "." : "",
-      completeCopy: "Results are being exported for humanitarian mappers.",
+      completeCopy: (state?.crew?.length ? "Thank you, crew. Sharpest eyes on the hidden checks: " +
+        state.crew.map((member) => member.name + " " + member.matched + "/" + member.checked).join(", ") + ". " : "") +
+        "Validated buildings are exported for humanitarian mappers.",
       agreement: live.voters ? Math.round(live.agreement * 100) + "%" : "—",
       leading: live.leading ? "say " + live.leading : live.voters ? "no leading label" : "waiting for votes",
       destroyedBarLabel: "destroyed", intactBarLabel: "intact", threshold: "66% needed",
@@ -125,7 +130,7 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
       completeCopy: !complete, emptyCopy: !empty, lead: empty || complete, voteBar: empty || complete,
       barLabels: empty || complete, threshold: empty || complete, goldCopy: !goldCopy, aiCopy: !result?.ai,
       advocateBox: !ready || !advocateBox || complete, skepticBox: !ready || !skepticBox || complete,
-      keys: complete, liveVote: !liveVoteCopy, imageStatus: ready,
+      keys: complete, liveVote: !liveVoteCopy, crew: !crewCopy || complete, imageStatus: ready,
       before: !ready, after: !ready, target: !ready, scale: !tile, divider: !ready, connection: !status,
       pauseReason: state?.phase !== "stopped" },
     geometry: { metresPerPixel: mpp, ringRadiusPx, scaleBarPx, countdownFraction },
