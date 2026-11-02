@@ -28,6 +28,17 @@ Many Eyes puts each building on a Twitch stream, before and after the flood:
 
 The AI calls half of the standing buildings destroyed. That is why people check the AI, and not the other way round. Every number above is recomputed from the committed ledgers by `npm run verify`.
 
+## Why a crowd on stream can do this
+
+Crowds have done this work before, at scale, with published results:
+
+- **Disaster damage:** after the 2015 Nepal earthquake, 58,000 Tomnod volunteers tagged over 21,000 damaged buildings, roads and areas of destruction in satellite photos ([Maxar](https://www.marketscreener.com/quote/stock/MAXAR-TECHNOLOGIES-50060908/news/Maxar-Technologies-In-the-blink-of-an-eye-looking-back-on-nine-years-with-Tomnod-28997367/)).
+- **People plus AI:** over 300,000 EVE Online players classified cell images inside the game. The AI was better on common patterns, players on rare ones, and the combination beat either ([Human Protein Atlas](https://www.proteinatlas.org/news/2018-08-20/mapping-of-cells-and-proteins-improved-with-combination-of-multiplayer-crowdsourcing-and-ai); Nature Biotechnology 2018). That is why Many Eyes keeps the AI as a debater and lets people decide.
+- **Gamers at scale:** over 4 million Borderlands 3 players solved over 135 million DNA puzzles that improved microbial phylogeny beyond state-of-the-art methods ([Sarrazin-Gendron et al. 2024, Nature Biotechnology](https://www.nature.com/articles/s41587-024-02175-6)).
+- **The same rule:** MapSwipe has over 200 million swipes from over 130,000 volunteers, with every image checked by at least three people ([mapswipe.org](https://mapswipe.org/)), the same minimum Many Eyes uses.
+
+**What one stream can do (a projection, not a measurement).** Each building takes 20 seconds on stream (a 15-second vote and a 5-second result), and every viewer judges the same building at once, so one stream checks about 180 buildings an hour. With ten simulated viewers about 81% are validated, about 146 an hour, and the rest go to experts. HOT's AI scored 1,053 buildings in the flood's first 48 hours: about six stream-hours. All 8,421 would take about 47 stream-hours, or two dozen two-hour charity streams. Twitch averaged 2.17 million concurrent viewers in 2025 ([TwitchTracker](https://twitchtracker.com/statistics)), and its community had raised over $75 million for charity by 2017, the last total Twitch published ([Twitch blog](https://blog.twitch.tv/en/2017/07/20/2017-charity-update-twitch-community-gives-back-at-record-pace-a687f86001bd/)). A relief stream can raise money and check the map of the same disaster in one segment.
+
 ## Try it in 2 minutes (no keys needed)
 
 ```
