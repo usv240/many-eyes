@@ -2,24 +2,59 @@
 
 **Twitch chat checks the AI's disaster map.**
 
-Website: https://usv240.github.io/many-eyes/ · Code: https://github.com/usv240/many-eyes · Built for the Codex x TwitchCon Hackathon 2026
+[Demo video (3 min)](https://youtu.be/ikf0yvDqPxQ) · [Website, try it in your browser](https://usv240.github.io/many-eyes/) · Built with OpenAI Codex for the Codex x TwitchCon Hackathon 2026 · Codex session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`
 
 ![The Many Eyes overlay: before and after photos of one building, two AI debaters, and a validated result where the AI alone said destroyed and the expert damage map shows no damage](site/public/img/overlay-decided.jpg)
 
-**Judging in a hurry?** Open the [website](https://usv240.github.io/many-eyes/) and judge six real buildings yourself (no install), or follow [Try it in 2 minutes](#try-it-in-2-minutes-no-keys-needed) and open http://localhost:5180 (no keys needed). Codex built the core in session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`; see [How it was built](#how-it-was-built).
+## The problem
 
-## In 60 seconds
+After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. After the glacier-flood in Syaphru Besi, Nepal, on 26 August 2026, the Humanitarian OpenStreetMap Team's AI scored 1,053 buildings in 48 hours and 8,421 by 12 September, published as "not yet human validated" ([HOT](https://www.hotosm.org/en/news/mapping-the-nepal-floods/)). Checking is the bottleneck.
 
-After a disaster, AI marks thousands of buildings as damaged within days, and nobody can trust those marks until people check them. After the Nepal flood of 26 August 2026, the Humanitarian OpenStreetMap Team's AI scored over 1,000 buildings in 48 hours, published as "not yet human validated". Checking is the bottleneck.
+We measured the AI ourselves on 80 buildings with known answers: it was right 73.8% of the time and **called 52.5% of the standing buildings destroyed**. That is why people check the AI, and not the other way round.
 
-Many Eyes puts each building on a Twitch stream, before and after the flood:
+## What Many Eyes does
 
-1. A tile opens for 15 seconds with real satellite photos of one building in Syaphru Besi, Nepal.
-2. Two AI debaters argue, one for destroyed and one for intact, each pointing at the photo. They never vote.
-3. Chat types `1` destroyed, `2` intact or `3` unsure. Votes arrive through Twitch EventSub.
-4. A label is **validated** only with at least 66% weighted agreement from at least 3 voters. Otherwise the building is **refused** and sent to experts.
-5. About 40% of tiles are **hidden checks** with known expert answers from Copernicus EMS. They show chat's accuracy live, and voters who get them right count for more.
-6. The bot posts each result in chat. Validated buildings export as GeoJSON for humanitarian mappers, and every vote sits in a hash-chained ledger that `npm run verify` re-checks.
+A Twitch stream segment where chat checks the AI's damage map, one building at a time:
+
+1. **One building per round.** The overlay shows real satellite photos of one building, before and after the flood, for 15 seconds.
+2. **Two AI debaters argue, but never vote.** One argues destroyed, one argues intact, each boxing the evidence in the photo. The AI's own guess stays hidden until chat has decided.
+3. **Chat decides.** Viewers type `1` destroyed, `2` intact or `3` unsure. Votes arrive through Twitch EventSub.
+4. **No guessing.** A building is **validated** only with at least 66% weighted agreement from at least 3 voters. Otherwise it is **refused** and sent to experts.
+5. **Surprise accuracy tests.** About 40% of buildings are hidden checks with a known answer. They show chat's accuracy live, and viewers who get them right count for more, which blunts trolls and raids.
+6. **The bot keeps chat in the loop.** It posts every result, answers `!why`, welcomes first-time voters, thanks by name the viewers who matched a hidden check, and drops a stream marker for every decided building.
+7. **Real output.** Validated buildings export as GeoJSON for humanitarian mappers; refused ones become an expert queue. Every vote sits in a hash-chained ledger, and `npm run verify` recomputes every published number.
+
+**For streamers:** a ready-made segment with a clear ending, chat as the player, shout-outs for careful viewers, and a natural fit for charity streams. Mixed mode adds a clearly labelled simulated crowd beside real chat, so a small channel can run it today.
+
+**Beyond the stream:** the [website](https://usv240.github.io/many-eyes/) lets anyone judge six real buildings, upload their own crowd's votes, or call the same engine through a developer API.
+
+## How it works
+
+```mermaid
+flowchart LR
+    chat["Twitch chat<br/>viewers type 1, 2 or 3"] -->|"EventSub WebSocket"| runner
+    sim["Simulated crowd<br/>optional, always labelled"] --> runner
+    cache["AI debates<br/>written ahead by the OpenAI API"] -->|"shown, never counted"| runner
+    runner["Mission runner<br/>one building every 20 s"] --> engine["Consensus engine<br/>66% weighted, 3+ voters"]
+    engine --> ledger["Hash-chained ledger"]
+    runner -->|"Server-Sent Events"| overlay["OBS overlay<br/>what viewers see"]
+    runner -->|"Send Chat API + stream markers"| channel["Twitch channel"]
+    ledger --> geojson["GeoJSON exports<br/>validated and refused"]
+    ledger --> verify["npm run verify<br/>recomputes every number"]
+```
+
+| Part | Where |
+|---|---|
+| Twitch EventSub client, chat sender, stream markers | `server/src/twitch/` |
+| Vote parsing (`1`, `!1`, `destroyed` and so on) | `server/src/votes/parse.ts` |
+| Mission runner (rounds, timing, bot messages) | `server/src/runner/mission-runner.ts` |
+| Consensus engine, the only place a label is decided | `server/src/consensus/engine.ts` |
+| GeoJSON exports | `server/src/exports/` |
+| Developer API | `server/src/api/` |
+| OBS overlay | `overlay/` |
+| Simulated crowd and benchmark | `sim/`, `scripts/bench.ts` |
+| Website | `site/` |
+| Cached AI debates for all 190 buildings | `data/cache/debate/` |
 
 ## The numbers
 
@@ -30,44 +65,41 @@ Many Eyes puts each building on a Twitch stream, before and after the flood:
 | One viewer alone | 75.9% | Simulation, MapSwipe-derived rates (Herfort et al. 2019) |
 | Ten viewers including three trolls, weighted by hidden checks | 89.2% on the 81.3% of tiles validated; the rest refused | Simulation |
 
-The AI calls half of the standing buildings destroyed. That is why people check the AI, and not the other way round. Every number above is recomputed from the committed ledgers by `npm run verify`.
+The crowd is simulated because a real audience did not exist yet; it is labelled that way on stream, on the website and here. Destroyed answers are Copernicus EMS expert grades; intact answers are buildings more than 40 m from any mapped damage, so they are inferred, not surveyed. Every number above is recomputed from the committed ledgers by `npm run verify`.
 
 ## Why a crowd on stream can do this
 
-Crowds have done this work before, at scale, with published results:
-
 - **Disaster damage:** after the 2015 Nepal earthquake, 58,000 Tomnod volunteers tagged over 21,000 damaged buildings, roads and areas of destruction in satellite photos ([Maxar](https://www.marketscreener.com/quote/stock/MAXAR-TECHNOLOGIES-50060908/news/Maxar-Technologies-In-the-blink-of-an-eye-looking-back-on-nine-years-with-Tomnod-28997367/)).
-- **People plus AI:** over 300,000 EVE Online players classified cell images inside the game. The AI was better on common patterns, players on rare ones, and the combination beat either ([Human Protein Atlas](https://www.proteinatlas.org/news/2018-08-20/mapping-of-cells-and-proteins-improved-with-combination-of-multiplayer-crowdsourcing-and-ai); Nature Biotechnology 2018). That is why Many Eyes keeps the AI as a debater and lets people decide.
-- **Gamers at scale:** over 4 million Borderlands 3 players solved over 135 million DNA puzzles that improved microbial phylogeny beyond state-of-the-art methods ([Sarrazin-Gendron et al. 2024, Nature Biotechnology](https://www.nature.com/articles/s41587-024-02175-6)).
-- **The same rule:** MapSwipe has over 200 million swipes from over 130,000 volunteers, with every image checked by at least three people ([mapswipe.org](https://mapswipe.org/)), the same minimum Many Eyes uses.
+- **People plus AI:** over 300,000 EVE Online players classified cell images. The AI was better on common patterns, players on rare ones, and the combination beat either ([Human Protein Atlas](https://www.proteinatlas.org/news/2018-08-20/mapping-of-cells-and-proteins-improved-with-combination-of-multiplayer-crowdsourcing-and-ai); Nature Biotechnology 2018). That is why the AI here argues but never decides.
+- **Gamers at scale:** over 4 million Borderlands 3 players solved over 135 million DNA puzzles that improved microbial phylogeny ([Sarrazin-Gendron et al. 2024, Nature Biotechnology](https://www.nature.com/articles/s41587-024-02175-6)).
+- **The same safety rule:** MapSwipe checks every image with at least three volunteers ([mapswipe.org](https://mapswipe.org/)), who reach 91 to 96% accuracy on simple tasks ([Herfort et al. 2019](https://www.mdpi.com/2072-4292/11/15/1799)). Damage is harder ([Gross et al. 2023](https://agile-giss.copernicus.org/articles/4/5/2023/)), so Many Eyes lets the crowd say "unsure" and refuses what it cannot settle.
+- **Debate helps non-experts:** two models arguing opposite sides helps people judge more accurately ([Khan et al. 2024, ICML](https://arxiv.org/abs/2402.06782)).
 
-**What one stream can do (a projection, not a measurement).** Each building takes 20 seconds on stream (a 15-second vote and a 5-second result), and every viewer judges the same building at once, so one stream checks about 180 buildings an hour. With ten simulated viewers about 81% are validated, about 146 an hour, and the rest go to experts. HOT's AI scored 1,053 buildings in the flood's first 48 hours: about six stream-hours. All 8,421 would take about 47 stream-hours, or two dozen two-hour charity streams. Twitch averaged 2.17 million concurrent viewers in 2025 ([TwitchTracker](https://twitchtracker.com/statistics)), and its community had raised over $75 million for charity by 2017, the last total Twitch published ([Twitch blog](https://blog.twitch.tv/en/2017/07/20/2017-charity-update-twitch-community-gives-back-at-record-pace-a687f86001bd/)). A relief stream can raise money and check the map of the same disaster in one segment.
+**What one stream could do (a projection, not a measurement).** Each building takes 20 seconds and every viewer judges the same one, so one stream reviews about 180 buildings an hour. HOT's first 1,053 buildings would take about six stream-hours. About 2.17 million people watch Twitch at an average moment ([TwitchTracker, 2025](https://twitchtracker.com/statistics)), and Twitch's community had raised over $75 million for charity by 2017 ([Twitch blog](https://blog.twitch.tv/en/2017/07/20/2017-charity-update-twitch-community-gives-back-at-record-pace-a687f86001bd/)).
 
-## Try it in 2 minutes (no keys needed)
+## Try it
 
+**No install:** open the [website](https://usv240.github.io/many-eyes/) and judge six real buildings.
+
+**Locally, no keys needed** (Node 22 or newer):
 ```
 git clone https://github.com/usv240/many-eyes
 cd many-eyes
 npm ci
 cp .env.example .env
 npm run demo        # open http://localhost:5180 (the OBS overlay)
-npm test            # 200+ tests
-npm run verify      # recompute every published number from the ledgers
 ```
+The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch or OpenAI keys and works offline.
 
-The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch or OpenAI keys and works offline. The website runs locally with `npm run site:dev`.
+## Testing
 
-## Glossary
-
-- **EventSub**: Twitch's live event feed. Many Eyes reads every chat message through it over a WebSocket.
-- **Hidden check (gold tile)**: a building whose answer experts already know. Viewers cannot tell which tiles are checks.
-- **Consensus**: the rule that turns votes into a label, at least 66% weighted agreement from at least 3 voters.
-- **Refused**: no label, because chat split or too few voted. The building goes to an expert queue.
-- **Weighting**: every voter starts at 1.0; a right hidden check adds 0.1, a wrong one removes 0.2, kept between 0.2 and 2.0.
-- **Copernicus EMS**: the European Union's emergency mapping service, whose experts graded the damage (activation EMSR927).
-- **OpenAerialMap**: open satellite imagery; the photos here are Vantor imagery under CC BY-NC 4.0.
-- **MapSwipe**: a volunteer app for checking map imagery; its measured accuracy calibrates the simulation.
-- **GeoJSON**: the standard file format for map features, readable by QGIS, JOSM and the HOT Tasking Manager.
+```
+npm test            # Vitest: 200+ tests, including property tests of the consensus engine and ledger
+npm run lint        # ESLint and TypeScript type checks
+npm run verify      # recompute every published number from the ledgers and compare
+npm run site:dev    # run the website locally
+```
+GitHub Actions runs the tests and `verify` on every push, and publishes the website.
 
 ## Run it live on Twitch
 
@@ -77,42 +109,43 @@ The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch
    ```
 2. Fill `TWITCH_CLIENT_ID`, `TWITCH_USER_TOKEN`, `TWITCH_REFRESH_TOKEN`, `TWITCH_BOT_USER_ID` and `TWITCH_BROADCASTER_USER_ID` in `.env`. To refresh later, run `twitch token -R <refresh token>` (capital R; lowercase -r revokes).
 3. Choose a mode:
-   - `npm run demo:mixed`: simulated crowd **plus** your real chat. Real votes go through the same parse, dedupe and replace path, and the overlay shows "Simulated crowd + live chat".
+   - `npm run demo:mixed`: simulated crowd **plus** your real chat, through the same vote path. The overlay shows "Simulated crowd + live chat".
    - `npm run live`: real chat only.
 4. In OBS, add a Browser Source at `http://localhost:5180`, 1920 by 1080.
 
-Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why` for a short explanation with the repo link. First-time voters get one welcome reply. The bot sends at most one message per second.
+Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why` for a short explanation. The bot sends at most one message per second. Stream markers need the `channel:manage:broadcast` scope; without it they switch off quietly.
 
-**Credit for the crew.** When a hidden check is decided, the result message thanks the real viewers who matched the experts by name, the overlay shows a "Sharpest eyes" line, and the mission ends with one summary message and a thank-you that names the three sharpest viewers. Credit never changes a label or a weight; those come only from the consensus engine.
-
-While the channel is live, every decided building also drops a **Twitch stream marker** ("Many Eyes · Tile 14: validated intact, 81% agreement, 23 voters"), so the saved broadcast becomes an index a responder can jump through. Markers need the `channel:manage:broadcast` scope; without it they switch off quietly.
-
-**Twitch platform rules the code follows**, each with a test:
+**Twitch platform rules the code follows:**
 - Chat is read with EventSub over WebSocket (`channel.chat.message`, subscribed right after the welcome) and sent with the Send Chat Message API, not IRC.
-- The token is checked with `/oauth2/validate` at startup and every hour after, and refreshed automatically when `TWITCH_CLIENT_SECRET` is set.
-- EventSub keepalives are watched; a silent socket reconnects and resubscribes, `session_reconnect` follows the given URL unchanged, and close codes 4000 to 4007 are handled.
+- The token is checked with `/oauth2/validate` at startup and every hour, and refreshed automatically when `TWITCH_CLIENT_SECRET` is set.
+- Keepalives are watched; `session_reconnect` follows the given URL unchanged, and close codes 4000 to 4007 are handled.
 - Every event is deduplicated by `message_id`, and events older than 10 minutes are dropped.
 - Helix calls time out after 5 seconds, wait for `Ratelimit-Reset` after a 429 and retry once after a 503.
-- The bot sends at most one message per second and one result per building.
 
-**What is stored.** Only what scoring needs: the Twitch user id, the vote and its time, in the local ledger. No message text, and logins appear only on the overlay for four seconds. Nothing is sent anywhere except the bot's own chat messages and markers to Twitch.
+**What is stored.** Only what scoring needs: the Twitch user id, the vote and its time, in the local ledger. No message text. Nothing is sent anywhere except the bot's own chat messages and markers to Twitch.
 
 ## Bring your own data, and the developer API
 
-- **Website data page**: upload a CSV of `tile_id,user_id,vote[,truth][,lon][,lat]` and get validated or refused labels, accuracy on your own hidden checks, voter weights and GeoJSON. It runs the same engine in the browser. Three presets are included and downloadable.
-- **Developer API**, served by `npm run demo` on port 8791:
-  - `POST /v1/keys` issues a key, shown once and stored only as a SHA-256 hash, 5 per hour per address.
-  - `POST /v1/decide` decides up to 5,000 tiles and 200,000 votes, with a Bearer key, 60 requests per minute.
-  - `GET /v1/openapi.json` describes it all.
-- The website's API page can issue a key and call a running server, or use an in-browser sandbox of the same function.
+- **Website data page:** upload a CSV of `tile_id,user_id,vote[,truth][,lon][,lat]` and get validated or refused labels, accuracy on your own hidden checks, voter weights and GeoJSON. It runs the same engine in the browser.
+- **Developer API**, served by `npm run demo` on port 8791: `POST /v1/keys` issues a key (shown once, stored only as a hash), `POST /v1/decide` decides up to 5,000 tiles and 200,000 votes, and `GET /v1/openapi.json` describes it.
 
-## How it was built
+## How it was built with Codex
 
-**OpenAI Codex** wrote the core in one main thread, session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`, phase by phase: Twitch EventSub and vote parsing; missions and imagery; consensus engine, ledger and simulated crowd; the live state stream and broadcast overlay; the AI debaters; exports and reports. `AGENTS.md` held the rules Codex followed in every phase (no extra dependencies, votes deduplicated by message id, no label written without `consensus.decide()`, careful wording, code-review rules), and two repository skills in `.agents/skills` taught it the Twitch EventSub protocol and the mission report format.
+- **OpenAI Codex built the core in one thread** (session `01a18e68-04f2-73b0-b14f-b84aa906c1c5`), phase by phase: Twitch EventSub and vote parsing; missions and imagery; consensus engine, ledger and simulated crowd; the live state stream and overlay; the AI debaters; exports and reports.
+- **Rules, not just prompts.** [`AGENTS.md`](AGENTS.md) held the rules Codex followed in every phase: no extra dependencies, votes counted once per person, no label written without `consensus.decide()`, timeouts on every network call, no secrets in code or logs, careful wording. Two repository skills in [`.agents/skills`](.agents/skills) taught it the Twitch EventSub protocol and the mission report format.
+- **Review loop.** Every phase was run and checked from screenshots before the next. Review caught a benchmark that scored an unrealistic 100% (rebuilt with shared hard tiles, trolls and raids) and satellite crops cut from the wrong corner of the map; Codex fixed both with regression tests.
+- **Codex reviewed the later parts.** Codex reviewed every later module against the Code Review Rules in `AGENTS.md` and fixed 19 problems, each with a regression test (commit `2308ec0`). Examples: real chat users could pose as simulated voters; a full API rate limiter let a caller start over; a quoted CSV field could shift votes into the wrong column; exports could carry spreadsheet formulas from voter names.
+- **Stack:** TypeScript on Node 22, Fastify with Server-Sent Events, Vite with vanilla TypeScript, zod, sharp, Vitest. The OpenAI API (gpt-6-luna) wrote the debates for all 190 buildings ahead of time, so the stream never waits on it.
 
-**Review loop.** Every phase was run and checked from screenshots before the next began. Review found two problems that Codex then fixed with regression tests. The first benchmark scored about 100% because simulated errors were independent, so it was rebuilt with shared hard and misleading tiles, always-wrong trolls and raids. And every satellite crop had been cut from the wrong corner of the map, because the image library runs extract before composite. The later parts were built after the core phases: mixed live mode, `!why` and welcome replies, stream markers, the developer API, the bring-your-own-data page and the website.
+## Glossary
 
-**Codex review of the later parts.** Back in the same thread, Codex reviewed every later module against the Code Review Rules in `AGENTS.md`: timeouts on every network call, no vote counted twice, no label or weight written outside `consensus.decide()` and the gold-check update, no secret reaching a log or the browser, and bounded memory. It found and fixed 19 problems, each with a regression test (26 new tests, commit `2308ec0`). Examples: real chat users could pose as simulated voters by choosing a `sim_` name; the API rate limiter evicted live windows when full, letting a caller start over; a quoted CSV field could shift votes into the wrong column; CSV exports could carry spreadsheet formulas from untrusted voter names; and the hourly token check needed to stop the bot on a revoked token rather than retry it.
+- **EventSub**: Twitch's live event feed. Many Eyes reads every chat message through it over a WebSocket.
+- **Hidden check (gold tile)**: a building whose answer is already known. Viewers cannot tell which tiles are checks.
+- **Consensus**: the rule that turns votes into a label, at least 66% weighted agreement from at least 3 voters.
+- **Refused**: no label, because chat split or too few voted. The building goes to an expert queue.
+- **Weighting**: every voter starts at 1.0; a right hidden check adds 0.1, a wrong one removes 0.2, kept between 0.2 and 2.0.
+- **Copernicus EMS**: the European Union's emergency mapping service, whose experts graded the damage (activation EMSR927).
+- **GeoJSON**: the standard file format for map features, readable by QGIS, JOSM and the HOT Tasking Manager.
 
 ## Sources
 
@@ -121,6 +154,10 @@ While the channel is live, every decided building also drops a **Twitch stream m
 - Herfort et al. 2019, [Remote Sensing 11(15)](https://www.mdpi.com/2072-4292/11/15/1799)
 - Gross et al. 2023, [AGILE GIScience Series 4](https://agile-giss.copernicus.org/articles/4/5/2023/)
 - Khan et al. 2024, [Debating with more persuasive LLMs leads to more truthful answers](https://arxiv.org/abs/2402.06782)
+- Sarrazin-Gendron et al. 2024, [Improving microbial phylogeny with citizen science within a mass-market video game](https://www.nature.com/articles/s41587-024-02175-6), Nature Biotechnology
+- Human Protein Atlas, [Project Discovery: multiplayer crowdsourcing and AI](https://www.proteinatlas.org/news/2018-08-20/mapping-of-cells-and-proteins-improved-with-combination-of-multiplayer-crowdsourcing-and-ai)
+- Maxar, [Nine years with Tomnod](https://www.marketscreener.com/quote/stock/MAXAR-TECHNOLOGIES-50060908/news/Maxar-Technologies-In-the-blink-of-an-eye-looking-back-on-nine-years-with-Tomnod-28997367/)
+- [MapSwipe](https://mapswipe.org/), [TwitchTracker statistics](https://twitchtracker.com/statistics), [Twitch blog: 2017 charity update](https://blog.twitch.tv/en/2017/07/20/2017-charity-update-twitch-community-gives-back-at-record-pace-a687f86001bd/)
 - [OpenAerialMap](https://openaerialmap.org) and [OpenStreetMap](https://www.openstreetmap.org/copyright)
 
 ## Licences
