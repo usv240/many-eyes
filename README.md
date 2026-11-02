@@ -58,7 +58,7 @@ The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch
 
 1. Register a Twitch app (category Chat Bot) and create a user token with the Twitch CLI:
    ```
-   twitch token -u -s "user:read:chat user:write:chat user:bot channel:bot"
+   twitch token -u -s "user:read:chat user:write:chat user:bot channel:bot channel:manage:broadcast"
    ```
 2. Fill `TWITCH_CLIENT_ID`, `TWITCH_USER_TOKEN`, `TWITCH_REFRESH_TOKEN`, `TWITCH_BOT_USER_ID` and `TWITCH_BROADCASTER_USER_ID` in `.env`. To refresh later, run `twitch token -R <refresh token>` (capital R; lowercase -r revokes).
 3. Choose a mode:
@@ -67,6 +67,8 @@ The demo uses a simulated crowd and the cached AI debates, so it needs no Twitch
 4. In OBS, add a Browser Source at `http://localhost:5180`, 1920 by 1080.
 
 Chat commands: `1`, `2`, `3` (or `!1`, `destroyed` and so on) to vote, and `!why` for a short explanation with the repo link. First-time voters get one welcome reply. The bot sends at most one message per second.
+
+While the channel is live, every decided building also drops a **Twitch stream marker** ("Many Eyes · Tile 14: validated intact, 81% agreement, 23 voters"), so the saved broadcast becomes an index a responder can jump through. Markers need the `channel:manage:broadcast` scope; without it they switch off quietly.
 
 ## Bring your own data, and the developer API
 

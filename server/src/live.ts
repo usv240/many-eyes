@@ -4,6 +4,7 @@ import { readConfig } from "./twitch/auth.js";
 import { EventSubClient } from "./twitch/eventsub.js";
 import { createChatSender } from "./twitch/send.js";
 import { createChatCommands } from "./twitch/commands.js";
+import { createMarker } from "./twitch/markers.js";
 
 export interface LiveMission { runner: MissionRunner; start(): Promise<void>; stop(): Promise<void> }
 export interface LiveConfig { source: "sim" | "twitch"; seed: number; liveChat: boolean }
@@ -26,10 +27,13 @@ export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPo
   const usesTwitch = config.source === "twitch" || config.liveChat;
   const twitch = usesTwitch ? readConfig(env) : undefined;
   const sendChat = twitch ? createChatSender(twitch) : undefined;
+  // The runner sends chat only for tile results; each result also becomes a stream marker on the saved video.
+  const marker = twitch ? createMarker(twitch) : undefined;
+  const sendResult = sendChat ? async (text: string) => { void marker?.("Many Eyes · " + text); await sendChat(text); } : undefined;
   const onChat = sendChat ? createChatCommands({ send: sendChat, repoUrl: env.REPO_URL?.trim() || DEFAULT_REPO_URL }) : undefined;
   const runner = new MissionRunner({ missionId: "nepal-flood-2026", ...config, virtual: false,
     ledger: options.ledger, ...options.runnerOptions,
-    ...(twitch ? { twitch: new EventSubClient(twitch), sendChat, onChat } : {}) });
+    ...(twitch ? { twitch: new EventSubClient(twitch), sendChat: sendResult, onChat } : {}) });
   let ready: Promise<void> | undefined;
   let task: Promise<void> | undefined;
   return {
@@ -54,7 +58,7 @@ export function createLive(options: { env?: NodeJS.ProcessEnv; ledger?: LedgerPo
           const reason = error instanceof Error ? error.message : "unknown startup error";
           if (!opened) reject(usesTwitch
             ? new Error("Live Twitch mission failed to start: " + reason + " Check the Twitch token in .env " +
-              "(twitch token -u -s \"user:read:chat user:write:chat user:bot channel:bot\").")
+              "(twitch token -u -s \"user:read:chat user:write:chat user:bot channel:bot channel:manage:broadcast\").")
             : new Error("Live simulation failed to start: " + reason));
           else (options.onError ?? ((cause: Error) => console.error("Live mission stopped: " + cause.message)))(
             error instanceof Error ? error : new Error(String(error)));
