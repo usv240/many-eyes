@@ -52,3 +52,25 @@ it("retries once after 429 (waiting for Ratelimit-Reset) and after 503", async (
   await expect(requestJson("https://api.twitch.tv/helix/x", {}, twice, sleep)).rejects.toThrow("HTTP 429");
   expect(twice).toHaveBeenCalledTimes(2);
 });
+
+it("cancels retry bodies and honors caller deadlines without another request", async () => {
+  const cancel = vi.fn();
+  const controller = new AbortController();
+  const response = new Response(new ReadableStream({ cancel }), { status: 503 });
+  const fetcher = vi.fn<typeof fetch>().mockResolvedValue(response);
+  await expect(requestJson("https://example.test", { signal: controller.signal }, fetcher,
+    async () => { controller.abort(new Error("private token")); })).rejects.toThrow("Twitch request failed");
+  expect(cancel).toHaveBeenCalledOnce(); expect(fetcher).toHaveBeenCalledOnce();
+  expect(fetcher.mock.calls[0]![1]!.signal!.aborted).toBe(true);
+  expect(retryDelay(new Response(null, { status: 429, headers: { "Ratelimit-Reset": "1" } }))).toBe(1000);
+});
+
+it("aborts retry backoff immediately at the caller deadline", async () => {
+  const controller = new AbortController();
+  const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 503 }));
+  const sleep = vi.fn(() => new Promise<void>(() => {}));
+  const pending = requestJson("https://example.test", { signal: controller.signal }, fetcher, sleep);
+  for (let i = 0; i < 10 && !sleep.mock.calls.length; i++) await Promise.resolve();
+  controller.abort();
+  await expect(pending).rejects.toThrow("Twitch request failed"); expect(fetcher).toHaveBeenCalledOnce();
+});

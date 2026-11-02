@@ -1,6 +1,6 @@
 import { EventEmitter } from "node:events";
 import { z } from "zod";
-import { HttpError, requestJson, validateToken, type TwitchConfig } from "./auth.js";
+import { AuthorizationError, HttpError, requestJson, validateToken, type TwitchConfig } from "./auth.js";
 
 export interface ChatMessage {
   messageId: string; userId: string; userLogin: string; text: string; timestamp: string;
@@ -18,7 +18,7 @@ export const MAX_EVENT_AGE_MS = 10 * 60 * 1000;
 export const VALIDATE_EVERY_MS = 60 * 60 * 1000;
 export const isStale = (timestamp: string, now = Date.now()) => {
   const at = Date.parse(timestamp);
-  return !Number.isFinite(at) || now - at > MAX_EVENT_AGE_MS;
+  return !Number.isFinite(at) || now - at > MAX_EVENT_AGE_MS || at - now > 60_000;
 };
 const envelope = z.object({
   metadata: z.object({ message_id: z.string(), message_type: z.string(),
@@ -63,7 +63,11 @@ export class EventSubClient extends EventEmitter<{
   async revalidate(): Promise<boolean> {
     try { await validateToken(this.config, this.fetcher, this.deps.saveTokens); return true; }
     catch (error) {
-      this.emit("status", "Twitch token check failed: " + (error instanceof Error ? error.message : "unknown error"));
+      if (!this.stopped) {
+        if (error instanceof AuthorizationError || (error instanceof HttpError && [400, 401, 403].includes(error.status)))
+          this.fail(new Error("Twitch token revalidation failed; reconnect after checking authorization."));
+        else this.emit("status", "Twitch token check temporarily failed; it will be checked again.");
+      }
       return false;
     }
   }
@@ -209,6 +213,7 @@ export class EventSubClient extends EventEmitter<{
 
   private async subscribe(sessionId: string) {
     await requestJson("https://api.twitch.tv/helix/eventsub/subscriptions", {
+      signal: AbortSignal.timeout(8000),
       method: "POST", headers: { Authorization: `Bearer ${this.config.userToken}`,
         "Client-Id": this.config.clientId, "Content-Type": "application/json" },
       body: JSON.stringify({ type: "channel.chat.message", version: "1",

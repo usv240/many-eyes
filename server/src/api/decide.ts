@@ -8,12 +8,12 @@ import { parseVote } from "../votes/parse.js";
  * from at least 3 voters validates a label; anything else is refused. Weights change only on
  * tiles that carry a known answer (hidden checks), and only after that tile is decided.
  */
-export const LIMITS = { tiles: 5000, votesPerTile: 1000, totalVotes: 200_000, idLength: 128 } as const;
+export const LIMITS = { tiles: 5000, votesPerTile: 1000, totalVotes: 200_000, idLength: 128, csvChars: 20 * 1024 * 1024 } as const;
 
 const id = z.string().trim().min(1).max(LIMITS.idLength);
 const voteInput = z.object({
   user: id,
-  vote: z.union([z.string(), z.number()]).transform((value, context) => {
+  vote: z.union([z.string().max(32), z.number()]).transform((value, context) => {
     const label = parseVote(String(value));
     if (!label) context.addIssue({ code: "custom", message: "vote must be 1, 2, 3, destroyed, intact or unsure" });
     return label ?? "unsure";
@@ -32,7 +32,7 @@ export const decideRequest = z.object({
   if (total > LIMITS.totalVotes) context.addIssue({ code: "custom", message: `at most ${LIMITS.totalVotes} votes per request` });
   const seen = new Set<string>();
   for (const tile of value.tiles) {
-    if (seen.has(tile.id)) context.addIssue({ code: "custom", message: "tile ids must be unique: " + tile.id });
+    if (seen.has(tile.id)) context.addIssue({ code: "custom", message: "tile ids must be unique" });
     seen.add(tile.id);
   }
 });
@@ -102,12 +102,36 @@ export function decideBatch(input: unknown): DecideResponse {
   };
 }
 
+function csvRow(line: string): string[] {
+  const cells: string[] = []; let cell = "", quoted = false, closed = false;
+  for (let index = 0; index < line.length; index++) {
+    const char = line[index]!;
+    if (quoted) {
+      if (char !== '"') cell += char;
+      else if (line[index + 1] === '"') { cell += '"'; index++; }
+      else { quoted = false; closed = true; }
+    } else if (char === ",") { cells.push(cell.trim()); cell = ""; closed = false; }
+    else if (char === '"') {
+      if (cell.trim() || closed) throw new Error("Malformed CSV quoting.");
+      cell = ""; quoted = true;
+    } else {
+      if (closed && char.trim()) throw new Error("Unexpected text after a quoted CSV field.");
+      cell += char;
+    }
+  }
+  if (quoted) throw new Error("Unclosed CSV field; multiline fields are not supported.");
+  cells.push(cell.trim()); return cells;
+}
+
 /** Reads tile_id,user_id,vote[,truth][,lon][,lat] rows (header required, any column order) into a request. */
 export function votesFromCsv(text: string): DecideRequest {
+  if (text.length > LIMITS.csvChars) throw new Error("CSV exceeds 20 MB of text.");
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   if (lines.length < 2) throw new Error("The CSV needs a header row and at least one vote.");
-  const split = (line: string) => line.split(",").map((cell) => cell.trim().replace(/^"(.*)"$/, "$1"));
+  if (lines.length - 1 > LIMITS.totalVotes) throw new Error("CSV exceeds the total vote limit.");
+  const split = csvRow;
   const header = split(lines[0]!).map((name) => name.toLowerCase());
+  if (new Set(header).size !== header.length) throw new Error("CSV header columns must be unique.");
   const column = (name: string, required: boolean) => {
     const index = header.indexOf(name);
     if (index < 0 && required) throw new Error(`The CSV header must include ${name}. Expected: tile_id,user_id,vote[,truth][,lon][,lat]`);
@@ -118,16 +142,29 @@ export function votesFromCsv(text: string): DecideRequest {
   const tiles = new Map<string, { id: string; votes: { user: string; vote: string }[]; truth?: "destroyed" | "intact"; lon?: number; lat?: number }>();
   lines.slice(1).forEach((line, index) => {
     const cells = split(line);
+    if (cells.length > header.length) throw new Error(`Row ${index + 2}: more cells than header columns.`);
     const tileId = cells[tileCol] ?? ""; const user = cells[userCol] ?? ""; const vote = cells[voteCol] ?? "";
     if (!tileId || !user) throw new Error(`Row ${index + 2} is missing tile_id or user_id.`);
     let tile = tiles.get(tileId);
-    if (!tile) { tile = { id: tileId, votes: [] }; tiles.set(tileId, tile); }
+    if (tileId.length > LIMITS.idLength || user.length > LIMITS.idLength || vote.length > 32) throw new Error(`Row ${index + 2}: field too long.`);
+    if (!tile) {
+      if (tiles.size >= LIMITS.tiles) throw new Error("CSV exceeds the tile limit.");
+      tile = { id: tileId, votes: [] }; tiles.set(tileId, tile);
+    }
+    if (tile.votes.length >= LIMITS.votesPerTile) throw new Error("CSV exceeds the votes-per-tile limit.");
     if (vote) tile.votes.push({ user, vote });
     const truth = truthCol >= 0 ? cells[truthCol]?.toLowerCase() : "";
-    if (truth === "destroyed" || truth === "intact") tile.truth = truth;
+    if (truth === "destroyed" || truth === "intact") {
+      if (tile.truth && tile.truth !== truth) throw new Error(`Row ${index + 2}: conflicting truth for this tile.`);
+      tile.truth = truth;
+    }
     else if (truth) throw new Error(`Row ${index + 2}: truth must be destroyed, intact or empty.`);
     const lon = lonCol >= 0 ? Number(cells[lonCol]) : NaN; const lat = latCol >= 0 ? Number(cells[latCol]) : NaN;
-    if (lonCol >= 0 && latCol >= 0 && cells[lonCol] && cells[latCol] && Number.isFinite(lon) && Number.isFinite(lat)) { tile.lon = lon; tile.lat = lat; }
+    if (cells[lonCol] || cells[latCol]) {
+      if (!cells[lonCol] || !cells[latCol] || !Number.isFinite(lon) || !Number.isFinite(lat)) throw new Error(`Row ${index + 2}: coordinates need numeric lon and lat.`);
+      if (tile.lon !== undefined && (tile.lon !== lon || tile.lat !== lat)) throw new Error(`Row ${index + 2}: conflicting coordinates for this tile.`);
+      tile.lon = lon; tile.lat = lat;
+    }
   });
   return { tiles: [...tiles.values()] };
 }

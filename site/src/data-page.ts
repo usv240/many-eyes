@@ -1,3 +1,4 @@
+import { presetText, csvCell } from "./data-io.js";
 import { attachInfo, download, escapeHtml, percent } from "./common.js";
 import { decideBatch, votesFromCsv, type DecideResponse } from "../../server/src/api/decide.js";
 
@@ -11,13 +12,16 @@ function setStatus(text: string, error = false) { status.textContent = text; sta
 
 async function loadPreset(name: string) {
   setStatus("Loading " + name + "…");
-  const text = await fetch(`downloads/${name}.csv`).then((response) => response.text());
-  textarea.value = text; lastName = name;
-  run();
-  document.querySelector("[data-results]")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  try {
+    const text = await presetText(name);
+    textarea.value = text; lastName = name;
+    run();
+    document.querySelector("[data-results]")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch { last = null; $<HTMLElement>("[data-results]").hidden = true; setStatus("Could not load the preset within 10 seconds. Try again.", true); }
 }
 
 function run() {
+  last = null; $<HTMLElement>("[data-results]").hidden = true;
   try {
     const started = performance.now();
     last = decideBatch(votesFromCsv(textarea.value));
@@ -80,5 +84,5 @@ document.querySelectorAll<HTMLButtonElement>("[data-download]").forEach((button)
   if (kind === "geojson") download(lastName + ".geojson", JSON.stringify(last.geojson, null, 2), "application/geo+json");
   else if (kind === "json") download(lastName + "-decisions.json", JSON.stringify(last, null, 2), "application/json");
   else download(lastName + "-decisions.csv", ["tile_id,status,label,agreement,voters,reason,check_truth,check_correct"].concat(last.tiles.map((tile) =>
-    [tile.id, tile.status, tile.label ?? "", tile.agreement, tile.voters, tile.reason ?? "", tile.check?.truth ?? "", tile.check ? tile.check.correct : ""].join(","))).join("\n") + "\n", "text/csv");
+    [tile.id, tile.status, tile.label ?? "", tile.agreement, tile.voters, tile.reason ?? "", tile.check?.truth ?? "", tile.check ? tile.check.correct : ""].map(csvCell).join(","))).join("\n") + "\n", "text/csv");
 }));

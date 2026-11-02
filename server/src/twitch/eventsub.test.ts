@@ -114,3 +114,33 @@ it("revalidates the token every hour while running", async () => {
   }
   expect(validations()).toBe(2);
 });
+
+it("stops accepting chat after failed hourly authorization and emits only a sanitized fault", async () => {
+  const { sockets, fetcher } = await setup();
+  const fault = vi.fn(), listener = vi.fn(); client.on("fault", fault); client.on("chatMessage", listener);
+  fetcher.mockResolvedValue(new Response("private credential", { status: 401 }));
+  expect(await client.revalidate()).toBe(false);
+  expect(sockets[0]!.closed).toBe(true);
+  sockets[0]!.notification("after-revocation");
+  expect(listener).not.toHaveBeenCalled();
+  expect(fault).toHaveBeenCalledOnce();
+  expect(fault.mock.calls[0]![0].message).not.toContain("private credential");
+});
+it("rejects far-future events and gives subscription retries an eight-second deadline", async () => {
+  const { sockets, fetcher } = await setup(); const listener = vi.fn(); client.on("chatMessage", listener);
+  sockets[0]!.notification("future", "2027-01-01T00:00:00Z");
+  expect(listener).not.toHaveBeenCalled();
+  expect(fetcher.mock.calls[1]![1]!.signal).toBeInstanceOf(AbortSignal);
+});
+
+it("keeps the session on transient revalidation failures without exposing error details", async () => {
+  const { sockets, fetcher } = await setup(); const status = vi.fn(); client.on("status", status);
+  fetcher.mockRejectedValue(new Error("private token"));
+  expect(await client.revalidate()).toBe(false); expect(sockets[0]!.closed).toBe(false);
+  expect(status).toHaveBeenCalledWith("Twitch token check temporarily failed; it will be checked again.");
+});
+it("bounds the whole subscription attempt including retries to eight seconds", async () => {
+  const timeouts = vi.spyOn(AbortSignal, "timeout");
+  try { await setup(); expect(timeouts).toHaveBeenCalledWith(8000); }
+  finally { timeouts.mockRestore(); }
+});

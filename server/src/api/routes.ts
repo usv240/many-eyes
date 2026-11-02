@@ -24,11 +24,15 @@ export function registerApiRoutes(app: FastifyInstance, options: ApiOptions = {}
   app.get("/v1/health", async () => ({ ok: true, service: "many-eyes", api: "v1", keysIssued: keys.size }));
   app.get("/v1/openapi.json", async () => openApiDocument);
 
-  app.post<{ Body: { name?: unknown } }>("/v1/keys", async (request, reply) => {
+  app.post<{ Body: { name?: unknown } }>("/v1/keys", { bodyLimit: 1024 }, async (request, reply) => {
     const limit = keyLimit.take("ip:" + request.ip);
     if (!limit.ok) return reply.code(429).header("Retry-After", Math.ceil(limit.resetMs / 1000)).send({ error: "Too many keys requested from this address. Try again later." });
     const name = typeof request.body?.name === "string" ? request.body.name.trim() : "";
-    const { key, record } = keys.issue(name);
+    let issued: ReturnType<KeyStore["issue"]>;
+    try { issued = keys.issue(name); }
+    catch { return reply.code(503).send({ error: "API key issuance is unavailable. Try again later." }); }
+    const { key, record } = issued;
+    reply.header("Cache-Control", "no-store");
     return reply.code(201).send({ key, prefix: record.prefix, name: record.name, createdAt: record.createdAt,
       note: "Shown once. Store it safely. Send it as: Authorization: Bearer <key>" });
   });

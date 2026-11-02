@@ -25,18 +25,35 @@ export function retryDelay(response: Response, now = Date.now()): number | undef
   if (response.status === 503) return 1000;
   if (response.status !== 429) return undefined;
   const reset = Number(response.headers.get("Ratelimit-Reset")) * 1000;
-  return Number.isFinite(reset) && reset > 0 ? Math.min(Math.max(reset - now, 0), 5000) : 1000;
+  return Number.isFinite(reset) && reset > 0 ? Math.min(Math.max(reset - now, 1000), 5000) : 1000;
 }
 
 // Never include response bodies, credentials, or underlying network errors in errors.
 export async function requestJson(url: string, init: RequestInit, fetcher = fetch,
   sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))): Promise<unknown> {
   try {
-    let response = await fetcher(url, { ...init, signal: AbortSignal.timeout(5000) });
+    const request = () => {
+      init.signal?.throwIfAborted();
+      const timeout = AbortSignal.timeout(5000);
+      return fetcher(url, { ...init, signal: init.signal ? AbortSignal.any([init.signal, timeout]) : timeout });
+    };
+    let response = await request();
     const wait = retryDelay(response);
     if (wait !== undefined) {
-      await sleep(wait);
-      response = await fetcher(url, { ...init, signal: AbortSignal.timeout(5000) });
+      void response.body?.cancel().catch(() => {});
+      const signal = init.signal;
+      if (!signal) await sleep(wait);
+      else {
+        signal.throwIfAborted();
+        let abort!: () => void;
+        const cancelled = new Promise<never>((_resolve, reject) => {
+          abort = () => reject(signal.reason);
+          signal.addEventListener("abort", abort, { once: true });
+        });
+        try { await Promise.race([sleep(wait), cancelled]); }
+        finally { signal.removeEventListener("abort", abort); }
+      }
+      response = await request();
     }
     if (!response.ok) throw new HttpError(response.status);
     return await response.json();
@@ -68,6 +85,8 @@ export async function persistTokens(access: string, refresh: string, path = ".en
   } catch { throw new Error("Could not persist refreshed Twitch credentials to .env."); }
 }
 
+export class AuthorizationError extends Error {}
+
 const validationSchema = z.object({ client_id: z.string(), user_id: z.string(), expires_in: z.number() });
 const tokensSchema = z.object({ access_token: z.string().min(1), refresh_token: z.string().min(1) });
 
@@ -80,7 +99,7 @@ export async function validateToken(config: TwitchConfig, fetcher = fetch,
     const result = validationSchema.safeParse(raw);
     if (!result.success) throw new Error("Invalid Twitch token validation response.");
     if (result.data.client_id !== config.clientId || result.data.user_id !== config.botUserId)
-      throw new Error("Twitch token must belong to TWITCH_CLIENT_ID and TWITCH_BOT_USER_ID.");
+      throw new AuthorizationError("Twitch token must belong to TWITCH_CLIENT_ID and TWITCH_BOT_USER_ID.");
     return result.data.expires_in;
   };
   let expires = 0;
@@ -88,7 +107,7 @@ export async function validateToken(config: TwitchConfig, fetcher = fetch,
   catch (error) { if (!(error instanceof HttpError) || error.status !== 401) throw error; }
   if (expires >= 600) return;
   if (!config.clientSecret)
-    throw new Error("Twitch token needs refreshing. Run `twitch token -R <refresh token>` and update .env, or set TWITCH_CLIENT_SECRET.");
+    throw new AuthorizationError("Twitch token needs refreshing. Run `twitch token -R <refresh token>` and update .env, or set TWITCH_CLIENT_SECRET.");
   const raw = await requestJson("https://id.twitch.tv/oauth2/token", {
     method: "POST", body: new URLSearchParams({ grant_type: "refresh_token",
       client_id: config.clientId, client_secret: config.clientSecret, refresh_token: config.refreshToken }),
@@ -98,5 +117,5 @@ export async function validateToken(config: TwitchConfig, fetcher = fetch,
   await save(tokens.data.access_token, tokens.data.refresh_token);
   config.userToken = tokens.data.access_token;
   config.refreshToken = tokens.data.refresh_token;
-  if (await validate() < 600) throw new Error("Refreshed Twitch token expires too soon.");
+  if (await validate() < 600) throw new AuthorizationError("Refreshed Twitch token expires too soon.");
 }

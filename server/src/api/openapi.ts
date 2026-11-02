@@ -15,7 +15,7 @@ export const openApiDocument = {
     schemas: {
       Vote: { type: "object", required: ["user", "vote"], properties: {
         user: { type: "string", maxLength: 128, description: "Any stable voter id, for example a Twitch user id" },
-        vote: { description: "1 or destroyed, 2 or intact, 3 or unsure", oneOf: [{ type: "string" }, { type: "integer" }] } } },
+        vote: { description: "1 or destroyed, 2 or intact, 3 or unsure", oneOf: [{ type: "string", maxLength: 32 }, { type: "integer" }] } } },
       Tile: { type: "object", required: ["id", "votes"], properties: {
         id: { type: "string", maxLength: 128 },
         votes: { type: "array", maxItems: 1000, items: { $ref: "#/components/schemas/Vote" } },
@@ -27,7 +27,7 @@ export const openApiDocument = {
     "/v1/health": { get: { summary: "Service status", responses: { 200: { description: "OK" } } } },
     "/v1/keys": { post: { summary: "Request an API key (shown once, 5 per hour per address)",
       requestBody: { content: { "application/json": { schema: { type: "object", properties: { name: { type: "string" } } } } } },
-      responses: { 201: { description: "The new key" }, 429: { description: "Too many keys requested" } } } },
+      responses: { 201: { description: "The new key" }, 429: { description: "Too many keys requested" }, 413: { description: "Key request exceeds 1 KB" }, 503: { description: "Key store unavailable or full" } } } },
     "/v1/decide": { post: { summary: "Decide labels for a batch of tiles", security: [{ apiKey: [] }],
       requestBody: { required: true, content: { "application/json": { schema: { type: "object", required: ["tiles"],
         properties: { tiles: { type: "array", minItems: 1, maxItems: 5000, items: { $ref: "#/components/schemas/Tile" } } } } } } },

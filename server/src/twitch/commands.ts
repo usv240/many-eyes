@@ -28,9 +28,15 @@ export function createChatCommands(options: CommandOptions) {
     const oldest = store.keys().next().value;
     if (oldest !== undefined) store.delete(oldest);
   };
-  const reply = (text: string) => { options.send(text).catch(() => { /* a failed reply never stops the mission */ }); };
+  let pending = 0;
+  const reply = (text: string) => {
+    pending++;
+    try { void options.send(text).catch(() => {}).finally(() => { pending--; }); }
+    catch { pending--; }
+  };
 
   return (message: ChatMessage, accepted: boolean): "why" | "welcome" | null => {
+    if (pending >= 20) return null; // Bound queued replies even when new callers keep arriving.
     const text = message.text.trim().toLowerCase();
     const login = message.userLogin || message.userId;
     if (text === "!why") {

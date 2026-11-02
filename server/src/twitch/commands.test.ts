@@ -37,3 +37,12 @@ it("keeps memory bounded and survives a failing sender", async () => {
   expect(handle(message("a", "1"), true)).toBe("welcome");
   await Promise.resolve();
 });
+
+it("bounds queued command replies and contains synchronous sender failures", async () => {
+  const send = vi.fn(() => new Promise<void>(() => {}));
+  const handle = createChatCommands({ send });
+  for (let i = 0; i < 1000; i++) handle(message(String(i), "!why"), false);
+  expect(send).toHaveBeenCalledTimes(20);
+  const broken = createChatCommands({ send: () => { throw new Error("private failure"); } });
+  expect(() => broken(message("a", "!why"), false)).not.toThrow();
+});

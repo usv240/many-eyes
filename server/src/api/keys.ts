@@ -8,14 +8,23 @@ const hash = (key: string) => createHash("sha256").update(key).digest("hex");
 
 export class KeyStore {
   private records: KeyRecord[] = [];
-  constructor(private readonly path?: string) {
-    if (path && existsSync(path)) this.records = JSON.parse(readFileSync(path, "utf8")) as KeyRecord[];
+  constructor(private readonly path?: string, private readonly maxKeys = 10_000) {
+    if (path && existsSync(path)) {
+      try {
+        const records: unknown = JSON.parse(readFileSync(path, "utf8"));
+        if (!Array.isArray(records) || records.length > maxKeys || records.some((record) =>
+          !record || typeof record.hash !== "string" || !/^[a-f0-9]{64}$/.test(record.hash) ||
+          typeof record.prefix !== "string" || typeof record.name !== "string" || typeof record.createdAt !== "string")) throw new Error();
+        this.records = records as KeyRecord[];
+      } catch { throw new Error("Invalid API key store."); }
+    }
   }
   issue(name: string, now = new Date()): { key: string; record: KeyRecord } {
+    if (this.records.length >= this.maxKeys) throw new Error("API key capacity reached.");
     const key = "me_" + randomBytes(24).toString("hex");
     const record = { hash: hash(key), prefix: key.slice(0, 7), name: name.slice(0, 60) || "unnamed", createdAt: now.toISOString() };
     this.records.push(record);
-    this.save();
+    try { this.save(); } catch { this.records.pop(); throw new Error("Could not save API key."); }
     return { key, record };
   }
   check(key: string | undefined): KeyRecord | undefined {
@@ -39,7 +48,10 @@ export class RateLimiter {
   take(caller: string, now = Date.now()): { ok: boolean; remaining: number; resetMs: number } {
     let window = this.windows.get(caller);
     if (!window || now - window.start >= this.windowMs) {
-      if (!window && this.windows.size >= this.maxCallers) this.windows.delete(this.windows.keys().next().value!);
+      if (!window && this.windows.size >= this.maxCallers) {
+        for (const [id, entry] of this.windows) if (now - entry.start >= this.windowMs) this.windows.delete(id);
+        if (this.windows.size >= this.maxCallers) return { ok: false, remaining: 0, resetMs: this.windowMs };
+      }
       window = { start: now, count: 0 };
       this.windows.set(caller, window);
     }

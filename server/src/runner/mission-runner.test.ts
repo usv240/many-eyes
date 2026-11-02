@@ -181,3 +181,30 @@ it("refuses live chat mixing in virtual time or with a Twitch-only source", () =
   expect(() => new MissionRunner({ missionId: "nepal-flood-2026", source: "twitch", liveChat: true,
     ledger: new MemoryLedger() })).toThrow(/real-time simulated crowd/);
 });
+
+it("keeps crew credit independent of every recorded label and gold weight", async () => {
+  const { Crew } = await import("./crew.js");
+  const execute = async () => {
+    const ledger = new MemoryLedger();
+    const runner = new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", virtual: true,
+      seed: 7, runId: "crew-independent", goldOnly: true, maxTiles: 4, ledger });
+    await runner.run(); return { events: ledger.events, weights: [...runner.getWeights()] };
+  };
+  const credited = await execute();
+  const credit = vi.spyOn(Crew.prototype, "credit").mockReturnValue([]);
+  try { expect(await execute()).toEqual(credited); } finally { credit.mockRestore(); }
+});
+it("does not let real chat impersonate a simulated voter in mixed mode", async () => {
+  let now = 1000; const ledger = new MemoryLedger(); const twitch = new FakeTwitch();
+  const runner = new MissionRunner({ missionId: "nepal-flood-2026", source: "sim", liveChat: true,
+    twitch, sendChat: vi.fn().mockResolvedValue(undefined), ledger, maxTiles: 1, crowd: { voters: 1 },
+    clock: { now: () => now, wait: async (ms) => { now += ms; } } });
+  let attempted = false;
+  runner.on("state", (state) => {
+    if (state.phase !== "voting" || attempted) return; attempted = true;
+    expect(runner.ingestChat({ messageId: "spoof", userId: "sim_0001", userLogin: "pretender",
+      text: "1", timestamp: new Date(now).toISOString() })).toBe(false);
+  });
+  await runner.run();
+  expect(ledger.events.some((event) => event.data.messageId === "spoof")).toBe(false);
+});

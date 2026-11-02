@@ -28,3 +28,11 @@ it("stays quiet when offline and stops after a missing scope", async () => {
   expect(fetcher).toHaveBeenCalledTimes(2);
   expect(warn).toHaveBeenCalledTimes(1);
 });
+
+it("uses a timeout and never exposes marker response bodies or network errors", async () => {
+  const fetcher = vi.fn<typeof fetch>().mockRejectedValue(new Error("private token"));
+  const warn = vi.fn();
+  expect(await createMarker(config, fetcher, warn)("Tile 1: refused")).toBe(false);
+  expect(fetcher.mock.calls[0]![1]!.signal).toBeInstanceOf(AbortSignal);
+  expect(warn).not.toHaveBeenCalled();
+});

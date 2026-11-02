@@ -2,66 +2,23 @@ import { EventEmitter } from "node:events";
 import { createHmac, randomBytes, randomUUID } from "node:crypto";
 import { setTimeout as sleep } from "node:timers/promises";
 import { getMission, goldTruth, nextTile, seededRng } from "../missions/mission.js";
-import { openSession, closeSession, collectVote, preview, updateGoldWeights, type TileSession, type Decision, type Truth, type Preview } from "../consensus/engine.js";
+import { openSession, closeSession, collectVote, preview, updateGoldWeights, type TileSession } from "../consensus/engine.js";
 import type { DecidedGold } from "../consensus/metrics.js";
 import { Ledger, type LedgerPort } from "../ledger/ledger.js";
 import { EventSubClient, type ChatMessage } from "../twitch/eventsub.js";
 import { readConfig } from "../twitch/auth.js";
 import { createChatSender } from "../twitch/send.js";
 import { parseVote, type VoteLabel } from "../votes/parse.js";
-import { createCrowd, createTileScenario, simulateVotes, type CrowdConfig } from "../../../sim/src/crowd.js";
-import { readCachedDebate, publicDebate, type CachedDebate } from "../debate/cache.js";
-import { Crew, type CrewMember } from "./crew.js";
+import { createCrowd, createTileScenario, simulateVotes } from "../../../sim/src/crowd.js";
+import { readCachedDebate, publicDebate } from "../debate/cache.js";
+import { Crew } from "./crew.js";
 import { liveScenario } from "./scenario.js";
 
+import type { PublicState, Clock, RunnerOptions } from "./types.js";
+import { Admission } from "./admission.js";
+
 const publicTokenKey = randomBytes(32);
-export interface DebateArgument { claim: string; box?: { x: number; y: number; width: number; height: number } }
-export interface PublicState {
-  missionId: string; source: "sim" | "twitch"; phase: "idle" | "voting" | "decided" | "complete" | "stopped";
-  mission: { name: string; place: string; eventDate: string; preDate: string; postDate: string; attribution: string };
-  live: Preview;
-  stats: { goldChecked: number; goldCorrect: number; validated: number; refused: number; remaining: number; total: number };
-  lastResult: (Pick<Decision, "status" | "label" | "agreement" | "voters" | "reason"> & {
-    tileNumber: number; gold?: { truth: Truth; chatCorrect: boolean };
-    ai?: { label: Truth; agreedWithChat: boolean } }) | null;
-  serverNow: number;
-  pauseReason?: string;
-  debate?: { advocate: DebateArgument; skeptic: DebateArgument };
-  /** Mixed mode: real Twitch chat votes join the simulated crowd. */
-  liveChat?: boolean;
-  /** The newest accepted real chat vote, shown briefly on the overlay. */
-  liveVote?: { login: string; label: VoteLabel; at: number };
-  /** Who matched the experts most often on decided hidden checks; credit only, never a weight or a label. */
-  crew?: CrewMember[];
-  attribution: string; refusedCount: number;
-  tile?: { token: string; number: number; lon: number; lat: number;
-    openedAt: number; closesAt: number; imageryUrl: string };
-  votes: { destroyed: number; intact: number; unsure: number; total: number };
-  decision?: Decision; baseline?: Decision; reveal?: { gold: true; truth: Truth };
-}
-export interface Clock { now(): number; wait(ms: number, signal: AbortSignal): Promise<void> }
-export interface TwitchSource {
-  on(event: "chatMessage", listener: (message: ChatMessage) => void): unknown;
-  on(event: "fault", listener: (error: Error) => void): unknown;
-  off(event: "chatMessage", listener: (message: ChatMessage) => void): unknown;
-  off(event: "fault", listener: (error: Error) => void): unknown;
-  start(): Promise<void>;
-  stop(): void;
-}
-export interface RunnerOptions {
-  missionId: string; source: "sim" | "twitch"; seed?: number; runId?: string;
-  crowd?: Partial<Omit<CrowdConfig, "seed">>; goldOnly?: boolean; maxTiles?: number;
-  virtual?: boolean; clock?: Clock; ledger?: LedgerPort;
-  twitch?: TwitchSource;
-  sendChat?: (text: string) => Promise<void>;
-  loadDebate?: (buildingId: string) => CachedDebate | null;
-  fixedTiles?: readonly string[]; votingMs?: number; pauseMs?: number; pauseAfterLast?: boolean;
-  gradedWork?: boolean; video?: boolean;
-  /** Add real Twitch chat votes to a simulated crowd (mixed mode). */
-  liveChat?: boolean;
-  /** Called for every chat message after vote handling, for commands such as !why. */
-  onChat?: (message: ChatMessage, accepted: boolean) => void;
-}
+export type { PublicState, Clock, TwitchSource, RunnerOptions, DebateArgument } from "./types.js";
 function makeClock(virtual: boolean): Clock {
   let now = 0;
   return virtual ? { now: () => now, wait: async (ms, signal) => { signal.throwIfAborted(); now += ms; } }
@@ -73,7 +30,7 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
   private readonly ledger: LedgerPort;
   private readonly clock: Clock;
   private readonly controller = new AbortController();
-  private readonly seen = new Set<string>();
+  private readonly admission = new Admission();
   private readonly publicTiles = new Map<string, string>();
   private weights = new Map<string, number>();
   private readonly crew = new Crew();
@@ -116,21 +73,20 @@ export class MissionRunner extends EventEmitter<{ state: [PublicState]; warning:
   private publish() { this.emit("state", this.getState()); }
 
   ingestChat(message: ChatMessage): boolean {
-    if (!message.messageId || this.seen.has(message.messageId)) return false;
+    if (!message.messageId || message.userId.startsWith("sim_") || this.admission.has(message.messageId)) return false;
     const label = parseVote(message.text);
-    if (!label) this.seen.add(message.messageId);
+    if (!label && !this.admission.message(message.messageId)) return false;
     const accepted = label ? this.acceptVote(message.messageId, message.userId, label, Date.parse(message.timestamp),
       message.userLogin || message.userId) : false;
     this.options.onChat?.(message, accepted);
     return accepted;
   }
   private acceptVote(messageId: string, userId: string, label: VoteLabel, timestamp: number, login?: string): boolean {
-    if (!messageId || this.seen.has(messageId)) return false;
-    this.seen.add(messageId);
+    if (!messageId || !this.admission.message(messageId)) return false;
     const session = this.session;
     const now = this.clock.now();
     if (!session || !Number.isFinite(timestamp) || timestamp < session.openedAt || timestamp >= session.closesAt ||
-        now < session.openedAt || now >= session.closesAt || session.closed) return false;
+        now < session.openedAt || now >= session.closesAt || session.closed || !this.admission.user(userId)) return false;
     const vote = { userId, label, weight: this.weights.get(userId) ?? 1 };
     const next = collectVote(session, vote, now);
     this.ledger.append("vote", { missionId: this.mission.id, runId: this.runId,

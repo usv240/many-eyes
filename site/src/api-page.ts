@@ -17,46 +17,66 @@ body.value = JSON.stringify({ tiles: [
     { user: "ana", vote: "2" }, { user: "ben", vote: "2" }, { user: "cai", vote: "1" }, { user: "dev", vote: "2" }, { user: "eve", vote: "3" }] },
 ] }, null, 2);
 
+const shellQuote = (value: string) => "'" + value.replaceAll("'", "'\"'\"'") + "'";
 const base = () => server.value.trim().replace(/\/+$/, "");
+function invalidateKey() {
+  key = keyTarget = null; send.disabled = true;
+  $<HTMLElement>("[data-key-out]").textContent = "";
+  $<HTMLElement>("[data-response]").hidden = true;
+  setStatus("Request a key for this target first.");
+}
+let generation = 0;
+server.addEventListener("input", () => { generation++; invalidateKey(); });
 const where = () => target.value === "server" ? base() : "sandbox";
 function setStatus(text: string, error = false) { status.textContent = text; status.classList.toggle("error", error); }
 
 target.addEventListener("change", () => {
   $<HTMLElement>("[data-server-row]").hidden = target.value !== "server";
-  if (keyTarget !== where()) { key = null; send.disabled = true; $<HTMLElement>("[data-key-out]").textContent = ""; setStatus("Request a key for this target first."); }
+  generation++;
+  if (keyTarget !== where()) invalidateKey();
 });
 
-async function http(path: string, init: RequestInit) {
-  const response = await fetch(base() + path, { ...init, signal: AbortSignal.timeout(10_000) });
+async function http(destination: string, path: string, init: RequestInit) {
+  const url = new URL(destination);
+  if (!["http:", "https:"].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw new Error("Invalid API server URL.");
+  const response = await fetch(destination + path, { ...init, redirect: "error", signal: AbortSignal.timeout(10_000) });
   return { status: response.status, json: await response.json().catch(() => ({})) as unknown };
 }
 
 $<HTMLButtonElement>("[data-issue]").addEventListener("click", async () => {
   const name = $<HTMLInputElement>("[data-key-name]").value.trim() || "my-app";
   const out = $<HTMLElement>("[data-key-out]");
+  const destination = where(), attempt = ++generation;
+  invalidateKey();
+  let issued: string;
   try {
     if (target.value === "sandbox") {
       const bytes = crypto.getRandomValues(new Uint8Array(24));
-      key = "me_" + [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+      issued = "me_" + [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
     } else {
-      const result = await http("/v1/keys", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });
-      if (result.status !== 201) throw new Error((result.json as { error?: string }).error || "The server answered " + result.status + ".");
-      key = (result.json as { key: string }).key;
+      const result = await http(destination, "/v1/keys", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });
+      if (result.status !== 201) throw new Error("Key request was rejected.");
+      issued = (result.json as { key: string }).key;
     }
-    keyTarget = where();
+    if (attempt !== generation || destination !== where()) return;
+    if (!/^me_[0-9a-f]{48}$/.test(issued)) throw new Error("Invalid key response.");
+    key = issued; keyTarget = destination;
     out.innerHTML = "";
     out.append("Your key for ", target.value === "sandbox" ? "the sandbox" : base(), ": ");
     const code = document.createElement("code"); code.textContent = key; out.append(code, ". It is shown once.");
     send.disabled = false; setStatus("Ready. Edit the body if you like, then send.");
   } catch (error) {
+    if (attempt !== generation) return;
     out.textContent = "";
     setStatus((error instanceof Error && error.name === "TimeoutError" ? "No answer within 10 seconds. " : "") +
-      "Could not reach " + base() + ". Is npm run demo running? " + (error instanceof Error ? error.message : ""), true);
+      "Could not issue a key. Check the server address and try again.", true);
   }
 });
 
 send.addEventListener("click", async () => {
-  if (!key) return;
+  if (!key || keyTarget !== where()) { invalidateKey(); return; }
+  const destination = keyTarget, requestKey = key, attempt = generation;
+  if (body.value.length > 8 * 1024 * 1024) { setStatus("The request exceeds 8 MB. Split it into smaller batches.", true); return; }
   let parsed: unknown;
   try { parsed = JSON.parse(body.value); } catch { setStatus("The body is not valid JSON.", true); return; }
   const started = performance.now();
@@ -69,13 +89,14 @@ send.addEventListener("click", async () => {
         result = { status: 400, json: { error: "Invalid request", issues: issues?.slice(0, 20).map((issue) => ({ path: issue.path.join("."), message: issue.message })) } };
       }
     } else {
-      result = await http("/v1/decide", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + key }, body: JSON.stringify(parsed) });
+      result = await http(destination, "/v1/decide", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + requestKey }, body: JSON.stringify(parsed) });
     }
-  } catch (error) { setStatus("Request failed: " + (error instanceof Error ? error.message : "network error"), true); return; }
+  } catch { if (attempt === generation) setStatus("Request failed or timed out. Check the server connection.", true); return; }
+  if (attempt !== generation || destination !== where()) return;
   const ms = Math.max(1, Math.round(performance.now() - started));
   setStatus(`HTTP ${result.status} in ${ms} ms${target.value === "sandbox" ? " (sandbox)" : ""}.`, result.status >= 400);
   $<HTMLElement>("[data-response-body]").textContent = JSON.stringify(result.json, null, 2);
   const url = (target.value === "sandbox" ? "http://127.0.0.1:8791" : base()) + "/v1/decide";
-  $<HTMLElement>("[data-curl]").textContent = `curl -X POST ${url} \\\n  -H "Authorization: Bearer ${key}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(parsed)}'`;
+  $<HTMLElement>("[data-curl]").textContent = `curl -X POST ${shellQuote(url)} \\\n  -H "Authorization: Bearer <key>" \\\n  -H "Content-Type: application/json" \\\n  -d ${shellQuote(JSON.stringify(parsed))}`;
   $<HTMLElement>("[data-response]").hidden = false;
 });
