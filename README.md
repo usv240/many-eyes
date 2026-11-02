@@ -36,7 +36,7 @@ cd many-eyes
 npm ci
 cp .env.example .env
 npm run demo        # open http://localhost:5180 (the OBS overlay)
-npm test            # 170+ tests
+npm test            # 200+ tests
 npm run verify      # recompute every published number from the ledgers
 ```
 
