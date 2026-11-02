@@ -19,6 +19,10 @@ it("renders every overlay state's copy", () => {
   expect(sample("refused").attributes.photoStage!["data-refused"]).toBe("true");
   expect(sample("gold").text.goldCopy).toBe("Hidden check: experts graded this building destroyed. Chat matched.");
   expect(sample("gold-missed").text.goldCopy).toBe("Hidden check: experts graded this building destroyed. Chat missed this one.");
+  const intact = fixtureSnapshot("gold", 10000);
+  intact.state!.lastResult!.gold = { truth: "intact", chatCorrect: true };
+  expect(view(intact.state!, { ...intact, now: 10000, localNow: 10000 }).text.goldCopy)
+    .toBe("Hidden check: the expert damage map shows no damage here. Chat matched.");
   expect(sample("loading").text.imageStatus).toBe("Loading photos");
   expect(sample("loading").hidden.scale).toBe(false);
   expect(sample("loading").text.coordinates).not.toBe("—");

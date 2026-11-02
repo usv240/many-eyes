@@ -106,11 +106,11 @@ async function startTrial(root: HTMLElement) {
     answers.push({ tile, vote: label });
     for (const button of buttons) { button.disabled = true; button.setAttribute("aria-pressed", String(button.dataset.vote === label)); }
     const verdict = label === "unsure" ? "You chose unsure. In Many Eyes that counts toward nothing, which is honest when you cannot tell."
-      : label === tile.truth ? "You matched the experts." : "You and the experts disagree on this one.";
+      : label === tile.truth ? "You matched the reference answer." : "You and the reference answer disagree on this one.";
     const aiRight = tile.ai.label === tile.truth;
     const last = index === tiles.length - 1;
     reveal.innerHTML = `
-      <p><b>Experts:</b> <span class="${tile.truth}">${tile.truth}</span>. <b>You:</b> ${label}.</p>
+      <p><b>Reference:</b> <span class="${tile.truth}">${tile.truth}</span>. <b>You:</b> ${label}.</p>
       <p>${verdict}</p>
       <p class="small muted">AI alone said <b>${tile.ai.label}</b> with ${Math.round(tile.ai.confidence * 100)}% confidence${aiRight ? "." : ", and was wrong."}<span data-info="${escapeHtml(
         "On the stream this line only appears after chat has decided, so the AI cannot sway the vote. Expert grade from Copernicus: " + tile.grade + ".")}" data-info-label="AI alone"></span></p>
@@ -129,7 +129,7 @@ async function startTrial(root: HTMLElement) {
       : Math.max(0.2, Math.min(2, Math.round((value + (answer.vote === answer.tile.truth ? 0.1 : -0.2)) * 10) / 10)), 1);
     reveal.innerHTML = `
       <p class="score">${right} of ${tiles.length}</p>
-      <p>You matched the experts on ${right} building${right === 1 ? "" : "s"}${unsure ? `, and said unsure on ${unsure}` : ""}. The AI alone matched on ${aiRight} of ${tiles.length}.</p>
+      <p>You matched the reference answer on ${right} building${right === 1 ? "" : "s"}${unsure ? `, and said unsure on ${unsure}` : ""}. The AI alone matched on ${aiRight} of ${tiles.length}.</p>
       <p>If these had been hidden checks on stream, your vote would now count <b>${weight.toFixed(1)}×</b> a new viewer's.<span data-info="Every viewer starts at 1.0. A correct hidden check adds 0.1, a wrong one removes 0.2, and weights stay between 0.2 and 2.0. Unsure leaves the weight unchanged." data-info-label="Your weight"></span></p>
       <p class="small muted">Across all 80 hidden checks, the AI alone scored 73.8%, and called 52.5% of standing buildings destroyed.</p>
       <div class="actions"><button class="button" type="button" data-again>Try again</button><a class="button quiet" href="#results">See the full results</a></div>`;

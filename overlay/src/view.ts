@@ -64,7 +64,9 @@ export function view(state: PublicState | null, options: ViewOptions = {}): View
     ? `Validated: ${result.label} · ${share}% agreement · ${result.voters} voters`
     : result.reason === "too_few_voters" ? `Refused: only ${result.voters} voters`
     : `Refused: chat split ${share} / ${100 - share}. Sent to expert review.`;
-  const goldCopy = result?.gold ? `Hidden check: experts graded this building ${result.gold.truth}. ` +
+  // Destroyed answers are Copernicus expert grades; intact answers are inferred from the expert damage map.
+  const goldCopy = result?.gold ? (result.gold.truth === "destroyed" ? "Hidden check: experts graded this building destroyed. "
+    : "Hidden check: the expert damage map shows no damage here. ") +
     (result.gold.chatCorrect ? "Chat matched." : "Chat missed this one.") : "";
   const debate = state?.debate;
   const advocateBox = box(debate?.advocate); const skepticBox = box(debate?.skeptic);
